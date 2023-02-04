@@ -1,3 +1,5 @@
 <p>workspace works!</p>
-<app-column></app-column>
+<div class="wrapper">
+  <app-column *ngFor="let column of columns" [column]="column"></app-column>
+</div>
 

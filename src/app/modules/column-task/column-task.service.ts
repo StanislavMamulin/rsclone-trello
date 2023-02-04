@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable} from 'rxjs';
+
 
 interface IColumn {
   nameColumn:string,
@@ -28,8 +30,8 @@ export class ColumnTaskService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getColumns(idBoard: string) {
-    return this.httpClient.get(`${this.urlColumn}/${idBoard}`);
+  public getColumns(idBoard: string):Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.urlColumn}/${idBoard}`);
   }
 
   public getColumnById(idColumn: string) {

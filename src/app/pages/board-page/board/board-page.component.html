@@ -1,2 +1,12 @@
 <p>board-page works!</p>
-<app-board></app-board>
+<div class="wrapper">
+  <app-board *ngFor="let board of boards" (onDelete)="deleteBoard($event)" [board]="board"></app-board>
+  <button (click)="createBoard()">create board</button>
+</div>
+<input type="text"  placeholder="name"   [(ngModel)]="nameBoard" >
+<input type="text" placeholder="description" [(ngModel)]="descriptionBoard">
+
+<div>name:{{nameBoard}}</div>
+<div>description:{{descriptionBoard}}</div>
+<button>update</button>
+

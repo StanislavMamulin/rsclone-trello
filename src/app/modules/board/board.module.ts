@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoardComponent } from './component/board/board.component';
 import { BoardService } from './board-service.service';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -10,7 +11,8 @@ import { BoardService } from './board-service.service';
     BoardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     BoardComponent
