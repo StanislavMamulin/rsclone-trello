@@ -15,4 +15,11 @@ export class BoardService {
   public getBoardByID(id: string) {
     return this.httpClient.get(`${this.boardUrl}/${id}`)
   }
+
+  public createNewBoard(name: string, description: string) {
+    return this.httpClient.post(this.boardUrl, {
+      nameBoard: name,
+      descriptionBoard: description,
+    })
+  }
 }
