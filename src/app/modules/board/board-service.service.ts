@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable} from 'rxjs';
 
 @Injectable()
 export class BoardService {
@@ -12,8 +13,8 @@ export class BoardService {
    * Get all boards
    * @returns Observable<Object>
    */
-  public getBoards() {
-    return this.httpClient.get(this.boardUrl);
+  public getBoards():Observable<any[]> {
+    return this.httpClient.get<any[]>(this.boardUrl);
   }
 
   /**

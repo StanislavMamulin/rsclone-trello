@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ColumnTaskService } from '../../column-task.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { ColumnTaskService } from '../../column-task.service';
 })
 export class ColumnComponent implements OnInit {
 
+  @Input() column: any;
   constructor(private ColumnTaskService: ColumnTaskService) {}
 
   ngOnInit(){
