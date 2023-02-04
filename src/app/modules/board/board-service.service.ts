@@ -22,4 +22,14 @@ export class BoardService {
       descriptionBoard: description,
     })
   }
+
+  public updateBoard(
+    id: string,
+    newProperties: {
+      nameBoard?: string,
+      descriptionBoard?: string
+    }
+) {
+    return this.httpClient.put(`${this.boardUrl}/${id}`, newProperties)
+  }
 }
