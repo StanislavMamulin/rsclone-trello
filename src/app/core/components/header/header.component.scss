@@ -1,0 +1,49 @@
+header {
+    background: #026aa7;
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 45px;
+    }
+}
+
+.trello-logo {
+    button {
+        background: none;
+        border: none;
+        border-radius: 4px;
+        padding: 8px;
+        &:hover {
+            background: rgba(9, 30, 66, 35%);
+        }
+        img {
+            height: 15px;
+        }
+    }
+}
+
+.button-container {
+    button {
+        margin: 0 10px;
+        text-transform: uppercase;
+        font-weight: 600;
+        padding: 5px 15px;
+        border-radius: 4px;
+        border: none;
+        background: #4c8bb0;
+        color: #fff;
+        &:hover {
+            background: rgba(9, 30, 66, 35%);
+            color: #d6f0ff;
+        }
+        &:active {
+            position: relative;
+            top: 1px;
+        }
+    }
+}
+
+button {
+    cursor: pointer;
+}
