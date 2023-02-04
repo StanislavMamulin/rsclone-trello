@@ -32,4 +32,8 @@ export class BoardService {
 ) {
     return this.httpClient.put(`${this.boardUrl}/${id}`, newProperties)
   }
+
+  public deleteBoard(id: string) {
+    return this.httpClient.delete(`${this.boardUrl}/${id}`);
+  }
 }
