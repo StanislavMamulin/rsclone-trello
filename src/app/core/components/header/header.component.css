@@ -1,0 +1,50 @@
+header {
+  background: #026aa7;
+}
+
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 45px;
+}
+
+.trello-logo button {
+  background: none;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.trello-logo button:hover {
+  background: #091e42;
+}
+
+.trello-logo button img {
+  height: 15px;
+}
+
+.button-container button {
+  margin: 0 10px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 5px 15px;
+  border-radius: 4px;
+  border: none;
+  background: #4c8bb0;
+  color: #fff;
+}
+
+.button-container button:hover {
+  background: #091e42;
+  color: #d6f0ff;
+}
+
+.button-container button:active {
+  position: relative;
+  top: 1px;
+}
+
+button {
+  cursor: pointer;
+}
