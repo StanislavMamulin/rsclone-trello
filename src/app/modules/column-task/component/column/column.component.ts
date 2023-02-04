@@ -11,8 +11,8 @@ export class ColumnComponent implements OnInit {
   constructor(private ColumnTaskService: ColumnTaskService) {}
 
   ngOnInit(){
-    this.ColumnTaskService.getColumns('9e67fcee-8b69-40cd-a335-5c506655cf9c')
-    .subscribe((res) => {console.log(res)});
+    // this.ColumnTaskService.getColumns('9e67fcee-8b69-40cd-a335-5c506655cf9c')
+    // .subscribe((res) => {console.log(res)});
 
     // this.ColumnTaskService.getColumnById('082ad0bd-700f-4a80-9106-d57ccbe66424')
     // .subscribe((res) => {console.log(res)});
@@ -46,5 +46,40 @@ export class ColumnComponent implements OnInit {
     // this.ColumnTaskService.getTasks('9e67fcee-8b69-40cd-a335-5c506655cf9c','082ad0bd-700f-4a80-9106-d57ccbe66424')
     // .subscribe(res=>{console.log(res)});
 
+    // this.ColumnTaskService.getTaskById('1ca9c510-7110-45b5-90dc-adf5adf5d72c')
+    // .subscribe(res=>{console.log(res)});
+
+    // this.ColumnTaskService.createTask('9e67fcee-8b69-40cd-a335-5c506655cf9c','082ad0bd-700f-4a80-9106-d57ccbe66424',{
+    //   nameTask: 'creating task...',
+    //   descriptionTask: 'description task...'
+    // }).subscribe(res=>{
+    //   console.log(res);
+    //   this.ColumnTaskService.getTasks('9e67fcee-8b69-40cd-a335-5c506655cf9c','082ad0bd-700f-4a80-9106-d57ccbe66424')
+    //   .subscribe(res=>{console.log(res)});
+    // })
+
+    // this.ColumnTaskService.deleteTask('4df36467-294c-453b-b910-67975dd0ad1b')
+    // .subscribe(res=>{
+    //   this.ColumnTaskService.getTasks('9e67fcee-8b69-40cd-a335-5c506655cf9c','082ad0bd-700f-4a80-9106-d57ccbe66424')
+    //   .subscribe(res=>{console.log(res)});
+    // })
+
+    // this.ColumnTaskService.updateTask('1ca9c510-7110-45b5-90dc-adf5adf5d72c',{
+    //   nameTask:'updating...',
+    //   descriptionTask:'updating...'
+    // }).subscribe(res=>{
+    //   console.log(res);
+    //   this.ColumnTaskService.getTasks('9e67fcee-8b69-40cd-a335-5c506655cf9c','082ad0bd-700f-4a80-9106-d57ccbe66424')
+    //   .subscribe(res=>{console.log(res)});
+    // })
+
+    // this.ColumnTaskService.moveTask('e1848e65-6631-4cc6-a4e5-5564ff1bf901',{
+    //   toColumnId:'082ad0bd-700f-4a80-9106-d57ccbe66424',
+    //   newPosition: 1
+    // }).subscribe(res=>{
+    //   console.log(res);
+    //   this.ColumnTaskService.getTasks('9e67fcee-8b69-40cd-a335-5c506655cf9c','082ad0bd-700f-4a80-9106-d57ccbe66424')
+    //   .subscribe(res=>{console.log(res)});
+    // })
   }
 }
