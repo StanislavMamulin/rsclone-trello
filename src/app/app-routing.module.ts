@@ -17,7 +17,11 @@ const routes: Routes = [
       {
         path: 'main',
         loadChildren: () => import('./pages/main-page/main-page.module').then(page => page.MainPageModule)
-      }
+      },
+      {
+        path: 'workspace',
+        loadChildren: () => import('./pages/workspace-page/workspace.module').then(page => page.WorkspaceModule)
+      },
     ]
   }
 ];
