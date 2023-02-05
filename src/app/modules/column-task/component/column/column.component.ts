@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ColumnTaskService } from '../../column-task.service';
+import { IColumn } from '../../model/column.interface';
 
 @Component({
   selector: 'app-column',
@@ -8,7 +9,7 @@ import { ColumnTaskService } from '../../column-task.service';
 })
 export class ColumnComponent implements OnInit {
 
-  @Input() column: any;
+  @Input() column: IColumn;
   constructor(private ColumnTaskService: ColumnTaskService) {}
 
   ngOnInit(){

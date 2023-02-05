@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ColumnTaskService } from 'src/app/modules/column-task/column-task.service';
+import { IColumn } from 'src/app/modules/column-task/model/column.interface';
 
 @Component({
   selector: 'app-workspace',
@@ -9,7 +10,7 @@ import { ColumnTaskService } from 'src/app/modules/column-task/column-task.servi
 })
 export class WorkspaceComponent implements OnInit {
 
-  columns: any[]=[];
+  columns: IColumn[] = [];
 
   constructor(
     private columnTaskService:ColumnTaskService,
