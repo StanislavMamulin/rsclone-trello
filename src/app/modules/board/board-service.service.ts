@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
+import { IBoard, IBoardCreateResponse, IBoardUpdateResponse } from './model/Board.model';
 
 @Injectable()
 export class BoardService {
@@ -13,8 +14,8 @@ export class BoardService {
    * Get all boards
    * @returns Observable<Object>
    */
-  public getBoards():Observable<any[]> {
-    return this.httpClient.get<any[]>(this.boardUrl);
+  public getBoards():Observable<IBoard[]> {
+    return this.httpClient.get<IBoard[]>(this.boardUrl);
   }
 
   /**
@@ -22,8 +23,8 @@ export class BoardService {
    * @param id - Board ID in UUID format
    * @returns Observable<Object>
    */
-  public getBoardByID(id: string) {
-    return this.httpClient.get(`${this.boardUrl}/${id}`)
+  public getBoardByID(id: string):Observable<IBoard> {
+    return this.httpClient.get<IBoard>(`${this.boardUrl}/${id}`)
   }
 
   /**
@@ -32,8 +33,8 @@ export class BoardService {
    * @param description - Board description
    * @returns Observable<Object>
    */
-  public createNewBoard(name: string, description: string) {
-    return this.httpClient.post(this.boardUrl, {
+  public createNewBoard(name: string, description: string):Observable<IBoardCreateResponse> {
+    return this.httpClient.post<IBoardCreateResponse>(this.boardUrl, {
       nameBoard: name,
       descriptionBoard: description,
     })
@@ -51,8 +52,8 @@ export class BoardService {
       nameBoard?: string,
       descriptionBoard?: string
     }
-) {
-    return this.httpClient.put(`${this.boardUrl}/${id}`, newProperties)
+  ):Observable<IBoardUpdateResponse> {
+    return this.httpClient.put<IBoardUpdateResponse>(`${this.boardUrl}/${id}`, newProperties)
   }
 
   /**
