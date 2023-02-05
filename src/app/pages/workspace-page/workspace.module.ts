@@ -6,6 +6,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 import { ColumnTaskModule } from 'src/app/modules/column-task/column-task.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ColumnTaskService } from 'src/app/modules/column-task/column-task.service';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ColumnTaskService } from 'src/app/modules/column-task/column-task.servi
     CommonModule,
     WorkspaceRoutingModule,
     ColumnTaskModule,
-    SharedModule
+    SharedModule,
+    DragDropModule
   ],
   exports:[
     WorkspaceComponent

@@ -1,4 +1,20 @@
-<div class="wrapper">{{board.nameBoard}}</div>
-<button (click)="openBoard()">open</button>
-<button>update</button>
-<button (click)="deleteBoard(board.idBoard)">delete</button>
+<div (mouseover)="offerOpenBoard($event)"
+     (mouseleave)="leaveBoard()"  class="board">
+  <div class="board__wrapper">
+    <h4 class="board__wrapper__title">{{board.nameBoard}}</h4>
+    <div class="board__wrapper__edit">
+      <div (click)="updateBoard(board.idBoard)">
+        <img src="../../../../../assets/images/edit.svg" alt="edit">
+      </div>
+      <div (click)="deleteBoard(board.idBoard)">
+        <img src="../../../../../assets/images/delete.svg" alt="edit">
+      </div>
+    </div>
+  </div>
+  <div class="board__description">
+    <button class="board__description__button">Description</button>
+  </div>
+  <div (click)="openBoard($event)" *ngIf="isOfferOpenBoard" class="board__offer-open">
+    Open Board
+  </div>
+</div>

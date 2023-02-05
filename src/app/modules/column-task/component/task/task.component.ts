@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ITask } from '../../model/task.interface';
 
 @Component({
   selector: 'app-task',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-
+  @Input() taskInfo: ITask;
 }
