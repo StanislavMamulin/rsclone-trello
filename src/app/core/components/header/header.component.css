@@ -11,9 +11,21 @@ header .container {
   height: 45px;
 }
 
+@media (max-width: 500px) {
+  header .container {
+    height: 60px;
+  }
+}
+
 .trello-logo {
   display: flex;
   gap: 50px;
+}
+
+@media (max-width: 400px) {
+  .trello-logo {
+    gap: 15px;
+  }
 }
 
 .trello-logo button {
@@ -26,6 +38,12 @@ header .container {
   font-weight: 600;
   letter-spacing: 1px;
   color: #fff;
+}
+
+@media (max-width: 500px) {
+  .trello-logo button {
+    font-size: 16px;
+  }
 }
 
 .trello-logo button:hover {
@@ -41,7 +59,15 @@ header .container {
   transform: scale(1.4);
 }
 
-.button-container button {
+@media (max-width: 500px) {
+  .authorization {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+.authorization button {
   margin: 0 10px;
   text-transform: uppercase;
   font-weight: 600;
@@ -52,12 +78,19 @@ header .container {
   color: #fff;
 }
 
-.button-container button:hover {
+@media (max-width: 500px) {
+  .authorization button {
+    padding: 2px 10px;
+    font-size: 12px;
+  }
+}
+
+.authorization button:hover {
   background: #091e42;
   color: #d6f0ff;
 }
 
-.button-container button:active {
+.authorization button:active {
   position: relative;
   top: 1px;
 }
