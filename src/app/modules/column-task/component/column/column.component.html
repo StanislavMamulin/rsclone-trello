@@ -2,10 +2,10 @@
     <h2>{{column.nameColumn}}</h2>
     <div
         class="task-list"
-        [cdkDropListData]="tasks"
+        [cdkDropListData]="{tasks, column}"
         cdkDropList
-        (cdkDropListDropped)="drop($event)
-    ">
+        (cdkDropListDropped)="drop($event)"
+    >
         <app-task class="task-list__item" *ngFor="let task of tasks" [taskInfo]="task" cdkDrag></app-task>
     </div>
 </div>
