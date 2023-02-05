@@ -1,5 +1,7 @@
 header {
   background: #026aa7;
+  position: fixed;
+  width: 100%;
 }
 
 header .container {
@@ -9,11 +11,21 @@ header .container {
   height: 45px;
 }
 
+.trello-logo {
+  display: flex;
+  gap: 50px;
+}
+
 .trello-logo button {
   background: none;
   border: none;
   border-radius: 4px;
   padding: 8px;
+  text-transform: capitalize;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
 }
 
 .trello-logo button:hover {
@@ -22,6 +34,11 @@ header .container {
 
 .trello-logo button img {
   height: 15px;
+}
+
+.trello-logo button svg {
+  height: 15px;
+  transform: scale(1.4);
 }
 
 .button-container button {
