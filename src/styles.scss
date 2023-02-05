@@ -16,3 +16,44 @@ body {
     max-width: 1200px;
     margin: auto;
 }
+
+html,
+body,
+app-root {
+    height: 100%;
+}
+
+app-main,
+app-header,
+app-footer,
+app-root {
+    display: flex;
+}
+
+app-root {
+    flex-direction: column;
+}
+
+app-main {
+    margin-top: 45px;
+    width: 100%;
+    flex-grow: 1;
+    background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat scroll padding-box
+        border-box rgb(178, 212, 255);
+    @media (max-width: 500px) {
+        margin-top: 60px;
+    }
+}
+
+app-footer {
+    margin: auto;
+    margin-bottom: 0;
+    width: 100%;
+    justify-self: flex-end;
+}
+
+app-header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
