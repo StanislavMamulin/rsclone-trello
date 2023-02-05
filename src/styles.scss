@@ -30,7 +30,6 @@ app-root {
 }
 
 app-root {
-    margin-top: 45px;
     flex-direction: column;
 }
 
@@ -39,9 +38,6 @@ app-main {
     flex-grow: 1;
     background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat scroll padding-box
         border-box rgb(178, 212, 255);
-    @media (max-width: 500px) {
-        margin-top: 60px;
-    }
 }
 
 app-footer {
@@ -52,7 +48,12 @@ app-footer {
 }
 
 app-header {
+    z-index: 5;
     width: 100%;
     position: fixed;
     top: 0;
+}
+
+router-outlet {
+    padding-top: 45px;
 }

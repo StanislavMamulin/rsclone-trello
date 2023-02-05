@@ -8,7 +8,6 @@
 body {
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
-  line-height: 1.6;
 }
 
 .container {
@@ -30,7 +29,6 @@ app-root {
 }
 
 app-root {
-  margin-top: 45px;
   flex-direction: column;
 }
 
@@ -38,12 +36,6 @@ app-main {
   width: 100%;
   flex-grow: 1;
   background: linear-gradient(0deg, #e6fcff, white) 0% 0%/auto repeat scroll padding-box border-box #b2d4ff;
-}
-
-@media (max-width: 500px) {
-  app-main {
-    margin-top: 60px;
-  }
 }
 
 app-footer {
@@ -54,7 +46,12 @@ app-footer {
 }
 
 app-header {
+  z-index: 5;
   width: 100%;
   position: fixed;
   top: 0;
+}
+
+router-outlet {
+  padding-top: 45px;
 }
