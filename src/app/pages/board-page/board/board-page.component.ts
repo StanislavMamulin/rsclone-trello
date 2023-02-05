@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from 'src/app/modules/board/board-service.service';
-import { IBoard, IBoardResponse } from 'src/app/modules/board/model/Board.model';
+import { IBoard, IBoardCreateResponse, IBoardUpdateResponse } from 'src/app/modules/board/model/Board.model';
 
 @Component({
   selector: 'app-board-page',
@@ -45,7 +45,8 @@ export class BoardPageComponent implements OnInit {
 
   createBoard(){
     this.boardService.createNewBoard(this.nameBoard, this.descriptionBoard)
-    .subscribe((res:IBoardResponse)=>{
+    .subscribe((res:IBoardCreateResponse)=>{
+      console.log(res);
       this.boards.push(res);
       this.defaultModal();
     });
@@ -66,7 +67,7 @@ export class BoardPageComponent implements OnInit {
       nameBoard: this.nameBoard,
       descriptionBoard: this.descriptionBoard
     })
-    .subscribe((res:IBoardResponse)=>{
+    .subscribe((res:IBoardUpdateResponse)=>{
       let indexUpdatedBoard:number = -1;
       this.boards.find((board,i)=>{
         if(board.idBoard === this.updateBoardId)

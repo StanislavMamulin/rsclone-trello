@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
-import { IBoard, IBoardResponse } from './model/Board.model';
+import { IBoard, IBoardCreateResponse, IBoardUpdateResponse } from './model/Board.model';
 
 @Injectable()
 export class BoardService {
@@ -33,8 +33,8 @@ export class BoardService {
    * @param description - Board description
    * @returns Observable<Object>
    */
-  public createNewBoard(name: string, description: string):Observable<IBoardResponse> {
-    return this.httpClient.post<IBoardResponse>(this.boardUrl, {
+  public createNewBoard(name: string, description: string):Observable<IBoardCreateResponse> {
+    return this.httpClient.post<IBoardCreateResponse>(this.boardUrl, {
       nameBoard: name,
       descriptionBoard: description,
     })
@@ -52,8 +52,8 @@ export class BoardService {
       nameBoard?: string,
       descriptionBoard?: string
     }
-  ):Observable<IBoardResponse> {
-    return this.httpClient.put<IBoardResponse>(`${this.boardUrl}/${id}`, newProperties)
+  ):Observable<IBoardUpdateResponse> {
+    return this.httpClient.put<IBoardUpdateResponse>(`${this.boardUrl}/${id}`, newProperties)
   }
 
   /**

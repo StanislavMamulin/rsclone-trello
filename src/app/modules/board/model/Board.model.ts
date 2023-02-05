@@ -14,10 +14,15 @@ export interface IBoard {
   }[];
 };
 
-export interface IBoardResponse {
+export interface IBoardCreateResponse {
   idBoard:string,
   nameBoard: string,
   descriptionBoard: string,
   columns:[]
+}
+
+export interface IBoardUpdateResponse {
+  nameBoard: string,
+  descriptionBoard: string,
 }
 
