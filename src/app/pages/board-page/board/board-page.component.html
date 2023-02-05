@@ -1,20 +1,42 @@
-  <div class="board-page">
-    <div class="container">
-      <div class="board-page__create" (click)="openCreateModal($event)">Create board</div>
-      <app-board *ngFor="let board of boards" (onDelete)="deleteBoard($event)" [board]="board"
-        (onUpdate)="openUpdateModal($event)"></app-board>
+<div class="board-page">
+  <div class="container">
+    <div class="board-page__create" (click)="openCreateModal($event)">
+      Create board
     </div>
+    <app-board
+      *ngFor="let board of boards"
+      (onDelete)="deleteBoard($event)"
+      [board]="board"
+      (onUpdate)="openUpdateModal($event)"
+    ></app-board>
   </div>
+</div>
 
-  <div *ngIf="isOpenModal" (click)="closeModal($event)" class="modal">
-    <div class="modal__window">
-      <h3 *ngIf="isCreateModal" class="modal__window__title">Create board</h3>
-      <h3 *ngIf="isUpdateModal" class="modal__window__title">Update board</h3>
-      <div class="modal__window__inputs">
-        <input type="text" placeholder="name" [(ngModel)]="nameBoard">
-        <input type="text" placeholder="description" [(ngModel)]="descriptionBoard">
-      </div>
-      <button *ngIf="isCreateModal" (click)="createBoard()" class="modal__window__button">Create</button>
-      <button *ngIf="isUpdateModal" (click)="updateBoard()" class="modal__window__button">Update</button>
+<div *ngIf="isOpenModal" (click)="closeModal($event)" class="modal">
+  <div class="modal__window">
+    <h3 *ngIf="isCreateModal" class="modal__window__title">Create board</h3>
+    <h3 *ngIf="isUpdateModal" class="modal__window__title">Update board</h3>
+    <div class="modal__window__inputs">
+      <input type="text" placeholder="name" [(ngModel)]="nameBoard" />
+      <input
+        type="text"
+        placeholder="description"
+        [(ngModel)]="descriptionBoard"
+      />
     </div>
+    <button
+      *ngIf="isCreateModal"
+      (click)="createBoard()"
+      class="modal__window__button"
+    >
+      Create
+    </button>
+    <button
+      *ngIf="isUpdateModal"
+      (click)="updateBoard()"
+      class="modal__window__button"
+    >
+      Update
+    </button>
   </div>
+</div>

@@ -8,20 +8,15 @@ import { BoardService } from 'src/app/modules/board/board-service.service';
 import { WorkspaceModule } from '../workspace-page/workspace.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 @NgModule({
-  declarations: [
-    BoardPageComponent
-  ],
+  declarations: [BoardPageComponent],
   imports: [
     CommonModule,
     BoardRoutingModule,
     BoardModule,
     WorkspaceModule,
-    SharedModule
+    SharedModule,
   ],
-  providers:[
-    BoardService
-  ]
+  providers: [BoardService],
 })
-export class BoardPageModule { }
+export class BoardPageModule {}

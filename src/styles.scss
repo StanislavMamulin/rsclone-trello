@@ -24,7 +24,6 @@ app-root {
 
 app-main,
 app-header,
-app-footer,
 app-root {
     display: flex;
 }
@@ -34,17 +33,11 @@ app-root {
 }
 
 app-main {
+    flex-direction: column;
     width: 100%;
     flex-grow: 1;
     background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat scroll padding-box
         border-box rgb(178, 212, 255);
-}
-
-app-footer {
-    margin: auto;
-    margin-bottom: 0;
-    width: 100%;
-    justify-self: flex-end;
 }
 
 app-header {
