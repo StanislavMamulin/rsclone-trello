@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from 'src/app/modules/board/board-service.service';
 import { IBoard, IBoardCreateResponse, IBoardUpdateResponse } from 'src/app/modules/board/model/Board.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-board-page',
@@ -9,15 +10,21 @@ import { IBoard, IBoardCreateResponse, IBoardUpdateResponse } from 'src/app/modu
 })
 export class BoardPageComponent implements OnInit {
   boards: IBoard[] = [];
-  nameBoard:string = '';
-  descriptionBoard:string = '';
   isOpenModal: boolean = false;
   isCreateModal:boolean = false;
   isUpdateModal:boolean = false;
   updateBoardId:string;
+  createFormModal:any;
+  submited:boolean = false;
   constructor(private boardService: BoardService){}
 
   ngOnInit(): void {
+
+    this.createFormModal = new FormGroup({
+      name: new FormControl(null,[Validators.required, Validators.minLength(3)]),
+      description: new FormControl(null, [Validators.required, Validators.minLength(10)])
+    })
+
     this.boardService.getBoards()
     .subscribe(res=>{this.boards = res});
   }
@@ -39,14 +46,17 @@ export class BoardPageComponent implements OnInit {
     this.isOpenModal = !this.isOpenModal;
     this.isCreateModal = false;
     this.isUpdateModal = false;
-    this.nameBoard="";
-    this.descriptionBoard="";
+    this.submited = false;
+    this.createFormModal.reset();
   }
 
   createBoard(){
-    this.boardService.createNewBoard(this.nameBoard, this.descriptionBoard)
+    this.submited = true;
+    this.boardService.createNewBoard(
+      this.createFormModal.get('name').value,
+      this.createFormModal.get('description').value
+    )
     .subscribe((res:IBoardCreateResponse)=>{
-      console.log(res);
       this.boards.push(res);
       this.defaultModal();
     });
@@ -64,8 +74,8 @@ export class BoardPageComponent implements OnInit {
 
   updateBoard(){
     this.boardService.updateBoard( this.updateBoardId,{
-      nameBoard: this.nameBoard,
-      descriptionBoard: this.descriptionBoard
+      nameBoard: this.createFormModal.get('name').value,
+      descriptionBoard: this.createFormModal.get('description').value
     })
     .subscribe((res:IBoardUpdateResponse)=>{
       let indexUpdatedBoard:number = -1;
