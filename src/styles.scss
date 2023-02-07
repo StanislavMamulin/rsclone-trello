@@ -53,3 +53,8 @@ router-outlet {
         padding-top: 60px;
     }
 }
+
+html {
+    --scrollbarBG: lightgray;
+    --thumbBG: rgba(17, 86, 152, 0.8);
+}

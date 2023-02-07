@@ -49,6 +49,10 @@ export class ColumnTaskService {
     return this.httpClient.post<ITask>(`${this.urlTask}/${idBoard}/${idColumn}`, body);
   }
 
+  public createTaskByColumnId(idColumn: string, body: ITaskCreate): Observable<ITask> {
+    return this.httpClient.post<ITask>(`${this.urlTask}/${idColumn}`, body);
+  }
+
   public deleteTask(idTask: string): Observable<void> {
     return this.httpClient.delete<void>(`${this.urlTask}/${idTask}`);
   }

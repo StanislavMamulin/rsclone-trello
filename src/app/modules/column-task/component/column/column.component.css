@@ -1,12 +1,12 @@
 .column-container {
-  width: 400px;
-  max-width: 100%;
-  margin: 0 25px 25px 0;
+  width: 300px;
   padding: 8px;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   vertical-align: top;
   border-radius: 3px;
   background-color: #ebecf0;
+  max-height: 88vh;
 }
 
 .task-list {
@@ -16,6 +16,9 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 10px;
+  overflow-y: auto;
+  height: 100%;
 }
 
 .task-list__item {
@@ -49,4 +52,94 @@
 
 .task-list .cdk-drop-list-dragging .task-list__item:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.column__add-task {
+  border-radius: 3px;
+  color: var(--ds-text-subtle, #5e6c84);
+  display: block;
+  flex: 1 0 auto;
+  padding: 4px 8px;
+  position: relative;
+  text-decoration: none;
+  -webkit-user-select: none;
+  user-select: none;
+  border: 0;
+  width: 100%;
+  background-color: transparent;
+  font-size: 16px;
+  text-align: left;
+}
+
+.column__add-task:hover {
+  background-color: #d1d3dc;
+}
+
+.task-list__item:hover {
+  background-color: #f1f2f5;
+}
+
+.button {
+  border-radius: 3px;
+  display: block;
+  flex: 1 0 auto;
+  padding: 4px 8px;
+  text-decoration: none;
+  -webkit-user-select: none;
+  user-select: none;
+  border: 0;
+  min-height: 32px;
+}
+
+.button:hover {
+  filter: brightness(0.8);
+}
+
+.add-task__add-btn {
+  background-color: #1365b4;
+  color: white;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.add-task__cancel-btn {
+  background-color: transparent;
+  color: #5e6c84;
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+}
+
+.add-task__cancel-btn:hover {
+  background-color: #d1d3dc;
+}
+
+.add-task__title {
+  padding: 20px 10px;
+  border: 0;
+  border-bottom: solid 1px #ccc;
+  border-radius: 3px;
+  color: rgba(0, 0, 0, 0.87);
+  box-sizing: border-box;
+  background: white;
+  font-size: 14px;
+  width: 100%;
+  height: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+  border-radius: 6px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  background-clip: padding-box;
+  border: 3px solid transparent;
 }

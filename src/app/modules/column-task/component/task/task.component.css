@@ -1,0 +1,9 @@
+.task-list__item-title {
+  width: 100%;
+}
+
+.task-list__item-title-text {
+  width: 100%;
+  text-align: justify;
+  word-wrap: break-word;
+}

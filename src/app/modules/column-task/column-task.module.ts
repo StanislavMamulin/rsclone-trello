@@ -5,6 +5,7 @@ import { ColumnComponent } from './component/column/column.component';
 import { TaskComponent } from './component/task/task.component';
 import { ColumnTaskService } from './column-task.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   ],
   imports: [
     CommonModule,
-    DragDropModule
+    DragDropModule,
+    FormsModule
   ],
   exports:[
     ColumnComponent,
