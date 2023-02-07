@@ -1,10 +1,14 @@
 <div class="board-page">
   <div class="container">
-    <div class="board-page__create" (click)="openCreateModal($event)">
-      Create board
+    <div>
+      <div class="board-page__create" (click)="openCreateModal($event)">
+        <span>Create board</span>
+      </div>
     </div>
-    <app-board *ngFor="let board of boards" (onDelete)="deleteBoard($event)" [board]="board"
+    <div class="board-page__boards">
+      <app-board *ngFor="let board of boards" (onDelete)="deleteBoard($event)" [board]="board"
       (onUpdate)="openUpdateModal($event)"></app-board>
+    </div>
   </div>
 </div>
 

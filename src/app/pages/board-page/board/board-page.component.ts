@@ -31,10 +31,12 @@ export class BoardPageComponent implements OnInit {
   }
 
   openCreateModal(event:any){
+    // const body = document.body;
     if(event.srcElement.className === "board-page__create"){
       this.isCreateModal=!this.isCreateModal;
     }
     this.isOpenModal=!this.isOpenModal;
+    document.body.style.overflow = 'hidden';
   }
 
   closeModal(event:any){
@@ -49,6 +51,7 @@ export class BoardPageComponent implements OnInit {
     this.isUpdateModal = false;
     this.submitted = false;
     this.createFormModal.reset();
+    document.body.style.overflow = 'auto';
   }
 
   createBoard(){
@@ -72,6 +75,7 @@ export class BoardPageComponent implements OnInit {
     this.isUpdateModal=!this.isUpdateModal;
     this.isOpenModal=!this.isOpenModal;
     this.updateBoardId=id;
+    document.body.style.overflow = 'hidden';
   }
 
   updateBoard(){
