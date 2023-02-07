@@ -1,5 +1,5 @@
 <div class="column-container">
-    <h2>{{column.nameColumn}}</h2>
+    <h2 class="column__title">{{column.nameColumn}}</h2>
     <div
         class="task-list"
         [cdkDropListData]="{tasks, column}"
@@ -8,5 +8,38 @@
     >
         <app-task class="task-list__item" *ngFor="let task of tasks" [taskInfo]="task" cdkDrag></app-task>
     </div>
+    
+    <button
+        *ngIf="!showAddTaskControl; else addTask"
+        class="column__add-task"
+        (click)="showAddTask()"
+    >
+        + Add task
+    </button>
+
+    <ng-template #addTask>
+        <div class="add-task__container">
+            <textarea
+                type="text"
+                placeholder="enter the title of the new task"
+                class="add-task__title"
+                [(ngModel)]="newTaskTitle"
+            ></textarea>
+            <div class="add-task__controls">
+                <button
+                    class="add-task__add-btn button"
+                    (click)="addNewTaskHandler()"
+                >
+                    Add card
+                </button>
+                <button
+                    class="add-task__cancel-btn button"
+                    (click)="cancelTaskCreation()"
+                >
+                    X
+                </button>
+            </div>
+        </div>
+    </ng-template>
 </div>
 

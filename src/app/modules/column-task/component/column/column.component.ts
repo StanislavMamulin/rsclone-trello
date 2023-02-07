@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { ColumnTaskService } from '../../column-task.service';
 import { IColumn } from '../../model/column.interface';
 import { IMovedTask, ITask } from '../../model/task.interface';
+import { IBoard } from 'src/app/modules/board/model/Board.model';
 
 @Component({
   selector: 'app-column',
@@ -11,7 +12,12 @@ import { IMovedTask, ITask } from '../../model/task.interface';
 })
 export class ColumnComponent implements OnInit {
   @Input() column: IColumn;
+  @Input() currentBoard: IBoard;
+
   tasks: ITask[];
+  showAddTaskControl = false;
+
+  newTaskTitle = '';
 
   constructor(private columnTaskService: ColumnTaskService) {}
 
@@ -38,5 +44,27 @@ export class ColumnComponent implements OnInit {
       toColumnId: newColumn.idColumn,
       newPosition: event.currentIndex,
     }).subscribe(res => console.log('res', res))
+  }
+
+  showAddTask() {
+    this.showAddTaskControl = true;
+  }
+
+  cancelTaskCreation() {
+    this.showAddTaskControl = false;
+    this.newTaskTitle = '';
+  }
+
+  addNewTaskHandler() {
+    this.columnTaskService.createTaskByColumnId(
+      this.column.idColumn, { nameTask: this.newTaskTitle, descriptionTask: '' }
+    ).subscribe((newTask: ITask) => {
+      this.tasks.push(newTask);
+      this.cancelTaskCreation();
+    });
+  }
+
+  getTitle() {
+    return 'Button title';
   }
 }
