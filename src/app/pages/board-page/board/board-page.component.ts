@@ -28,6 +28,7 @@ export class BoardPageComponent implements OnInit {
     this.boardService.getBoards()
     .subscribe(res=>{this.boards = res});
   }
+  toUpperFirstLetter = (str:string) => str[0].toUpperCase()+str.toLowerCase().substring(1);
 
   openCreateModal(event:any){
     if(event.srcElement.className === "board-page__create"){
@@ -53,8 +54,8 @@ export class BoardPageComponent implements OnInit {
   createBoard(){
     this.submited = true;
     this.boardService.createNewBoard(
-      this.createFormModal.get('name').value,
-      this.createFormModal.get('description').value
+      this.toUpperFirstLetter(this.createFormModal.get('name').value),
+      this.toUpperFirstLetter(this.createFormModal.get('description').value)
     )
     .subscribe((res:IBoardCreateResponse)=>{
       this.boards.push(res);
@@ -73,10 +74,9 @@ export class BoardPageComponent implements OnInit {
   }
 
   updateBoard(){
-    this.boardService.updateBoard( this.updateBoardId,{
-      nameBoard: this.createFormModal.get('name').value,
-      descriptionBoard: this.createFormModal.get('description').value
-    })
+    const nameBoard = this.toUpperFirstLetter(this.createFormModal.get('name').value);
+    const descriptionBoard = this.toUpperFirstLetter(this.createFormModal.get('description').value);
+    this.boardService.updateBoard( this.updateBoardId,{nameBoard,descriptionBoard})
     .subscribe((res:IBoardUpdateResponse)=>{
       let indexUpdatedBoard:number = -1;
       this.boards.find((board,i)=>{
