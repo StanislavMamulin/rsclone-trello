@@ -49,6 +49,9 @@ app-header {
 
 router-outlet {
     padding-top: 45px;
+    @media (max-width: 500px) {
+        padding-top: 60px;
+    }
 }
 
 html {

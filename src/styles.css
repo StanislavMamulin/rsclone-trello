@@ -53,3 +53,9 @@ html {
   --scrollbarBG: lightgray;
   --thumbBG: rgba(17, 86, 152, 0.8);
 }
+
+@media (max-width: 500px) {
+  router-outlet {
+    padding-top: 60px;
+  }
+}
