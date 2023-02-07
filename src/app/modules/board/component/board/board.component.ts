@@ -1,5 +1,6 @@
 import { Component, Input,Output, OnInit,EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { IColumn } from 'src/app/modules/column-task/model/column.interface';
 import { BoardService } from '../../board-service.service';
 import { IBoard } from '../../model/Board.model';
 
@@ -12,8 +13,10 @@ export class BoardComponent implements OnInit {
   @Input() board:IBoard;
   @Output() onDelete = new EventEmitter<string>();
   @Output() onUpdate = new EventEmitter<string>();
+  @Output() onUpdateStar = new EventEmitter<IBoard>();
 
   isOfferOpenBoard:boolean = false;
+  isOpenDescription:boolean = false;
 
   constructor(
     private boardService: BoardService,
@@ -21,7 +24,7 @@ export class BoardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
+    this.isOpenDescription=false;
   }
 
   deleteBoard(id:string){
@@ -33,11 +36,12 @@ export class BoardComponent implements OnInit {
 
   openBoard(event:any){
     if(event.srcElement.className === 'board__offer-open')
-    this.router.navigate(['/board',this.board.idBoard])
+      this.router.navigate(['/board',this.board.idBoard])
   }
 
   updateBoard(id:string){
     this.onUpdate.emit(id);
+    this.isOpenDescription=false;
   }
 
   offerOpenBoard(event:any){
@@ -51,6 +55,25 @@ export class BoardComponent implements OnInit {
   }
   leaveBoard(){
     this.isOfferOpenBoard = false;
+  }
+
+  amountTasks(arr:IColumn[]){
+    return arr.reduce((start,item)=>{
+      if(item.tasks instanceof Array){
+        return start + item.tasks.length;
+      }
+      return start + 0;
+    },0)
+  }
+
+  showDescription(event:any){
+    this.isOpenDescription = !this.isOpenDescription;
+  }
+
+  closeDescription = () => {this.isOpenDescription=false;}
+
+  updateFavorite(board:IBoard){
+    this.onUpdateStar.emit(board);
   }
 
 }

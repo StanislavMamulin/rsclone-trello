@@ -40,6 +40,14 @@ header {
         svg {
             height: 15px;
             transform: scale(1.4);
+            @media (max-width: 360px) {
+                transform: scale(2);
+            }
+        }
+        span {
+            @media (max-width: 360px) {
+                display: none;
+            }
         }
     }
 }
@@ -76,4 +84,63 @@ header {
 
 button {
     cursor: pointer;
+}
+
+.search-container {
+    .search {
+        display: flex;
+        flex-grow: 1;
+        justify-content: flex-end;
+        margin: 0 25px;
+        position: relative;
+        @media (max-width: 750px) {
+            top: -13px;
+        }
+        input[type="search"] {
+            outline: none;
+            border-radius: 0.3rem;
+            padding: 4px;
+            padding-left: 25px;
+            background-color: rgb(53, 136, 185);
+            border: none;
+            caret-color: white;
+            color: white;
+            &::-webkit-search-cancel-button {
+                appearance: none;
+            }
+            &:focus {
+                border: 2px solid rgba(255, 255, 255, 0.25);
+                background-color: white;
+                caret-color: black;
+                color: black;
+                &::placeholder {
+                    visibility: hidden;
+                }
+            }
+            &::placeholder {
+                color: white;
+            }
+            @media (max-width: 750px) {
+                width: 0;
+                top: 0;
+                left: 0;
+                position: absolute;
+                background: none;
+                border: none;
+                &:focus {
+                    width: auto;
+                }
+            }
+        }
+        span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: white;
+            z-index: 2;
+            svg {
+                transform: scale(0.8);
+            }
+        }
+    }
 }

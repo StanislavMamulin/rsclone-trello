@@ -7,14 +7,35 @@
         <img src="../../../../../assets/images/edit.svg" alt="edit">
       </div>
       <div (click)="deleteBoard(board.idBoard)">
-        <img src="../../../../../assets/images/delete.svg" alt="edit">
+        <img src="../../../../../assets/images/delete.svg" alt="description">
+      </div>
+      <div (click)="showDescription($event)">
+        <img src="../../../../../assets/images/description.svg" alt="edit">
       </div>
     </div>
   </div>
-  <div class="board__description">
-    <button class="board__description__button">Description</button>
+  <div  (click)="updateFavorite(board)"
+        class="board__chosen">
+    <img *ngIf="!board.isChosen" src="../../../../../assets/images/star-empty.svg" alt="empty-start">
+    <img *ngIf="board.isChosen" src="../../../../../assets/images/star-black.svg" alt="star-black">
   </div>
   <div (click)="openBoard($event)" *ngIf="isOfferOpenBoard" class="board__offer-open">
     Open Board
   </div>
+    <div *ngIf="isOpenDescription" class="description">
+      <small class="description__date">{{board.dateBoard}}</small>
+      <div class="description__name">{{board.nameBoard}}</div>
+      <div class="description__description">{{board.descriptionBoard}}</div>
+      <div class="description__info">
+        <span><b>Columns:</b> {{board.columns.length}}</span>,
+        <span><b>Tasks:</b> {{amountTasks(board.columns)}}</span>
+      </div>
+      <img class="description__star" *ngIf="board.isChosen" src="../../../../../assets/images/star-black.svg" alt="fill">
+      <button (click)="closeDescription()" class="description__button">Close</button>
+    </div>
+
 </div>
+
+
+
+

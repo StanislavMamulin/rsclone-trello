@@ -1,42 +1,56 @@
 <div class="board-page">
   <div class="container">
-    <div class="board-page__create" (click)="openCreateModal($event)">
-      Create board
+    <div>
+      <div class="board-page__create" (click)="openCreateModal($event)">
+        <span>Create board</span>
+      </div>
     </div>
-    <app-board
-      *ngFor="let board of boards"
-      (onDelete)="deleteBoard($event)"
-      [board]="board"
-      (onUpdate)="openUpdateModal($event)"
-    ></app-board>
+    <div class="board-page__boards">
+      <app-board *ngFor="let board of boards"
+                  (onDelete)="deleteBoard($event)" [board]="board"
+                  (onUpdate)="openUpdateModal($event)"
+                  (onUpdateStar)="updateStar($event)"
+      ></app-board>
+    </div>
   </div>
 </div>
 
+
+
+
 <div *ngIf="isOpenModal" (click)="closeModal($event)" class="modal">
-  <div class="modal__window">
-    <h3 *ngIf="isCreateModal" class="modal__window__title">Create board</h3>
-    <h3 *ngIf="isUpdateModal" class="modal__window__title">Update board</h3>
-    <div class="modal__window__inputs">
-      <input type="text" placeholder="name" [(ngModel)]="nameBoard" />
-      <input
-        type="text"
-        placeholder="description"
-        [(ngModel)]="descriptionBoard"
-      />
-    </div>
-    <button
-      *ngIf="isCreateModal"
-      (click)="createBoard()"
-      class="modal__window__button"
-    >
-      Create
-    </button>
-    <button
-      *ngIf="isUpdateModal"
-      (click)="updateBoard()"
-      class="modal__window__button"
-    >
-      Update
-    </button>
-  </div>
+    <form class="form-create" [formGroup]="createFormModal">
+      <h3 *ngIf="isCreateModal" class="form-create__title">Create board</h3>
+      <h3 *ngIf="isUpdateModal" class="form-create__title">Update board</h3>
+      <div class="form-create__name">
+        <label for="name">Name:</label>
+        <input id="name" type="text" formControlName="name">
+        <div class="validation" *ngIf="createFormModal.get('name').touched && createFormModal.get('name').invalid">
+          <small *ngIf="createFormModal.get('name').errors.required">Enter Name</small>
+          <small *ngIf="createFormModal.get('name').errors.minlength">
+            Name must be at least {{createFormModal.get('name').errors.minlength.requiredLength}} characters.
+            Now it {{createFormModal.get('name').errors.minlength.actualLength}}
+          </small>
+        </div>
+      </div>
+      <div class="form-create__description">
+        <label for="description">Description:</label>
+        <textarea formControlName="description" name="description" id="description" cols="60" rows="10"></textarea>
+        <div class="validation"
+          *ngIf="createFormModal.get('description').touched && createFormModal.get('description').invalid">
+          <small *ngIf="createFormModal.get('description').errors.required">Enter Description</small>
+          <small *ngIf="createFormModal.get('description').errors.minlength">
+            Description must be at least {{createFormModal.get('description').errors.minlength.requiredLength}}
+            characters.
+            Now it {{createFormModal.get('description').errors.minlength.actualLength}}
+          </small>
+        </div>
+      </div>
+      <button *ngIf="isCreateModal" (click)="createBoard()" [disabled]="createFormModal.invalid || submitted" class="form-create__button">
+        Create
+      </button>
+      <button *ngIf="isUpdateModal" (click)="updateBoard()" [disabled]="createFormModal.invalid || submitted" class="form-create__button">
+        Update
+      </button>
+    </form>
 </div>
