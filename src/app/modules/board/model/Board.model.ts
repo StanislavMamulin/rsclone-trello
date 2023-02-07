@@ -3,6 +3,7 @@ export interface IBoard {
   nameBoard: string;
   dateBoard:string;
   descriptionBoard: string;
+  isChosen:boolean;
   columns: {
       idColumn: string;
       nameColumn: string;
@@ -20,6 +21,7 @@ export interface IBoardCreateResponse {
   nameBoard: string,
   dateBoard: string,
   descriptionBoard: string,
+  isChosen:boolean,
   columns:[]
 }
 
@@ -27,5 +29,6 @@ export interface IBoardUpdateResponse {
   nameBoard: string,
   descriptionBoard: string,
   dateBoard: string,
+  isChosen:boolean
 }
 

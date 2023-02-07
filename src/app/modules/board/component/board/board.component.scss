@@ -45,6 +45,18 @@
     }
   }
 
+  &__chosen{
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    right: 10px;
+    bottom: 5px;
+    img{
+      width: 20px;
+    }
+
+  }
+
   &__offer-open{
     cursor: pointer;
     transition: .5s;

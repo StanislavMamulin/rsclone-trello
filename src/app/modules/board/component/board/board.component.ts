@@ -13,9 +13,11 @@ export class BoardComponent implements OnInit {
   @Input() board:IBoard;
   @Output() onDelete = new EventEmitter<string>();
   @Output() onUpdate = new EventEmitter<string>();
+  @Output() onUpdateStar = new EventEmitter<IBoard>();
 
   isOfferOpenBoard:boolean = false;
   isOpenDescription:boolean = false;
+  isHover:boolean = false;
   constructor(
     private boardService: BoardService,
     private router:Router
@@ -68,8 +70,10 @@ export class BoardComponent implements OnInit {
     this.isOpenDescription = !this.isOpenDescription;
   }
 
-  closeDescription(){
-    this.isOpenDescription=false;
+  closeDescription = () => {this.isOpenDescription=false;}
+
+  updateFavorite(board:IBoard){
+    this.onUpdateStar.emit(board);
   }
 
 }

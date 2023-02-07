@@ -6,8 +6,11 @@
       </div>
     </div>
     <div class="board-page__boards">
-      <app-board *ngFor="let board of boards" (onDelete)="deleteBoard($event)" [board]="board"
-      (onUpdate)="openUpdateModal($event)"></app-board>
+      <app-board *ngFor="let board of boards"
+                  (onDelete)="deleteBoard($event)" [board]="board"
+                  (onUpdate)="openUpdateModal($event)"
+                  (onUpdateStar)="updateStar($event)"
+      ></app-board>
     </div>
   </div>
 </div>

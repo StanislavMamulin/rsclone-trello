@@ -14,6 +14,11 @@
       </div>
     </div>
   </div>
+  <div  (click)="updateFavorite(board)"
+        class="board__chosen">
+    <img *ngIf="!isHover && !board.isChosen" src="../../../../../assets/images/star-empty.svg" alt="empty-start">
+    <img *ngIf="isHover || board.isChosen" src="../../../../../assets/images/star-black.svg" alt="star-black">
+  </div>
   <div (click)="openBoard($event)" *ngIf="isOfferOpenBoard" class="board__offer-open">
     Open Board
   </div>

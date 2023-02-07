@@ -31,8 +31,7 @@ export class BoardPageComponent implements OnInit {
   }
 
   openCreateModal(event:any){
-    // const body = document.body;
-    if(event.srcElement.className === "board-page__create"){
+    if(event.currentTarget.className === "board-page__create"){
       this.isCreateModal=!this.isCreateModal;
     }
     this.isOpenModal=!this.isOpenModal;
@@ -93,8 +92,28 @@ export class BoardPageComponent implements OnInit {
       if(indexUpdatedBoard>=0){
         this.boards[indexUpdatedBoard].nameBoard = res.nameBoard;
         this.boards[indexUpdatedBoard].descriptionBoard = res.descriptionBoard;
+        this.boards[indexUpdatedBoard].dateBoard = res.dateBoard;
       }
       this.defaultModal();
+    })
+  }
+
+  updateStar(b:IBoard){
+    let {idBoard,nameBoard,descriptionBoard,isChosen} = b;
+    this.boardService.updateBoard(idBoard,{
+      nameBoard,descriptionBoard,
+      dateBoard: new Date().toLocaleDateString(),
+      isChosen: !isChosen
+    }).subscribe((res:IBoardUpdateResponse)=>{
+      let indexUpdatedBoard:number = -1;
+      this.boards.find((board,i)=>{
+        if(board.idBoard === idBoard)
+        indexUpdatedBoard = i;
+      });
+      if(indexUpdatedBoard>=0){
+        this.boards[indexUpdatedBoard].isChosen = !isChosen;
+        this.boards[indexUpdatedBoard].dateBoard = res.dateBoard;
+      }
     })
   }
 }
