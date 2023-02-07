@@ -29,6 +29,7 @@ export class BoardPageComponent implements OnInit {
     this.boardService.getBoards()
     .subscribe(res=>{this.boards = res});
   }
+  toUpperFirstLetter = (str:string) => str[0].toUpperCase()+str.toLowerCase().substring(1);
 
   openCreateModal(event:any){
     if(event.currentTarget.className === "board-page__create"){
@@ -56,8 +57,8 @@ export class BoardPageComponent implements OnInit {
   createBoard(){
     this.submitted = true;
     this.boardService.createNewBoard(
-      this.createFormModal.get('name').value,
-      this.createFormModal.get('description').value,
+      this.toUpperFirstLetter(this.createFormModal.get('name').value),
+      this.toUpperFirstLetter(this.createFormModal.get('description').value)
       new Date().toLocaleDateString()
     )
     .subscribe((res:IBoardCreateResponse)=>{
@@ -78,9 +79,11 @@ export class BoardPageComponent implements OnInit {
   }
 
   updateBoard(){
+    const nameBoard = this.toUpperFirstLetter(this.createFormModal.get('name').value);
+    const descriptionBoard = this.toUpperFirstLetter(this.createFormModal.get('description').value);
     this.boardService.updateBoard( this.updateBoardId,{
-      nameBoard: this.createFormModal.get('name').value,
-      descriptionBoard: this.createFormModal.get('description').value,
+      nameBoard,
+      descriptionBoard,
       dateBoard: new Date().toLocaleDateString()
     })
     .subscribe((res:IBoardUpdateResponse)=>{
