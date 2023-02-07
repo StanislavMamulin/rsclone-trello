@@ -24,6 +24,7 @@
                 placeholder="enter the title of the new task"
                 class="add-task__title"
                 [(ngModel)]="newTaskTitle"
+                (keydown.enter)="enterPressed()"
             ></textarea>
             <div class="add-task__controls">
                 <button

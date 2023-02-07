@@ -64,7 +64,7 @@ export class ColumnComponent implements OnInit {
     });
   }
 
-  getTitle() {
-    return 'Button title';
+  enterPressed() {
+    this.addNewTaskHandler();
   }
 }
