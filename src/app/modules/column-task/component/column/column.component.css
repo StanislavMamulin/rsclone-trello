@@ -1,12 +1,12 @@
 .column-container {
-  width: 400px;
-  max-width: 100%;
-  margin: 0 25px 25px 0;
+  width: 300px;
   padding: 8px;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   vertical-align: top;
   border-radius: 3px;
   background-color: #ebecf0;
+  max-height: 88vh;
 }
 
 .task-list {
@@ -17,6 +17,8 @@
   flex-direction: column;
   gap: 8px;
   margin-bottom: 10px;
+  overflow-y: auto;
+  height: 100%;
 }
 
 .task-list__item {
@@ -123,4 +125,21 @@
   font-size: 14px;
   width: 100%;
   height: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+  border-radius: 6px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  background-clip: padding-box;
+  border: 3px solid transparent;
 }
