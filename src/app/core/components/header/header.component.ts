@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  searchField: HTMLElement;
+
   constructor(private router: Router) {}
 
   openBoards() {
@@ -15,5 +17,41 @@ export class HeaderComponent {
 
   openMainPage() {
     this.router.navigate(['/main']);
+  }
+
+  searchFocus(event: Event) {
+    this.searchField = document.querySelector(
+      'input[type="search"]'
+    ) as HTMLInputElement;
+    if (this.searchField) {
+      this.searchField.focus();
+    }
+  }
+
+  changeSearchIcon(event: Event) {
+    const searchIcon = document.querySelector('.search span') as HTMLElement;
+    const searchContainer = (event.target as HTMLElement).closest(
+      '.search'
+    ) as HTMLDivElement;
+
+    // event.type === 'focus'
+    //   ? ((searchIcon.style.color = 'black'),
+    //     (searchIcon.style.top = '1px'),
+    //     (searchContainer.style.left = '-50px'))
+    //   : ((searchIcon.style.color = 'white'), (searchIcon.style.top = '0'));
+
+    if (event.type === 'focus') {
+      searchIcon.style.color = 'black';
+      searchIcon.style.top = '1px';
+      if (window.innerWidth <= 750) {
+        searchContainer.style.left = '-100px';
+      }
+    } else if (event.type === 'blur') {
+      searchIcon.style.color = 'white';
+      searchIcon.style.top = '0';
+      if (window.innerWidth <= 750) {
+        searchContainer.style.left = '0';
+      }
+    }
   }
 }
