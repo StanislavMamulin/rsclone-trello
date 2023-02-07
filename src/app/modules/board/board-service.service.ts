@@ -33,10 +33,11 @@ export class BoardService {
    * @param description - Board description
    * @returns Observable<Object>
    */
-  public createNewBoard(name: string, description: string):Observable<IBoardCreateResponse> {
+  public createNewBoard(name: string, description: string, date:string):Observable<IBoardCreateResponse> {
     return this.httpClient.post<IBoardCreateResponse>(this.boardUrl, {
       nameBoard: name,
       descriptionBoard: description,
+      dateBoard: date
     })
   }
 
@@ -50,7 +51,8 @@ export class BoardService {
     id: string,
     newProperties: {
       nameBoard?: string,
-      descriptionBoard?: string
+      descriptionBoard?: string,
+      dateBoard:string
     }
   ):Observable<IBoardUpdateResponse> {
     return this.httpClient.put<IBoardUpdateResponse>(`${this.boardUrl}/${id}`, newProperties)

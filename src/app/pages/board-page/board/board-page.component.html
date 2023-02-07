@@ -39,10 +39,10 @@
           </small>
         </div>
       </div>
-      <button *ngIf="isCreateModal" (click)="createBoard()" [disabled]="createFormModal.invalid || submited" class="form-create__button">
+      <button *ngIf="isCreateModal" (click)="createBoard()" [disabled]="createFormModal.invalid || submitted" class="form-create__button">
         Create
       </button>
-      <button *ngIf="isUpdateModal" (click)="updateBoard()" [disabled]="createFormModal.invalid || submited" class="form-create__button">
+      <button *ngIf="isUpdateModal" (click)="updateBoard()" [disabled]="createFormModal.invalid || submitted" class="form-create__button">
         Update
       </button>
     </form>

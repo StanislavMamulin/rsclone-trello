@@ -1,6 +1,7 @@
 export interface IBoard {
   idBoard: string;
   nameBoard: string;
+  dateBoard:string;
   descriptionBoard: string;
   columns: {
       idColumn: string;
@@ -17,6 +18,7 @@ export interface IBoard {
 export interface IBoardCreateResponse {
   idBoard:string,
   nameBoard: string,
+  dateBoard: string,
   descriptionBoard: string,
   columns:[]
 }
@@ -24,5 +26,6 @@ export interface IBoardCreateResponse {
 export interface IBoardUpdateResponse {
   nameBoard: string,
   descriptionBoard: string,
+  dateBoard: string,
 }
 

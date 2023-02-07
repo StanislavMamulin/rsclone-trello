@@ -15,14 +15,15 @@ export class BoardPageComponent implements OnInit {
   isUpdateModal:boolean = false;
   updateBoardId:string;
   createFormModal:any;
-  submited:boolean = false;
+  submitted:boolean = false;
   constructor(private boardService: BoardService){}
 
   ngOnInit(): void {
 
     this.createFormModal = new FormGroup({
       name: new FormControl(null,[Validators.required, Validators.minLength(3)]),
-      description: new FormControl(null, [Validators.required, Validators.minLength(10)])
+      description: new FormControl(null, [Validators.required, Validators.minLength(10)]),
+      path: new FormControl('')
     })
 
     this.boardService.getBoards()
@@ -46,15 +47,16 @@ export class BoardPageComponent implements OnInit {
     this.isOpenModal = !this.isOpenModal;
     this.isCreateModal = false;
     this.isUpdateModal = false;
-    this.submited = false;
+    this.submitted = false;
     this.createFormModal.reset();
   }
 
   createBoard(){
-    this.submited = true;
+    this.submitted = true;
     this.boardService.createNewBoard(
       this.createFormModal.get('name').value,
-      this.createFormModal.get('description').value
+      this.createFormModal.get('description').value,
+      new Date().toLocaleDateString()
     )
     .subscribe((res:IBoardCreateResponse)=>{
       this.boards.push(res);
@@ -75,7 +77,8 @@ export class BoardPageComponent implements OnInit {
   updateBoard(){
     this.boardService.updateBoard( this.updateBoardId,{
       nameBoard: this.createFormModal.get('name').value,
-      descriptionBoard: this.createFormModal.get('description').value
+      descriptionBoard: this.createFormModal.get('description').value,
+      dateBoard: new Date().toLocaleDateString()
     })
     .subscribe((res:IBoardUpdateResponse)=>{
       let indexUpdatedBoard:number = -1;
