@@ -22,3 +22,20 @@
   background-clip: padding-box;
   border: 3px solid transparent;
 }
+
+.workspace__add-column-btn {
+  border-radius: 3px;
+  padding: 8px;
+  text-decoration: none;
+  border: 0;
+  height: 32px;
+  white-space: nowrap;
+}
+
+.workspace__add-column-btn:hover {
+  filter: brightness(0.80);
+}
+
+.workspace__add-column-btn:active {
+  filter: brightness(0.9);
+}
