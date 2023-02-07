@@ -120,7 +120,7 @@ button {
 
 @media (max-width: 750px) {
   .search-container .search {
-    margin: 0;
+    top: -13px;
   }
 }
 
@@ -139,6 +139,13 @@ button {
   appearance: none;
 }
 
+.search-container .search input[type="search"]:focus {
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background-color: white;
+  caret-color: black;
+  color: black;
+}
+
 .search-container .search input[type="search"]:focus::placeholder {
   visibility: hidden;
 }
@@ -150,20 +157,25 @@ button {
 @media (max-width: 750px) {
   .search-container .search input[type="search"] {
     width: 0;
-    padding-left: 16px;
+    top: 0;
+    left: 0;
+    position: absolute;
     background: none;
     border: none;
   }
-}
-
-.search-container .search svg {
-  position: absolute;
-  transform: scale(0.8);
-  color: white;
-}
-
-@media (max-width: 750px) {
-  .search-container .search svg {
-    transform: scale(1.2);
+  .search-container .search input[type="search"]:focus {
+    width: auto;
   }
+}
+
+.search-container .search span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  z-index: 2;
+}
+
+.search-container .search span svg {
+  transform: scale(0.8);
 }

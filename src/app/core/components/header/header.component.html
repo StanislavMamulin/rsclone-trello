@@ -27,7 +27,7 @@
       </button>
     </div>
     <div class="search-container">
-      <div class="search">
+      <div (click)="searchFocus($event)" class="search">
         <span
           role="img"
           aria-label="search"
@@ -42,7 +42,12 @@
               fill="currentColor"
               fill-rule="evenodd"
             ></path></svg></span
-        ><input placeholder="search" type="search" />
+        ><input
+          (blur)="changeSearchIcon($event)"
+          (focus)="changeSearchIcon($event)"
+          placeholder="search"
+          type="search"
+        />
       </div>
     </div>
     <div class="authorization">

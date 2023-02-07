@@ -94,7 +94,7 @@ button {
         margin: 0 25px;
         position: relative;
         @media (max-width: 750px) {
-            margin: 0;
+            top: -13px;
         }
         input[type="search"] {
             outline: none;
@@ -109,8 +109,10 @@ button {
                 appearance: none;
             }
             &:focus {
-                // border: 2px solid rgba(255, 255, 255, 0.25);
-                // background-color: white;
+                border: 2px solid rgba(255, 255, 255, 0.25);
+                background-color: white;
+                caret-color: black;
+                color: black;
                 &::placeholder {
                     visibility: hidden;
                 }
@@ -120,17 +122,24 @@ button {
             }
             @media (max-width: 750px) {
                 width: 0;
-                padding-left: 16px;
+                top: 0;
+                left: 0;
+                position: absolute;
                 background: none;
                 border: none;
+                &:focus {
+                    width: auto;
+                }
             }
         }
-        svg {
+        span {
             position: absolute;
-            transform: scale(0.8);
+            top: 0;
+            left: 0;
             color: white;
-            @media (max-width: 750px) {
-                transform: scale(1.2);
+            z-index: 2;
+            svg {
+                transform: scale(0.8);
             }
         }
     }
