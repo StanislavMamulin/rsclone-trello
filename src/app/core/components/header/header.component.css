@@ -58,6 +58,18 @@ header .container {
   transform: scale(1.4);
 }
 
+@media (max-width: 360px) {
+  .trello-logo button svg {
+    transform: scale(2);
+  }
+}
+
+@media (max-width: 360px) {
+  .trello-logo button span {
+    display: none;
+  }
+}
+
 @media (max-width: 500px) {
   .authorization {
     display: flex;
@@ -96,4 +108,62 @@ header .container {
 
 button {
   cursor: pointer;
+}
+
+.search-container .search {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  margin: 0 25px;
+  position: relative;
+}
+
+@media (max-width: 750px) {
+  .search-container .search {
+    margin: 0;
+  }
+}
+
+.search-container .search input[type="search"] {
+  outline: none;
+  border-radius: 0.3rem;
+  padding: 4px;
+  padding-left: 25px;
+  background-color: #3588b9;
+  border: none;
+  caret-color: white;
+  color: white;
+}
+
+.search-container .search input[type="search"]::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.search-container .search input[type="search"]:focus::placeholder {
+  visibility: hidden;
+}
+
+.search-container .search input[type="search"]::placeholder {
+  color: white;
+}
+
+@media (max-width: 750px) {
+  .search-container .search input[type="search"] {
+    width: 0;
+    padding-left: 16px;
+    background: none;
+    border: none;
+  }
+}
+
+.search-container .search svg {
+  position: absolute;
+  transform: scale(0.8);
+  color: white;
+}
+
+@media (max-width: 750px) {
+  .search-container .search svg {
+    transform: scale(1.2);
+  }
 }
