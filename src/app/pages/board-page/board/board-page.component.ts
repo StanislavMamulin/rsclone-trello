@@ -58,7 +58,7 @@ export class BoardPageComponent implements OnInit {
     this.submitted = true;
     this.boardService.createNewBoard(
       this.toUpperFirstLetter(this.createFormModal.get('name').value),
-      this.toUpperFirstLetter(this.createFormModal.get('description').value)
+      this.toUpperFirstLetter(this.createFormModal.get('description').value),
       new Date().toLocaleDateString()
     )
     .subscribe((res:IBoardCreateResponse)=>{

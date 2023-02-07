@@ -17,7 +17,7 @@ export class BoardComponent implements OnInit {
 
   isOfferOpenBoard:boolean = false;
   isOpenDescription:boolean = false;
-  isHover:boolean = false;
+
   constructor(
     private boardService: BoardService,
     private router:Router

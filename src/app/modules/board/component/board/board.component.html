@@ -16,8 +16,8 @@
   </div>
   <div  (click)="updateFavorite(board)"
         class="board__chosen">
-    <img *ngIf="!isHover && !board.isChosen" src="../../../../../assets/images/star-empty.svg" alt="empty-start">
-    <img *ngIf="isHover || board.isChosen" src="../../../../../assets/images/star-black.svg" alt="star-black">
+    <img *ngIf="!board.isChosen" src="../../../../../assets/images/star-empty.svg" alt="empty-start">
+    <img *ngIf="board.isChosen" src="../../../../../assets/images/star-black.svg" alt="star-black">
   </div>
   <div (click)="openBoard($event)" *ngIf="isOfferOpenBoard" class="board__offer-open">
     Open Board
@@ -30,6 +30,7 @@
         <span><b>Columns:</b> {{board.columns.length}}</span>,
         <span><b>Tasks:</b> {{amountTasks(board.columns)}}</span>
       </div>
+      <img class="description__star" *ngIf="board.isChosen" src="../../../../../assets/images/star-black.svg" alt="fill">
       <button (click)="closeDescription()" class="description__button">Close</button>
     </div>
 
