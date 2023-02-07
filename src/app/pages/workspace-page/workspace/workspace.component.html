@@ -1,4 +1,10 @@
 <div cdkDropListGroup class="workspace__container">
   <app-column *ngFor="let column of columns" [column]="column"></app-column>
+  <button
+    class="workspace__add-column-btn"
+    (click)="addNewColumn()"
+  >
+    Add a new column...
+  </button>
 </div>
 
