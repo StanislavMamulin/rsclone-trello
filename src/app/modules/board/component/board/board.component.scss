@@ -45,23 +45,16 @@
     }
   }
 
-  &__description{
-    width: 100%;
-    height: 30px;
-    text-align: center;
-    margin: auto;
-    justify-self: flex-end;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    &__button{
-      cursor: pointer;
-      font-size: 16px;
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
+  &__chosen{
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    right: 10px;
+    bottom: 5px;
+    img{
+      width: 20px;
     }
+
   }
 
   &__offer-open{
@@ -69,7 +62,7 @@
     transition: .5s;
     position: absolute;
     background:rgb(107, 103, 103, 0.4);
-    color: rgb(107, 103, 103, 1);
+    color: rgb(167, 158, 158);
     height: 100%;
     width: 100%;
     display: flex;
@@ -77,5 +70,87 @@
     justify-content: center;
     font-size: 28px;
   }
+  .description{
+    position: absolute;
+    right: 30px;
+    top: 105px;
+    z-index: 5;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
+    padding: 50px;
+    width: 400px;
+
+    &__star{
+      width: 25px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+    }
+
+    &__date{
+      color: gray;
+      font-weight: 500;
+    }
+
+    &__name{
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    &__description{
+      margin-top: 5px;
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    &__info{
+      margin-top: 10px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: gray;
+      b{
+        color:black;
+
+      }
+
+    }
+
+    &__button{
+      cursor: pointer;
+      margin-top: 20px;
+      background: #327da8;
+      color: #fff;
+      width: 100px;
+      height: 28px;
+      border-radius:5px;
+      border-style: none;
+      &:hover{
+        background: #026aa7;
+      }
+    }
 
 }
+}
+
+
+
+@media (max-width:550px){
+  .board{
+    .description{
+      width: 320px;
+    }
+  }
+}
+@media (max-width:430px){
+  .board{
+    .description{
+      width: 270px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+

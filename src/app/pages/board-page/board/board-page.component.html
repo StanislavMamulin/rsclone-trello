@@ -1,10 +1,17 @@
 <div class="board-page">
   <div class="container">
-    <div class="board-page__create" (click)="openCreateModal($event)">
-      Create board
+    <div>
+      <div class="board-page__create" (click)="openCreateModal($event)">
+        <span>Create board</span>
+      </div>
     </div>
-    <app-board *ngFor="let board of boards" (onDelete)="deleteBoard($event)" [board]="board"
-      (onUpdate)="openUpdateModal($event)"></app-board>
+    <div class="board-page__boards">
+      <app-board *ngFor="let board of boards"
+                  (onDelete)="deleteBoard($event)" [board]="board"
+                  (onUpdate)="openUpdateModal($event)"
+                  (onUpdateStar)="updateStar($event)"
+      ></app-board>
+    </div>
   </div>
 </div>
 
@@ -39,10 +46,10 @@
           </small>
         </div>
       </div>
-      <button *ngIf="isCreateModal" (click)="createBoard()" [disabled]="createFormModal.invalid || submited" class="form-create__button">
+      <button *ngIf="isCreateModal" (click)="createBoard()" [disabled]="createFormModal.invalid || submitted" class="form-create__button">
         Create
       </button>
-      <button *ngIf="isUpdateModal" (click)="updateBoard()" [disabled]="createFormModal.invalid || submited" class="form-create__button">
+      <button *ngIf="isUpdateModal" (click)="updateBoard()" [disabled]="createFormModal.invalid || submitted" class="form-create__button">
         Update
       </button>
     </form>
