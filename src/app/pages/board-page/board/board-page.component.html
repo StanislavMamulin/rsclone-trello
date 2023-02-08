@@ -14,7 +14,7 @@
       <app-board *ngFor="let board of boards
       | chosen:showFavorite
       | resent:showDate
-      | filterColumn: {min:minValueColumns, max:maxValueColumns}"
+      "
                   (onDelete)="deleteBoard($event)" [board]="board"
                   (onUpdate)="openUpdateModal($event)"
                   (onUpdateStar)="updateStar($event)"
