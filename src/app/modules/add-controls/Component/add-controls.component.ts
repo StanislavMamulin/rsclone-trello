@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class AddControlsComponent {
   @Input() addButtonText: string;
   @Output() addButtonPressed = new EventEmitter<string>();
+  @Output() cancelButtonPressed = new EventEmitter();
 
   newElementTitle: string;
 
@@ -26,5 +27,6 @@ export class AddControlsComponent {
 
   cancelTaskCreation() {
     this.newElementTitle = '';
+    this.cancelButtonPressed.emit();
   }
 }

@@ -7,6 +7,7 @@ import { ColumnTaskModule } from 'src/app/modules/column-task/column-task.module
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ColumnTaskService } from 'src/app/modules/column-task/column-task.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { AddControlsModule } from 'src/app/modules/add-controls/add-controls.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     WorkspaceRoutingModule,
     ColumnTaskModule,
     SharedModule,
-    DragDropModule
+    DragDropModule,
+    AddControlsModule
   ],
   exports:[
     WorkspaceComponent

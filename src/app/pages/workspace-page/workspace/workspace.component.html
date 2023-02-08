@@ -2,9 +2,19 @@
   <app-column *ngFor="let column of columns" [column]="column"></app-column>
   <button
     class="workspace__add-column-btn"
-    (click)="addNewColumn()"
+    (click)="showAddColumn()"
+    *ngIf="!showAddControl; else addColumnControl"
   >
     Add a new column...
   </button>
+
+  <ng-template #addColumnControl>
+    <app-add-controls
+      addButtonText="Add a new column"
+      (addButtonPressed)="addNewColumn($event)"
+      (cancelButtonPressed)="hideAddColumn()"
+    >
+    </app-add-controls>
+  </ng-template>
 </div>
 
