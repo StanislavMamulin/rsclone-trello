@@ -43,6 +43,7 @@
               fill-rule="evenodd"
             ></path></svg></span
         ><input
+          [(ngModel)]="search"
           (blur)="changeSearchIcon($event)"
           (focus)="changeSearchIcon($event)"
           placeholder="search"
