@@ -17,8 +17,6 @@ export class ColumnComponent implements OnInit {
   tasks: ITask[];
   showAddTaskControl = false;
 
-  newTaskTitle = '';
-
   constructor(private columnTaskService: ColumnTaskService) {}
 
   ngOnInit() {
@@ -52,19 +50,13 @@ export class ColumnComponent implements OnInit {
 
   cancelTaskCreation() {
     this.showAddTaskControl = false;
-    this.newTaskTitle = '';
   }
 
-  addNewTaskHandler() {
+  addNewTaskHandler(title: string) {
     this.columnTaskService.createTaskByColumnId(
-      this.column.idColumn, { nameTask: this.newTaskTitle, descriptionTask: '' }
+      this.column.idColumn, { nameTask: title, descriptionTask: '' }
     ).subscribe((newTask: ITask) => {
       this.tasks.push(newTask);
-      this.cancelTaskCreation();
     });
-  }
-
-  enterPressed() {
-    this.addNewTaskHandler();
   }
 }

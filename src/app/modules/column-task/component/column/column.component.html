@@ -18,29 +18,10 @@
     </button>
 
     <ng-template #addTask>
-        <div class="add-task__container">
-            <textarea
-                type="text"
-                placeholder="enter the title of the new task"
-                class="add-task__title"
-                [(ngModel)]="newTaskTitle"
-                (keydown.enter)="enterPressed()"
-            ></textarea>
-            <div class="add-task__controls">
-                <button
-                    class="add-task__add-btn button"
-                    (click)="addNewTaskHandler()"
-                >
-                    Add card
-                </button>
-                <button
-                    class="add-task__cancel-btn button"
-                    (click)="cancelTaskCreation()"
-                >
-                    X
-                </button>
-            </div>
-        </div>
+        <app-add-controls
+            addButtonText="Add task"
+            (addButtonPressed)="addNewTaskHandler($event)"
+        ></app-add-controls>
     </ng-template>
 </div>
 

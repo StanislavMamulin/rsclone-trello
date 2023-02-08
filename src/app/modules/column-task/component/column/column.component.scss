@@ -83,52 +83,8 @@
   background-color: #f1f2f5;
 }
 
-.button {
-  border-radius: 3px;
-  display: block;
-  flex: 1 0 auto;
-  padding: 4px 8px;
-  text-decoration: none;
-  -webkit-user-select: none;
-  user-select: none;
-  border: 0;
-  min-height: 32px;
-}
-
 .button:hover {
   filter: brightness(0.80);
-}
-
-.add-task__add-btn {
-  background-color: #1365b4;
-  color: white;
-  display: inline-block;
-  margin-right: 8px;
-}
-
-.add-task__cancel-btn {
-  background-color: rgba(0, 0, 0, 0);
-  color: #5e6c84;
-  height: 32px;
-  width: 32px;
-  display: inline-block;
-}
-
-.add-task__cancel-btn:hover {
-  background-color: #d1d3dc;
-}
-
-.add-task__title {
-  padding: 20px 10px;
-  border: 0;
-  border-bottom: solid 1px #ccc;
-  border-radius: 3px;
-  color: rgba(0, 0, 0, 0.87);
-  box-sizing: border-box;
-  background: white;
-  font-size: 14px;
-  width: 100%;
-  height: auto;
 }
 
 ::-webkit-scrollbar {
