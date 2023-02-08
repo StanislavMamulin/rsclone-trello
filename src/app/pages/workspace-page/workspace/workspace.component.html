@@ -1,5 +1,18 @@
-<div cdkDropListGroup class="workspace__container">
-  <app-column *ngFor="let column of columns" [column]="column"></app-column>
+<div
+  cdkDropList
+  (cdkDropListDropped)="drop($event)"
+  class="workspace__container"
+  [cdkDropListData]="columns"
+  cdkDropListOrientation="horizontal"
+>
+  <app-column
+    *ngFor="let
+    column of columns"
+    [column]="column"
+    cdkDrag
+    [getConnectedList]="columnsIdsFunc"
+    class="workspace__column"
+  ></app-column>
   <button
     class="workspace__add-column-btn"
     (click)="addNewColumn()"
