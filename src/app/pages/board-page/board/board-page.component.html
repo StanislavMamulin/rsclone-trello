@@ -13,12 +13,6 @@
         (onUpdate)="openUpdateModal($event)"
       ></app-board>
     </div>
-    <app-board
-      *ngFor="let board of boards"
-      (onDelete)="deleteBoard($event)"
-      [board]="board"
-      (onUpdate)="openUpdateModal($event)"
-    ></app-board>
   </div>
 </div>
 
