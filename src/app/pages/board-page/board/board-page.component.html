@@ -1,12 +1,20 @@
 <div class="board-page">
   <div class="container">
-    <div>
-      <div class="board-page__create" (click)="openCreateModal($event)">
+    <div class="board-page__wrapper">
+      <div  class="board-page__create" (click)="openCreateModal($event)">
         <span>Create board</span>
       </div>
+      <app-filters (boards)="boards" (onShowFavorite)="updateShowFavorite($event)"
+                   (onShowDate)="updateShowDate($event)"
+                   (updateValues)="updateValues($event)"
+      >
+      </app-filters>
     </div>
     <div class="board-page__boards">
-      <app-board *ngFor="let board of boards"
+      <app-board *ngFor="let board of boards
+      | chosen:showFavorite
+      | resent:showDate
+      "
                   (onDelete)="deleteBoard($event)" [board]="board"
                   (onUpdate)="openUpdateModal($event)"
                   (onUpdateStar)="updateStar($event)"

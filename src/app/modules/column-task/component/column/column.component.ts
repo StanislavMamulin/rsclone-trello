@@ -13,6 +13,7 @@ import { IBoard } from 'src/app/modules/board/model/Board.model';
 export class ColumnComponent implements OnInit {
   @Input() column: IColumn;
   @Input() currentBoard: IBoard;
+  @Input() getConnectedList: () => string[];
 
   tasks: ITask[];
   showAddTaskControl = false;
@@ -58,5 +59,11 @@ export class ColumnComponent implements OnInit {
     ).subscribe((newTask: ITask) => {
       this.tasks.push(newTask);
     });
+  }
+
+  getConnectedToList(currentColumnId: string): string[] { 
+    const possibleConnectionIds = this.getConnectedList();
+
+    return possibleConnectionIds.filter(id => id !== currentColumnId);
   }
 }
