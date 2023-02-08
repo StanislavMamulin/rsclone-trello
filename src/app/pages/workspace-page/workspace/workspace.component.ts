@@ -12,6 +12,7 @@ import { IColumn } from 'src/app/modules/column-task/model/column.interface';
 export class WorkspaceComponent implements OnInit {
   currentBoardId: string;
   columns: IColumn[] = [];
+  showAddControl = false;
   columnsIds: string[];
 
   constructor(
@@ -34,13 +35,22 @@ export class WorkspaceComponent implements OnInit {
     })
   }
 
-  addNewColumn() { 
+  addNewColumn(columnName: string) { 
     this.columnTaskService.createColumn(this.currentBoardId, {
-      nameColumn: 'Column',
+      nameColumn: columnName,
       descriptionColumn: ''
     }).subscribe((newColumn: IColumn) => {
       this.columns.push(newColumn);
+      this.hideAddColumn();
     })
+  }
+
+  showAddColumn() {
+    this.showAddControl = true;
+  }
+
+  hideAddColumn() {
+    this.showAddControl = false;
   }
 
   drop(event: CdkDragDrop<IColumn[]>) {
