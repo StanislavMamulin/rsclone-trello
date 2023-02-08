@@ -135,7 +135,11 @@
 }
 }
 
-
+@media (max-width:635px){
+  .board{
+    width: 100%;
+  }
+}
 
 @media (max-width:550px){
   .board{

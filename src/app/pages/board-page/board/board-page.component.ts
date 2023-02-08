@@ -16,6 +16,13 @@ export class BoardPageComponent implements OnInit {
   updateBoardId:string;
   createFormModal:any;
   submitted:boolean = false;
+  whatSort:boolean = true;
+  showFavorite:boolean = false;
+  showDate:boolean = false;
+  minValueColumns:number = 0;
+  maxValueColumns:number = 250;
+
+
   constructor(private boardService: BoardService){}
 
   ngOnInit(): void {
@@ -29,6 +36,15 @@ export class BoardPageComponent implements OnInit {
     this.boardService.getBoards()
     .subscribe(res=>{this.boards = res});
   }
+
+  updateShowDate = (showDate:boolean)=> {this.showDate = showDate}
+  updateShowFavorite = (showFavorite:boolean)=> {this.showFavorite = showFavorite;}
+  updateValues = (obj:{maxValueColumns:number, minValueColumns:number})=>{
+    const {minValueColumns, maxValueColumns} = obj;
+    this.minValueColumns = minValueColumns;
+    this.maxValueColumns = maxValueColumns;
+  }
+
   toUpperFirstLetter = (str:string) => str[0].toUpperCase()+str.toLowerCase().substring(1);
 
   openCreateModal(event:any){
@@ -102,10 +118,9 @@ export class BoardPageComponent implements OnInit {
   }
 
   updateStar(b:IBoard){
-    let {idBoard,nameBoard,descriptionBoard,isChosen} = b;
+    let {idBoard,nameBoard,descriptionBoard,isChosen, dateBoard} = b;
     this.boardService.updateBoard(idBoard,{
-      nameBoard,descriptionBoard,
-      dateBoard: new Date().toLocaleDateString(),
+      nameBoard,descriptionBoard,dateBoard,
       isChosen: !isChosen
     }).subscribe((res:IBoardUpdateResponse)=>{
       let indexUpdatedBoard:number = -1;
@@ -119,4 +134,5 @@ export class BoardPageComponent implements OnInit {
       }
     })
   }
+
 }

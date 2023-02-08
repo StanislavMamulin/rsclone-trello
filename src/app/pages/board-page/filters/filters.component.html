@@ -1,0 +1,16 @@
+<form  class="form-filters">
+  <div class="inputGroup">
+    <input (change)="toShowFavorite(showFavorite)" [(ngModel)]="showFavorite" id="option1" name="option1" type="checkbox"/>
+    <label for="option1">Favorites</label>
+  </div>
+
+  <div class="inputGroup">
+    <input (change)="toShowDate(showDate)" [(ngModel)]="showDate" id="option2" name="option2" type="checkbox"/>
+    <label for="option2">Last created</label>
+  </div>
+
+  <ngx-slider (mouseup)="toUpdateValues({minValueColumns,maxValueColumns})"
+              (mousemove)="toUpdateValues({minValueColumns,maxValueColumns})"
+   [(value)]="minValueColumns" [(highValue)]="maxValueColumns" [options]="optionsColumns"></ngx-slider>
+  <ngx-slider [(value)]="minValueTasks" [(highValue)]="maxValueTasks" [options]="optionsTasks"></ngx-slider>
+</form>
