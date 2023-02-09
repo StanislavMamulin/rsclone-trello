@@ -19,9 +19,7 @@ export class BoardPageComponent implements OnInit {
   whatSort:boolean = true;
   showFavorite:boolean = false;
   showDate:boolean = false;
-  minValueColumns:number = 0;
-  maxValueColumns:number = 250;
-
+  selectValue:string = '';
 
   constructor(private boardService: BoardService){}
 
@@ -38,17 +36,15 @@ export class BoardPageComponent implements OnInit {
   }
 
   updateShowDate = (showDate:boolean)=> {this.showDate = showDate}
-  updateShowFavorite = (showFavorite:boolean)=> {this.showFavorite = showFavorite;}
-  updateValues = (obj:{maxValueColumns:number, minValueColumns:number})=>{
-    const {minValueColumns, maxValueColumns} = obj;
-    this.minValueColumns = minValueColumns;
-    this.maxValueColumns = maxValueColumns;
+  updateShowFavorite = (showFavorite:boolean) => {this.showFavorite = showFavorite;}
+  updateSelectValue = (selectValue:string) => {
+    this.selectValue = selectValue;
   }
 
   toUpperFirstLetter = (str:string) => str[0].toUpperCase()+str.toLowerCase().substring(1);
 
   openCreateModal(event:any){
-    if(event.currentTarget.className === "board-page__create"){
+    if(event.currentTarget.classList.contains("board-page__create")){
       this.isCreateModal=!this.isCreateModal;
     }
     this.isOpenModal=!this.isOpenModal;
@@ -56,7 +52,7 @@ export class BoardPageComponent implements OnInit {
   }
 
   closeModal(event:any){
-    if(event.srcElement.className === "modal"){
+    if(event.target.classList.contains('modal')){
       this.defaultModal();
     }
   }
@@ -75,7 +71,7 @@ export class BoardPageComponent implements OnInit {
     this.boardService.createNewBoard(
       this.toUpperFirstLetter(this.createFormModal.get('name').value),
       this.toUpperFirstLetter(this.createFormModal.get('description').value),
-      new Date().toLocaleDateString()
+      new Date()
     )
     .subscribe((res:IBoardCreateResponse)=>{
       this.boards.push(res);
@@ -100,7 +96,7 @@ export class BoardPageComponent implements OnInit {
     this.boardService.updateBoard( this.updateBoardId,{
       nameBoard,
       descriptionBoard,
-      dateBoard: new Date().toLocaleDateString()
+      dateBoard: new Date()
     })
     .subscribe((res:IBoardUpdateResponse)=>{
       let indexUpdatedBoard:number = -1;

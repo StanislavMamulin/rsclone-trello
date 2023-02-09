@@ -5,19 +5,26 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ChosenPipe } from './chosen.pipe';
 import { ResentPipe } from './resent.pipe';
-import { FilterColumnPipe } from './filter-column.pipe';
+import { SortByParamsPipe } from './sort-date.pipe';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
     ChosenPipe,
     ResentPipe,
-    FilterColumnPipe,
+    SortByParamsPipe,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule
   ],
   exports:[
     FormsModule,
@@ -25,7 +32,10 @@ import { FilterColumnPipe } from './filter-column.pipe';
     RouterModule,
     ChosenPipe,
     ResentPipe,
-    FilterColumnPipe
+    SortByParamsPipe,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
   ]
 })
 export class SharedModule { }
