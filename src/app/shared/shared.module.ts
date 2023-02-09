@@ -7,10 +7,19 @@ import { ChosenPipe } from './chosen.pipe';
 import { ResentPipe } from './resent.pipe';
 import { FilterColumnPipe } from './filter-column.pipe';
 import { SearchPipePipe } from './search-pipe.pipe';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [ChosenPipe, ResentPipe, FilterColumnPipe, SearchPipePipe],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    MatAutocompleteModule,
+    MatInputModule,
+  ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
@@ -19,6 +28,8 @@ import { SearchPipePipe } from './search-pipe.pipe';
     ResentPipe,
     FilterColumnPipe,
     SearchPipePipe,
+    MatAutocompleteModule,
+    MatInputModule,
   ],
 })
 export class SharedModule {}

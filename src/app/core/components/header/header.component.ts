@@ -23,10 +23,10 @@ export class HeaderComponent {
   }
 
   searchFocus(): void {
-    const searchField = document.querySelector(
-      'input[type="search"]'
-    ) as HTMLInputElement;
-    searchField.focus();
+    // const searchField = document.querySelector(
+    //   'input[type="search"]'
+    // ) as HTMLInputElement;
+    // searchField.focus();
   }
 
   changeSearchIcon(event: Event): void {
@@ -52,8 +52,13 @@ export class HeaderComponent {
     }
   }
 
-  ngAfterViewChecked(): void {
-    document.addEventListener('click', this.changeVisibility);
+  // ngAfterViewChecked(): void {
+  //   document.addEventListener('click', this.changeVisibility);
+  // }
+
+  ngOnInit() {
+    this.getBoards();
+    console.log(this.boards);
   }
 
   getBoards(): void {
@@ -66,16 +71,17 @@ export class HeaderComponent {
     this.router.navigate(['/board', board.idBoard]);
   }
 
-  changeVisibility(event: Event): void {
-    const result = document.querySelector(
-      '.result-container'
-    ) as HTMLDivElement;
-    const input = document.querySelector(
-      'input[type="search"]'
-    ) as HTMLInputElement;
-    (event.target as HTMLElement).closest('.search') &&
-    !(event.target as HTMLElement).classList.contains('result')
-      ? (result.style.display = 'block')
-      : ((result.style.display = 'none'), input.blur());
-  }
+  // changeVisibility(event: Event): void {
+  //   console.log(event.target);
+  //   const result = document.querySelector(
+  //     '.result-container'
+  //   ) as HTMLDivElement;
+  //   const input = document.querySelector(
+  //     'input[type="search"]'
+  //   ) as HTMLInputElement;
+  //   (event.target as HTMLElement).closest('.search') &&
+  //   !(event.target as HTMLElement).classList.contains('result')
+  //     ? (result.style.display = 'block')
+  //     : ((result.style.display = 'none'), input.blur());
+  // }
 }
