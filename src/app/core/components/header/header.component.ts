@@ -9,30 +9,29 @@ import { BoardService } from 'src/app/modules/board/board-service.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  searchField: HTMLElement;
   boards: IBoard[] = [];
 
   constructor(private router: Router, private boardService: BoardService) {}
 
-  openBoards() {
+  openBoards(): void {
     this.router.navigate(['/board']);
   }
 
-  openMainPage() {
+  openMainPage(): void {
     this.router.navigate(['/main']);
   }
 
-  searchFocus(event: Event) {
-    this.searchField = document.querySelector(
+  searchFocus(): void {
+    const searchField = document.querySelector(
       'input[type="search"]'
     ) as HTMLInputElement;
-    if (this.searchField) {
-      this.searchField.focus();
-    }
+    searchField.focus();
   }
 
-  changeSearchIcon(event: Event) {
-    const searchIcon = document.querySelector('.search span') as HTMLElement;
+  changeSearchIcon(event: Event): void {
+    const searchIcon = document.querySelector(
+      '.search span'
+    ) as HTMLSpanElement;
     const searchContainer = (event.target as HTMLElement).closest(
       '.search'
     ) as HTMLDivElement;
@@ -52,22 +51,24 @@ export class HeaderComponent {
     }
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     document.addEventListener('click', this.changeVisibility);
   }
 
-  getBoards() {
+  getBoards(): void {
     this.boardService.getBoards().subscribe((res) => {
       this.boards = res;
     });
   }
 
-  openBoard(event: Event, board: IBoard) {
+  openBoard(board: IBoard): void {
     this.router.navigate(['/board', board.idBoard]);
   }
 
-  changeVisibility(event: Event) {
-    const result = document.querySelector('.result-container') as HTMLElement;
+  changeVisibility(event: Event): void {
+    const result = document.querySelector(
+      '.result-container'
+    ) as HTMLDivElement;
     const input = document.querySelector(
       'input[type="search"]'
     ) as HTMLInputElement;

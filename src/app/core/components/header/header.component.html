@@ -27,7 +27,7 @@
       </button>
     </div>
     <div class="search-container">
-      <div (click)="searchFocus($event)" class="search">
+      <div (click)="searchFocus()" class="search">
         <span
           role="img"
           aria-label="search"
@@ -44,15 +44,14 @@
             ></path></svg></span
         ><input
           (blur)="changeSearchIcon($event)"
-          (focus)="changeSearchIcon($event)"
-          (focus)="getBoards()"
+          (focus)="changeSearchIcon($event); getBoards()"
           placeholder="search"
           type="search"
         />
         <div class="result-container">
           <div
             *ngFor="let board of boards"
-            (click)="openBoard($event, board)"
+            (click)="openBoard(board)"
             class="result"
           >
             {{ board.nameBoard }}
