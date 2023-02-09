@@ -10,6 +10,7 @@ import { BoardService } from 'src/app/modules/board/board-service.service';
 })
 export class HeaderComponent {
   boards: IBoard[] = [];
+  searchStr: string = '';
 
   constructor(private router: Router, private boardService: BoardService) {}
 

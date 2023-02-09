@@ -6,26 +6,19 @@ import { RouterModule } from '@angular/router';
 import { ChosenPipe } from './chosen.pipe';
 import { ResentPipe } from './resent.pipe';
 import { FilterColumnPipe } from './filter-column.pipe';
+import { SearchPipePipe } from './search-pipe.pipe';
 
 @NgModule({
-  declarations: [
+  declarations: [ChosenPipe, ResentPipe, FilterColumnPipe, SearchPipePipe],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  exports: [
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
     ChosenPipe,
     ResentPipe,
     FilterColumnPipe,
+    SearchPipePipe,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-  ],
-  exports:[
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    ChosenPipe,
-    ResentPipe,
-    FilterColumnPipe
-  ]
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -43,6 +43,7 @@
               fill-rule="evenodd"
             ></path></svg></span
         ><input
+          [(ngModel)]="searchStr"
           (blur)="changeSearchIcon($event)"
           (focus)="changeSearchIcon($event); getBoards()"
           placeholder="search"
@@ -50,7 +51,7 @@
         />
         <div class="result-container">
           <div
-            *ngFor="let board of boards"
+            *ngFor="let board of boards | searchPipe : searchStr"
             (click)="openBoard(board)"
             class="result"
           >
