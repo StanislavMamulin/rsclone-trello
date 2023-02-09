@@ -1,3 +1,4 @@
+import { BASE_URL } from 'src/app/core/constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
@@ -7,8 +8,8 @@ import { ITask, ITaskCreate, ITaskMove } from './model/task.interface';
 @Injectable()
 
 export class ColumnTaskService {
-  private urlColumn: string = 'http://localhost:3000/api/column';
-  private urlTask: string = 'http://localhost:3000/api/task';
+  private urlColumn: string = `${BASE_URL}/api/column`;
+  private urlTask: string = `${BASE_URL}/api/task`;
 
   constructor(private httpClient: HttpClient) { }
 

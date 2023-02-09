@@ -1,3 +1,4 @@
+import { BASE_URL } from 'src/app/core/constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
@@ -5,7 +6,7 @@ import { IBoard, IBoardCreateResponse, IBoardUpdateResponse } from './model/Boar
 
 @Injectable()
 export class BoardService {
-  private baseUrl: string = 'http://localhost:3000/api';
+  private baseUrl: string = `${BASE_URL}/api`;
   private boardUrl = `${this.baseUrl}/board`;
 
   constructor(private httpClient: HttpClient) { }
