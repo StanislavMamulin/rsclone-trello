@@ -72,7 +72,7 @@ export class HeaderComponent {
       'input[type="search"]'
     ) as HTMLInputElement;
     (event.target as HTMLElement).closest('.search') &&
-    (event.target as HTMLElement) != document.querySelector('.result')
+    !(event.target as HTMLElement).classList.contains('result')
       ? (result.style.display = 'block')
       : ((result.style.display = 'none'), input.blur());
   }
