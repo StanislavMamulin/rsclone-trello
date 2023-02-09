@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { IBoard } from 'src/app/modules/board/model/Board.model';
+import { BoardService } from 'src/app/modules/board/board-service.service';
 
 @Component({
   selector: 'app-header',
@@ -8,8 +10,10 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   searchField: HTMLElement;
+  boards: IBoard[] = [];
+  searchResultVisibility: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private boardService: BoardService) {}
 
   openBoards() {
     this.router.navigate(['/board']);
@@ -34,12 +38,6 @@ export class HeaderComponent {
       '.search'
     ) as HTMLDivElement;
 
-    // event.type === 'focus'
-    //   ? ((searchIcon.style.color = 'black'),
-    //     (searchIcon.style.top = '1px'),
-    //     (searchContainer.style.left = '-50px'))
-    //   : ((searchIcon.style.color = 'white'), (searchIcon.style.top = '0'));
-
     if (event.type === 'focus') {
       searchIcon.style.color = 'black';
       searchIcon.style.top = '1px';
@@ -53,5 +51,24 @@ export class HeaderComponent {
         searchContainer.style.left = '0';
       }
     }
+  }
+
+  getBoards() {
+    this.searchResultVisibility = true;
+    this.boardService.getBoards().subscribe((res) => {
+      this.boards = res;
+    });
+  }
+
+  openBoard(event: Event, board: IBoard) {
+    this.router.navigate(['/board', board.idBoard]);
+    this.searchResultVisibility = false;
+  }
+
+  changeVisibility(event: Event) {
+    (event.target as HTMLElement).closest('.search')
+      ? (this.searchResultVisibility = true)
+      : (this.searchResultVisibility = false);
+    console.log(event.target);
   }
 }

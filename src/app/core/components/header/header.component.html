@@ -1,5 +1,5 @@
 <header>
-  <div class="container">
+  <div (click)="changeVisibility($event)" class="container">
     <div class="trello-logo">
       <button (click)="openMainPage()" class="main-btn">
         <img
@@ -45,9 +45,19 @@
         ><input
           (blur)="changeSearchIcon($event)"
           (focus)="changeSearchIcon($event)"
+          (focus)="getBoards()"
           placeholder="search"
           type="search"
         />
+        <div *ngIf="searchResultVisibility" class="result-container">
+          <div
+            *ngFor="let board of boards"
+            (click)="openBoard($event, board)"
+            class="result"
+          >
+            {{ board.nameBoard }}
+          </div>
+        </div>
       </div>
     </div>
     <div class="authorization">
