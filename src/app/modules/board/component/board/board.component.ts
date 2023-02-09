@@ -35,7 +35,7 @@ export class BoardComponent implements OnInit {
   }
 
   openBoard(event:any){
-    if(event.srcElement.className === 'board__offer-open')
+    if(event.currentTarget.classList.contains('board__offer-open') )
       this.router.navigate(['/board',this.board.idBoard])
   }
 
@@ -45,7 +45,7 @@ export class BoardComponent implements OnInit {
   }
 
   offerOpenBoard(event:any){
-    const elClass = event.srcElement.className;
+    const elClass = event.currentTarget.className;
     if(elClass === 'board' || elClass === 'board__wrapper'
       || elClass === 'board__wrapper__title' || elClass === 'board__offer-open'){
       this.isOfferOpenBoard = true;
