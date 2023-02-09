@@ -182,7 +182,7 @@ button {
 
 .result-container {
   width: 195px;
-  min-height: 40px;
+  min-height: 27px;
   background: white;
   border: 1px solid rgba(9, 30, 66, 0.3);
   box-shadow: rgba(9, 30, 66, 0.3) 0px 0.25rem 0.5rem 0px;
