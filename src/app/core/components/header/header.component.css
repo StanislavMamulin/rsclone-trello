@@ -187,6 +187,7 @@ button {
   border: 1px solid rgba(9, 30, 66, 0.3);
   box-shadow: rgba(9, 30, 66, 0.3) 0px 0.25rem 0.5rem 0px;
   position: absolute;
+  display: none;
   left: 0;
   top: 30px;
   border-radius: 0.3rem;

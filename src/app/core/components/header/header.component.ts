@@ -11,7 +11,6 @@ import { BoardService } from 'src/app/modules/board/board-service.service';
 export class HeaderComponent {
   searchField: HTMLElement;
   boards: IBoard[] = [];
-  searchResultVisibility: boolean = false;
 
   constructor(private router: Router, private boardService: BoardService) {}
 
@@ -53,8 +52,11 @@ export class HeaderComponent {
     }
   }
 
+  ngAfterViewChecked() {
+    document.addEventListener('click', this.changeVisibility);
+  }
+
   getBoards() {
-    this.searchResultVisibility = true;
     this.boardService.getBoards().subscribe((res) => {
       this.boards = res;
     });
@@ -62,13 +64,13 @@ export class HeaderComponent {
 
   openBoard(event: Event, board: IBoard) {
     this.router.navigate(['/board', board.idBoard]);
-    this.searchResultVisibility = false;
   }
 
   changeVisibility(event: Event) {
-    (event.target as HTMLElement).closest('.search')
-      ? (this.searchResultVisibility = true)
-      : (this.searchResultVisibility = false);
-    console.log(event.target);
+    const result = document.querySelector('.result-container') as HTMLElement;
+    (event.target as HTMLElement).closest('.search') &&
+    (event.target as HTMLElement) != document.querySelector('.result')
+      ? (result.style.display = 'block')
+      : (result.style.display = 'none');
   }
 }
