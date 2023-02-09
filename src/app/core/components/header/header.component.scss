@@ -94,7 +94,7 @@ button {
         margin: 0 25px;
         position: relative;
         @media (max-width: 750px) {
-            top: -13px;
+            display: none;
         }
         input[type="search"] {
             outline: none;
