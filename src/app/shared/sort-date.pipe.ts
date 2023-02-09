@@ -8,7 +8,6 @@ import { IBoard } from '../modules/board/model/Board.model';
 export class SortByParamsPipe implements PipeTransform {
 
   transform(boards: IBoard[], selectValue:string):IBoard[] {
-    console.log(boards.length);
     if(selectValue === 'desc'){
       return [...boards].sort((a,b)=>{
         const dateValueA = new Date(a.dateBoard).getTime();
