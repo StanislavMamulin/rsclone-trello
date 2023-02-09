@@ -68,9 +68,12 @@ export class HeaderComponent {
 
   changeVisibility(event: Event) {
     const result = document.querySelector('.result-container') as HTMLElement;
+    const input = document.querySelector(
+      'input[type="search"]'
+    ) as HTMLInputElement;
     (event.target as HTMLElement).closest('.search') &&
     (event.target as HTMLElement) != document.querySelector('.result')
       ? (result.style.display = 'block')
-      : (result.style.display = 'none');
+      : ((result.style.display = 'none'), input.blur());
   }
 }
