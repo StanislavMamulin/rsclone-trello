@@ -14,7 +14,7 @@
       <app-board *ngFor="let board of boards
       | chosen:showFavorite
       | resent:showDate
-      | SortDate: selectValue
+      | SortByParams: selectValue
       "
                   (onDelete)="deleteBoard($event)" [board]="board"
                   (onUpdate)="openUpdateModal($event)"

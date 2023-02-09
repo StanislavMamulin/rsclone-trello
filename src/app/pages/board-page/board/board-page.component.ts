@@ -71,7 +71,7 @@ export class BoardPageComponent implements OnInit {
     this.boardService.createNewBoard(
       this.toUpperFirstLetter(this.createFormModal.get('name').value),
       this.toUpperFirstLetter(this.createFormModal.get('description').value),
-      new Date().toLocaleDateString()
+      new Date()
     )
     .subscribe((res:IBoardCreateResponse)=>{
       this.boards.push(res);
@@ -96,7 +96,7 @@ export class BoardPageComponent implements OnInit {
     this.boardService.updateBoard( this.updateBoardId,{
       nameBoard,
       descriptionBoard,
-      dateBoard: new Date().toLocaleDateString()
+      dateBoard: new Date()
     })
     .subscribe((res:IBoardUpdateResponse)=>{
       let indexUpdatedBoard:number = -1;

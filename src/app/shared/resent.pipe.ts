@@ -10,10 +10,11 @@ export class ResentPipe implements PipeTransform {
 
     if(choice){
       return boards.filter(item => {
-        const recent = new Date(item.dateBoard);
-        const date = new Date();
-        const diff = Math.abs((date.getTime() - recent.getTime()) / (60*60*60*24*1000))
-        return Math.floor(diff) > 1;
+        const recent = new Date(item.dateBoard).getTime();
+        const date = new Date().getTime();
+        const diff = Math.abs(date- recent);
+        const dayOfMilliSeconds = 8640000;
+        return dayOfMilliSeconds < diff;
       })
     }
 

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ChosenPipe } from './chosen.pipe';
 import { ResentPipe } from './resent.pipe';
-import { SortDatePipe } from './sort-date.pipe';
+import { SortByParamsPipe } from './sort-date.pipe';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -14,7 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
   declarations: [
     ChosenPipe,
     ResentPipe,
-    SortDatePipe,
+    SortByParamsPipe,
   ],
   imports: [
     CommonModule,
@@ -31,7 +31,7 @@ import {MatButtonModule} from '@angular/material/button';
     RouterModule,
     ChosenPipe,
     ResentPipe,
-    SortDatePipe,
+    SortByParamsPipe,
     MatSelectModule,
     MatInputModule,
     MatButtonModule,

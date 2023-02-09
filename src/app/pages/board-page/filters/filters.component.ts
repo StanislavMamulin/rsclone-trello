@@ -26,6 +26,8 @@ export class FiltersComponent implements OnInit{
   sorts: ISort[] = [
     {value: 'asc', viewValue: 'Date ASC'},
     {value: 'desc', viewValue: 'Date DESC'},
+    {value: 'by', viewValue: 'Name by alphabet'},
+    {value: 'across', viewValue: 'Name across alphabet'},
   ];
 
   ngOnInit(){
