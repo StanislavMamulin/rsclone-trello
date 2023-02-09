@@ -70,7 +70,7 @@ header .container {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 515px) {
   .authorization {
     display: flex;
     flex-direction: column;
@@ -89,7 +89,7 @@ header .container {
   color: #fff;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 515px) {
   .authorization button {
     padding: 2px 10px;
     font-size: 12px;
