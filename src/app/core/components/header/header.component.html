@@ -1,13 +1,19 @@
 <header>
   <div class="container">
     <div class="trello-logo">
-      <button (click)="openMainPage()" class="main-btn">
+      <button
+        (click)="openMainPage()"
+        class="main-btn"
+      >
         <img
           src="../../../../assets/images/trello-logo.gif"
           alt="trello-logo"
         />
       </button>
-      <button (click)="openBoards()" class="bord-btn">
+      <button
+        (click)="openBoards()"
+        class="bord-btn"
+      >
         <svg
           width="24"
           height="24"
@@ -36,14 +42,23 @@
             --icon-primary-color: var(--dynamic-text, #ffffff);
             --icon-secondary-color: var(--ds-surface, #ffffff);
           "
-          ><svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+          ><svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            role="presentation"
+          >
             <path
               d="M16.436 15.085l3.94 4.01a1 1 0 01-1.425 1.402l-3.938-4.006a7.5 7.5 0 111.423-1.406zM10.5 16a5.5 5.5 0 100-11 5.5 5.5 0 000 11z"
               fill="currentColor"
               fill-rule="evenodd"
-            ></path></svg
-        ></span>
-        <mat-form-field class="example-full-width" appearance="fill">
+            ></path>
+          </svg>
+        </span>
+        <mat-form-field
+          class="example-full-width"
+          appearance="fill"
+        >
           <input
             type="text"
             [(ngModel)]="searchStr"

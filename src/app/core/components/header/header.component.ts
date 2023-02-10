@@ -10,7 +10,8 @@ import { BoardService } from 'src/app/modules/board/board-service.service';
 })
 export class HeaderComponent {
   boards: IBoard[] = [];
-  searchStr: string = '';
+
+  searchStr = '';
 
   constructor(private router: Router, private boardService: BoardService) {}
 
@@ -22,7 +23,7 @@ export class HeaderComponent {
     this.router.navigate(['/main']);
   }
 
-  openRegistrationPage(){
+  openRegistrationPage() {
     this.router.navigate(['/registration']);
   }
 

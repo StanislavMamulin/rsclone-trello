@@ -9,18 +9,18 @@ import { SearchPipePipe } from './search-pipe.pipe';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { SortByParamsPipe } from './sort-date.pipe';
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     ChosenPipe,
     ResentPipe,
     SortByParamsPipe,
-    SearchPipePipe
+    SearchPipePipe,
   ],
   imports: [
     CommonModule,
@@ -31,7 +31,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   exports: [
     FormsModule,
@@ -46,8 +46,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
-    MatProgressSpinnerModule
-  ]
+    MatIconModule,
+    MatProgressSpinnerModule,
+  ],
 })
 export class SharedModule {}

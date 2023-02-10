@@ -9,24 +9,17 @@ import { ColumnTaskService } from 'src/app/modules/column-task/column-task.servi
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AddControlsModule } from 'src/app/modules/add-controls/add-controls.module';
 
-
 @NgModule({
-  declarations: [
-    WorkspaceComponent
-  ],
+  declarations: [WorkspaceComponent],
   imports: [
     CommonModule,
     WorkspaceRoutingModule,
     ColumnTaskModule,
     SharedModule,
     DragDropModule,
-    AddControlsModule
+    AddControlsModule,
   ],
-  exports:[
-    WorkspaceComponent
-  ],
-  providers:[
-    ColumnTaskService
-  ]
+  exports: [WorkspaceComponent],
+  providers: [ColumnTaskService],
 })
-export class WorkspaceModule { }
+export class WorkspaceModule {}

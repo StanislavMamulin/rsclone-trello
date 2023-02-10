@@ -44,9 +44,8 @@
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drag-placeholder {
@@ -63,7 +62,7 @@
 
 .column__add-task {
   border-radius: 3px;
-  color: var(--ds-text-subtle,#5e6c84);
+  color: var(--ds-text-subtle, #5e6c84);
   display: block;
   flex: 1 0 auto;
   padding: 4px 8px;
@@ -87,7 +86,7 @@
 }
 
 .button:hover {
-  filter: brightness(0.80);
+  filter: brightness(0.8);
 }
 
 ::-webkit-scrollbar {
@@ -101,7 +100,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--thumbBG) ;
+  background-color: var(--thumbBG);
   border-radius: 6px;
   background-clip: padding-box;
   border: 3px solid transparent;

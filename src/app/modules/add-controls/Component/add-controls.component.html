@@ -1,23 +1,23 @@
 <div class="add-element__container">
-    <textarea
-        type="text"
-        placeholder="enter the title of the new task"
-        class="add-element__title"
-        [(ngModel)]="newElementTitle"
-        (keydown.enter)="enterPressed()"
-    ></textarea>
-    <div class="add-element__controls">
-        <button
-            class="add-element__add-btn button"
-            (click)="addNewTaskHandler()"
-        >
-            {{addButtonText}}
-        </button>
-        <button
-            class="add-element__cancel-btn button"
-            (click)="cancelTaskCreation()"
-        >
-            X
-        </button>
-    </div>
+  <textarea
+    type="text"
+    placeholder="enter the title of the new task"
+    class="add-element__title"
+    [(ngModel)]="newElementTitle"
+    (keydown.enter)="enterPressed()"
+  ></textarea>
+  <div class="add-element__controls">
+    <button
+      class="add-element__add-btn button"
+      (click)="addNewTaskHandler()"
+    >
+      {{ addButtonText }}
+    </button>
+    <button
+      class="add-element__cancel-btn button"
+      (click)="cancelTaskCreation()"
+    >
+      X
+    </button>
+  </div>
 </div>

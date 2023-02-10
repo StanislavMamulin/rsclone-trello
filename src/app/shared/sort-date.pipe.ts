@@ -3,24 +3,23 @@ import { IBoard } from '../modules/board/model/Board.model';
 
 @Pipe({
   name: 'SortByParams',
-  pure: false
+  pure: false,
 })
 export class SortByParamsPipe implements PipeTransform {
-
-  transform(boards: IBoard[], selectValue:string):IBoard[] {
-    if(selectValue === 'desc'){
-      return [...boards].sort((a,b)=>{
+  transform(boards: IBoard[], selectValue: string): IBoard[] {
+    if (selectValue === 'desc') {
+      return [...boards].sort((a, b) => {
         const dateValueA = new Date(a.dateBoard).getTime();
         const dateValueB = new Date(b.dateBoard).getTime();
-        return (dateValueA-dateValueB);
+        return dateValueA - dateValueB;
       });
     }
 
-    if(selectValue === 'asc'){
-      return [...boards].sort((a,b)=>{
+    if (selectValue === 'asc') {
+      return [...boards].sort((a, b) => {
         const dateValueA = new Date(a.dateBoard).getTime();
         const dateValueB = new Date(b.dateBoard).getTime();
-        return (dateValueB-dateValueA);
+        return dateValueB - dateValueA;
       });
     }
 
@@ -28,7 +27,7 @@ export class SortByParamsPipe implements PipeTransform {
       return [...boards].sort((a, b) => {
         const textA = a.nameBoard.toLowerCase();
         const textB = b.nameBoard.toLowerCase();
-        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
       });
     }
 
@@ -36,12 +35,10 @@ export class SortByParamsPipe implements PipeTransform {
       return [...boards].sort((a, b) => {
         const textA = a.nameBoard.toLowerCase();
         const textB = b.nameBoard.toLowerCase();
-        return (textB < textA) ? -1 : (textB > textA) ? 1 : 0;
+        return textB < textA ? -1 : textB > textA ? 1 : 0;
       });
     }
 
     return boards;
-
   }
-
 }

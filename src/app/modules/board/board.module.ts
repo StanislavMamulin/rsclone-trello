@@ -4,21 +4,10 @@ import { BoardComponent } from './component/board/board.component';
 import { BoardService } from './board-service.service';
 import { RouterModule } from '@angular/router';
 
-
-
 @NgModule({
-  declarations: [
-    BoardComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  exports: [
-    BoardComponent
-  ],
-  providers: [
-    BoardService,
-  ]
+  declarations: [BoardComponent],
+  imports: [CommonModule, RouterModule],
+  exports: [BoardComponent],
+  providers: [BoardService],
 })
-export class BoardModule { }
+export class BoardModule {}

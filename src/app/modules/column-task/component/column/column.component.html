@@ -1,30 +1,34 @@
 <div class="column-container">
-    <h2 class="column__title">{{column.nameColumn}}</h2>
-    <div
-        id="{{column.idColumn}}"
-        class="task-list"
-        [cdkDropListData]="{tasks, column}"
-        cdkDropList
-        (cdkDropListDropped)="drop($event)"
-        [cdkDropListConnectedTo]="getConnectedToList(column.idColumn)"
-    >
-        <app-task class="task-list__item" *ngFor="let task of tasks" [taskInfo]="task" cdkDrag></app-task>
-    </div>
-    
-    <button
-        *ngIf="!showAddTaskControl; else addTask"
-        class="column__add-task"
-        (click)="showAddTask()"
-    >
-        + Add task
-    </button>
+  <h2 class="column__title">{{ column.nameColumn }}</h2>
+  <div
+    id="{{ column.idColumn }}"
+    class="task-list"
+    [cdkDropListData]="{tasks, column}"
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
+    [cdkDropListConnectedTo]="getConnectedToList(column.idColumn)"
+  >
+    <app-task
+      class="task-list__item"
+      *ngFor="let task of tasks"
+      [taskInfo]="task"
+      cdkDrag
+    ></app-task>
+  </div>
 
-    <ng-template #addTask>
-        <app-add-controls
-            addButtonText="Add task"
-            (addButtonPressed)="addNewTaskHandler($event)"
-            (cancelButtonPressed)="cancelTaskCreation()"
-        ></app-add-controls>
-    </ng-template>
+  <button
+    *ngIf="!showAddTaskControl; else addTask"
+    class="column__add-task"
+    (click)="showAddTask()"
+  >
+    + Add task
+  </button>
+
+  <ng-template #addTask>
+    <app-add-controls
+      addButtonText="Add task"
+      (addButtonPressed)="addNewTaskHandler($event)"
+      (cancelButtonPressed)="cancelTaskCreation()"
+    ></app-add-controls>
+  </ng-template>
 </div>
-

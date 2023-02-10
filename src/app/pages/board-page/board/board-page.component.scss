@@ -28,7 +28,7 @@
   }
 
   &__create {
-    transition: .5s;
+    transition: 0.5s;
     border-radius: 2px;
     cursor: pointer;
     width: 290px;
@@ -40,7 +40,7 @@
     color: rgb(107, 103, 103, 0.7);
     background: whitesmoke;
 
-    span{
+    span {
       text-align: center;
       width: 290px;
     }
@@ -63,7 +63,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  mat-form-field{
+  mat-form-field {
     width: 100%;
   }
 
@@ -87,44 +87,51 @@
       z-index: 10;
     }
 
+    &__spinner{
+      width: 100px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -100px;
+      z-index: 10;
+    }
+
     .validation{
       color: #fff;
       font-size: 16px;
     }
 
-    &__title{
+    &__title {
       font-size: 20px;
       text-align: center;
       color: #fff;
       letter-spacing: 1px;
     }
 
-    &__name{
+    &__name {
       margin-top: 50px;
     }
 
-    &__description{
+    &__description {
       margin-top: 10px;
     }
 
-    &__buttons{
+    &__buttons {
       margin-top: 10px;
-      button{
+      button {
         width: 100%;
       }
     }
-
   }
 }
 
-@media (max-width:635px){
-
-  app-board{
+@media (max-width: 635px) {
+  app-board {
     width: 95%;
   }
   .board-page {
     width: 100%;
-    &__wrapper{
+    &__wrapper {
       width: 95%;
     }
 
@@ -133,10 +140,10 @@
       justify-content: center;
       flex-wrap: wrap;
     }
-    &__create{
+    &__create {
       width: 100%;
     }
-    &__boards{
+    &__boards {
       width: 100%;
       justify-content: center;
     }
