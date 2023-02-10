@@ -35,10 +35,14 @@
           { "allowShortCircuit": true, "allowTernary": true }
         ],
         "array-bracket-newline": ["error", { "multiline": true }],
-        "array-element-newline": ["error", { "multiline": true, "minItems": 3 }]
+        "array-element-newline": ["error", { "multiline": true, "minItems": 3 }],
+        "@typescript-eslint/no-explicit-any": "error",
+        "class-methods-use-this": "off"
       },
       "parserOptions": {
-        "project": ["./tsconfig.json"]
+        "project": ["./tsconfig.json"],
+        "ecmaVersion": 2020,
+        "sourceType": "module"
       }
     },
     {
