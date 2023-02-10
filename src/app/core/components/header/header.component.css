@@ -110,90 +110,25 @@ button {
   cursor: pointer;
 }
 
-.search-container .search {
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-end;
-  margin: 0 25px;
+.search-container {
   position: relative;
+  top: 11px;
 }
 
 @media (max-width: 750px) {
-  .search-container .search {
-    top: -13px;
+  .search-container {
+    display: none;
   }
 }
 
-.search-container .search input[type="search"] {
-  outline: none;
-  border-radius: 0.3rem;
-  padding: 4px;
-  padding-left: 25px;
-  background-color: #3588b9;
-  border: none;
-  caret-color: white;
-  color: white;
-}
-
-.search-container .search input[type="search"]::-webkit-search-cancel-button {
-  appearance: none;
-}
-
-.search-container .search input[type="search"]:focus {
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  background-color: white;
-  caret-color: black;
-  color: black;
-}
-
-.search-container .search input[type="search"]:focus::placeholder {
-  visibility: hidden;
-}
-
-.search-container .search input[type="search"]::placeholder {
-  color: white;
-}
-
-@media (max-width: 750px) {
-  .search-container .search input[type="search"] {
-    width: 0;
-    top: 0;
-    left: 0;
-    position: absolute;
-    background: none;
-    border: none;
-  }
-  .search-container .search input[type="search"]:focus {
-    width: auto;
-  }
+.search-container .search {
+  margin: 0 25px;
 }
 
 .search-container .search span {
   position: absolute;
-  top: 0;
-  left: 0;
-  color: white;
+  top: 5px;
+  left: 30px;
+  color: rgba(0, 0, 0, 0.6);
   z-index: 2;
-}
-
-.search-container .search span svg {
-  transform: scale(0.8);
-}
-
-.result-container {
-  width: 195px;
-  min-height: 27px;
-  background: white;
-  border: 1px solid rgba(9, 30, 66, 0.3);
-  box-shadow: rgba(9, 30, 66, 0.3) 0px 0.25rem 0.5rem 0px;
-  position: absolute;
-  display: none;
-  left: 0;
-  top: 30px;
-  border-radius: 0.3rem;
-}
-
-.result-container .result {
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
 }

@@ -22,43 +22,8 @@ export class HeaderComponent {
     this.router.navigate(['/main']);
   }
 
-  searchFocus(): void {
-    // const searchField = document.querySelector(
-    //   'input[type="search"]'
-    // ) as HTMLInputElement;
-    // searchField.focus();
-  }
-
-  changeSearchIcon(event: Event): void {
-    const searchIcon = document.querySelector(
-      '.search span'
-    ) as HTMLSpanElement;
-    const searchContainer = (event.target as HTMLElement).closest(
-      '.search'
-    ) as HTMLDivElement;
-
-    if (event.type === 'focus') {
-      searchIcon.style.color = 'black';
-      searchIcon.style.top = '1px';
-      if (window.innerWidth <= 750) {
-        searchContainer.style.left = '-100px';
-      }
-    } else if (event.type === 'blur') {
-      searchIcon.style.color = 'white';
-      searchIcon.style.top = '0';
-      if (window.innerWidth <= 750) {
-        searchContainer.style.left = '0';
-      }
-    }
-  }
-
-  // ngAfterViewChecked(): void {
-  //   document.addEventListener('click', this.changeVisibility);
-  // }
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.getBoards();
-    console.log(this.boards);
   }
 
   getBoards(): void {
@@ -68,20 +33,8 @@ export class HeaderComponent {
   }
 
   openBoard(board: IBoard): void {
-    this.router.navigate(['/board', board.idBoard]);
+    this.router.navigate(['main']).then(() => {
+      this.router.navigate(['/board', board.idBoard]);
+    });
   }
-
-  // changeVisibility(event: Event): void {
-  //   console.log(event.target);
-  //   const result = document.querySelector(
-  //     '.result-container'
-  //   ) as HTMLDivElement;
-  //   const input = document.querySelector(
-  //     'input[type="search"]'
-  //   ) as HTMLInputElement;
-  //   (event.target as HTMLElement).closest('.search') &&
-  //   !(event.target as HTMLElement).classList.contains('result')
-  //     ? (result.style.display = 'block')
-  //     : ((result.style.display = 'none'), input.blur());
-  // }
 }
