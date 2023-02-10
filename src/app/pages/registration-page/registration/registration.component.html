@@ -1,47 +1,74 @@
-<form class="registration">
+<form [formGroup]="form" class="registration">
 
 
   <mat-card  class="registration__wrapper">
+    <img class="icon-user" src="../../../../assets/images/user-icon.svg" alt="user">
     <span class="title">Sign Up</span>
 
     <mat-form-field class="registration__firstname">
       <mat-label>First name</mat-label>
-      <input matInput>
+      <input matInput formControlName="firstNameControl">
+      <mat-error *ngIf="form.get('firstNameControl').invalid && form.get('firstNameControl').touched">
+        <span *ngIf="form.get('firstNameControl').errors.required">Enter first name</span>
+        <span *ngIf="!form.get('firstNameControl').errors.minLength">
+          Min characters {{form.get('firstNameControl').errors?.minlength?.requiredLength}}
+          It now {{form.get('firstNameControl').errors?.minlength?.actualLength}}
+        </span>
+      </mat-error>
     </mat-form-field>
+
     <mat-form-field class="registration__lastname">
       <mat-label>Last name</mat-label>
-      <input matInput>
+      <input matInput formControlName="lastNameControl">
+      <mat-error *ngIf="form.get('lastNameControl').invalid && form.get('lastNameControl').touched">
+        <span *ngIf="form.get('lastNameControl').errors.required">Enter first name</span>
+        <span *ngIf="!form.get('lastNameControl').errors.minLength">
+          Min characters {{form.get('lastNameControl').errors?.minlength?.requiredLength}}
+          It now {{form.get('lastNameControl').errors?.minlength?.actualLength}}
+        </span>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
-      <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+      <input type="email" matInput formControlName="emailFormControl"
              placeholder="Ex. pat@example.com">
-      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="emailFormControl.hasError('required')">
-        Email is required
+      <mat-error *ngIf="form.get('emailFormControl').invalid && form.get('emailFormControl').touched">
+        <span *ngIf="form.get('emailFormControl').errors.required">Enter email</span>
+        <span *ngIf="form.get('emailFormControl').errors.email">Input correct email</span>
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="isHidePassword ? 'password' : 'text'">
+      <input (input)="updateSubmitted()" formControlName="enterPassword" matInput [type]="isHidePassword ? 'password' : 'text'">
       <button mat-icon-button matSuffix (click)="isHidePassword = !isHidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidePassword">
         <mat-icon>{{isHidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
+      <mat-error *ngIf="form.get('enterPassword').invalid && form.get('enterPassword').touched">
+        <span *ngIf="form.get('enterPassword').errors.required">Enter password</span>
+        <span *ngIf="form.get('enterPassword').errors.pattern">
+          > 8 , one number, one of !@#$%^&*, one Caps letter
+        </span>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Repeat your password</mat-label>
-      <input matInput [type]="isHidePassword ? 'password' : 'text'">
+      <input (input)="updateSubmitted()" formControlName="repeatPassword" matInput [type]="isHidePassword ? 'password' : 'text'">
       <button mat-icon-button matSuffix (click)="isHidePassword = !isHidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidePassword">
         <mat-icon>{{isHidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
+      <mat-error *ngIf="form.get('repeatPassword').invalid && form.get('repeatPassword').touched">
+        <span *ngIf="form.get('repeatPassword').errors.required">Enter password</span>
+        <span *ngIf="form.get('repeatPassword').errors.pattern">
+          > 8 , one number, one of !@#$%^&*, one Caps letter
+        </span>
+      </mat-error>
     </mat-form-field>
 
-    <button mat-raised-button>Sign Up</button>
+      <button [disabled]="form.invalid || isSubmitted" mat-raised-button>Sign Up</button>
+      <mat-error class="isSubmitted" *ngIf="isSubmitted">Passwords mismatch</mat-error>
   </mat-card>
 </form>
 <app-footer></app-footer>
