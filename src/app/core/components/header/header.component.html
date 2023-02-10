@@ -27,7 +27,7 @@
       </button>
     </div>
     <div class="search-container">
-      <div (click)="searchFocus($event)" class="search">
+      <div class="search">
         <span
           role="img"
           aria-label="search"
@@ -41,13 +41,25 @@
               d="M16.436 15.085l3.94 4.01a1 1 0 01-1.425 1.402l-3.938-4.006a7.5 7.5 0 111.423-1.406zM10.5 16a5.5 5.5 0 100-11 5.5 5.5 0 000 11z"
               fill="currentColor"
               fill-rule="evenodd"
-            ></path></svg></span
-        ><input
-          (blur)="changeSearchIcon($event)"
-          (focus)="changeSearchIcon($event)"
-          placeholder="search"
-          type="search"
-        />
+            ></path></svg
+        ></span>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <input
+            type="text"
+            [(ngModel)]="searchStr"
+            matInput
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              (click)="openBoard(board)"
+              *ngFor="let board of boards | searchPipe : searchStr"
+              [value]="board.nameBoard"
+            >
+              {{ board.nameBoard }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
       </div>
     </div>
     <div class="authorization">

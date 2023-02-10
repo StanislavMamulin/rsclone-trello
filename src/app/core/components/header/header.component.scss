@@ -53,7 +53,7 @@ header {
 }
 
 .authorization {
-    @media (max-width: 500px) {
+    @media (max-width: 515px) {
         display: flex;
         flex-direction: column;
         gap: 5px;
@@ -67,7 +67,7 @@ header {
         border: none;
         background: #4c8bb0;
         color: #fff;
-        @media (max-width: 500px) {
+        @media (max-width: 515px) {
             padding: 2px 10px;
             font-size: 12px;
         }
@@ -87,60 +87,19 @@ button {
 }
 
 .search-container {
+    position: relative;
+    top: 11px;
+    @media (max-width: 750px) {
+        display: none;
+    }
     .search {
-        display: flex;
-        flex-grow: 1;
-        justify-content: flex-end;
         margin: 0 25px;
-        position: relative;
-        @media (max-width: 750px) {
-            top: -13px;
-        }
-        input[type="search"] {
-            outline: none;
-            border-radius: 0.3rem;
-            padding: 4px;
-            padding-left: 25px;
-            background-color: rgb(53, 136, 185);
-            border: none;
-            caret-color: white;
-            color: white;
-            &::-webkit-search-cancel-button {
-                appearance: none;
-            }
-            &:focus {
-                border: 2px solid rgba(255, 255, 255, 0.25);
-                background-color: white;
-                caret-color: black;
-                color: black;
-                &::placeholder {
-                    visibility: hidden;
-                }
-            }
-            &::placeholder {
-                color: white;
-            }
-            @media (max-width: 750px) {
-                width: 0;
-                top: 0;
-                left: 0;
-                position: absolute;
-                background: none;
-                border: none;
-                &:focus {
-                    width: auto;
-                }
-            }
-        }
         span {
             position: absolute;
-            top: 0;
-            left: 0;
-            color: white;
+            top: 5px;
+            left: 30px;
+            color: rgba(0, 0, 0, 0.6);
             z-index: 2;
-            svg {
-                transform: scale(0.8);
-            }
         }
     }
 }

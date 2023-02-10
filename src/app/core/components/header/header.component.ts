@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { IBoard } from 'src/app/modules/board/model/Board.model';
+import { BoardService } from 'src/app/modules/board/board-service.service';
 
 @Component({
   selector: 'app-header',
@@ -7,51 +9,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  searchField: HTMLElement;
+  boards: IBoard[] = [];
+  searchStr: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private boardService: BoardService) {}
 
-  openBoards() {
+  openBoards(): void {
     this.router.navigate(['/board']);
   }
 
-  openMainPage() {
+  openMainPage(): void {
     this.router.navigate(['/main']);
   }
 
-  searchFocus(event: Event) {
-    this.searchField = document.querySelector(
-      'input[type="search"]'
-    ) as HTMLInputElement;
-    if (this.searchField) {
-      this.searchField.focus();
-    }
+  ngOnInit(): void {
+    this.getBoards();
   }
 
-  changeSearchIcon(event: Event) {
-    const searchIcon = document.querySelector('.search span') as HTMLElement;
-    const searchContainer = (event.target as HTMLElement).closest(
-      '.search'
-    ) as HTMLDivElement;
+  getBoards(): void {
+    this.boardService.getBoards().subscribe((res) => {
+      this.boards = res;
+    });
+  }
 
-    // event.type === 'focus'
-    //   ? ((searchIcon.style.color = 'black'),
-    //     (searchIcon.style.top = '1px'),
-    //     (searchContainer.style.left = '-50px'))
-    //   : ((searchIcon.style.color = 'white'), (searchIcon.style.top = '0'));
-
-    if (event.type === 'focus') {
-      searchIcon.style.color = 'black';
-      searchIcon.style.top = '1px';
-      if (window.innerWidth <= 750) {
-        searchContainer.style.left = '-100px';
-      }
-    } else if (event.type === 'blur') {
-      searchIcon.style.color = 'white';
-      searchIcon.style.top = '0';
-      if (window.innerWidth <= 750) {
-        searchContainer.style.left = '0';
-      }
-    }
+  openBoard(board: IBoard): void {
+    this.router.navigate(['main']).then(() => {
+      this.router.navigate(['/board', board.idBoard]);
+    });
   }
 }
