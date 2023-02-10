@@ -3,8 +3,6 @@
   height: 100%;
   padding-top: 10px;
   padding-left: 10px;
-  padding-bottom: 20px;
-
 
   .container {
     display: flex;
@@ -17,6 +15,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    margin-bottom: 10px;
+
   }
 
   &__create {

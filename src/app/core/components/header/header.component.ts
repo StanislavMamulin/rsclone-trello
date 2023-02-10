@@ -19,6 +19,10 @@ export class HeaderComponent {
     this.router.navigate(['/main']);
   }
 
+  openRegistrationPage(){
+    this.router.navigate(['/registration']);
+  }
+
   searchFocus(event: Event) {
     this.searchField = document.querySelector(
       'input[type="search"]'
