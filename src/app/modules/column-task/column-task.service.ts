@@ -1,17 +1,17 @@
 import { BASE_URL } from 'src/app/core/constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { IColumn, IColumnCreate, IColumnMove } from './model/column.interface';
 import { ITask, ITaskCreate, ITaskMove } from './model/task.interface';
 
 @Injectable()
-
 export class ColumnTaskService {
-  private urlColumn: string = `${BASE_URL}/api/column`;
-  private urlTask: string = `${BASE_URL}/api/task`;
+  private urlColumn = `${BASE_URL}/api/column`;
 
-  constructor(private httpClient: HttpClient) { }
+  private urlTask = `${BASE_URL}/api/task`;
+
+  constructor(private httpClient: HttpClient) {}
 
   public getColumns(idBoard: string): Observable<IColumn[]> {
     return this.httpClient.get<IColumn[]>(`${this.urlColumn}/${idBoard}`);
@@ -22,7 +22,7 @@ export class ColumnTaskService {
   }
 
   public createColumn(idBoard: string, body: IColumnCreate): Observable<IColumn> {
-    return this.httpClient.post<IColumn>(`${this.urlColumn}/${idBoard}`,body);
+    return this.httpClient.post<IColumn>(`${this.urlColumn}/${idBoard}`, body);
   }
 
   public deleteColumn(idColumn: string): Observable<void> {
@@ -30,11 +30,11 @@ export class ColumnTaskService {
   }
 
   public updateColumn(idColumn: string, body: Partial<IColumnCreate>): Observable<IColumn> {
-    return this.httpClient.put<IColumn>(`${this.urlColumn}/${idColumn}`,body);
+    return this.httpClient.put<IColumn>(`${this.urlColumn}/${idColumn}`, body);
   }
 
   public moveColumn(idColumn: string, body: IColumnMove): Observable<IColumn> {
-    return this.httpClient.put<IColumn>(`${this.urlColumn}/move/${idColumn}`,body);
+    return this.httpClient.put<IColumn>(`${this.urlColumn}/move/${idColumn}`, body);
   }
 
   // tasks methods
@@ -59,10 +59,10 @@ export class ColumnTaskService {
   }
 
   public updateTask(idTask: string, body: Partial<ITaskCreate>): Observable<ITask> {
-    return this.httpClient.put<ITask>(`${this.urlTask}/${idTask}`,body);
+    return this.httpClient.put<ITask>(`${this.urlTask}/${idTask}`, body);
   }
 
   public moveTask(idTask: string, body: ITaskMove): Observable<ITask> {
-    return this.httpClient.put<ITask>(`${this.urlTask}/move/${idTask}`,body);
+    return this.httpClient.put<ITask>(`${this.urlTask}/move/${idTask}`, body);
   }
 }

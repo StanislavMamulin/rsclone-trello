@@ -58,7 +58,7 @@ section {
 }
 
 .cards-wrapper .card.selected::before {
-  content: "";
+  content: '';
   width: 0.5rem;
   height: 100%;
   background-color: #00c7e5;

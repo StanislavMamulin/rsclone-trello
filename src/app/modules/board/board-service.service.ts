@@ -1,21 +1,22 @@
 import { BASE_URL } from 'src/app/core/constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { IBoard, IBoardCreateResponse, IBoardUpdateResponse } from './model/Board.model';
 
 @Injectable()
 export class BoardService {
-  private baseUrl: string = `${BASE_URL}/api`;
+  private baseUrl = `${BASE_URL}/api`;
+
   private boardUrl = `${this.baseUrl}/board`;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   /**
    * Get all boards
    * @returns Observable<Object>
    */
-  public getBoards():Observable<IBoard[]> {
+  public getBoards(): Observable<IBoard[]> {
     return this.httpClient.get<IBoard[]>(this.boardUrl);
   }
 
@@ -24,8 +25,8 @@ export class BoardService {
    * @param id - Board ID in UUID format
    * @returns Observable<Object>
    */
-  public getBoardByID(id: string):Observable<IBoard> {
-    return this.httpClient.get<IBoard>(`${this.boardUrl}/${id}`)
+  public getBoardByID(id: string): Observable<IBoard> {
+    return this.httpClient.get<IBoard>(`${this.boardUrl}/${id}`);
   }
 
   /**
@@ -34,13 +35,18 @@ export class BoardService {
    * @param description - Board description
    * @returns Observable<Object>
    */
-  public createNewBoard(name: string, description: string, date:Date, isChosen:boolean=false):Observable<IBoardCreateResponse> {
+  public createNewBoard(
+    name: string,
+    description: string,
+    date: Date,
+    isChosen = false,
+  ): Observable<IBoardCreateResponse> {
     return this.httpClient.post<IBoardCreateResponse>(this.boardUrl, {
       nameBoard: name,
       descriptionBoard: description,
       dateBoard: date,
-      isChosen
-    })
+      isChosen,
+    });
   }
 
   /**
@@ -52,13 +58,13 @@ export class BoardService {
   public updateBoard(
     id: string,
     newProperties: {
-      nameBoard?: string,
-      descriptionBoard?: string,
-      dateBoard?:Date,
-      isChosen?:boolean
-    }
-  ):Observable<IBoardUpdateResponse> {
-    return this.httpClient.put<IBoardUpdateResponse>(`${this.boardUrl}/${id}`, newProperties)
+      nameBoard?: string;
+      descriptionBoard?: string;
+      dateBoard?: Date;
+      isChosen?: boolean;
+    },
+  ): Observable<IBoardUpdateResponse> {
+    return this.httpClient.put<IBoardUpdateResponse>(`${this.boardUrl}/${id}`, newProperties);
   }
 
   /**

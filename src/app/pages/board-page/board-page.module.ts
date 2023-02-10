@@ -11,10 +11,7 @@ import { FiltersComponent } from './filters/filters.component';
 import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
-  declarations: [
-    BoardPageComponent,
-    FiltersComponent,
-  ],
+  declarations: [BoardPageComponent, FiltersComponent],
   imports: [
     CommonModule,
     BoardRoutingModule,
