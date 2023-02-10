@@ -30,6 +30,10 @@ export class HeaderComponent {
     this.getBoards();
   }
 
+  updateBoards(){
+    this.getBoards();
+  }
+
   getBoards(): void {
     this.boardService.getBoards().subscribe((res) => {
       this.boards = res;

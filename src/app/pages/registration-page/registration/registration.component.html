@@ -20,7 +20,7 @@
       <input matInput formControlName="lastNameControl">
       <mat-error *ngIf="form.get('lastNameControl').invalid && form.get('lastNameControl').touched">
         <span *ngIf="form.get('lastNameControl').errors.required">Enter first name</span>
-        <span *ngIf="form.get('firstNameControl').errors.pattern">
+        <span *ngIf="form.get('lastNameControl').errors.pattern">
           Only numbers, letters, characters (3 - 15)
         </span>
       </mat-error>

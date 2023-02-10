@@ -32,10 +32,5 @@ export class RegistrationComponent implements OnInit {
       this.isSubmitted = true;
     }
   }
-
-
-
-
-
 }
 

@@ -26,18 +26,6 @@ export class BoardPageComponent implements OnInit {
   constructor(private boardService: BoardService){}
 
   ngOnInit(): void {
-    // window.addEventListener('keyup',(e)=>{
-    //   if(e.code==='Enter' && this.isOpenModal && this.createFormModal.valid && !this.isEnter){
-    //     if(this.isCreateModal){
-    //       this.isEnter=true;
-    //       this.createBoard();
-    //     }
-    //     if(this.isUpdateModal){
-    //       this.isEnter=true;
-    //       this.updateBoard();
-    //     }
-    //   }
-    // })
 
     this.createFormModal = new FormGroup({
       name: new FormControl(null,[Validators.required, Validators.minLength(3)]),

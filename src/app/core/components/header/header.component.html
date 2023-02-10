@@ -44,7 +44,7 @@
             ></path></svg
         ></span>
         <mat-form-field class="example-full-width" appearance="fill">
-          <input
+          <input (click)="updateBoards()"
             type="text"
             [(ngModel)]="searchStr"
             matInput
