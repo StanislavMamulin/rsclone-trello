@@ -29,3 +29,8 @@
     </app-add-controls>
   </ng-template>
 </div>
+<button (click)="toggleModal()">toggleModal</button>
+
+
+<app-modal-task *ngIf="isToggleModal"></app-modal-task>
+

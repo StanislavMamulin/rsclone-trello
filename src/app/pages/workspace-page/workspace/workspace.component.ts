@@ -18,10 +18,16 @@ export class WorkspaceComponent implements OnInit {
 
   columnsIds: string[];
 
+  isToggleModal:boolean = true;
+
   constructor(
     private columnTaskService: ColumnTaskService,
     private activatedRoute: ActivatedRoute,
   ) {}
+
+  toggleModal(){
+    this.isToggleModal = !this.isToggleModal;
+  }
 
   ngOnInit(): void {
     const {
