@@ -6,7 +6,7 @@
       </div>
       <app-filters (boards)="boards" (onShowFavorite)="updateShowFavorite($event)"
                    (onShowDate)="updateShowDate($event)"
-                   (updateValues)="updateValues($event)"
+                   (onSelectValue)="updateSelectValue($event)"
       >
       </app-filters>
     </div>
@@ -14,6 +14,7 @@
       <app-board *ngFor="let board of boards
       | chosen:showFavorite
       | resent:showDate
+      | SortByParams: selectValue
       "
                   (onDelete)="deleteBoard($event)" [board]="board"
                   (onUpdate)="openUpdateModal($event)"
@@ -31,8 +32,10 @@
       <h3 *ngIf="isCreateModal" class="form-create__title">Create board</h3>
       <h3 *ngIf="isUpdateModal" class="form-create__title">Update board</h3>
       <div class="form-create__name">
-        <label for="name">Name:</label>
-        <input id="name" type="text" formControlName="name">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input formControlName="name" matInput>
+        </mat-form-field>
         <div class="validation" *ngIf="createFormModal.get('name').touched && createFormModal.get('name').invalid">
           <small *ngIf="createFormModal.get('name').errors.required">Enter Name</small>
           <small *ngIf="createFormModal.get('name').errors.minlength">
@@ -42,8 +45,10 @@
         </div>
       </div>
       <div class="form-create__description">
-        <label for="description">Description:</label>
-        <textarea formControlName="description" name="description" id="description" cols="60" rows="10"></textarea>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea formControlName="description" matInput></textarea>
+        </mat-form-field>
         <div class="validation"
           *ngIf="createFormModal.get('description').touched && createFormModal.get('description').invalid">
           <small *ngIf="createFormModal.get('description').errors.required">Enter Description</small>
@@ -54,11 +59,10 @@
           </small>
         </div>
       </div>
-      <button *ngIf="isCreateModal" (click)="createBoard()" [disabled]="createFormModal.invalid || submitted" class="form-create__button">
-        Create
-      </button>
-      <button *ngIf="isUpdateModal" (click)="updateBoard()" [disabled]="createFormModal.invalid || submitted" class="form-create__button">
-        Update
-      </button>
+      <div class="form-create__buttons">
+        <button *ngIf="isCreateModal" (click)="createBoard()" [disabled]="createFormModal.invalid || submitted" mat-raised-button>Create</button>
+        <button *ngIf="isUpdateModal" (click)="updateBoard()" [disabled]="createFormModal.invalid || submitted" mat-raised-button>Update</button>
+      </div>
+
     </form>
 </div>

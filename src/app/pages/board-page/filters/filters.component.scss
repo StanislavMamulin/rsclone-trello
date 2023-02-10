@@ -1,8 +1,13 @@
 .inputGroup {
-  background-color: #D1D7DC;
+  background-color: whitesmoke;
   display: block;
-  margin: 10px 0;
+  margin-top: 10px;
   position: relative;
+  transition: .5s;
+
+  &:hover{
+    background-color: #D1D7DC;
+  }
 
   label {
     padding: 11.5px 30px;
@@ -93,4 +98,10 @@
     cursor: pointer;
     visibility: hidden;
   }
+}
+
+.select{
+  width: 100%;
+  margin-top: 10px;
+
 }

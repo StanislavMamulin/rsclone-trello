@@ -1,3 +1,4 @@
+import { BASE_URL } from 'src/app/core/constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
@@ -5,7 +6,7 @@ import { IBoard, IBoardCreateResponse, IBoardUpdateResponse } from './model/Boar
 
 @Injectable()
 export class BoardService {
-  private baseUrl: string = 'http://localhost:3000/api';
+  private baseUrl: string = `${BASE_URL}/api`;
   private boardUrl = `${this.baseUrl}/board`;
 
   constructor(private httpClient: HttpClient) { }
@@ -33,7 +34,7 @@ export class BoardService {
    * @param description - Board description
    * @returns Observable<Object>
    */
-  public createNewBoard(name: string, description: string, date:string, isChosen:boolean=false):Observable<IBoardCreateResponse> {
+  public createNewBoard(name: string, description: string, date:Date, isChosen:boolean=false):Observable<IBoardCreateResponse> {
     return this.httpClient.post<IBoardCreateResponse>(this.boardUrl, {
       nameBoard: name,
       descriptionBoard: description,
@@ -53,7 +54,7 @@ export class BoardService {
     newProperties: {
       nameBoard?: string,
       descriptionBoard?: string,
-      dateBoard?:string,
+      dateBoard?:Date,
       isChosen?:boolean
     }
   ):Observable<IBoardUpdateResponse> {

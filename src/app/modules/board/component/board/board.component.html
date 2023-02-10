@@ -23,7 +23,7 @@
     Open Board
   </div>
     <div *ngIf="isOpenDescription" class="description">
-      <small class="description__date">{{board.dateBoard}}</small>
+      <small class="description__date">{{board.dateBoard | date:'medium'}}</small>
       <div class="description__name">{{board.nameBoard}}</div>
       <div class="description__description">{{board.descriptionBoard}}</div>
       <div class="description__info">
