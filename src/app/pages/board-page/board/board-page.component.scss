@@ -12,6 +12,7 @@
   }
 
   .spinner{
+    margin: auto;
     width: 290px;
     height: 200px;
     display: flex;
@@ -20,6 +21,7 @@
   }
 
   &__boards{
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
