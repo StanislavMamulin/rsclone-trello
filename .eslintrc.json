@@ -1,18 +1,15 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "airbnb-typescript/base"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
@@ -30,17 +27,26 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "import/extensions": 0,
+        "import/no-extraneous-dependencies": 0,
+        "@typescript-eslint/no-unused-expressions": [
+          "error",
+          { "allowShortCircuit": true, "allowTernary": true }
+        ],
+        "array-bracket-newline": ["error", { "multiline": true }],
+        "array-element-newline": ["error", { "multiline": true, "minItems": 3 }]
+      },
+      "parserOptions": {
+        "project": ["./tsconfig.json"]
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
-      "rules": {}
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended", "plugin:prettier/recommended"],
+      "rules": {
+        "prettier/prettier": ["error", { "parser": "angular" }]
+      }
     }
   ]
 }
