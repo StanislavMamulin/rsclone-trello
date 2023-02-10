@@ -15,8 +15,8 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(){
     this.form = new FormGroup({
-      firstNameControl: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      lastNameControl: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      firstNameControl: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
+      lastNameControl: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
       emailFormControl: new FormControl('', [Validators.required, Validators.email]),
       enterPassword: new FormControl('',[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
       repeatPassword: new FormControl('',[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
