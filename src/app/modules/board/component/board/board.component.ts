@@ -18,6 +18,7 @@ export class BoardComponent implements OnInit {
 
   isOfferOpenBoard:boolean = false;
   isOpenDescription:boolean = false;
+  isSpinner:boolean = false;
 
   constructor(
     private boardService: BoardService,
@@ -29,9 +30,11 @@ export class BoardComponent implements OnInit {
   }
 
   deleteBoard(id:string){
+    this.isSpinner = true;
     this.boardService.deleteBoard(id)
     .subscribe(()=>{
       this.onDelete.emit(id);
+      this.isSpinner = false;
     });
   }
 

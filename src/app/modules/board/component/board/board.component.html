@@ -22,6 +22,9 @@
   <div (click)="openBoard($event)" *ngIf="isOfferOpenBoard" class="board__offer-open">
     Open Board
   </div>
+  <div *ngIf="isSpinner" class="board__spinner">
+    <img src="../../../../../assets/images/spinner.svg" alt="spinner">
+  </div>
     <div *ngIf="isOpenDescription" class="description">
       <small class="description__date">{{board.dateBoard | date:'medium'}}</small>
       <div class="description__name">{{board.nameBoard}}</div>
