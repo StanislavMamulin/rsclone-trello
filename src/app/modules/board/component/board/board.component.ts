@@ -11,6 +11,7 @@ import { IBoard } from '../../model/Board.model';
 })
 export class BoardComponent implements OnInit {
   @Input() board:IBoard;
+  @Input() submitted:boolean;
   @Output() onDelete = new EventEmitter<string>();
   @Output() onUpdate = new EventEmitter<string>();
   @Output() onUpdateStar = new EventEmitter<IBoard>();

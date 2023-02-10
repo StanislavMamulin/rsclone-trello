@@ -11,7 +11,13 @@
     gap: 10px;
   }
 
-
+  .spinner{
+    width: 290px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   &__boards{
     display: flex;
@@ -61,7 +67,8 @@
   .form-create{
     display: flex;
     flex-direction: column;
-    background: #026aa7;
+    // background: #026aa7;
+    background: rgb(53, 136, 185);
     padding: 20px 50px 40px 50px;
     border-radius: 3px;
     width: 400px;

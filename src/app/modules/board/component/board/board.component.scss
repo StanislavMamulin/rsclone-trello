@@ -7,6 +7,11 @@
   display: flex;
   flex-direction: column;
 
+  .delete{
+    background: transparent;
+    border-style: none;
+  }
+
   &__wrapper{
     width: 100%;
     height: fit-content;

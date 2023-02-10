@@ -6,9 +6,9 @@
       <div (click)="updateBoard(board.idBoard)">
         <img src="../../../../../assets/images/edit.svg" alt="edit">
       </div>
-      <div (click)="deleteBoard(board.idBoard)">
+      <button [disabled]="submitted" class="delete" (click)="deleteBoard(board.idBoard)">
         <img src="../../../../../assets/images/delete.svg" alt="description">
-      </div>
+      </button>
       <div (click)="showDescription($event)">
         <img src="../../../../../assets/images/description.svg" alt="edit">
       </div>

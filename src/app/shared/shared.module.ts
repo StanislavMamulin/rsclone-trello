@@ -9,7 +9,7 @@ import { SortByParamsPipe } from './sort-date.pipe';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import {MatButtonModule} from '@angular/material/button';
     RouterModule,
     MatSelectModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   exports:[
     FormsModule,
@@ -36,6 +37,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule { }
