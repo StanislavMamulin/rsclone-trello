@@ -15,15 +15,11 @@ export class MainComponent {
   changeCard(event: Event): void {
     const targetElement = (event.target as HTMLElement).closest('.card');
     const cardsList = document.querySelectorAll('.card');
-    const cardIndex = Array.from(cardsList).indexOf(
-      targetElement as HTMLElement
-    );
+    const cardIndex = Array.from(cardsList).indexOf(targetElement as HTMLElement);
     if (cardIndex === -1) return;
     this.cardNumber = cardIndex + 1;
     cardsList.forEach((item: Element) => {
-      item === targetElement
-        ? item.classList.add('selected')
-        : item.classList.remove('selected');
+      item === targetElement ? item.classList.add('selected') : item.classList.remove('selected');
     });
 
     this.changeCardImage();

@@ -10,10 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FiltersComponent } from './filters/filters.component';
 
 @NgModule({
-  declarations: [
-    BoardPageComponent,
-    FiltersComponent,
-  ],
+  declarations: [BoardPageComponent, FiltersComponent],
   imports: [
     CommonModule,
     BoardRoutingModule,

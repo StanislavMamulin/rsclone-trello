@@ -6,10 +6,9 @@ import { RouterModule } from '@angular/router';
 import { ChosenPipe } from './chosen.pipe';
 import { ResentPipe } from './resent.pipe';
 import { SortByParamsPipe } from './sort-date.pipe';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -24,9 +23,9 @@ import {MatButtonModule} from '@angular/material/button';
     RouterModule,
     MatSelectModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
   ],
-  exports:[
+  exports: [
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
@@ -36,6 +35,6 @@ import {MatButtonModule} from '@angular/material/button';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
-  ]
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

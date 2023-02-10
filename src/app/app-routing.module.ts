@@ -12,18 +12,20 @@ const routes: Routes = [
     children: [
       {
         path: 'board',
-        loadChildren: () => import('./pages/board-page/board-page.module').then(page => page.BoardPageModule)
+        loadChildren: () =>
+          import('./pages/board-page/board-page.module').then((page) => page.BoardPageModule),
       },
       {
         path: 'main',
-        loadChildren: () => import('./pages/main-page/main-page.module').then(page => page.MainPageModule)
-      }
-    ]
-  }
+        loadChildren: () =>
+          import('./pages/main-page/main-page.module').then((page) => page.MainPageModule),
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -8,7 +8,7 @@ import { IBoard } from 'src/app/modules/board/model/Board.model';
 @Component({
   selector: 'app-column',
   templateUrl: './column.component.html',
-  styleUrls: ['./column.component.scss']
+  styleUrls: ['./column.component.scss'],
 })
 export class ColumnComponent implements OnInit {
   @Input() column: IColumn;
@@ -39,10 +39,12 @@ export class ColumnComponent implements OnInit {
     const droppedTask: ITask = event.container.data.tasks[event.currentIndex];
     const newColumn = event.container.data.column;
 
-    this.columnTaskService.moveTask(droppedTask.idTask, {
-      toColumnId: newColumn.idColumn,
-      newPosition: event.currentIndex,
-    }).subscribe(res => console.log('res', res))
+    this.columnTaskService
+      .moveTask(droppedTask.idTask, {
+        toColumnId: newColumn.idColumn,
+        newPosition: event.currentIndex,
+      })
+      .subscribe((res) => console.log('res', res));
   }
 
   showAddTask() {
@@ -54,16 +56,16 @@ export class ColumnComponent implements OnInit {
   }
 
   addNewTaskHandler(title: string) {
-    this.columnTaskService.createTaskByColumnId(
-      this.column.idColumn, { nameTask: title, descriptionTask: '' }
-    ).subscribe((newTask: ITask) => {
-      this.tasks.push(newTask);
-    });
+    this.columnTaskService
+      .createTaskByColumnId(this.column.idColumn, { nameTask: title, descriptionTask: '' })
+      .subscribe((newTask: ITask) => {
+        this.tasks.push(newTask);
+      });
   }
 
-  getConnectedToList(currentColumnId: string): string[] { 
+  getConnectedToList(currentColumnId: string): string[] {
     const possibleConnectionIds = this.getConnectedList();
 
-    return possibleConnectionIds.filter(id => id !== currentColumnId);
+    return possibleConnectionIds.filter((id) => id !== currentColumnId);
   }
 }

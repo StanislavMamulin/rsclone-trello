@@ -7,18 +7,21 @@ import { IColumn } from 'src/app/modules/column-task/model/column.interface';
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
-  styleUrls: ['./workspace.component.scss']
+  styleUrls: ['./workspace.component.scss'],
 })
 export class WorkspaceComponent implements OnInit {
   currentBoardId: string;
+
   columns: IColumn[] = [];
+
   showAddControl = false;
+
   columnsIds: string[];
 
   constructor(
-    private columnTaskService:ColumnTaskService,
-    private activatedRoute: ActivatedRoute
-  ){}
+    private columnTaskService: ColumnTaskService,
+    private activatedRoute: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     const {
@@ -27,22 +30,23 @@ export class WorkspaceComponent implements OnInit {
       },
     } = this.activatedRoute;
 
-    this.columnTaskService.getColumns(id)
-    .subscribe(res=>{
+    this.columnTaskService.getColumns(id).subscribe((res) => {
       this.columns = res;
       this.currentBoardId = id;
       this.setColumnsIds();
-    })
+    });
   }
 
-  addNewColumn(columnName: string) { 
-    this.columnTaskService.createColumn(this.currentBoardId, {
-      nameColumn: columnName,
-      descriptionColumn: ''
-    }).subscribe((newColumn: IColumn) => {
-      this.columns.push(newColumn);
-      this.hideAddColumn();
-    })
+  addNewColumn(columnName: string) {
+    this.columnTaskService
+      .createColumn(this.currentBoardId, {
+        nameColumn: columnName,
+        descriptionColumn: '',
+      })
+      .subscribe((newColumn: IColumn) => {
+        this.columns.push(newColumn);
+        this.hideAddColumn();
+      });
   }
 
   showAddColumn() {
@@ -67,11 +71,13 @@ export class WorkspaceComponent implements OnInit {
     this.setColumnsIds();
 
     const droppedColumn: IColumn = event.container.data[event.currentIndex];
-    console.log(droppedColumn.idColumn, event.currentIndex, this.currentBoardId)
-    this.columnTaskService.moveColumn(droppedColumn.idColumn, {
-      newPosition: event.currentIndex,
-      toBoardId: this.currentBoardId,
-    }).subscribe(res => console.log(res));
+    console.log(droppedColumn.idColumn, event.currentIndex, this.currentBoardId);
+    this.columnTaskService
+      .moveColumn(droppedColumn.idColumn, {
+        newPosition: event.currentIndex,
+        toBoardId: this.currentBoardId,
+      })
+      .subscribe((res) => console.log(res));
   }
 
   get columnsIdsFunc() {

@@ -10,12 +10,12 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: WorkspaceComponent
-  }
+    component: WorkspaceComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class BoardRoutingModule { }
+export class BoardRoutingModule {}

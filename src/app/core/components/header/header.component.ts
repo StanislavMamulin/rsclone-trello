@@ -19,9 +19,9 @@ export class HeaderComponent {
     this.router.navigate(['/main']);
   }
 
-  searchFocus(event: Event) {
+  searchFocus() {
     this.searchField = document.querySelector(
-      'input[type="search"]'
+      'input[type="search"]',
     ) as HTMLInputElement;
     if (this.searchField) {
       this.searchField.focus();
@@ -30,9 +30,7 @@ export class HeaderComponent {
 
   changeSearchIcon(event: Event) {
     const searchIcon = document.querySelector('.search span') as HTMLElement;
-    const searchContainer = (event.target as HTMLElement).closest(
-      '.search'
-    ) as HTMLDivElement;
+    const searchContainer = (event.target as HTMLElement).closest('.search') as HTMLDivElement;
 
     // event.type === 'focus'
     //   ? ((searchIcon.style.color = 'black'),

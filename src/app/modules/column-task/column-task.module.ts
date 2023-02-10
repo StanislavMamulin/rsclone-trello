@@ -8,23 +8,15 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { AddControlsModule } from '../add-controls/add-controls.module';
 
-
 @NgModule({
-  declarations: [
-    ColumnComponent,
-    TaskComponent
-  ],
+  declarations: [ColumnComponent, TaskComponent],
   imports: [
     CommonModule,
     DragDropModule,
     FormsModule,
-    AddControlsModule
+    AddControlsModule,
   ],
-  exports:[
-    ColumnComponent,
-  ],
-  providers:[
-    ColumnTaskService
-  ]
+  exports: [ColumnComponent],
+  providers: [ColumnTaskService],
 })
-export class ColumnTaskModule { }
+export class ColumnTaskModule {}
