@@ -6,21 +6,24 @@
       <div (click)="updateBoard(board.idBoard)">
         <img src="../../../../../assets/images/edit.svg" alt="edit">
       </div>
-      <div (click)="deleteBoard(board.idBoard)">
+      <button [disabled]="submitted" class="button-empty" (click)="deleteBoard(board.idBoard)">
         <img src="../../../../../assets/images/delete.svg" alt="description">
-      </div>
+      </button>
       <div (click)="showDescription($event)">
         <img src="../../../../../assets/images/description.svg" alt="edit">
       </div>
     </div>
   </div>
-  <div  (click)="updateFavorite(board)"
-        class="board__chosen">
+  <button  (click)="updateFavorite(board)"
+        class="board__chosen button-empty">
     <img *ngIf="!board.isChosen" src="../../../../../assets/images/star-empty.svg" alt="empty-start">
     <img *ngIf="board.isChosen" src="../../../../../assets/images/star-black.svg" alt="star-black">
-  </div>
+  </button>
   <div (click)="openBoard($event)" *ngIf="isOfferOpenBoard" class="board__offer-open">
     Open Board
+  </div>
+  <div *ngIf="isDelete" class="board__spinner">
+    <img src="../../../../../assets/images/spinner.svg" alt="spinner">
   </div>
     <div *ngIf="isOpenDescription" class="description">
       <small class="description__date">{{board.dateBoard | date:'medium'}}</small>

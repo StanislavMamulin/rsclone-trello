@@ -11,12 +11,14 @@ import { IBoard } from '../../model/Board.model';
 })
 export class BoardComponent implements OnInit {
   @Input() board:IBoard;
+  @Input() submitted:boolean;
   @Output() onDelete = new EventEmitter<string>();
   @Output() onUpdate = new EventEmitter<string>();
   @Output() onUpdateStar = new EventEmitter<IBoard>();
 
   isOfferOpenBoard:boolean = false;
   isOpenDescription:boolean = false;
+  isDelete:boolean = false;
 
   constructor(
     private boardService: BoardService,
@@ -28,9 +30,11 @@ export class BoardComponent implements OnInit {
   }
 
   deleteBoard(id:string){
+    this.isDelete = true;
     this.boardService.deleteBoard(id)
     .subscribe(()=>{
       this.onDelete.emit(id);
+      this.isDelete = false;
     });
   }
 
@@ -70,7 +74,10 @@ export class BoardComponent implements OnInit {
     this.isOpenDescription = !this.isOpenDescription;
   }
 
-  closeDescription = () => {this.isOpenDescription=false;}
+  closeDescription = () => {
+    this.isOpenDescription=false;
+    this.isOfferOpenBoard = false;
+  }
 
   updateFavorite(board:IBoard){
     this.onUpdateStar.emit(board);

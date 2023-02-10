@@ -11,15 +11,19 @@
       </app-filters>
     </div>
     <div class="board-page__boards">
-      <app-board *ngFor="let board of boards
-      | chosen:showFavorite
-      | resent:showDate
-      | SortByParams: selectValue
-      "
+      <app-board  [submitted]="submitted"
+                  *ngFor="let board of boards
+                  | chosen:showFavorite
+                  | resent:showDate
+                  | SortByParams: selectValue
+                  "
                   (onDelete)="deleteBoard($event)" [board]="board"
                   (onUpdate)="openUpdateModal($event)"
                   (onUpdateStar)="updateStar($event)"
       ></app-board>
+      <div class="spinner">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+      </div>
     </div>
   </div>
 </div>
@@ -34,7 +38,7 @@
       <div class="form-create__name">
         <mat-form-field>
           <mat-label>Name</mat-label>
-          <input formControlName="name" matInput>
+          <input autofocus="true" formControlName="name" matInput>
         </mat-form-field>
         <div class="validation" *ngIf="createFormModal.get('name').touched && createFormModal.get('name').invalid">
           <small *ngIf="createFormModal.get('name').errors.required">Enter Name</small>
@@ -63,6 +67,7 @@
         <button *ngIf="isCreateModal" (click)="createBoard()" [disabled]="createFormModal.invalid || submitted" mat-raised-button>Create</button>
         <button *ngIf="isUpdateModal" (click)="updateBoard()" [disabled]="createFormModal.invalid || submitted" mat-raised-button>Update</button>
       </div>
-
+      <img *ngIf="submitted" class="form-create__spinner" src="../../../../assets/images/spinner.svg" alt="spinner">
     </form>
 </div>
+

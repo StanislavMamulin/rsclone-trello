@@ -20,10 +20,24 @@ export class BoardPageComponent implements OnInit {
   showFavorite:boolean = false;
   showDate:boolean = false;
   selectValue:string = '';
+  isLoading: boolean = false;
+  isEnter:boolean = false;
 
   constructor(private boardService: BoardService){}
 
   ngOnInit(): void {
+    // window.addEventListener('keyup',(e)=>{
+    //   if(e.code==='Enter' && this.isOpenModal && this.createFormModal.valid && !this.isEnter){
+    //     if(this.isCreateModal){
+    //       this.isEnter=true;
+    //       this.createBoard();
+    //     }
+    //     if(this.isUpdateModal){
+    //       this.isEnter=true;
+    //       this.updateBoard();
+    //     }
+    //   }
+    // })
 
     this.createFormModal = new FormGroup({
       name: new FormControl(null,[Validators.required, Validators.minLength(3)]),
@@ -31,15 +45,17 @@ export class BoardPageComponent implements OnInit {
       path: new FormControl('')
     })
 
+    this.isLoading = true;
     this.boardService.getBoards()
-    .subscribe(res=>{this.boards = res});
+    .subscribe(res=>{
+      this.boards = res;
+      this.isLoading = false;
+    });
   }
 
   updateShowDate = (showDate:boolean)=> {this.showDate = showDate}
   updateShowFavorite = (showFavorite:boolean) => {this.showFavorite = showFavorite;}
-  updateSelectValue = (selectValue:string) => {
-    this.selectValue = selectValue;
-  }
+  updateSelectValue = (selectValue:string) => {this.selectValue = selectValue;}
 
   toUpperFirstLetter = (str:string) => str[0].toUpperCase()+str.toLowerCase().substring(1);
 
@@ -62,6 +78,8 @@ export class BoardPageComponent implements OnInit {
     this.isCreateModal = false;
     this.isUpdateModal = false;
     this.submitted = false;
+    this.isLoading = false;
+    this.isEnter = false;
     this.createFormModal.reset();
     document.body.style.overflow = 'auto';
   }
@@ -91,6 +109,7 @@ export class BoardPageComponent implements OnInit {
   }
 
   updateBoard(){
+    this.submitted = true;
     const nameBoard = this.toUpperFirstLetter(this.createFormModal.get('name').value);
     const descriptionBoard = this.toUpperFirstLetter(this.createFormModal.get('description').value);
     this.boardService.updateBoard( this.updateBoardId,{
