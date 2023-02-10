@@ -8,6 +8,7 @@ import { BoardService } from 'src/app/modules/board/board-service.service';
 import { WorkspaceModule } from '../workspace-page/workspace.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FiltersComponent } from './filters/filters.component';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   declarations: [BoardPageComponent, FiltersComponent],
@@ -17,6 +18,7 @@ import { FiltersComponent } from './filters/filters.component';
     BoardModule,
     WorkspaceModule,
     SharedModule,
+    CoreModule
   ],
   providers: [BoardService],
 })

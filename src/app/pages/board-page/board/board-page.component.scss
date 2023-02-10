@@ -3,17 +3,28 @@
   height: 100%;
   padding-top: 10px;
   padding-left: 10px;
-  padding-bottom: 20px;
 
   .container {
     display: flex;
     gap: 10px;
   }
 
-  &__boards {
+  .spinner{
+    margin: auto;
+    width: 290px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__boards{
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    margin-bottom: 10px;
+
   }
 
   &__create {
@@ -55,15 +66,37 @@
   mat-form-field {
     width: 100%;
   }
-  .form-create {
+
+
+  .form-create{
+    position: relative;
     display: flex;
     flex-direction: column;
-    background: #026aa7;
+    // background: #026aa7;
+    background: rgb(53, 136, 185);
     padding: 20px 50px 40px 50px;
     border-radius: 3px;
     width: 400px;
 
-    .validation {
+    &__spinner{
+      width: 100px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -100px;
+      z-index: 10;
+    }
+
+    &__spinner{
+      width: 100px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -100px;
+      z-index: 10;
+    }
+
+    .validation{
       color: #fff;
       font-size: 16px;
     }

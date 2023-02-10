@@ -12,6 +12,8 @@ import { IBoard } from '../../model/Board.model';
 export class BoardComponent implements OnInit {
   @Input() board: IBoard;
 
+  @Input() submitted: boolean;
+
   @Output() onDelete = new EventEmitter<string>();
 
   @Output() onUpdate = new EventEmitter<string>();
@@ -22,16 +24,21 @@ export class BoardComponent implements OnInit {
 
   isOpenDescription = false;
 
+  isDelete = false;
+
   constructor(private boardService: BoardService, private router: Router) {}
 
   ngOnInit() {
     this.isOpenDescription = false;
   }
 
-  deleteBoard(id: string) {
-    this.boardService.deleteBoard(id).subscribe(() => {
-      this.onDelete.emit(id);
-    });
+  deleteBoard(id:string) {
+    this.isDelete = true;
+    this.boardService.deleteBoard(id)
+      .subscribe(()=>{
+        this.onDelete.emit(id);
+        this.isDelete = false;
+      });
   }
 
   openBoard(event: any) {
@@ -77,6 +84,7 @@ export class BoardComponent implements OnInit {
 
   closeDescription = () => {
     this.isOpenDescription = false;
+    this.isOfferOpenBoard = false;
   };
 
   updateFavorite(board: IBoard) {

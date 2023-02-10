@@ -7,7 +7,20 @@
   display: flex;
   flex-direction: column;
 
-  &__wrapper {
+  &__spinner{
+    position: absolute;
+    z-index: 3;
+    width: 36px;
+    left: 0;
+    bottom: 0
+  }
+
+  .button-empty{
+    background: transparent;
+    border-style: none;
+  }
+
+  &__wrapper{
     width: 100%;
     height: fit-content;
     display: flex;
@@ -60,7 +73,7 @@
     cursor: pointer;
     transition: 0.5s;
     position: absolute;
-    background: rgb(107, 103, 103, 0.4);
+    background:rgba(107, 103, 103, 0.4);
     color: rgb(167, 158, 158);
     height: 100%;
     width: 100%;
@@ -92,14 +105,15 @@
       font-weight: 500;
     }
 
-    &__name {
+    &__name{
+      margin-top: 5px;
       font-size: 28px;
       font-weight: 500;
       letter-spacing: 1px;
     }
 
     &__description {
-      margin-top: 5px;
+      margin-top: 15px;
       font-size: 14px;
       font-style: italic;
     }
@@ -152,3 +166,4 @@
     }
   }
 }
+

@@ -12,12 +12,9 @@
           alt="edit"
         />
       </div>
-      <div (click)="deleteBoard(board.idBoard)">
-        <img
-          src="../../../../../assets/images/delete.svg"
-          alt="description"
-        />
-      </div>
+      <button [disabled]="submitted" class="button-empty" (click)="deleteBoard(board.idBoard)">
+        <img src="../../../../../assets/images/delete.svg" alt="description">
+      </button>
       <div (click)="showDescription($event)">
         <img
           src="../../../../../assets/images/description.svg"
@@ -26,39 +23,27 @@
       </div>
     </div>
   </div>
-  <div
-    (click)="updateFavorite(board)"
-    class="board__chosen"
-  >
-    <img
-      *ngIf="!board.isChosen"
-      src="../../../../../assets/images/star-empty.svg"
-      alt="empty-start"
-    />
-    <img
-      *ngIf="board.isChosen"
-      src="../../../../../assets/images/star-black.svg"
-      alt="star-black"
-    />
-  </div>
-  <div
-    (click)="openBoard($event)"
-    *ngIf="isOfferOpenBoard"
-    class="board__offer-open"
-  >
+  <button  (click)="updateFavorite(board)"
+        class="board__chosen button-empty">
+    <img *ngIf="!board.isChosen" src="../../../../../assets/images/star-empty.svg" alt="empty-start">
+    <img *ngIf="board.isChosen" src="../../../../../assets/images/star-black.svg" alt="star-black">
+  </button>
+  <div (click)="openBoard($event)" *ngIf="isOfferOpenBoard" class="board__offer-open">
     Open Board
   </div>
-  <div
-    *ngIf="isOpenDescription"
-    class="description"
-  >
-    <small class="description__date">{{ board.dateBoard | date : 'medium' }}</small>
-    <div class="description__name">{{ board.nameBoard }}</div>
-    <div class="description__description">{{ board.descriptionBoard }}</div>
-    <div class="description__info">
-      <span><b>Columns:</b> {{ board.columns.length }}</span
-      >,
-      <span><b>Tasks:</b> {{ amountTasks(board.columns) }}</span>
+  <div *ngIf="isDelete" class="board__spinner">
+    <img src="../../../../../assets/images/spinner.svg" alt="spinner">
+  </div>
+    <div *ngIf="isOpenDescription" class="description">
+      <small class="description__date">{{board.dateBoard | date:'medium'}}</small>
+      <div class="description__name">{{board.nameBoard}}</div>
+      <div class="description__description">{{board.descriptionBoard}}</div>
+      <div class="description__info">
+        <span><b>Columns:</b> {{board.columns.length}}</span>,
+        <span><b>Tasks:</b> {{amountTasks(board.columns)}}</span>
+      </div>
+      <img class="description__star" *ngIf="board.isChosen" src="../../../../../assets/images/star-black.svg" alt="fill">
+      <button (click)="closeDescription()" class="description__button">Close</button>
     </div>
     <img
       class="description__star"

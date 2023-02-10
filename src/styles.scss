@@ -75,6 +75,13 @@ app-main {
   background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat
     scroll padding-box border-box rgb(178, 212, 255);
 }
+app-registration,
+app-board-page{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background:whitesmoke;
+}
 
 app-header {
   z-index: 5;
@@ -93,6 +100,26 @@ router-outlet {
 html {
   --scrollbarBG: lightgray;
   --thumbBG: rgba(17, 86, 152, 0.8);
+}
+
+
+.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 150px;
+}
+
+.mat-mdc-form-field-infix {
+    min-height: 32px;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field.ng-tns-c82-0.mdc-text-field--filled.mdc-text-field--no-label {
+    padding-left: 33px;
+    border-radius: 4px;
+}
+
+.mat-mdc-option.mat-mdc-focus-indicator.mdc-list-item.ng-tns-c84-1 {
+    min-height: 32px;
 }
 
 html,

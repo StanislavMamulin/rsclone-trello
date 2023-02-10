@@ -14,16 +14,30 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class BoardPageComponent implements OnInit {
   boards: IBoard[] = [];
-  isOpenModal: boolean = false;
-  isCreateModal: boolean = false;
-  isUpdateModal: boolean = false;
+
+  isOpenModal = false;
+
+  isCreateModal = false;
+
+  isUpdateModal = false;
+
   updateBoardId: string;
+
   createFormModal: any;
-  submitted: boolean = false;
-  whatSort: boolean = true;
-  showFavorite: boolean = false;
-  showDate: boolean = false;
-  selectValue: string = '';
+
+  submitted = false;
+
+  whatSort = true;
+
+  showFavorite = false;
+
+  showDate = false;
+
+  selectValue = '';
+
+  isLoading = false;
+
+  isEnter = false;
 
   constructor(private boardService: BoardService) {}
 
@@ -34,20 +48,23 @@ export class BoardPageComponent implements OnInit {
       path: new FormControl(''),
     });
 
-    this.boardService.getBoards().subscribe((res) => {
-      this.boards = res;
-    });
+    this.isLoading = true;
+    this.boardService.getBoards()
+      .subscribe(res=>{
+        this.boards = res;
+        this.isLoading = false;
+      });
   }
 
   updateShowDate = (showDate: boolean) => {
     this.showDate = showDate;
   };
+
   updateShowFavorite = (showFavorite: boolean) => {
     this.showFavorite = showFavorite;
   };
-  updateSelectValue = (selectValue: string) => {
-    this.selectValue = selectValue;
-  };
+
+  updateSelectValue = (selectValue: string) => {this.selectValue = selectValue;};
 
   toUpperFirstLetter = (str: string) => str[0].toUpperCase() + str.toLowerCase().substring(1);
 
@@ -70,6 +87,8 @@ export class BoardPageComponent implements OnInit {
     this.isCreateModal = false;
     this.isUpdateModal = false;
     this.submitted = false;
+    this.isLoading = false;
+    this.isEnter = false;
     this.createFormModal.reset();
     document.body.style.overflow = 'auto';
   }
@@ -100,6 +119,7 @@ export class BoardPageComponent implements OnInit {
   }
 
   updateBoard() {
+    this.submitted = true;
     const nameBoard = this.toUpperFirstLetter(this.createFormModal.get('name').value);
     const descriptionBoard = this.toUpperFirstLetter(this.createFormModal.get('description').value);
     this.boardService
@@ -109,7 +129,7 @@ export class BoardPageComponent implements OnInit {
         dateBoard: new Date(),
       })
       .subscribe((res: IBoardUpdateResponse) => {
-        let indexUpdatedBoard: number = -1;
+        let indexUpdatedBoard = -1;
         this.boards.find((board, i) => {
           if (board.idBoard === this.updateBoardId) indexUpdatedBoard = i;
         });
@@ -123,7 +143,7 @@ export class BoardPageComponent implements OnInit {
   }
 
   updateStar(b: IBoard) {
-    let { idBoard, nameBoard, descriptionBoard, isChosen, dateBoard } = b;
+    const { idBoard, nameBoard, descriptionBoard, isChosen, dateBoard } = b;
     this.boardService
       .updateBoard(idBoard, {
         nameBoard,
@@ -132,7 +152,7 @@ export class BoardPageComponent implements OnInit {
         isChosen: !isChosen,
       })
       .subscribe((res: IBoardUpdateResponse) => {
-        let indexUpdatedBoard: number = -1;
+        let indexUpdatedBoard = -1;
         this.boards.find((board, i) => {
           if (board.idBoard === idBoard) indexUpdatedBoard = i;
         });
