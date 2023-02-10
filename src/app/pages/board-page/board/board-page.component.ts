@@ -21,7 +21,6 @@ export class BoardPageComponent implements OnInit {
   showDate:boolean = false;
   selectValue:string = '';
   isLoading: boolean = false;
-  isSpinner: boolean = false;
   isEnter:boolean = false;
 
   constructor(private boardService: BoardService){}
@@ -56,9 +55,7 @@ export class BoardPageComponent implements OnInit {
 
   updateShowDate = (showDate:boolean)=> {this.showDate = showDate}
   updateShowFavorite = (showFavorite:boolean) => {this.showFavorite = showFavorite;}
-  updateSelectValue = (selectValue:string) => {
-    this.selectValue = selectValue;
-  }
+  updateSelectValue = (selectValue:string) => {this.selectValue = selectValue;}
 
   toUpperFirstLetter = (str:string) => str[0].toUpperCase()+str.toLowerCase().substring(1);
 

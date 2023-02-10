@@ -18,7 +18,7 @@ export class BoardComponent implements OnInit {
 
   isOfferOpenBoard:boolean = false;
   isOpenDescription:boolean = false;
-  isSpinner:boolean = false;
+  isDelete:boolean = false;
 
   constructor(
     private boardService: BoardService,
@@ -30,11 +30,11 @@ export class BoardComponent implements OnInit {
   }
 
   deleteBoard(id:string){
-    this.isSpinner = true;
+    this.isDelete = true;
     this.boardService.deleteBoard(id)
     .subscribe(()=>{
       this.onDelete.emit(id);
-      this.isSpinner = false;
+      this.isDelete = false;
     });
   }
 
@@ -74,7 +74,10 @@ export class BoardComponent implements OnInit {
     this.isOpenDescription = !this.isOpenDescription;
   }
 
-  closeDescription = () => {this.isOpenDescription=false;}
+  closeDescription = () => {
+    this.isOpenDescription=false;
+    this.isOfferOpenBoard = false;
+  }
 
   updateFavorite(board:IBoard){
     this.onUpdateStar.emit(board);
