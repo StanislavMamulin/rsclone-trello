@@ -22,6 +22,10 @@ export class HeaderComponent {
     this.router.navigate(['/main']);
   }
 
+  openRegistrationPage(){
+    this.router.navigate(['/registration']);
+  }
+
   ngOnInit(): void {
     this.getBoards();
   }
