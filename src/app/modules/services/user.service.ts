@@ -8,9 +8,9 @@ import { IUser, LoginParams, RegistrationParams } from 'src/app/shared/models/us
   providedIn: 'root',
 })
 export class UserService {
-  private registrationUrl = `${BASE_URL}\\register`;
+  private registrationUrl = `${BASE_URL}/register`;
 
-  private loginUrl = `${BASE_URL}\\login`;
+  private loginUrl = `${BASE_URL}/login`;
 
   constructor(private httpClient: HttpClient) { }
 
