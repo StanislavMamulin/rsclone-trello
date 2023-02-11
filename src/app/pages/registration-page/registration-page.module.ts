@@ -8,15 +8,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { SuccessModalComponent } from './success-modal/success-modal.component';
 
 @NgModule({
-  declarations: [
-    RegistrationComponent,
-    SuccessModalComponent
-  ],
+  declarations: [RegistrationComponent, SuccessModalComponent],
   imports: [
     CommonModule,
     RegistrationPageRoutingModule,
     CoreModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
 export class RegistrationPageModule { }
