@@ -1,0 +1,13 @@
+.modal-success{
+  width: 400px;
+
+  &__header{
+    display: flex;
+    justify-content: center;
+  }
+
+  &__button{
+    width: 100px;
+    margin: auto;
+  }
+}

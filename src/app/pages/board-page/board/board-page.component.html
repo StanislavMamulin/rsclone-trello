@@ -1,34 +1,21 @@
 <div class="board-page">
   <div class="container">
     <div class="board-page__wrapper">
-      <div
-        class="board-page__create"
-        (click)="openCreateModal($event)"
-      >
+      <div class="board-page__create" (click)="openCreateModal($event)">
         <span>Create board</span>
       </div>
-      <app-filters
-        (boards)="(boards)"
-        (onShowFavorite)="updateShowFavorite($event)"
-        (onShowDate)="updateShowDate($event)"
-        (onSelectValue)="updateSelectValue($event)"
-      >
+      <app-filters (boards)="(boards)" (onShowFavorite)="updateShowFavorite($event)"
+        (onShowDate)="updateShowDate($event)" (onSelectValue)="updateSelectValue($event)">
       </app-filters>
     </div>
     <div class="board-page__boards">
-      <app-board
-        [submitted]="submitted"
-        *ngFor="
+      <app-board [submitted]="submitted" *ngFor="
           let board of boards
             | chosen : showFavorite
             | resent : showDate
             | SortByParams : selectValue
-        "
-        (onDelete)="deleteBoard($event)"
-        [board]="board"
-        (onUpdate)="openUpdateModal($event)"
-        (onUpdateStar)="updateStar($event)"
-      ></app-board>
+        " (onDelete)="deleteBoard($event)" [board]="board" (onUpdate)="openUpdateModal($event)"
+        (onUpdateStar)="updateStar($event)"></app-board>
       <div class="spinner">
         <mat-spinner *ngIf="isLoading"></mat-spinner>
       </div>
@@ -36,93 +23,57 @@
   </div>
 </div>
 
-<div
-  *ngIf="isOpenModal"
-  (click)="closeModal($event)"
-  class="modal"
->
-  <form
-    class="form-create"
-    [formGroup]="createFormModal"
-  >
-    <h3
-      *ngIf="isCreateModal"
-      class="form-create__title"
-    >
-      Create board
-    </h3>
-    <h3
-      *ngIf="isUpdateModal"
-      class="form-create__title"
-    >
-      Update board
-    </h3>
-    <div class="form-create__name">
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input
-          autofocus="true"
-          formControlName="name"
-          matInput
-        />
-      </mat-form-field>
-      <div
-        class="validation"
-        *ngIf="createFormModal.get('name').touched && createFormModal.get('name').invalid"
-      >
-        <small *ngIf="createFormModal.get('name').errors.required">Enter Name</small>
-        <small *ngIf="createFormModal.get('name').errors.minlength">
-          Name must be at least
-          {{ createFormModal.get('name').errors.minlength.requiredLength }} characters. Now it
-          {{ createFormModal.get('name').errors.minlength.actualLength }}
-        </small>
+<div *ngIf="isOpenModal" (click)="closeModal($event)" class="modal">
+  <div>
+    <form class="form-create" [formGroup]="createFormModal">
+      <h3 *ngIf="isCreateModal" class="form-create__title">
+        Create board
+      </h3>
+      <h3 *ngIf="isUpdateModal" class="form-create__title">
+        Update board
+      </h3>
+      <div class="form-create__name">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input autofocus="true" formControlName="name" matInput />
+        </mat-form-field>
+        <div class="validation" *ngIf="createFormModal.get('name').touched && createFormModal.get('name').invalid">
+          <small *ngIf="createFormModal.get('name').errors.required">Enter Name</small>
+          <small *ngIf="createFormModal.get('name').errors.minlength">
+            Name must be at least
+            {{ createFormModal.get('name').errors.minlength.requiredLength }} characters. Now it
+            {{ createFormModal.get('name').errors.minlength.actualLength }}
+          </small>
+        </div>
       </div>
-    </div>
-    <div class="form-create__description">
-      <mat-form-field appearance="fill">
-        <mat-label>Description</mat-label>
-        <textarea
-          formControlName="description"
-          matInput
-        ></textarea>
-      </mat-form-field>
-      <div
-        class="validation"
-        *ngIf="
-          createFormModal.get('description').touched && createFormModal.get('description').invalid
-        "
-      >
-        <small *ngIf="createFormModal.get('description').errors.required">Enter Description</small>
-        <small *ngIf="createFormModal.get('description').errors.minlength">
-          Description must be at least
-          {{ createFormModal.get('description').errors.minlength.requiredLength }} characters. Now
-          it {{ createFormModal.get('description').errors.minlength.actualLength }}
-        </small>
+      <div class="form-create__description">
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea formControlName="description" matInput></textarea>
+        </mat-form-field>
+        <div class="validation" *ngIf="
+            createFormModal.get('description').touched && createFormModal.get('description').invalid
+          ">
+          <small *ngIf="createFormModal.get('description').errors.required">Enter Description</small>
+          <small *ngIf="createFormModal.get('description').errors.minlength">
+            Description must be at least
+            {{ createFormModal.get('description').errors.minlength.requiredLength }} characters. Now
+            it {{ createFormModal.get('description').errors.minlength.actualLength }}
+          </small>
+        </div>
       </div>
-    </div>
-    <div class="form-create__buttons">
-      <button
-        *ngIf="isCreateModal"
-        (click)="createBoard()"
-        [disabled]="createFormModal.invalid || submitted"
-        mat-raised-button
-      >
-        Create
-      </button>
-      <button
-        *ngIf="isUpdateModal"
-        (click)="updateBoard()"
-        [disabled]="createFormModal.invalid || submitted"
-        mat-raised-button
-      >
-        Update
-      </button>
-    </div>
-    <img
-      *ngIf="submitted"
-      class="form-create__spinner"
-      src="../../../../assets/images/spinner.svg"
-      alt="spinner"
-    />
-  </form>
+      <div class="form-create__buttons">
+        <button *ngIf="isCreateModal" (click)="createBoard()" [disabled]="createFormModal.invalid || submitted"
+          mat-raised-button>
+          Create
+        </button>
+        <button *ngIf="isUpdateModal" (click)="updateBoard()" [disabled]="createFormModal.invalid || submitted"
+          mat-raised-button>
+          Update
+        </button>
+      </div>
+      <!-- <img  class="form-create__spinner" src="../../../../assets/images/spinner.svg" alt="spinner" /> -->
+    </form>
+    <mat-progress-bar *ngIf="submitted" mode="indeterminate"></mat-progress-bar>
+  </div>
 </div>

@@ -12,7 +12,7 @@ export class ResentPipe implements PipeTransform {
         const date = new Date().getTime();
         const diff = Math.abs(date - recent);
         const dayOfMilliSeconds = 8640000;
-        return dayOfMilliSeconds < diff;
+        return dayOfMilliSeconds > diff;
       });
     }
 
