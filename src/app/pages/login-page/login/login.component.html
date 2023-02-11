@@ -1,0 +1,33 @@
+<form [formGroup]="form" class="registration">
+
+  <mat-card  class="registration__wrapper">
+    <img class="icon-user" src="../../../../assets/images/user-icon.svg" alt="user">
+    <span class="title">Log in</span>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="emailFormControl"
+             placeholder="Ex. pat@example.com">
+      <mat-error *ngIf="form.get('emailFormControl').invalid && form.get('emailFormControl').touched">
+        <span *ngIf="form.get('emailFormControl').errors.required">Enter email</span>
+        <span *ngIf="form.get('emailFormControl').errors.email">Input correct email</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your password</mat-label>
+      <input formControlName="enterPassword" matInput [type]="isHidePassword ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="isHidePassword = !isHidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidePassword">
+        <mat-icon>{{isHidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="form.get('enterPassword').invalid && form.get('enterPassword').touched">
+        <span *ngIf="form.get('enterPassword').errors.required">Enter password</span>
+        <span *ngIf="form.get('enterPassword').errors.pattern">
+          One caps letter, > 8 , one number, one of !@#$%^&*
+        </span>
+      </mat-error>
+    </mat-form-field>
+    <button [disabled]="form.invalid" mat-raised-button>Log in</button>
+  </mat-card>
+</form>
+<app-footer></app-footer>

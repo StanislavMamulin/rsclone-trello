@@ -5,10 +5,12 @@ import { RegistrationPageRoutingModule } from './registration-page-routing.modul
 import { RegistrationComponent } from './registration/registration.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SuccessModalComponent } from './success-modal/success-modal.component';
 
 @NgModule({
   declarations: [
-    RegistrationComponent
+    RegistrationComponent,
+    SuccessModalComponent
   ],
   imports: [
     CommonModule,

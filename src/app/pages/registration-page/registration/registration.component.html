@@ -1,6 +1,5 @@
 <form [formGroup]="form" class="registration">
 
-
   <mat-card  class="registration__wrapper">
     <img class="icon-user" src="../../../../assets/images/user-icon.svg" alt="user">
     <span class="title">Sign Up</span>
@@ -23,6 +22,18 @@
         <span *ngIf="form.get('lastNameControl').errors.pattern">
           Only numbers, letters, characters (3 - 15)
         </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="sexControl">
+        <mat-option  *ngFor="let gender of genders" [value]="gender.value">
+          {{gender.viewValue}}<mat-icon>{{gender.value}}</mat-icon>
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('sexControl').invalid && form.get('sexControl').touched">
+        <span *ngIf="form.get('sexControl').errors.required">Choose a gender</span>
       </mat-error>
     </mat-form-field>
 
@@ -64,8 +75,9 @@
       </mat-error>
     </mat-form-field>
 
-      <button [disabled]="form.invalid || isSubmitted" mat-raised-button>Sign Up</button>
+      <button (click)="sendForm()" [disabled]="form.invalid || isSubmitted" mat-raised-button>Sign Up</button>
       <mat-error class="isSubmitted" *ngIf="isSubmitted">Passwords mismatch</mat-error>
   </mat-card>
 </form>
+<app-success-modal *ngIf="isSendForm"></app-success-modal>
 <app-footer></app-footer>
