@@ -67,6 +67,9 @@
       >
         <span *ngIf="form.get('emailFormControl').errors.required">Enter email</span>
         <span *ngIf="form.get('emailFormControl').errors.email">Input correct email</span>
+        <span *ngIf="form.get('emailFormControl').errors.restricredEmail">
+          Email {{form.get('emailFormControl').value}} already exists
+        </span>
       </mat-error>
     </mat-form-field>
 
@@ -119,7 +122,6 @@
         </span>
       </mat-error>
     </mat-form-field>
-
     <button
       (click)="sendForm()"
       [disabled]="form.invalid || isSubmitted"
@@ -134,5 +136,5 @@
     >
   </mat-card>
 </form>
-<app-success-modal *ngIf="isSendForm"></app-success-modal>
+<app-success-modal (onCloseModal)="closeModal($event)" [isLoading]="isLoading" *ngIf="isSendForm"></app-success-modal>
 <app-footer></app-footer>

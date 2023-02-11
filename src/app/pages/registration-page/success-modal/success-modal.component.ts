@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-success-modal',
@@ -6,12 +6,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./success-modal.component.scss']
 })
 export class SuccessModalComponent implements OnInit{
-  @Output() onSendForm = new EventEmitter<boolean>();
-  isLoading:boolean = true;
+  @Input() isLoading:boolean;
+  @Output() onCloseModal = new EventEmitter<boolean>();
 
   ngOnInit(){
-    setTimeout(()=>{
-      this.isLoading = !this.isLoading;
-    },1000);
+
+  }
+
+  closeModal(){
+    this.onCloseModal.emit(false);
   }
 }
