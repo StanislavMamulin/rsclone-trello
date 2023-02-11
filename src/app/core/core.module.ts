@@ -9,7 +9,12 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
-  imports: [CommonModule, RouterModule, FormsModule, SharedModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    SharedModule,
+  ],
   exports: [HeaderComponent, FooterComponent],
   providers: [BoardService],
 })
