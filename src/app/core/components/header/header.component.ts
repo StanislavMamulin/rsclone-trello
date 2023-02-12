@@ -31,7 +31,7 @@ export class HeaderComponent {
     this.getBoards();
   }
 
-  updateBoards(){
+  updateBoards() {
     this.getBoards();
   }
 

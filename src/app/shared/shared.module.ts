@@ -18,7 +18,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [ChosenPipe, ResentPipe, SortByParamsPipe, SearchPipePipe],
+  declarations: [
+    ChosenPipe,
+    ResentPipe,
+    SortByParamsPipe,
+    SearchPipePipe,
+  ],
   imports: [
     CommonModule,
     FormsModule,

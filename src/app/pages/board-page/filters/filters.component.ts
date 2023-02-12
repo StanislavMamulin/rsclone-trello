@@ -16,12 +16,16 @@ interface ISort {
 })
 export class FiltersComponent implements OnInit {
   @Output() onShowFavorite = new EventEmitter<boolean>();
+
   @Output() onShowDate = new EventEmitter<boolean>();
+
   @Output() onSelectValue = new EventEmitter<string>();
 
-  showFavorite: boolean = false;
-  showDate: boolean = false;
-  selectValue: string = '';
+  showFavorite = false;
+
+  showDate = false;
+
+  selectValue = '';
 
   sorts: ISort[] = [
     { value: 'asc', viewValue: 'Date ASC' },
@@ -35,9 +39,11 @@ export class FiltersComponent implements OnInit {
   toShowFavorite = (showFavorite: boolean) => {
     this.onShowFavorite.emit(showFavorite);
   };
+
   toShowDate = (showDate: boolean) => {
     this.onShowDate.emit(showDate);
   };
+
   toSelectValue = (selectValue: string) => {
     this.onSelectValue.emit(selectValue);
   };

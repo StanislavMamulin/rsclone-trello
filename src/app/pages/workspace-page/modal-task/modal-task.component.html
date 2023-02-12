@@ -1,9 +1,12 @@
-<div class="wrapper">
+<div
+  [formGroup]="formTask"
+  class="wrapper"
+>
   <section class="title-wrapper">
     <h2 class="title">
       <mat-icon>today</mat-icon>
       <input
-        [value]="data.task.nameTask"
+        formControlName="nameTask"
         type="text"
       />
     </h2>
@@ -15,7 +18,7 @@
     <h3 class="description"><mat-icon>subject</mat-icon>Description</h3>
     <textarea
       class="textarea"
-      [placeholder]="data.task.descriptionTask"
+      formControlName="descriptionTask"
     ></textarea>
   </section>
   <section class="checklist-wrapper">
@@ -27,6 +30,13 @@
   </section>
   <div class="close-buttons">
     <button (click)="closeModal()">Close</button>
-    <button [mat-dialog-close]="data">Apply</button>
+    <button
+      class="apply"
+      (click)="updateTask()"
+      [disabled]="formTask.invalid"
+      [mat-dialog-close]="data"
+    >
+      Apply
+    </button>
   </div>
 </div>

@@ -14,10 +14,13 @@ import { ModalTaskComponent } from 'src/app/pages/workspace-page/modal-task/moda
 })
 export class ColumnComponent implements OnInit {
   @Input() column: IColumn;
+
   @Input() currentBoard: IBoard;
+
   @Input() getConnectedList: () => string[];
 
   tasks: ITask[];
+
   showAddTaskControl = false;
 
   constructor(private columnTaskService: ColumnTaskService, public dialog: MatDialog) {}

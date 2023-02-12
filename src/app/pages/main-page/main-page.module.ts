@@ -7,6 +7,10 @@ import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   declarations: [MainComponent],
-  imports: [CommonModule, MainPageRoutingModule, CoreModule],
+  imports: [
+    CommonModule,
+    MainPageRoutingModule,
+    CoreModule,
+  ],
 })
 export class MainPageModule {}

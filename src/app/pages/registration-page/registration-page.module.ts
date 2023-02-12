@@ -7,14 +7,12 @@ import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-  declarations: [
-    RegistrationComponent
-  ],
+  declarations: [RegistrationComponent],
   imports: [
     CommonModule,
     RegistrationPageRoutingModule,
     CoreModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
 export class RegistrationPageModule { }
