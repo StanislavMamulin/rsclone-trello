@@ -6,9 +6,10 @@ import { RegistrationComponent } from './registration/registration.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SuccessModalComponent } from './success-modal/success-modal.component';
+import { SnackComponent } from './snack/snack.component';
 
 @NgModule({
-  declarations: [RegistrationComponent, SuccessModalComponent],
+  declarations: [RegistrationComponent, SuccessModalComponent, SnackComponent],
   imports: [
     CommonModule,
     RegistrationPageRoutingModule,
