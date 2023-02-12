@@ -39,12 +39,12 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(){
 
     this.form = new FormGroup({
-      firstNameControl: new FormControl('Zheka', [Validators.required,Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
-      lastNameControl: new FormControl('Grushevskiy', [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
-      sexControl: new FormControl('man',Validators.required),
-      emailFormControl: new FormControl('grushevskiy@mail.ru', [Validators.required,Validators.email, this.restricredEmail]),
-      enterPassword: new FormControl('Usdfsdf3kdk@',[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
-      repeatPassword: new FormControl('Usdfsdf3kdk@',[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
+      firstNameControl: new FormControl(null, [Validators.required,Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
+      lastNameControl: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
+      sexControl: new FormControl(null,Validators.required),
+      emailFormControl: new FormControl(null, [Validators.required,Validators.email, this.restricredEmail]),
+      enterPassword: new FormControl(null,[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
+      repeatPassword: new FormControl(null,[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
     })
     this.updateSubmitted();
   }
@@ -68,8 +68,8 @@ export class RegistrationComponent implements OnInit {
     this.isSendForm = close;
     this.isLoading = !close;
     this.router.navigate(['/login']);
-    this.form.reset();
     document.body.style.overflow = 'auto';
+    this.form.reset();
   }
   openSnackBar(){
     this.snackBar.openFromComponent(SnackComponent,{
