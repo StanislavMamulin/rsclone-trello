@@ -20,7 +20,7 @@ export class RegistrationComponent implements OnInit {
   isSubmitted:boolean = true;
   isSendForm: boolean = false;
   isLoading: boolean = false;
-  email:string = 'email@mail.ru'
+  email:string[] = ['email@mail.ru','m2@mail.ru'];
   form: any;
 
   genders: IGender[] = [
@@ -53,7 +53,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   restricredEmail = (control: FormControl):{[key:string]:boolean}|null => {
-    if(this.email === control.value){
+    if(this.email.includes(control.value)){
       return {restricredEmail:true}
     }
     return null;
