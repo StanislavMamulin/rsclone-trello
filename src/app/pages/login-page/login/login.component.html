@@ -1,6 +1,7 @@
 <form
   [formGroup]="form"
   class="registration"
+  (ngSubmit)="submit()"
 >
   <mat-card class="registration__wrapper">
     <img
@@ -19,10 +20,10 @@
         placeholder="Ex. pat@example.com"
       />
       <mat-error
-        *ngIf="form.get('emailFormControl').invalid && form.get('emailFormControl').touched"
+        *ngIf="form.get('emailFormControl')?.invalid && form.get('emailFormControl')?.touched"
       >
-        <span *ngIf="form.get('emailFormControl').errors.required">Enter email</span>
-        <span *ngIf="form.get('emailFormControl').errors.email">Input correct email</span>
+        <span *ngIf="form.get('emailFormControl')?.errors?.required">Enter email</span>
+        <span *ngIf="form.get('emailFormControl')?.errors?.email">Input correct email</span>
       </mat-error>
     </mat-form-field>
 
@@ -42,9 +43,9 @@
       >
         <mat-icon>{{ isHidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
-      <mat-error *ngIf="form.get('enterPassword').invalid && form.get('enterPassword').touched">
-        <span *ngIf="form.get('enterPassword').errors.required">Enter password</span>
-        <span *ngIf="form.get('enterPassword').errors.pattern">
+      <mat-error *ngIf="form.get('enterPassword')?.invalid && form.get('enterPassword')?.touched">
+        <span *ngIf="form.get('enterPassword')?.errors?.required">Enter password</span>
+        <span *ngIf="form.get('enterPassword')?.errors?.pattern">
           One caps letter, > 8 , one number, one of !@#$%^&*
         </span>
       </mat-error>
