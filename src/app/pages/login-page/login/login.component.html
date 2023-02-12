@@ -51,11 +51,14 @@
       </mat-error>
     </mat-form-field>
     <button
-      [disabled]="form.invalid"
+      [disabled]="form.invalid || submitted"
       mat-raised-button
     >
       Log in
     </button>
+    <mat-error *ngIf="invalidCredentials">
+      <span>Invalid login or password</span>
+    </mat-error>
   </mat-card>
 </form>
 <app-footer></app-footer>
