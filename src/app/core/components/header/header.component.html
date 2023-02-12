@@ -82,7 +82,7 @@
       <button (click)="openLoginPage()">log in</button>
     </div>
     <div class="authorization" *ngIf="auth.isAuthenticated()">
-      <button (click)="logOut()">log out</button>
+      <button (click)="openDialog('500ms', '500ms')">log out</button>
     </div>
   </div>
 </header>
