@@ -39,6 +39,21 @@
       </mat-error>
     </mat-form-field>
 
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="sexControl">
+        <mat-option
+          *ngFor="let gender of genders"
+          [value]="gender.value"
+        >
+          {{ gender.viewValue }}<mat-icon>{{ gender.value }}</mat-icon>
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('sexControl').invalid && form.get('sexControl').touched">
+        <span *ngIf="form.get('sexControl').errors.required">Choose a gender</span>
+      </mat-error>
+    </mat-form-field>
+
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input
@@ -52,6 +67,9 @@
       >
         <span *ngIf="form.get('emailFormControl').errors.required">Enter email</span>
         <span *ngIf="form.get('emailFormControl').errors.email">Input correct email</span>
+        <span *ngIf="form.get('emailFormControl').errors.restricredEmail">
+          Email {{ form.get('emailFormControl').value }} already exists
+        </span>
       </mat-error>
     </mat-form-field>
 
@@ -104,8 +122,8 @@
         </span>
       </mat-error>
     </mat-form-field>
-
     <button
+      (click)="sendForm()"
       [disabled]="form.invalid || isSubmitted"
       mat-raised-button
     >
@@ -118,4 +136,9 @@
     >
   </mat-card>
 </form>
+<app-success-modal
+  (onCloseModal)="closeModal($event)"
+  [isLoading]="isLoading"
+  *ngIf="isSendForm"
+></app-success-modal>
 <app-footer></app-footer>

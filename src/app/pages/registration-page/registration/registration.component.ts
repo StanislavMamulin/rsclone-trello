@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/modules/services/user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { SnackComponent } from '../snack/snack.component';
+
+interface IGender {
+  value:string,
+  viewValue: string
+}
 
 @Component({
   selector: 'app-registration',
@@ -9,23 +18,44 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 export class RegistrationComponent implements OnInit {
-  isHidePassword = true;
 
-  isSubmitted = true;
-
+  isHidePassword:boolean = true;
+  isSubmitted:boolean = true;
+  isSendForm: boolean = false;
+  isLoading: boolean = false;
+  email:string[] = [];
+  durationInSeconds: number = 5;
   form: any;
 
-  ngOnInit() {
+  genders: IGender[] = [
+    {value: 'man', viewValue: 'Man'},
+    {value: 'woman', viewValue: 'Woman'},
+  ];
+
+  constructor(
+    private UserService: UserService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ){}
+  ngOnInit(){
+
     this.form = new FormGroup({
-      firstNameControl: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
-      lastNameControl: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
-      emailFormControl: new FormControl('', [Validators.required, Validators.email]),
-      enterPassword: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
-      repeatPassword: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
-    });
+      firstNameControl: new FormControl(null, [Validators.required,Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
+      lastNameControl: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
+      sexControl: new FormControl(null,Validators.required),
+      emailFormControl: new FormControl(null, [Validators.required,Validators.email, this.restricredEmail]),
+      enterPassword: new FormControl(null,[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
+      repeatPassword: new FormControl(null,[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
+    })
     this.updateSubmitted();
   }
 
+  restricredEmail = (control: FormControl):{[key:string]:boolean}|null => {
+    if(this.email.includes(control.value)){
+      return {restricredEmail:true}
+    }
+    return null;
+  }
 
   updateSubmitted() {
     if (this.form.get('enterPassword')?.value === this.form.get('repeatPassword')?.value) {
@@ -34,5 +64,41 @@ export class RegistrationComponent implements OnInit {
       this.isSubmitted = true;
     }
   }
+
+  closeModal(close:boolean){
+    this.isSendForm = close;
+    this.isLoading = !close;
+    this.router.navigate(['/login']);
+    document.body.style.overflow = 'auto';
+    this.form.reset();
+  }
+  openSnackBar(){
+    this.snackBar.openFromComponent(SnackComponent,{
+      duration: this.durationInSeconds * 1000,
+    });
+  }
+
+  sendForm(){
+    this.isLoading=true;
+    this.isSendForm=true;
+    document.body.style.overflow = 'hidden';
+    this.UserService.userRegistartion({
+      firstName: this.form.get('firstNameControl').value,
+      lastName: this.form.get('lastNameControl').value,
+      gender: this.form.get('sexControl').value,
+      email: this.form.get('emailFormControl').value,
+      password: this.form.get('enterPassword').value,
+    }).subscribe((res)=>{
+      this.isLoading = false;
+      this.email.push(res.email);
+    },(err)=>{
+        this.openSnackBar();
+        this.form.controls['emailFormControl'].setValue(null);
+        this.isSendForm = false;
+        this.isLoading = true;
+        document.body.style.overflow = 'auto';
+    })
+  }
+
 }
 

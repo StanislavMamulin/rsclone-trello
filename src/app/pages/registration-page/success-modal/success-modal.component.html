@@ -1,0 +1,14 @@
+<mat-card  class="modal-success">
+  <mat-card-header class="modal-success__header">
+    <mat-card-title *ngIf="isLoading">Please wait</mat-card-title>
+    <mat-card-title *ngIf="!isLoading">You successfully registered</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+  </mat-card-content>
+  <mat-card-actions>
+    <button [disabled]="isLoading" (click)="closeModal()" class="modal-success__button" mat-raised-button color="primary">Ok</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
