@@ -38,6 +38,7 @@ export class RegistrationComponent implements OnInit {
     this.isLoading = !close;
     this.router.navigate(['/login']);
     this.form.reset();
+    document.body.style.overflow = 'auto';
   }
 
   ngOnInit(){
@@ -79,12 +80,16 @@ export class RegistrationComponent implements OnInit {
       password: this.form.get('enterPassword').value,
     }).subscribe(()=>{
       this.isLoading = false;
+      document.body.style.overflow = 'hidden';
     },(err)=>{
-      alert(`Email ${this.form.get('emailFormControl').value} already exists`);
-      this.form.reset();
-      this.isSendForm = false;
-      this.isLoading = true;
+
+        alert(`Email ${this.form.get('emailFormControl').value} already exists`);
+        this.form.controls['emailFormControl'].setValue(null);
+        this.isSendForm = false;
+        this.isLoading = true;
+        console.log(err);
     })
   }
+
 }
 

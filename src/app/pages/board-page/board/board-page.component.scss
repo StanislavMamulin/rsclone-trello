@@ -3,6 +3,7 @@
   height: 100%;
   padding-top: 10px;
   padding-left: 10px;
+  padding-right: 10px;
 
   .container {
     display: flex;
@@ -24,7 +25,6 @@
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 10px;
-
   }
 
   &__create {
@@ -38,7 +38,7 @@
     justify-content: center;
     font-size: 28px;
     color: rgb(107, 103, 103, 0.7);
-    background: whitesmoke;
+    background: #f0e9e9;
 
     span {
       text-align: center;
@@ -133,6 +133,8 @@
   }
   .board-page {
     width: 100%;
+    padding-left: 0;
+    padding-right: 0;
     &__wrapper {
       width: 95%;
     }
