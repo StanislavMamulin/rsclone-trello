@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/modules/services/user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { SnackComponent } from '../snack/snack.component';
 
 interface IGender {
   value:string,
@@ -20,7 +22,8 @@ export class RegistrationComponent implements OnInit {
   isSubmitted:boolean = true;
   isSendForm: boolean = false;
   isLoading: boolean = false;
-  email:string = 'email@mail.ru'
+  email:string[] = [];
+  durationInSeconds: number = 5;
   form: any;
 
   genders: IGender[] = [
@@ -31,29 +34,23 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private UserService: UserService,
     private router: Router,
+    private snackBar: MatSnackBar
   ){}
-
-  closeModal(close:boolean){
-    this.isSendForm = close;
-    this.isLoading = !close;
-    this.router.navigate(['/login']);
-    this.form.reset();
-  }
-
   ngOnInit(){
+
     this.form = new FormGroup({
-      firstNameControl: new FormControl('', [Validators.required,Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
-      lastNameControl: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
-      sexControl: new FormControl('',Validators.required),
-      emailFormControl: new FormControl('', [Validators.required,Validators.email, this.restricredEmail]),
-      enterPassword: new FormControl('',[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
-      repeatPassword: new FormControl('',[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
+      firstNameControl: new FormControl(null, [Validators.required,Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
+      lastNameControl: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
+      sexControl: new FormControl(null,Validators.required),
+      emailFormControl: new FormControl(null, [Validators.required,Validators.email, this.restricredEmail]),
+      enterPassword: new FormControl(null,[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
+      repeatPassword: new FormControl(null,[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
     })
     this.updateSubmitted();
   }
 
   restricredEmail = (control: FormControl):{[key:string]:boolean}|null => {
-    if(this.email === control.value){
+    if(this.email.includes(control.value)){
       return {restricredEmail:true}
     }
     return null;
@@ -67,24 +64,40 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  closeModal(close:boolean){
+    this.isSendForm = close;
+    this.isLoading = !close;
+    this.router.navigate(['/login']);
+    document.body.style.overflow = 'auto';
+    this.form.reset();
+  }
+  openSnackBar(){
+    this.snackBar.openFromComponent(SnackComponent,{
+      duration: this.durationInSeconds * 1000,
+    });
+  }
+
   sendForm(){
     this.isLoading=true;
     this.isSendForm=true;
-
+    document.body.style.overflow = 'hidden';
     this.UserService.userRegistartion({
       firstName: this.form.get('firstNameControl').value,
       lastName: this.form.get('lastNameControl').value,
       gender: this.form.get('sexControl').value,
       email: this.form.get('emailFormControl').value,
       password: this.form.get('enterPassword').value,
-    }).subscribe(()=>{
+    }).subscribe((res)=>{
       this.isLoading = false;
+      this.email.push(res.email);
     },(err)=>{
-      alert(`Email ${this.form.get('emailFormControl').value} already exists`);
-      this.form.reset();
-      this.isSendForm = false;
-      this.isLoading = true;
+        this.openSnackBar();
+        this.form.controls['emailFormControl'].setValue(null);
+        this.isSendForm = false;
+        this.isLoading = true;
+        document.body.style.overflow = 'auto';
     })
   }
+
 }
 

@@ -16,9 +16,7 @@
             | SortByParams : selectValue
         " (onDelete)="deleteBoard($event)" [board]="board" (onUpdate)="openUpdateModal($event)"
         (onUpdateStar)="updateStar($event)"></app-board>
-      <div class="spinner">
-        <mat-spinner *ngIf="isLoading"></mat-spinner>
-      </div>
+        <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
     </div>
   </div>
 </div>
