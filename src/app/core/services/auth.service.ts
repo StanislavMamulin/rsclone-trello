@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { LoginParams, UserResponse } from 'src/app/shared/models/user.model';
 import { BASE_URL } from '../constants';
@@ -13,7 +14,10 @@ const TOKEN_KEY = 'token';
 export class AuthService {
   private loginUrl = `${BASE_URL}/api/login`;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router
+  ) { }
 
   public login(loginParams: LoginParams): Observable<UserResponse > {
     return this.httpClient.post<UserResponse>(this.loginUrl, loginParams)
@@ -24,6 +28,7 @@ export class AuthService {
 
   public logout() {
     this.resetToken();
+    this.router.navigate(['/main']);
   }
 
   private setToken(response: UserResponse) {
@@ -31,7 +36,7 @@ export class AuthService {
 
     localStorage.setItem(TOKEN_EXP_KEY, new Date(expiresIn).toString());
     if (token) localStorage.setItem('token', token);
-      
+
   }
 
   private resetToken() {
