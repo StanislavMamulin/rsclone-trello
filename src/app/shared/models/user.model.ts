@@ -16,6 +16,12 @@ IUser,
 'firstName' | 'lastName' | 'email' | 'password' | 'gender'
 >;
 
+type ExpiresIn = {
+  expiresIn: string;
+};
+
+export type UserResponse = Pick<IUser, 'email' | 'id' | 'token'> & ExpiresIn;
+
 export type LoginParams = Pick<IUser, 'email' | 'password'>;
 
 export enum AccessLevel {
