@@ -2,26 +2,27 @@
   display: flex;
   flex-direction: column;
   width: 500px;
-  height: 450px;
-  border: 1px solid black;
-  background: whitesmoke;
   overflow-y: auto;
   border-radius: 4px;
   padding: 1rem;
   padding-left: 2.5rem;
+  margin: 10px auto 0;
 }
 
 .title-wrapper .title {
   position: relative;
-  left: -4px;
   margin-bottom: 0;
 }
 
 .title-wrapper .title mat-icon {
   position: absolute;
-  left: -30px;
+  left: -32px;
   top: 3px;
-  transform: scale(0.9);
+}
+
+.title-wrapper .title input {
+  border: none;
+  font-size: 24px;
 }
 
 .title-wrapper p span {
@@ -35,18 +36,14 @@
 
 .description-wrapper .description mat-icon {
   position: absolute;
-  left: -30px;
-  transform: scale(0.9);
+  left: -32px;
 }
 
-.description-wrapper input {
-  height: 40px;
+.description-wrapper textarea {
+  min-height: 60px;
   width: 100%;
   border: none;
-}
-
-.description-wrapper input::placeholder {
-  line-height: 1.2em;
+  background: whitesmoke;
 }
 
 .checklist-wrapper {
@@ -60,8 +57,7 @@
 
 .checklist-wrapper h4 mat-icon {
   position: absolute;
-  left: -30px;
-  transform: scale(0.9);
+  left: -32px;
 }
 
 .checklist-wrapper p {
@@ -71,10 +67,19 @@
 }
 
 .checklist-wrapper button {
-  background: #d4d4d4;
+  background: whitesmoke;
   border: none;
   padding: 6px 12px;
   border-radius: 3px;
   letter-spacing: 1px;
-  margin: 1em 0;
+  margin-bottom: 1.5rem;
+}
+
+.close-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.close-buttons button {
+  text-transform: uppercase;
 }

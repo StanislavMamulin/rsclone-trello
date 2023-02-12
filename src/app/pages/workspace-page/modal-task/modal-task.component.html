@@ -1,17 +1,32 @@
 <div class="wrapper">
   <section class="title-wrapper">
-    <h2 class="title"><mat-icon>dvr</mat-icon>Task modal</h2>
-    <p>in column <span>need to do</span></p>
+    <h2 class="title">
+      <mat-icon>today</mat-icon>
+      <input
+        [value]="data.task.nameTask"
+        type="text"
+      />
+    </h2>
+    <p>
+      in column <span>{{ data.column.nameColumn }}</span>
+    </p>
   </section>
   <section class="description-wrapper">
-    <h3 class="description"><mat-icon>description</mat-icon>Description</h3>
-    <input type="text" />
+    <h3 class="description"><mat-icon>subject</mat-icon>Description</h3>
+    <textarea
+      class="textarea"
+      [placeholder]="data.task.descriptionTask"
+    ></textarea>
   </section>
   <section class="checklist-wrapper">
     <h4><mat-icon>check_box</mat-icon>Check-list:</h4>
-    <p><mat-checkbox formControlName="first"> first </mat-checkbox></p>
-    <p><mat-checkbox formControlName="second"> second </mat-checkbox></p>
-    <p><mat-checkbox formControlName="third"> third </mat-checkbox></p>
+    <p><mat-checkbox> first </mat-checkbox></p>
+    <p><mat-checkbox> second </mat-checkbox></p>
+    <p><mat-checkbox> third </mat-checkbox></p>
     <button>Add element</button>
   </section>
+  <div class="close-buttons">
+    <button (click)="closeModal()">Close</button>
+    <button [mat-dialog-close]="data">Apply</button>
+  </div>
 </div>

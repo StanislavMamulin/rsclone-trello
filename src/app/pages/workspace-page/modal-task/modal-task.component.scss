@@ -2,25 +2,25 @@
   display: flex;
   flex-direction: column;
   width: 500px;
-  height: 450px;
-  border: 1px solid black;
-  background: whitesmoke;
   overflow-y: auto;
   border-radius: 4px;
   padding: 1rem;
   padding-left: 2.5rem;
+  margin: 10px auto 0;
 }
 
 .title-wrapper {
   .title {
     position: relative;
-    left: -4px;
     margin-bottom: 0;
     mat-icon {
       position: absolute;
-      left: -30px;
+      left: -32px;
       top: 3px;
-      transform: scale(0.9);
+    }
+    input {
+      border: none;
+      font-size: 24px;
     }
   }
   p {
@@ -36,17 +36,14 @@
     margin: 0.5rem 0;
     mat-icon {
       position: absolute;
-      left: -30px;
-      transform: scale(0.9);
+      left: -32px;
     }
   }
-  input {
-    height: 40px;
+  textarea {
+    min-height: 60px;
     width: 100%;
     border: none;
-    &::placeholder {
-      line-height: 1.2em;
-    }
+    background: rgb(245, 245, 245);
   }
 }
 
@@ -57,8 +54,7 @@
     position: relative;
     mat-icon {
       position: absolute;
-      left: -30px;
-      transform: scale(0.9);
+      left: -32px;
     }
   }
   p {
@@ -67,11 +63,19 @@
     left: -10px;
   }
   button {
-    background: rgb(212, 212, 212);
+    background: rgb(245, 245, 245);
     border: none;
     padding: 6px 12px;
     border-radius: 3px;
     letter-spacing: 1px;
-    margin: 1em 0;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.close-buttons {
+  display: flex;
+  justify-content: space-around;
+  button {
+    text-transform: uppercase;
   }
 }

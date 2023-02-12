@@ -9,8 +9,9 @@
     [cdkDropListConnectedTo]="getConnectedToList(column.idColumn)"
   >
     <app-task
-      class="task-list__item"
       *ngFor="let task of tasks"
+      (click)="openModal(task)"
+      class="task-list__item"
       [taskInfo]="task"
       cdkDrag
     ></app-task>

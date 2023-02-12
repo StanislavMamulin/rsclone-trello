@@ -14,15 +14,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [
-    ChosenPipe,
-    ResentPipe,
-    SortByParamsPipe,
-    SearchPipePipe,
-  ],
+  declarations: [ChosenPipe, ResentPipe, SortByParamsPipe, SearchPipePipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -33,7 +29,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule,
   ],
   exports: [
     FormsModule,
@@ -50,7 +47,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCardModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule,
   ],
 })
 export class SharedModule {}
