@@ -8,9 +8,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ColumnTaskService } from 'src/app/modules/column-task/column-task.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AddControlsModule } from 'src/app/modules/add-controls/add-controls.module';
+import { ModalTaskComponent } from './modal-task/modal-task.component';
 
 @NgModule({
-  declarations: [WorkspaceComponent],
+  declarations: [WorkspaceComponent, ModalTaskComponent],
   imports: [
     CommonModule,
     WorkspaceRoutingModule,

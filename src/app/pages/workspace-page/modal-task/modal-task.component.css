@@ -1,0 +1,85 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  overflow-y: auto;
+  border-radius: 4px;
+  padding: 1rem;
+  padding-left: 2.5rem;
+  margin: 10px auto 0;
+}
+
+.title-wrapper .title {
+  position: relative;
+  margin-bottom: 0;
+}
+
+.title-wrapper .title mat-icon {
+  position: absolute;
+  left: -32px;
+  top: 3px;
+}
+
+.title-wrapper .title input {
+  border: none;
+  font-size: 24px;
+}
+
+.title-wrapper p span {
+  text-decoration: underline;
+}
+
+.description-wrapper .description {
+  position: relative;
+  margin: 0.5rem 0;
+}
+
+.description-wrapper .description mat-icon {
+  position: absolute;
+  left: -32px;
+}
+
+.description-wrapper textarea {
+  min-height: 60px;
+  width: 100%;
+  border: none;
+  background: whitesmoke;
+}
+
+.checklist-wrapper {
+  margin-top: 2rem;
+}
+
+.checklist-wrapper h4 {
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.checklist-wrapper h4 mat-icon {
+  position: absolute;
+  left: -32px;
+}
+
+.checklist-wrapper p {
+  margin: 0;
+  position: relative;
+  left: -10px;
+}
+
+.checklist-wrapper button {
+  background: whitesmoke;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+
+.close-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.close-buttons button {
+  text-transform: uppercase;
+}

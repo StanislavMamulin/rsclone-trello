@@ -1,0 +1,81 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  overflow-y: auto;
+  border-radius: 4px;
+  padding: 1rem;
+  padding-left: 2.5rem;
+  margin: 10px auto 0;
+}
+
+.title-wrapper {
+  .title {
+    position: relative;
+    margin-bottom: 0;
+    mat-icon {
+      position: absolute;
+      left: -32px;
+      top: 3px;
+    }
+    input {
+      border: none;
+      font-size: 24px;
+    }
+  }
+  p {
+    span {
+      text-decoration: underline;
+    }
+  }
+}
+
+.description-wrapper {
+  .description {
+    position: relative;
+    margin: 0.5rem 0;
+    mat-icon {
+      position: absolute;
+      left: -32px;
+    }
+  }
+  textarea {
+    min-height: 60px;
+    width: 100%;
+    border: none;
+    background: rgb(245, 245, 245);
+  }
+}
+
+.checklist-wrapper {
+  margin-top: 2rem;
+  h4 {
+    margin-bottom: 0.5rem;
+    position: relative;
+    mat-icon {
+      position: absolute;
+      left: -32px;
+    }
+  }
+  p {
+    margin: 0;
+    position: relative;
+    left: -10px;
+  }
+  button {
+    background: rgb(245, 245, 245);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.close-buttons {
+  display: flex;
+  justify-content: space-around;
+  button {
+    text-transform: uppercase;
+  }
+}

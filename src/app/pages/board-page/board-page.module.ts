@@ -18,7 +18,7 @@ import { CoreModule } from 'src/app/core/core.module';
     BoardModule,
     WorkspaceModule,
     SharedModule,
-    CoreModule
+    CoreModule,
   ],
   providers: [BoardService],
 })

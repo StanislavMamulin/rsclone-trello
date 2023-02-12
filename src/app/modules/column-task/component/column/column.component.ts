@@ -4,6 +4,8 @@ import { ColumnTaskService } from '../../column-task.service';
 import { IColumn } from '../../model/column.interface';
 import { IMovedTask, ITask } from '../../model/task.interface';
 import { IBoard } from 'src/app/modules/board/model/Board.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalTaskComponent } from 'src/app/pages/workspace-page/modal-task/modal-task.component';
 
 @Component({
   selector: 'app-column',
@@ -12,13 +14,16 @@ import { IBoard } from 'src/app/modules/board/model/Board.model';
 })
 export class ColumnComponent implements OnInit {
   @Input() column: IColumn;
+
   @Input() currentBoard: IBoard;
+
   @Input() getConnectedList: () => string[];
 
   tasks: ITask[];
+
   showAddTaskControl = false;
 
-  constructor(private columnTaskService: ColumnTaskService) {}
+  constructor(private columnTaskService: ColumnTaskService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.tasks = this.column.tasks;
@@ -67,5 +72,20 @@ export class ColumnComponent implements OnInit {
     const possibleConnectionIds = this.getConnectedList();
 
     return possibleConnectionIds.filter((id) => id !== currentColumnId);
+  }
+
+  openModal(task: ITask): void {
+    const dialogRef = this.dialog.open(ModalTaskComponent, {
+      data: { task: task, column: this.column },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.tasks.forEach((task) => {
+          if (task.idTask == result.task.idTask) {
+            task = result.task;
+          }
+        });
+      }
+    });
   }
 }

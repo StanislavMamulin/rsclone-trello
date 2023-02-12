@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit{
     this.isAuth = this.auth.isAuthenticated();
   }
 
-  updateBoards(){
+  updateBoards() {
     this.getBoards();
   }
 

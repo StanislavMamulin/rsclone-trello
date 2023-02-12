@@ -13,11 +13,12 @@ interface IGender {
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
 })
 
 
 export class RegistrationComponent implements OnInit {
+
   isHidePassword:boolean = true;
   isSubmitted:boolean = true;
   isSendForm: boolean = false;
@@ -56,8 +57,8 @@ export class RegistrationComponent implements OnInit {
     return null;
   }
 
-  updateSubmitted(){
-    if(this.form.get('enterPassword')?.value === this.form.get('repeatPassword')?.value){
+  updateSubmitted() {
+    if (this.form.get('enterPassword')?.value === this.form.get('repeatPassword')?.value) {
       this.isSubmitted = false;
     } else {
       this.isSubmitted = true;

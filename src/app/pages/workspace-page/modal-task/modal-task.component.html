@@ -1,0 +1,42 @@
+<div
+  [formGroup]="formTask"
+  class="wrapper"
+>
+  <section class="title-wrapper">
+    <h2 class="title">
+      <mat-icon>today</mat-icon>
+      <input
+        formControlName="nameTask"
+        type="text"
+      />
+    </h2>
+    <p>
+      in column <span>{{ data.column.nameColumn }}</span>
+    </p>
+  </section>
+  <section class="description-wrapper">
+    <h3 class="description"><mat-icon>subject</mat-icon>Description</h3>
+    <textarea
+      class="textarea"
+      formControlName="descriptionTask"
+    ></textarea>
+  </section>
+  <section class="checklist-wrapper">
+    <h4><mat-icon>check_box</mat-icon>Check-list:</h4>
+    <p><mat-checkbox> first </mat-checkbox></p>
+    <p><mat-checkbox> second </mat-checkbox></p>
+    <p><mat-checkbox> third </mat-checkbox></p>
+    <button>Add element</button>
+  </section>
+  <div class="close-buttons">
+    <button (click)="closeModal()">Close</button>
+    <button
+      class="apply"
+      (click)="updateTask()"
+      [disabled]="formTask.invalid"
+      [mat-dialog-close]="data"
+    >
+      Apply
+    </button>
+  </div>
+</div>
