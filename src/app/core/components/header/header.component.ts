@@ -5,6 +5,7 @@ import { BoardService } from 'src/app/modules/board/board-service.service';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalLogOutComponent } from '../modal-log-out/modal-log-out.component';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,12 @@ export class HeaderComponent implements OnInit {
     private boardService: BoardService,
     public auth: AuthService,
     public dialog: MatDialog,
+    private translocoService: TranslocoService
   ) {}
+
+  switchLang(){
+    this.translocoService.setActiveLang('ru');
+  }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(ModalLogOutComponent, {

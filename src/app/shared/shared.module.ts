@@ -18,6 +18,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TranslocoRootModule } from '../transloco-root.module';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatProgressBarModule,
     MatSnackBarModule,
     MatDialogModule,
+    TranslocoRootModule,
   ],
   exports: [
     FormsModule,
@@ -60,6 +63,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatProgressBarModule,
     MatSnackBarModule,
     MatDialogModule,
+    TranslocoRootModule
   ],
 })
 export class SharedModule {}

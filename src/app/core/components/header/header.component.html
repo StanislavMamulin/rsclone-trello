@@ -1,6 +1,7 @@
 <header>
   <div class="container">
     <div class="trello-logo">
+      <button (click)="switchLang()">switch</button>
       <button
         (click)="openMainPage()"
         class="main-btn"
@@ -30,7 +31,7 @@
             fill="white"
           ></path>
         </svg>
-        <span>boards</span>
+        <span *transloco="let t">{{t('header.board')}}</span>
       </button>
     </div>
     <div
