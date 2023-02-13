@@ -20,6 +20,9 @@
 .column__title {
   margin-bottom: 0;
   padding-left: 4px;
+  word-wrap: break-word;
+  width: 100%;
+  overflow: auto;
 }
 
 .column__title_edit {

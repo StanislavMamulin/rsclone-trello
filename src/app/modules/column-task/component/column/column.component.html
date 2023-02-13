@@ -7,7 +7,7 @@
     >
       {{ column.nameColumn }}
     </h2>
-    <input
+    <textarea
       class="column__title_edit"
       matInput
       *ngIf="isShowEditColumnTitle"
@@ -16,7 +16,10 @@
       [value]="column.nameColumn"
       #titleInput
       [(ngModel)]="column.nameColumn"
-    />
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="7"
+    ></textarea>
     <div class="column__menu">
       <mat-icon>more_horiz</mat-icon>
     </div>
