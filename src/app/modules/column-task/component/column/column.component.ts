@@ -62,7 +62,7 @@ export class ColumnComponent implements OnInit {
 
   addNewTaskHandler(title: string) {
     this.columnTaskService
-      .createTaskByColumnId(this.column.idColumn, { nameTask: title, descriptionTask: '' })
+      .createTaskByColumnId(this.column.idColumn, { nameTask: title, descriptionTask: '', checkLists: [] })
       .subscribe((newTask: ITask) => {
         this.tasks.push(newTask);
       });
