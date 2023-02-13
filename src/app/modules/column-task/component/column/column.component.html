@@ -1,5 +1,24 @@
 <div class="column-container">
-  <h2 class="column__title">{{ column.nameColumn }}</h2>
+  <div class="column__header">
+    <h2
+      class="column__title"
+      *ngIf="!isShowEditColumnTitle"
+      (click)="showEditColumnTitle()"
+    >
+      {{ column.nameColumn }}
+    </h2>
+    <input
+      matInput
+      *ngIf="isShowEditColumnTitle"
+      (blur)="hideEditColumnTitle(column)"
+      [value]="column.nameColumn"
+      #titleInput
+      [(ngModel)]="column.nameColumn"
+    />
+    <div class="column__menu">
+      <mat-icon>more_horiz</mat-icon>
+    </div>
+  </div>
   <div
     id="{{ column.idColumn }}"
     class="task-list"

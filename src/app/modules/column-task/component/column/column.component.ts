@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, AfterViewInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ColumnTaskService } from '../../column-task.service';
 import { IColumn } from '../../model/column.interface';
@@ -12,21 +12,29 @@ import { ModalTaskComponent } from 'src/app/pages/workspace-page/modal-task/moda
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
 })
-export class ColumnComponent implements OnInit {
+export class ColumnComponent implements OnInit, AfterViewInit {
   @Input() column: IColumn;
 
   @Input() currentBoard: IBoard;
 
   @Input() getConnectedList: () => string[];
 
+  @ViewChildren('titleInput') private titleInput: QueryList<ElementRef>;
+
   tasks: ITask[];
 
   showAddTaskControl = false;
+
+  isShowEditColumnTitle = false;
 
   constructor(private columnTaskService: ColumnTaskService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.tasks = this.column.tasks;
+  }
+
+  ngAfterViewInit(): void {
+    this.titleInput.changes.subscribe(() => this.focusTitleInput());
   }
 
   drop(event: CdkDragDrop<IMovedTask>) {
@@ -80,12 +88,28 @@ export class ColumnComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.tasks.forEach((task) => {
-          if (task.idTask == result.task.idTask) {
-            task = result.task;
+        this.tasks.forEach((taskItem) => {
+          if (taskItem.idTask == result.task.idTask) {
+            taskItem = result.task;
           }
         });
       }
     });
+  }
+
+  focusTitleInput() {
+    if (this.titleInput.length > 0) {
+      this.titleInput.first.nativeElement.focus();
+    }
+  }
+
+  showEditColumnTitle() {
+    this.isShowEditColumnTitle = true;
+
+  }
+
+  hideEditColumnTitle(newColumn: IColumn) {
+    this.isShowEditColumnTitle = false;
+    console.log(newColumn);
   }
 }

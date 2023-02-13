@@ -1,3 +1,5 @@
+$hover-color: #d1d3dc;
+
 .column-container {
   width: 300px;
   padding: 8px;
@@ -11,8 +13,29 @@
   max-height: 88vh;
 }
 
-.column__title {
+.column__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
+}
+
+.column__title {
+  margin-bottom: 0;
+}
+
+.column__menu {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.column__menu:hover {
+  background-color: $hover-color;
+  border-radius: 5px;
 }
 
 .task-list {
@@ -78,7 +101,7 @@
 }
 
 .column__add-task:hover {
-  background-color: #d1d3dc;
+  background-color: $hover-color;
 }
 
 .task-list__item:hover {
