@@ -108,8 +108,10 @@ export class ColumnComponent implements OnInit, AfterViewInit {
 
   }
 
-  hideEditColumnTitle(newColumn: IColumn) {
+  hideEditColumnTitle(editedColumn: IColumn) {
     this.isShowEditColumnTitle = false;
-    console.log(newColumn);
+    this.columnTaskService.updateColumn(editedColumn.idColumn, {
+      nameColumn: editedColumn.nameColumn,
+    }).subscribe((res) => console.log(res));
   }
 }

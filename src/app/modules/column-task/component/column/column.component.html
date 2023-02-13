@@ -11,6 +11,7 @@
       matInput
       *ngIf="isShowEditColumnTitle"
       (blur)="hideEditColumnTitle(column)"
+      (keydown.enter)="hideEditColumnTitle(column)"
       [value]="column.nameColumn"
       #titleInput
       [(ngModel)]="column.nameColumn"
