@@ -8,9 +8,9 @@ describe('SuccessModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SuccessModalComponent ]
+      declarations: [ SuccessModalComponent ],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SuccessModalComponent);
     component = fixture.componentInstance;

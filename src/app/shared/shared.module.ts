@@ -16,8 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatCheckboxModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   exports: [
     FormsModule,
@@ -59,7 +59,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatCheckboxModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
   ],
 })
 export class SharedModule {}
