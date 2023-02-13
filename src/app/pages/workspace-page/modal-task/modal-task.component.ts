@@ -39,42 +39,21 @@ export class ModalTaskComponent implements OnInit {
 
     this.ChecklistService.getCheckList(this.data.task.idTask).subscribe((res) => {
       this.checklist = res;
-      // this.formTask.controls.calc.setValue(
-      //   (res.filter((item) => item.isChoose).length / res.length) * 100,
-      // );
       this.calculated = (res.filter((item) => item.isChoose).length / res.length) * 100;
     });
-
-    // this.ChecklistService.getCheckBox('9468b8cd-771d-443e-96c4-8dbf90afc26c')
-    // .subscribe(res=>console.log(res));
-
-    // this.ChecklistService.createCheckbox(this.data.task.idTask,{
-    //   nameCheckBox: 'asdasdasdasda'
-    // }).subscribe(res=>{
-    //   console.log(res);
-    // })
-
-    // this.ChecklistService.delteCheckbox("d90c0e4a-afe5-4557-ad0d-b70b3134e903")
-    //   .subscribe();
-
-    // this.ChecklistService.updateCheckBox("23474998-d132-42a8-8cdb-56a559f631df",{
-    //   idCheckBox: "23474998-d132-42a8-8cdb-56a559f631df",
-    //   nameCheckBox: "updating checkbox..."
-    // }).subscribe(res=>{
-    //   console.log(res);
-    // })
   }
 
   updateCheckBox(checkbox: ICheckBox) {
-    this.checklist.forEach((item) => {
-      if (item.idCheckBox === checkbox.idCheckBox) {
-        item = { ...checkbox };
-        console.log(this.checklist);
-      }
+    let index:any;
+    this.checklist.forEach((item,i) => {
+      if (item.idCheckBox === checkbox.idCheckBox) index = i;
     });
+    let arr = [...this.checklist];
+    arr[index] = checkbox;
+    this.checklist = arr;
     this.calculated =
       (this.checklist.filter((item) => item.isChoose).length / this.checklist.length) * 100;
-    // console.log(this.checklist);
+    console.log(this.checklist);
   }
 
   updateInput(checkbox: ICheckBox) {

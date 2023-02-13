@@ -33,16 +33,6 @@ export class CheckboxComponent implements OnInit {
     this.isChoose = !this.isChoose;
   }
 
-  // addCheckbox() {
-  //   this.ChecklistService.createCheckbox(this.data.task.idTask, {
-  //     nameCheckBox: 'asdasdasdasda',
-  //   }).subscribe((res) => {
-  //     console.log(res);
-  //     this.checkboxes.push({ nameCheckbox: res.nameCheckBox });
-  //     console.log(this.checkboxes);
-  //   });
-  // }
-
   updateName() {
     this.checkbox = {
       ...this.checkbox,
@@ -56,8 +46,6 @@ export class CheckboxComponent implements OnInit {
       ...this.checkbox,
       isChoose: this.checkboxValue,
     };
-    console.log(this.checkboxValue);
-
     this.onUpdateCheckBox.emit(this.checkbox);
   }
 }
