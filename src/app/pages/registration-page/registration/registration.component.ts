@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/modules/services/user.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackComponent } from '../snack/snack.component';
 
 interface IGender {
@@ -19,43 +19,51 @@ interface IGender {
 
 export class RegistrationComponent implements OnInit {
 
-  isHidePassword:boolean = true;
-  isSubmitted:boolean = true;
-  isSendForm: boolean = false;
-  isLoading: boolean = false;
+  isHidePassword = true;
+
+  isSubmitted = true;
+
+  isSendForm = false;
+
+  isLoading = false;
+
   email:string[] = [];
-  durationInSeconds: number = 5;
+
+  durationInSeconds = 5;
+
   form: any;
 
-  genders: IGender[] = [
-    {value: 'man', viewValue: 'Man'},
-    {value: 'woman', viewValue: 'Woman'},
-  ];
+  genders: IGender[] = [{ value: 'man', viewValue: 'Man' }, { value: 'woman', viewValue: 'Woman' }];
 
   constructor(
     private UserService: UserService,
     private router: Router,
-    private snackBar: MatSnackBar
-  ){}
-  ngOnInit(){
+    private snackBar: MatSnackBar,
+  ) {}
+
+  ngOnInit() {
 
     this.form = new FormGroup({
-      firstNameControl: new FormControl(null, [Validators.required,Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
+      firstNameControl: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
       lastNameControl: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
-      sexControl: new FormControl(null,Validators.required),
-      emailFormControl: new FormControl(null, [Validators.required,Validators.email, this.restricredEmail]),
-      enterPassword: new FormControl(null,[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
-      repeatPassword: new FormControl(null,[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
-    })
+      sexControl: new FormControl(null, Validators.required),
+      emailFormControl: new FormControl(null, [
+        Validators.required,
+        Validators.email,
+        this.restricredEmail,
+      ]),
+      enterPassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
+      repeatPassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
+    });
     this.updateSubmitted();
   }
 
-  restricredEmail = (control: FormControl):{[key:string]:boolean}|null => {
-    if(this.email.includes(control.value)){
-      return {restricredEmail:true}
+  restricredEmail = (control: FormControl):{ [key:string]:boolean } | null => {
+    if (this.email.includes(control.value)) {
+      return { restricredEmail:true };
     }
     return null;
-  }
+  };
 
   updateSubmitted() {
     if (this.form.get('enterPassword')?.value === this.form.get('repeatPassword')?.value) {
@@ -65,22 +73,23 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  closeModal(close:boolean){
+  closeModal(close:boolean) {
     this.isSendForm = close;
     this.isLoading = !close;
     this.router.navigate(['/login']);
     document.body.style.overflow = 'auto';
     this.form.reset();
   }
-  openSnackBar(){
-    this.snackBar.openFromComponent(SnackComponent,{
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(SnackComponent, {
       duration: this.durationInSeconds * 1000,
     });
   }
 
-  sendForm(){
-    this.isLoading=true;
-    this.isSendForm=true;
+  sendForm() {
+    this.isLoading = true;
+    this.isSendForm = true;
     document.body.style.overflow = 'hidden';
     this.UserService.userRegistartion({
       firstName: this.form.get('firstNameControl').value,
@@ -91,13 +100,13 @@ export class RegistrationComponent implements OnInit {
     }).subscribe((res)=>{
       this.isLoading = false;
       this.email.push(res.email);
-    },(err)=>{
-        this.openSnackBar();
-        this.form.controls['emailFormControl'].setValue(null);
-        this.isSendForm = false;
-        this.isLoading = true;
-        document.body.style.overflow = 'auto';
-    })
+    }, (err)=>{
+      this.openSnackBar();
+      this.form.controls.emailFormControl.setValue(null);
+      this.isSendForm = false;
+      this.isLoading = true;
+      document.body.style.overflow = 'auto';
+    });
   }
 
 }

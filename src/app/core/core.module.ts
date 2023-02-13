@@ -9,7 +9,11 @@ import { SharedModule } from '../shared/shared.module';
 import { ModalLogOutComponent } from './components/modal-log-out/modal-log-out.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, ModalLogOutComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    ModalLogOutComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,

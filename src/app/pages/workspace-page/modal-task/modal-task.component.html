@@ -23,7 +23,21 @@
   </section>
   <section class="checklist-wrapper">
     <h4><mat-icon>check_box</mat-icon>Check-list:</h4>
-    <p><mat-checkbox> first </mat-checkbox></p>
+    <p>
+      <mat-checkbox>
+        first
+        <span
+          (click)="updateIsChoose()"
+          *ngIf="isChoose"
+          >qqqqqqq</span
+        >
+        <span
+          (click)="updateIsChoose()"
+          *ngIf="!isChoose"
+          >wwwwwwwwww</span
+        >
+      </mat-checkbox>
+    </p>
     <p><mat-checkbox> second </mat-checkbox></p>
     <p><mat-checkbox> third </mat-checkbox></p>
     <button>Add element</button>
@@ -39,4 +53,5 @@
       Apply
     </button>
   </div>
+  <mat-icon (click)="deleteTask()">delete</mat-icon>
 </div>

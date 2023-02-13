@@ -9,7 +9,11 @@ import { SuccessModalComponent } from './success-modal/success-modal.component';
 import { SnackComponent } from './snack/snack.component';
 
 @NgModule({
-  declarations: [RegistrationComponent, SuccessModalComponent, SnackComponent],
+  declarations: [
+    RegistrationComponent,
+    SuccessModalComponent,
+    SnackComponent,
+  ],
   imports: [
     CommonModule,
     RegistrationPageRoutingModule,

@@ -13,6 +13,8 @@ import { ITask } from 'src/app/modules/column-task/model/task.interface';
 })
 export class ModalTaskComponent implements OnInit {
   formTask: any;
+  isChoose: boolean = true;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { task: ITask; column: IColumn },
     public dialogRef: MatDialogRef<ColumnComponent>,
@@ -30,6 +32,7 @@ export class ModalTaskComponent implements OnInit {
         Validators.minLength(10),
       ]),
     });
+    console.log(this.data.column.tasks);
   }
 
   closeModal() {
@@ -45,5 +48,24 @@ export class ModalTaskComponent implements OnInit {
       this.data.task.nameTask = nameTask;
       this.data.task.descriptionTask = descriptionTask;
     });
+  }
+
+  deleteTask() {
+    this.ColumnTaskService.deleteTask(this.data.task.idTask).subscribe(() => {
+      this.closeModal();
+      let index: number;
+      this.data.column.tasks.find((task, i) => {
+        if (task.idTask === this.data.task.idTask) {
+          index = i;
+          console.log(task.idTask);
+          console.log(this.data.task.idTask);
+          this.data.column.tasks.splice(index, 1);
+        }
+      });
+    });
+  }
+
+  updateIsChoose() {
+    this.isChoose = !this.isChoose;
   }
 }

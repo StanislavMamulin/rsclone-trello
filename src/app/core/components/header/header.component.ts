@@ -11,16 +11,18 @@ import { ModalLogOutComponent } from '../modal-log-out/modal-log-out.component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   boards: IBoard[] = [];
-  isAuth: boolean = false;
+
+  isAuth = false;
+
   searchStr = '';
 
   constructor(
     private router: Router,
     private boardService: BoardService,
     public auth: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {}
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
@@ -43,7 +45,7 @@ export class HeaderComponent implements OnInit{
     this.router.navigate(['/registration']);
   }
 
-  openLoginPage(){
+  openLoginPage() {
     this.router.navigate(['/login']);
   }
 
