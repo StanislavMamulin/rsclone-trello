@@ -1,0 +1,22 @@
+<div class="checkbox-wrapper">
+  <p class="checkbox">
+    <mat-checkbox
+      (input)="updateCheckBox()"
+      [(ngModel)]="checkboxValue"
+    >
+    </mat-checkbox>
+    <span
+      (click)="updateIsChoose()"
+      *ngIf="!isChoose"
+      >{{ checkbox.nameCheckBox }}</span
+    >
+    <span *ngIf="isChoose">
+      <input
+        [(ngModel)]="inputValue"
+        type="text"
+      />
+      <button (click)="updateIsChoose(); updateName()">Save</button>
+      <button (click)="updateIsChoose()">Close</button>
+    </span>
+  </p>
+</div>

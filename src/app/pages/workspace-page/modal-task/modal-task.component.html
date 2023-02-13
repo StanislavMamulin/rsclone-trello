@@ -23,24 +23,18 @@
   </section>
   <section class="checklist-wrapper">
     <h4><mat-icon>check_box</mat-icon>Check-list:</h4>
-    <p>
-      <mat-checkbox>
-        first
-        <span
-          (click)="updateIsChoose()"
-          *ngIf="isChoose"
-          >qqqqqqq</span
-        >
-        <span
-          (click)="updateIsChoose()"
-          *ngIf="!isChoose"
-          >wwwwwwwwww</span
-        >
-      </mat-checkbox>
-    </p>
-    <p><mat-checkbox> second </mat-checkbox></p>
-    <p><mat-checkbox> third </mat-checkbox></p>
-    <button>Add element</button>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="calculated"
+      [bufferValue]="calculated"
+    ></mat-progress-bar>
+    <app-checkbox
+      *ngFor="let checkbox of checklist"
+      [checkbox]="checkbox"
+      (onUpdateInput)="updateInput($event)"
+      (onUpdateCheckBox)="updateCheckBox($event)"
+    ></app-checkbox>
+    <button (click)="createCheckBox()">Add element</button>
   </section>
   <div class="close-buttons">
     <button (click)="closeModal()">Close</button>
