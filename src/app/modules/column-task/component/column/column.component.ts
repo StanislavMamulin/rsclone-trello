@@ -112,6 +112,6 @@ export class ColumnComponent implements OnInit, AfterViewInit {
     this.isShowEditColumnTitle = false;
     this.columnTaskService.updateColumn(editedColumn.idColumn, {
       nameColumn: editedColumn.nameColumn,
-    }).subscribe((res) => console.log(res));
+    }).subscribe();
   }
 }

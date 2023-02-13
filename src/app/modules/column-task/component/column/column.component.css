@@ -19,6 +19,14 @@
 
 .column__title {
   margin-bottom: 0;
+  padding-left: 4px;
+}
+
+.column__title_edit {
+  font: 500 20px Roboto, sans-serif;
+  letter-spacing: .0178571429em;
+  padding-left: 2px;
+  flex: 1;
 }
 
 .column__menu {

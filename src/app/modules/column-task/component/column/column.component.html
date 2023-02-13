@@ -8,6 +8,7 @@
       {{ column.nameColumn }}
     </h2>
     <input
+      class="column__title_edit"
       matInput
       *ngIf="isShowEditColumnTitle"
       (blur)="hideEditColumnTitle(column)"
