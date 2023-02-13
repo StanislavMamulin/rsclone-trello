@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ChecklistService } from 'src/app/core/services/checklist.service';
 import { ColumnTaskService } from 'src/app/modules/column-task/column-task.service';
 import { ColumnComponent } from 'src/app/modules/column-task/component/column/column.component';
 import { IColumn } from 'src/app/modules/column-task/model/column.interface';
@@ -19,6 +20,7 @@ export class ModalTaskComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { task: ITask; column: IColumn },
     public dialogRef: MatDialogRef<ColumnComponent>,
     private ColumnTaskService: ColumnTaskService,
+    private ChecklistService: ChecklistService
   ) {}
 
   ngOnInit() {
@@ -32,7 +34,31 @@ export class ModalTaskComponent implements OnInit {
         Validators.minLength(10),
       ]),
     });
+
     console.log(this.data.column.tasks);
+
+    // this.ChecklistService.getCheckList(this.data.task.idTask)
+    // .subscribe(res=>console.log(res));
+
+    // this.ChecklistService.getCheckBox('9468b8cd-771d-443e-96c4-8dbf90afc26c')
+    // .subscribe(res=>console.log(res));
+
+    // this.ChecklistService.createCheckbox(this.data.task.idTask,{
+    //   nameCheckBox: 'asdasdasdasda'
+    // }).subscribe(res=>{
+    //   console.log(res);
+    // })
+
+    // this.ChecklistService.delteCheckbox("d90c0e4a-afe5-4557-ad0d-b70b3134e903")
+    //   .subscribe();
+
+    // this.ChecklistService.updateCheckBox("23474998-d132-42a8-8cdb-56a559f631df",{
+    //   idCheckBox: "23474998-d132-42a8-8cdb-56a559f631df",
+    //   nameCheckBox: "updating checkbox..."
+    // }).subscribe(res=>{
+    //   console.log(res);
+    // })
+
   }
 
   closeModal() {
