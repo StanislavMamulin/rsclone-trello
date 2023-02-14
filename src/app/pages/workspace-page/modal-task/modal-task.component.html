@@ -23,11 +23,10 @@
   </section>
   <section class="checklist-wrapper">
     <h4><mat-icon>check_box</mat-icon>Check-list:</h4>
-    <mat-progress-bar
-      mode="determinate"
-      [value]="calculated"
-      [bufferValue]="calculated"
-    ></mat-progress-bar>
+    <div class="wrapper-progressbar">
+      <div class="calc">{{calculated}}%</div>
+      <mat-progress-bar mode="determinate" [value]="calculated" [bufferValue]="calculated"></mat-progress-bar>
+    </div>
     <app-checkbox
       *ngFor="let checkbox of checklist"
       [checkbox]="checkbox"
@@ -40,7 +39,7 @@
     <button (click)="closeModal()">Close</button>
     <button
       class="apply"
-      (click)="updateTask()"
+      (click)="updateTask(); updateChecklist()"
       [disabled]="formTask.invalid"
       [mat-dialog-close]="data"
     >

@@ -39,7 +39,7 @@ export class ModalTaskComponent implements OnInit {
 
     this.ChecklistService.getCheckList(this.data.task.idTask).subscribe((res) => {
       this.checklist = res;
-      this.calculated = (res.filter((item) => item.isChoose).length / res.length) * 100;
+      this.calculated = Math.round((res.filter((item) => item.isChoose).length / res.length) * 100);
     });
   }
 
@@ -52,8 +52,11 @@ export class ModalTaskComponent implements OnInit {
     arr[index] = checkbox;
     this.checklist = arr;
     this.calculated =
-      (this.checklist.filter((item) => item.isChoose).length / this.checklist.length) * 100;
-    console.log(this.checklist);
+      Math.round((this.checklist.filter((item) => item.isChoose).length / this.checklist.length) * 100);
+  }
+  updateChecklist(){
+    this.ChecklistService.updateChecklist(this.data.task.idTask,this.checklist)
+    .subscribe(res=>console.log(res));
   }
 
   updateInput(checkbox: ICheckBox) {
@@ -67,7 +70,6 @@ export class ModalTaskComponent implements OnInit {
           item = res;
         }
       });
-      console.log(res);
     });
   }
 

@@ -1,22 +1,31 @@
 <div class="checkbox-wrapper">
-  <p class="checkbox">
+  <div class="checkbox">
     <mat-checkbox
+    color="primary"
       (input)="updateCheckBox()"
       [(ngModel)]="checkboxValue"
     >
     </mat-checkbox>
-    <span
-      (click)="updateIsChoose()"
+    <span [class.isDone]="checkbox.isChoose" class="no-edit"
+
+       (click)="updateIsChoose()"
       *ngIf="!isChoose"
       >{{ checkbox.nameCheckBox }}</span
     >
-    <span *ngIf="isChoose">
+    <span class="edit" *ngIf="isChoose">
       <input
         [(ngModel)]="inputValue"
         type="text"
       />
-      <button (click)="updateIsChoose(); updateName()">Save</button>
-      <button (click)="updateIsChoose()">Close</button>
+      <div class="edit__wrapper">
+        <div class="edit__button">
+          <button (click)="updateIsChoose(); updateName()" mat-raised-button color="primary">Save</button>
+          <mat-icon class="close" (click)="updateIsChoose()">close</mat-icon>
+        </div>
+        <mat-icon *ngIf="isChoose" class="delete-task-under">delete</mat-icon>
+      </div>
     </span>
-  </p>
+
+  </div>
+  <mat-icon *ngIf="!isChoose" class="delete-task">delete</mat-icon>
 </div>

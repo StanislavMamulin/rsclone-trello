@@ -3,8 +3,12 @@ import { IColumn } from './column.interface';
 export interface ITask {
   nameTask: string;
   descriptionTask: string;
-  checkLists:string[];
   idTask: string;
+  checkLists: {
+    idCheckBox: string;
+    nameCheckBox: string;
+    isChoose: boolean;
+  }[]
 }
 
 export interface ITaskMove {
@@ -15,7 +19,11 @@ export interface ITaskMove {
 export interface ITaskCreate {
   nameTask: string;
   descriptionTask: string;
-  checkLists: string[]
+  checkLists: {
+    idCheckBox: string;
+    nameCheckBox: string;
+    isChoose: boolean;
+  }[]
 }
 
 export interface IMovedTask {

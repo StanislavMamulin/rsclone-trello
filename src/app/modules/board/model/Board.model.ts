@@ -12,6 +12,11 @@ export interface IBoard {
       idTask: string;
       nameTask: string;
       descriptionTask: string;
+      checkLists:{
+        idCheckBox:string;
+        nameCheckBox: string;
+        isChoose: boolean;
+    }[]
     }[];
   }[];
 }

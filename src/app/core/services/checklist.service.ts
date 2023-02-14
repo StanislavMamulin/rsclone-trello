@@ -14,6 +14,7 @@ export class ChecklistService {
   private baseUrl = `${BASE_URL}/api`;
 
   private checkBoxUrl = `${this.baseUrl}/checkbox`;
+  private checkListUrl = `${this.baseUrl}/checklist`;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -35,5 +36,9 @@ export class ChecklistService {
 
   public updateCheckBox(idCheckBox: string, body: ICheckBox): Observable<ICheckBox> {
     return this.httpClient.put<ICheckBox>(`${this.checkBoxUrl}/${idCheckBox}`, body);
+  }
+
+  public updateChecklist(idTask:string, body: ICheckBox[]):Observable<ICheckBox[]>{
+    return this.httpClient.put<ICheckBox[]>(`${this.checkListUrl}/${idTask}`, body)
   }
 }

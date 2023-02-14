@@ -9,6 +9,12 @@
   margin: 10px auto 0;
 }
 
+.wrapper-progressbar{
+  display: flex;
+  align-items:center;
+  gap: 10px;
+}
+
 .title-wrapper {
   .title {
     position: relative;
@@ -44,10 +50,16 @@
     width: 100%;
     border: none;
     background: rgb(245, 245, 245);
+    resize: vertical;
+    max-height: 300px;
   }
 }
 
 .checklist-wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 5px;
   margin-top: 2rem;
   h4 {
     margin-bottom: 0.5rem;
@@ -78,4 +90,11 @@
   button {
     text-transform: uppercase;
   }
+}
+app-checkbox{
+  margin-top: 10px;
+}
+
+mat-progress-bar{
+  border-radius: 20px;
 }
