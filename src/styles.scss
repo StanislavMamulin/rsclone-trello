@@ -130,6 +130,15 @@ html {
   }
 }
 
+.mat-mdc-option.mat-mdc-option-active,
+.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.ng-trigger.ng-trigger-transformPanel.ng-tns-c111-1.mat-mdc-select-panel.mdc-menu-surface.mdc-menu-surface--open.mat-primary.ng-star-inserted {
+  background: rgb(237, 237, 237);
+}
+
 html,
 body {
   height: 100%;
