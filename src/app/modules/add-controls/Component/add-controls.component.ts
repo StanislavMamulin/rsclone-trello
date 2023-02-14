@@ -18,12 +18,13 @@ export class AddControlsComponent {
     this.addTask();
   }
 
-  enterPressed() {
+  enterPressed(event: Event) {
+    event.preventDefault();
     this.addTask();
   }
 
   private addTask() {
-    this.addButtonPressed.emit(this.newElementTitle);
+    this.addButtonPressed.emit(this.newElementTitle.trim());
     this.newElementTitle = '';
   }
 

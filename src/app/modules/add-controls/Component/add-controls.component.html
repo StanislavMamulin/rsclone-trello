@@ -4,7 +4,7 @@
     placeholder="enter the title of the new task"
     class="add-element__title"
     [(ngModel)]="newElementTitle"
-    (keydown.enter)="enterPressed()"
+    (keydown.enter)="enterPressed($event)"
     appAutofocus
   ></textarea>
   <div class="add-element__controls">
