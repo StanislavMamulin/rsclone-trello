@@ -39,6 +39,6 @@ export class ColumnDescriptionComponent {
     this.description.column.descriptionColumn = this.descrText;
     this.columnTaskService.updateColumn(this.description.column.idColumn, {
       descriptionColumn: this.descrText,
-    }).subscribe(res => console.log(res));
+    }).subscribe();
   }
 }

@@ -8,7 +8,7 @@
       *ngIf="!editDescription; else editColumnDescription"
       (click)="showEditDescription()"
     >
-      {{ description.text }}
+      {{ description.text || 'Enter a description for the column' }}
     </p>
   </div>
   <div mat-dialog-actions>
