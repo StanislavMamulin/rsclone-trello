@@ -6,6 +6,7 @@ import { IMovedTask, ITask } from '../../model/task.interface';
 import { IBoard } from 'src/app/modules/board/model/Board.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalTaskComponent } from 'src/app/pages/workspace-page/modal-task/modal-task.component';
+import { ColumnDescriptionComponent } from './column-description/column-description.component';
 
 @Component({
   selector: 'app-column',
@@ -151,5 +152,13 @@ export class ColumnComponent implements OnInit, AfterViewInit {
 
   setDirectionColumns() {
     this.directionColumns = this.columnsInBoard.filter((columnItem: IColumn) => columnItem.idColumn !== this.column.idColumn);
+  }
+
+  showColumnInfo(): void {
+    const dialogRef = this.dialog.open(ColumnDescriptionComponent, {
+      data: { text: this.column.descriptionColumn, column: this.column },
+    });
+
+    dialogRef.afterClosed().subscribe();
   }
 }

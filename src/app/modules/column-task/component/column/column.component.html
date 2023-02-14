@@ -63,7 +63,10 @@
 </div>
 
 <mat-menu #columnMenu>
-  <button mat-menu-item>
+  <button
+    mat-menu-item
+    (click)="showColumnInfo()"
+  >
     <mat-icon class="menu-item__icon">info</mat-icon>
     <span class="menu-item__title">Show column description</span>
   </button>

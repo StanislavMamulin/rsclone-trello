@@ -8,9 +8,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { AddControlsModule } from '../add-controls/add-controls.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ColumnDescriptionComponent } from './component/column/column-description/column-description.component';
 
 @NgModule({
-  declarations: [ColumnComponent, TaskComponent],
+  declarations: [
+    ColumnComponent,
+    TaskComponent,
+    ColumnDescriptionComponent,
+  ],
   imports: [
     CommonModule,
     DragDropModule,
