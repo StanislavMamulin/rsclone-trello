@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChildren, QueryList, ElementRef, AfterViewInit, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ColumnTaskService } from '../../column-task.service';
 import { IColumn } from '../../model/column.interface';
@@ -125,6 +125,21 @@ export class ColumnComponent implements OnInit, AfterViewInit {
 
   moveColumnWithinBoard() {
 
+  }
+
+  moveTaskToNewColumn(newColumn: IColumn): void {
+    const copyTasks = [...this.column.tasks];
+    copyTasks.reverse().forEach((task: ITask) =>
+      this.columnTaskService.moveTask(task.idTask, {
+        toColumnId: newColumn.idColumn,
+        newPosition: newColumn.tasks.length,
+      }).subscribe(() => {
+        const length = this.column.tasks.length;
+        for (let i = 0; i < length; i += 1) {
+          newColumn.tasks.push(this.column.tasks.shift() as ITask);
+        }
+      }),
+    );
   }
 
   showedColumnMenu() {
