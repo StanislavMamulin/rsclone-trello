@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChildren, QueryList, ElementRef, AfterViewInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ColumnTaskService } from '../../column-task.service';
 import { IColumn } from '../../model/column.interface';
@@ -20,6 +20,8 @@ export class ColumnComponent implements OnInit, AfterViewInit {
   @Input() columnsInBoard: IColumn[];
 
   @Input() getConnectedList: () => string[];
+
+  @Output() deletedTask = new EventEmitter();
 
   @ViewChildren('titleInput') private titleInput: QueryList<ElementRef>;
 
@@ -121,6 +123,7 @@ export class ColumnComponent implements OnInit, AfterViewInit {
 
   deleteColumn(column: IColumn) {
     this.columnTaskService.deleteColumn(column.idColumn).subscribe();
+    this.deletedTask.emit(column);
   }
 
   moveColumnWithinBoard() {

@@ -91,4 +91,8 @@ export class WorkspaceComponent implements OnInit {
   private setColumnsIds(): void {
     this.columnsIds = this.columns.map((column: IColumn) => column.idColumn);
   }
+
+  deleteColumn(column: IColumn): void {
+    this.columns = this.columns.filter((columnItem) => columnItem.idColumn !== column.idColumn);
+  }
 }
