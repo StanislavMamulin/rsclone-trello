@@ -10,7 +10,8 @@
           alt="trello-logo"
         />
       </button>
-      <button *ngIf="auth.isAuthenticated()"
+      <button
+        *ngIf="auth.isAuthenticated()"
         (click)="openBoards()"
         class="bord-btn"
       >
@@ -32,7 +33,10 @@
         <span>boards</span>
       </button>
     </div>
-    <div class="search-container" *ngIf="auth.isAuthenticated()">
+    <div
+      class="search-container"
+      *ngIf="auth.isAuthenticated()"
+    >
       <div class="search">
         <span
           role="img"
@@ -59,12 +63,14 @@
           class="example-full-width"
           appearance="fill"
         >
-            <input style="padding-left: 12px;" (click)="updateBoards()"
+          <input
+            style="padding-left: 12px"
+            (click)="updateBoards()"
             type="text"
             [(ngModel)]="searchStr"
             matInput
             [matAutocomplete]="auto"
-            />
+          />
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option
               (click)="openBoard(board)"
@@ -77,11 +83,17 @@
         </mat-form-field>
       </div>
     </div>
-    <div class="authorization" *ngIf="!auth.isAuthenticated()">
+    <div
+      class="authorization"
+      *ngIf="!auth.isAuthenticated()"
+    >
       <button (click)="openRegistrationPage()">sign up</button>
       <button (click)="openLoginPage()">log in</button>
     </div>
-    <div class="authorization" *ngIf="auth.isAuthenticated()">
+    <div
+      class="authorization"
+      *ngIf="auth.isAuthenticated()"
+    >
       <button (click)="openDialog('500ms', '500ms')">log out</button>
     </div>
   </div>

@@ -8,9 +8,9 @@ describe('ModalLogOutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalLogOutComponent ]
+      declarations: [ ModalLogOutComponent ],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ModalLogOutComponent);
     component = fixture.componentInstance;
