@@ -14,7 +14,8 @@ export class AddControlsComponent {
 
   newElementTitle: string;
 
-  addNewTaskHandler() {
+  addNewTaskHandler(event: Event) {
+    event.preventDefault();
     this.addTask();
   }
 
@@ -35,10 +36,17 @@ export class AddControlsComponent {
     this.cancelButtonPressed.emit();
   }
 
-  blurHandler() {
-    if (this.newElementTitle) {
-      this.addTask();
+  blurHandler(event: FocusEvent) {
+    if (event.relatedTarget) {
+      event.preventDefault();
+      if (event.target instanceof HTMLTextAreaElement) {
+        event.target.focus();
+      }
+    } else {
+      if (this.newElementTitle) {
+        this.addTask();
+      }
+      this.cancelButtonPressed.emit();
     }
-    this.cancelButtonPressed.emit();
   }
 }
