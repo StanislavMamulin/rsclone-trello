@@ -39,8 +39,12 @@ export class ModalTaskComponent implements OnInit {
 
     this.ChecklistService.getCheckList(this.data.task.idTask).subscribe((res) => {
       this.checklist = res;
-      this.calculated = Math.round((res.filter((item) => item.isChoose).length / res.length) * 100);
+      this.updateCalculated();
     });
+  }
+
+  updateCalculated(){
+    this.calculated = Math.round((this.checklist.filter((item) => item.isChoose).length / this.checklist.length) * 100);
   }
 
   updateCheckBox(checkbox: ICheckBox) {
@@ -51,8 +55,7 @@ export class ModalTaskComponent implements OnInit {
     let arr = [...this.checklist];
     arr[index] = checkbox;
     this.checklist = arr;
-    this.calculated =
-      Math.round((this.checklist.filter((item) => item.isChoose).length / this.checklist.length) * 100);
+    this.updateCalculated();
   }
   updateChecklist(){
     this.ChecklistService.updateChecklist(this.data.task.idTask,this.checklist)
@@ -79,6 +82,7 @@ export class ModalTaskComponent implements OnInit {
       isChoose: true,
     }).subscribe((res) => {
       this.checklist.push(res);
+      this.updateCalculated();
     });
   }
 
@@ -104,11 +108,23 @@ export class ModalTaskComponent implements OnInit {
       this.data.column.tasks.find((task, i) => {
         if (task.idTask === this.data.task.idTask) {
           index = i;
-          console.log(task.idTask);
-          console.log(this.data.task.idTask);
           this.data.column.tasks.splice(index, 1);
         }
       });
     });
+  }
+
+  delteCheckbox(idCheckBox: string){
+    this.ChecklistService.delteCheckbox(idCheckBox)
+      .subscribe(() => {
+        let index:number;
+        this.checklist.forEach((item, i)=>{
+          if(item.idCheckBox === idCheckBox){
+            index = i;
+            this.checklist.splice(index, 1);
+            this.updateCalculated();
+          }
+        })
+      })
   }
 }

@@ -15,6 +15,7 @@ export class CheckboxComponent implements OnInit {
   @Input() checkbox: ICheckBox;
   @Output() onUpdateInput = new EventEmitter<ICheckBox>();
   @Output() onUpdateCheckBox = new EventEmitter<ICheckBox>();
+  @Output() onDeleteCheckBox = new EventEmitter<string>();
   isChoose = false;
   checkboxValue: boolean = false;
   inputValue: string;
@@ -47,5 +48,9 @@ export class CheckboxComponent implements OnInit {
       isChoose: this.checkboxValue,
     };
     this.onUpdateCheckBox.emit(this.checkbox);
+  }
+
+  deleteCheckbox(idCheckBox: string){
+    this.onDeleteCheckBox.emit(idCheckBox);
   }
 }

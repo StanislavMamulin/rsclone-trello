@@ -34,7 +34,7 @@
     .no-edit {
       font-size: 17px;
       width: 100%;
-      height: 100%;
+      height: 33px;
       &.isDone{
         text-decoration: line-through;
       }
@@ -51,7 +51,7 @@
         padding-top: 5px;
         font-size: 17px;
         &:focus{
-          outline: 0px solid #3f51b5 !important;
+          outline: 1px solid #3f51b5 !important;
         }
       }
       &__wrapper{

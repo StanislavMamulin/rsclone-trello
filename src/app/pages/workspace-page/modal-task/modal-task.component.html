@@ -32,11 +32,11 @@
       [checkbox]="checkbox"
       (onUpdateInput)="updateInput($event)"
       (onUpdateCheckBox)="updateCheckBox($event)"
+      (onDeleteCheckBox)="delteCheckbox($event)"
     ></app-checkbox>
-    <button (click)="createCheckBox()">Add element</button>
+    <button (click)="createCheckBox()" mat-raised-button color="primary">Add element</button>
   </section>
-  <div class="close-buttons">
-    <button (click)="closeModal()">Close</button>
+  <!-- <div class="close-buttons">
     <button
       class="apply"
       (click)="updateTask(); updateChecklist()"
@@ -45,6 +45,7 @@
     >
       Apply
     </button>
-  </div>
-  <mat-icon (click)="deleteTask()">delete</mat-icon>
+  </div> -->
+  <!-- <mat-icon (click)="deleteTask()">delete</mat-icon> -->
+  <mat-icon class="close-modal" (click)="closeModal();updateTask(); updateChecklist()">close</mat-icon>
 </div>
