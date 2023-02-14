@@ -17,11 +17,15 @@ export class ColumnComponent implements OnInit, AfterViewInit {
 
   @Input() currentBoard: IBoard;
 
+  @Input() columnsInBoard: IColumn[];
+
   @Input() getConnectedList: () => string[];
 
   @ViewChildren('titleInput') private titleInput: QueryList<ElementRef>;
 
   tasks: ITask[];
+
+  directionColumns: IColumn[];
 
   showAddTaskControl = false;
 
@@ -31,6 +35,7 @@ export class ColumnComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.tasks = this.column.tasks;
+    this.setDirectionColumns();
   }
 
   ngAfterViewInit(): void {
@@ -105,7 +110,6 @@ export class ColumnComponent implements OnInit, AfterViewInit {
 
   showEditColumnTitle() {
     this.isShowEditColumnTitle = true;
-
   }
 
   hideEditColumnTitle(editedColumn: IColumn) {
@@ -113,5 +117,21 @@ export class ColumnComponent implements OnInit, AfterViewInit {
     this.columnTaskService.updateColumn(editedColumn.idColumn, {
       nameColumn: editedColumn.nameColumn,
     }).subscribe();
+  }
+
+  deleteColumn(column: IColumn) {
+    this.columnTaskService.deleteColumn(column.idColumn).subscribe();
+  }
+
+  moveColumnWithinBoard() {
+
+  }
+
+  showedColumnMenu() {
+    this.setDirectionColumns();
+  }
+
+  setDirectionColumns() {
+    this.directionColumns = this.columnsInBoard.filter((columnItem: IColumn) => columnItem.idColumn !== this.column.idColumn);
   }
 }

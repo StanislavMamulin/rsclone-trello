@@ -20,7 +20,11 @@
       cdkAutosizeMinRows="1"
       cdkAutosizeMaxRows="7"
     ></textarea>
-    <div class="column__menu">
+    <div
+      class="column__menu"
+      [matMenuTriggerFor]="columnMenu"
+      (click)="showedColumnMenu()"
+    >
       <mat-icon>more_horiz</mat-icon>
     </div>
   </div>
@@ -57,3 +61,42 @@
     ></app-add-controls>
   </ng-template>
 </div>
+
+<mat-menu #columnMenu>
+  <button mat-menu-item>
+    <mat-icon class="menu-item__icon">info</mat-icon>
+    <span class="menu-item__title">Show column description</span>
+  </button>
+  <button
+    mat-menu-item
+    (click)="deleteColumn(column)"
+  >
+    <mat-icon class="menu-item__icon">delete_forever</mat-icon>
+    <span class="menu-item__title">Delete column</span>
+  </button>
+  <hr />
+  <button
+    mat-menu-item
+    [matMenuTriggerFor]="columnsList"
+  >
+    <mat-icon class="menu-item__icon">playlist_play</mat-icon>
+    <span class="menu-item__title">Move all tasks to other column...</span>
+  </button>
+  <button
+    mat-menu-item
+    [matMenuTriggerFor]="boardsList"
+  >
+    <mat-icon class="menu-item__icon">dashboard</mat-icon>
+    <span class="menu-item__title">Move column to other board</span>
+  </button>
+</mat-menu>
+
+<mat-menu #columnsList>
+  <ng-container *ngFor="let columnItem of directionColumns">
+    <button mat-menu-item>
+      <span class="menu-item__title">{{ columnItem.nameColumn }}</span>
+    </button>
+  </ng-container>
+</mat-menu>
+
+<mat-menu #boardsList> </mat-menu>

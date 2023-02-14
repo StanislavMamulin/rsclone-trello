@@ -19,6 +19,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AutofocusDirective } from './directives/autofocus.directive';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
     MatProgressBarModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatMenuModule,
   ],
   exports: [
     FormsModule,
@@ -63,6 +65,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
     MatSnackBarModule,
     MatDialogModule,
     AutofocusDirective,
+    MatMenuModule,
   ],
 })
 export class SharedModule {}
