@@ -24,8 +24,12 @@
   <section class="checklist-wrapper">
     <h4><mat-icon>check_box</mat-icon>Check-list:</h4>
     <div class="wrapper-progressbar">
-      <div class="calc">{{calculated}}%</div>
-      <mat-progress-bar mode="determinate" [value]="calculated" [bufferValue]="calculated"></mat-progress-bar>
+      <div class="calc">{{ calculated }}%</div>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="calculated"
+        [bufferValue]="calculated"
+      ></mat-progress-bar>
     </div>
     <app-checkbox
       *ngFor="let checkbox of checklist"
@@ -34,7 +38,17 @@
       (onUpdateCheckBox)="updateCheckBox($event)"
       (onDeleteCheckBox)="delteCheckbox($event)"
     ></app-checkbox>
-    <button (click)="createCheckBox()" mat-raised-button color="primary">Add element</button>
+    <input
+      formControlName="addCheckBox"
+      type="text"
+    />
+    <button
+      (click)="createCheckBox()"
+      mat-raised-button
+      color="primary"
+    >
+      Add element
+    </button>
   </section>
   <!-- <div class="close-buttons">
     <button
@@ -47,5 +61,9 @@
     </button>
   </div> -->
   <!-- <mat-icon (click)="deleteTask()">delete</mat-icon> -->
-  <mat-icon class="close-modal" (click)="closeModal();updateTask(); updateChecklist()">close</mat-icon>
+  <mat-icon
+    class="close-modal"
+    (click)="closeModal(); updateTask(); updateChecklist()"
+    >close</mat-icon
+  >
 </div>

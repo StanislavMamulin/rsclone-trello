@@ -35,22 +35,28 @@ export class ModalTaskComponent implements OnInit {
         Validators.required,
         Validators.minLength(10),
       ]),
+      addCheckBox: new FormControl(null, [Validators.required, Validators.minLength(3)]),
     });
 
     this.ChecklistService.getCheckList(this.data.task.idTask).subscribe((res) => {
       this.checklist = res;
-      this.updateCalculated();
+      if (this.checklist.length) {
+        this.updateCalculated();
+      } else {
+        this.calculated = 0;
+      }
     });
-
   }
 
-  updateCalculated(){
-    this.calculated = Math.round((this.checklist.filter((item) => item.isChoose).length / this.checklist.length) * 100);
+  updateCalculated() {
+    this.calculated = Math.round(
+      (this.checklist.filter((item) => item.isChoose).length / this.checklist.length) * 100,
+    );
   }
 
   updateCheckBox(checkbox: ICheckBox) {
-    let index:any;
-    this.checklist.forEach((item,i) => {
+    let index: any;
+    this.checklist.forEach((item, i) => {
       if (item.idCheckBox === checkbox.idCheckBox) index = i;
     });
     let arr = [...this.checklist];
@@ -58,9 +64,10 @@ export class ModalTaskComponent implements OnInit {
     this.checklist = arr;
     this.updateCalculated();
   }
-  updateChecklist(){
-    this.ChecklistService.updateChecklist(this.data.task.idTask,this.checklist)
-    .subscribe(res=>console.log(res));
+  updateChecklist() {
+    this.ChecklistService.updateChecklist(this.data.task.idTask, this.checklist).subscribe((res) =>
+      console.log(res),
+    );
   }
 
   updateInput(checkbox: ICheckBox) {
@@ -79,8 +86,8 @@ export class ModalTaskComponent implements OnInit {
 
   createCheckBox() {
     this.ChecklistService.createCheckbox(this.data.task.idTask, {
-      nameCheckBox: 'test!!!',
-      isChoose: true,
+      nameCheckBox: this.formTask.get('addCheckBox').value,
+      isChoose: false,
     }).subscribe((res) => {
       this.checklist.push(res);
       this.updateCalculated();
@@ -115,17 +122,16 @@ export class ModalTaskComponent implements OnInit {
     });
   }
 
-  delteCheckbox(idCheckBox: string){
-    this.ChecklistService.delteCheckbox(idCheckBox)
-      .subscribe(() => {
-        let index:number;
-        this.checklist.forEach((item, i)=>{
-          if(item.idCheckBox === idCheckBox){
-            index = i;
-            this.checklist.splice(index, 1);
-            this.updateCalculated();
-          }
-        })
-      })
+  delteCheckbox(idCheckBox: string) {
+    this.ChecklistService.delteCheckbox(idCheckBox).subscribe(() => {
+      let index: number;
+      this.checklist.forEach((item, i) => {
+        if (item.idCheckBox === idCheckBox) {
+          index = i;
+          this.checklist.splice(index, 1);
+          this.updateCalculated();
+        }
+      });
+    });
   }
 }

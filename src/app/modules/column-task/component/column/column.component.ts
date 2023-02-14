@@ -62,7 +62,11 @@ export class ColumnComponent implements OnInit {
 
   addNewTaskHandler(title: string) {
     this.columnTaskService
-      .createTaskByColumnId(this.column.idColumn, { nameTask: title, descriptionTask: '', checkLists: [] })
+      .createTaskByColumnId(this.column.idColumn, {
+        nameTask: title,
+        descriptionTask: '',
+        checkLists: [],
+      })
       .subscribe((newTask: ITask) => {
         this.tasks.push(newTask);
       });
@@ -77,6 +81,7 @@ export class ColumnComponent implements OnInit {
   openModal(task: ITask): void {
     const dialogRef = this.dialog.open(ModalTaskComponent, {
       data: { task: task, column: this.column },
+      disableClose: true,
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
