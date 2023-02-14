@@ -38,12 +38,44 @@
       (onUpdateCheckBox)="updateCheckBox($event)"
       (onDeleteCheckBox)="delteCheckbox($event)"
     ></app-checkbox>
-    <input
+    <!-- <input
       formControlName="addCheckBox"
       type="text"
-    />
+    /> -->
+    <div
+      *ngIf="isCreate"
+      class="task-create-wrapper"
+    >
+      <div class="task-create">
+        <span class="create">
+          <input
+            formControlName="addCheckBox"
+            class="create-input"
+            type="text"
+          />
+          <div class="create-wrapper">
+            <div class="create-button">
+              <button
+                (click)="updateCreateState()"
+                (click)="createCheckBox()"
+                mat-raised-button
+                color="primary"
+              >
+                Save
+              </button>
+            </div>
+            <mat-icon
+              (click)="updateCreateState()"
+              class="delete-task"
+              >delete</mat-icon
+            >
+          </div>
+        </span>
+      </div>
+    </div>
     <button
-      (click)="createCheckBox()"
+      (click)="updateCreateState()"
+      *ngIf="!isCreate"
       mat-raised-button
       color="primary"
     >

@@ -17,6 +17,7 @@ export class ModalTaskComponent implements OnInit {
   formTask: any;
   checklist: ICheckBox[] = [];
   calculated: number;
+  isCreate: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { task: ITask; column: IColumn },
@@ -46,6 +47,10 @@ export class ModalTaskComponent implements OnInit {
         this.calculated = 0;
       }
     });
+  }
+
+  updateCreateState() {
+    this.isCreate = !this.isCreate;
   }
 
   updateCalculated() {
