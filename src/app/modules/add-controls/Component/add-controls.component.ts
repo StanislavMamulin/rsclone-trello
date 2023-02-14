@@ -24,12 +24,21 @@ export class AddControlsComponent {
   }
 
   private addTask() {
-    this.addButtonPressed.emit(this.newElementTitle.trim());
-    this.newElementTitle = '';
+    if (this.newElementTitle) {
+      this.addButtonPressed.emit(this.newElementTitle.trim());
+      this.newElementTitle = '';
+    }
   }
 
   cancelTaskCreation() {
     this.newElementTitle = '';
+    this.cancelButtonPressed.emit();
+  }
+
+  blurHandler() {
+    if (this.newElementTitle) {
+      this.addTask();
+    }
     this.cancelButtonPressed.emit();
   }
 }
