@@ -7,8 +7,7 @@
     >
     </mat-checkbox>
     <span [class.isDone]="checkbox.isChoose" class="no-edit"
-
-       (click)="updateIsChoose()"
+      (click)="updateIsChoose()"
       *ngIf="!isChoose"
       >{{ checkbox.nameCheckBox }}</span
     >

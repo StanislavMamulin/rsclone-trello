@@ -41,6 +41,7 @@ export class ModalTaskComponent implements OnInit {
       this.checklist = res;
       this.updateCalculated();
     });
+
   }
 
   updateCalculated(){
