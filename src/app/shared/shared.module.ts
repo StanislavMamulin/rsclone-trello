@@ -67,7 +67,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatProgressBarModule,
     MatSnackBarModule,
     MatDialogModule,
-    TranslocoRootModule
+    TranslocoRootModule,
     AutofocusDirective,
     MatMenuModule,
   ],

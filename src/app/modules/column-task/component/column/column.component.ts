@@ -7,6 +7,7 @@ import { IBoard } from 'src/app/modules/board/model/Board.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalTaskComponent } from 'src/app/pages/workspace-page/modal-task/modal-task.component';
 import { ColumnDescriptionComponent } from './column-description/column-description.component';
+import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 
 @Component({
   selector: 'app-column',
@@ -28,17 +29,22 @@ export class ColumnComponent implements OnInit, AfterViewInit {
 
   tasks: ITask[];
 
+  allBoards: IBoard[];
+
   directionColumns: IColumn[];
 
   showAddTaskControl = false;
 
   isShowEditColumnTitle = false;
 
-  constructor(private columnTaskService: ColumnTaskService, public dialog: MatDialog) {}
+  constructor(private columnTaskService: ColumnTaskService, public dialog: MatDialog, private boardsService: BoardsStateService) {}
 
   ngOnInit() {
     this.tasks = this.column.tasks;
     this.setDirectionColumns();
+    this.boardsService.getBoards().subscribe((boards: IBoard[]) => {
+      this.allBoards = boards;
+    });
   }
 
   ngAfterViewInit(): void {
