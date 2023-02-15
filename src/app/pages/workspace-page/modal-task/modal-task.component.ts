@@ -6,7 +6,7 @@ import { ColumnTaskService } from 'src/app/modules/column-task/column-task.servi
 import { ColumnComponent } from 'src/app/modules/column-task/component/column/column.component';
 import { IColumn } from 'src/app/modules/column-task/model/column.interface';
 import { ITask } from 'src/app/modules/column-task/model/task.interface';
-import { ICheckBox, ICheckBoxCreateResponse } from '../model/checkbox.interface';
+import { ICheckBox,  } from '../model/checkbox.interface';
 
 @Component({
   selector: 'app-modal-task',
@@ -27,6 +27,7 @@ export class ModalTaskComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
     this.formTask = new FormGroup({
       nameTask: new FormControl(this.data.task.nameTask, [
         Validators.required,
@@ -80,9 +81,10 @@ export class ModalTaskComponent implements OnInit {
     this.updateCalculated();
   }
   updateChecklist() {
-    this.ChecklistService.updateChecklist(this.data.task.idTask, this.checklist).subscribe((res) =>
-      console.log(res),
-    );
+    this.ChecklistService.updateChecklist(this.data.task.idTask, this.checklist)
+    .subscribe((res) =>{
+      this.data.task.checkLists = res;
+    });
   }
 
   updateInput(checkbox: ICheckBox) {
@@ -105,6 +107,7 @@ export class ModalTaskComponent implements OnInit {
       isChoose: false,
     }).subscribe((res) => {
       this.checklist.push(res);
+      this.data.task.checkLists = this.checklist;
       this.updateCalculated();
       this.formTask.controls["addCheckBox"].setValue(null);
     });
@@ -126,7 +129,7 @@ export class ModalTaskComponent implements OnInit {
   }
 
   deleteCheckbox(idCheckBox: string) {
-    this.ChecklistService.delteCheckbox(idCheckBox).subscribe(() => {
+    this.ChecklistService.deleteCheckbox(idCheckBox).subscribe(() => {
       let index: number;
       this.checklist.forEach((item, i) => {
         if (item.idCheckBox === idCheckBox) {
@@ -135,9 +138,9 @@ export class ModalTaskComponent implements OnInit {
           if(this.checklist.length){
             this.updateCalculated();
           }else {this.calculated = 0}
-
         }
       });
     });
+    this.data.task.checkLists = this.checklist;
   }
 }

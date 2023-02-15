@@ -30,7 +30,7 @@ export class ChecklistService {
     return this.httpClient.post<ICheckBox>(`${this.checkBoxUrl}/${idTask}`, body);
   }
 
-  public delteCheckbox(idTask: string): Observable<void> {
+  public deleteCheckbox(idTask: string): Observable<void> {
     return this.httpClient.delete<void>(`${this.checkBoxUrl}/${idTask}`);
   }
 

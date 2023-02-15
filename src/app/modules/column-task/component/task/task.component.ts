@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ITask } from '../../model/task.interface';
 
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -8,7 +9,7 @@ import { ITask } from '../../model/task.interface';
 })
 export class TaskComponent implements OnInit{
   @Input() taskInfo: ITask;
-  checked:number = 0;
+  checked:number;
   allChecked: number = 0;
   isDone: boolean = false;
 
