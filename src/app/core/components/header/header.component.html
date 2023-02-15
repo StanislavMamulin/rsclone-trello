@@ -64,7 +64,7 @@
           appearance="fill"
         >
           <input
-            style="padding-left: 12px"
+            style="padding-left: 20px"
             (click)="updateBoards()"
             type="text"
             [(ngModel)]="searchStr"
@@ -77,7 +77,8 @@
               *ngFor="let board of boards | searchPipe : searchStr"
               [value]="board.nameBoard"
             >
-              {{ board.nameBoard }}
+              <b>{{ board.nameBoard }}</b> | {{board.dateBoard | date:'MMM dd, YYYY, HH:mm'}}<br>
+              <small style="margin-top: -5px;">Workspace of trello</small>
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
