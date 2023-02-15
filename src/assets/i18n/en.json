@@ -86,6 +86,12 @@
     "moveToColumn": "Move all tasks to other column...",
     "moveToBoard": "Move column to other board",
     "noColumnsToMove": "No columns to move",
-    "noBoardsToMove": "No boards to move"
+    "noBoardsToMove": "No boards to move",
+    "columnInfo": "Column info",
+    "close": "Close",
+    "save": "Save"
+  },
+  "snack": {
+    "exist": "Email already exists"
   }
 }
