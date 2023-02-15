@@ -27,17 +27,16 @@ export class ModalTaskComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     this.formTask = new FormGroup({
       nameTask: new FormControl(this.data.task.nameTask, [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(3),
       ]),
       descriptionTask: new FormControl(`description of ${this.data.task.nameTask}`, [
         Validators.required,
         Validators.minLength(10),
       ]),
-      addCheckBox: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      addCheckBox: new FormControl(null, [Validators.required]),
     });
 
     this.ChecklistService.getCheckList(this.data.task.idTask).subscribe((res) => {
@@ -58,7 +57,6 @@ export class ModalTaskComponent implements OnInit {
     }
 
     const inputCreate = document.querySelector('.create-input') as HTMLInputElement;
-    console.log(inputCreate);
     setTimeout(()=>{
       inputCreate?.focus();
     },0);
@@ -86,7 +84,6 @@ export class ModalTaskComponent implements OnInit {
       this.data.task.checkLists = res;
     });
   }
-
   updateInput(checkbox: ICheckBox) {
     const { nameCheckBox, idCheckBox } = checkbox;
     this.ChecklistService.updateCheckBox(idCheckBox, {
@@ -99,6 +96,13 @@ export class ModalTaskComponent implements OnInit {
         }
       });
     });
+  }
+
+  enterPressedInputAdd(event: Event){
+    event.preventDefault();
+    if(!this.formTask.controls['addCheckBox'].errors){
+      this.createCheckBox();
+    }
   }
 
   createCheckBox() {
@@ -114,18 +118,35 @@ export class ModalTaskComponent implements OnInit {
   }
 
   closeModal() {
-    this.dialogRef.close();
+    if(!this.formTask.controls['nameTask'].errors &&
+    !this.formTask.controls['descriptionTask'].errors){
+      this.dialogRef.close();
+    }else{
+      const nameInput = document.querySelector('.name-task') as HTMLInputElement;
+      const descriptionInput = document.querySelector('.description-task') as HTMLTextAreaElement;
+      if(this.formTask.controls['nameTask'].errors){
+        nameInput?.focus();
+      }else{
+        descriptionInput?.focus();
+        console.log(descriptionInput);
+      }
+
+
+    }
   }
 
   updateTask() {
-    this.ColumnTaskService.updateTask(this.data.task.idTask, {
-      nameTask: this.formTask.get('nameTask').value,
-      descriptionTask: this.formTask.get('descriptionTask').value,
-    }).subscribe((res) => {
-      const { nameTask, descriptionTask } = res;
-      this.data.task.nameTask = nameTask;
-      this.data.task.descriptionTask = descriptionTask;
-    });
+    if(!this.formTask.controls['nameTask'].errors &&
+    !this.formTask.controls['descriptionTask'].errors){
+      this.ColumnTaskService.updateTask(this.data.task.idTask, {
+        nameTask: this.formTask.get('nameTask').value,
+        descriptionTask: this.formTask.get('descriptionTask').value,
+      }).subscribe((res) => {
+        const { nameTask, descriptionTask } = res;
+        this.data.task.nameTask = nameTask;
+        this.data.task.descriptionTask = descriptionTask;
+      });
+    }
   }
 
   deleteCheckbox(idCheckBox: string) {
