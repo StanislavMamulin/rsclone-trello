@@ -4,6 +4,7 @@
   class="workspace__container"
   [cdkDropListData]="columns"
   cdkDropListOrientation="horizontal"
+  #workspaceElement
 >
   <app-column
     *ngFor="let column of columns"

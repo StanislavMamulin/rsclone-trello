@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ColumnTaskService } from 'src/app/modules/column-task/column-task.service';
@@ -17,6 +17,8 @@ export class WorkspaceComponent implements OnInit {
   showAddControl = false;
 
   columnsIds: string[];
+
+  @ViewChild('workspaceElement') workspaceElement: ElementRef;
 
   constructor(
     private columnTaskService: ColumnTaskService,
@@ -45,12 +47,14 @@ export class WorkspaceComponent implements OnInit {
       })
       .subscribe((newColumn: IColumn) => {
         this.columns.push(newColumn);
+        this.setColumnsIds();
         this.hideAddColumn();
       });
   }
 
   showAddColumn() {
     this.showAddControl = true;
+    this.workspaceElement.nativeElement.scrollLeft = this.workspaceElement.nativeElement.scrollWidth;
   }
 
   hideAddColumn() {
