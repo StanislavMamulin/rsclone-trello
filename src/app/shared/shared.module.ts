@@ -19,7 +19,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslocoRootModule } from '../transloco-root.module';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { AutofocusDirective } from './directives/autofocus.directive';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     ResentPipe,
     SortByParamsPipe,
     SearchPipePipe,
+    AutofocusDirective,
   ],
   imports: [
     CommonModule,
@@ -43,6 +46,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatSnackBarModule,
     MatDialogModule,
     TranslocoRootModule,
+    MatMenuModule,
   ],
   exports: [
     FormsModule,
@@ -64,6 +68,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatSnackBarModule,
     MatDialogModule,
     TranslocoRootModule
+    AutofocusDirective,
+    MatMenuModule,
   ],
 })
 export class SharedModule {}
