@@ -6,6 +6,9 @@ import { IBoard } from '../modules/board/model/Board.model';
 })
 export class SearchPipePipe implements PipeTransform {
   transform(boards: IBoard[], value: string) {
-    return boards.filter((board) => board.nameBoard.includes(value));
+    const search = value.toLowerCase().trim();
+    return boards.filter((board) => {
+      return board.nameBoard.toLowerCase().trim().includes(search);
+    });
   }
 }
