@@ -45,6 +45,7 @@ export class WorkspaceComponent implements OnInit {
       })
       .subscribe((newColumn: IColumn) => {
         this.columns.push(newColumn);
+        this.setColumnsIds();
         this.hideAddColumn();
       });
   }
