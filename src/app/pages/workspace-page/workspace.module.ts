@@ -9,9 +9,14 @@ import { ColumnTaskService } from 'src/app/modules/column-task/column-task.servi
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AddControlsModule } from 'src/app/modules/add-controls/add-controls.module';
 import { ModalTaskComponent } from './modal-task/modal-task.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
 
 @NgModule({
-  declarations: [WorkspaceComponent, ModalTaskComponent],
+  declarations: [
+    WorkspaceComponent,
+    ModalTaskComponent,
+    CheckboxComponent,
+  ],
   imports: [
     CommonModule,
     WorkspaceRoutingModule,

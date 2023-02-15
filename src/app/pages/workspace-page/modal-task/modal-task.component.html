@@ -22,36 +22,66 @@
     ></textarea>
   </section>
   <section class="checklist-wrapper">
-    <h4><mat-icon>check_box</mat-icon>Check-list:</h4>
-    <p>
-      <mat-checkbox>
-        first
-        <span
-          (click)="updateIsChoose()"
-          *ngIf="isChoose"
-          >qqqqqqq</span
-        >
-        <span
-          (click)="updateIsChoose()"
-          *ngIf="!isChoose"
-          >wwwwwwwwww</span
-        >
-      </mat-checkbox>
-    </p>
-    <p><mat-checkbox> second </mat-checkbox></p>
-    <p><mat-checkbox> third </mat-checkbox></p>
-    <button>Add element</button>
-  </section>
-  <div class="close-buttons">
-    <button (click)="closeModal()">Close</button>
-    <button
-      class="apply"
-      (click)="updateTask()"
-      [disabled]="formTask.invalid"
-      [mat-dialog-close]="data"
+    <h4><img width="21px" src="../../../../assets/images/checked.svg">Check-list:</h4>
+    <div class="wrapper-progressbar">
+      <div class="calc">{{ calculated }}%</div>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="calculated"
+        [bufferValue]="calculated"
+      ></mat-progress-bar>
+    </div>
+    <app-checkbox
+      *ngFor="let checkbox of checklist"
+      [checkbox]="checkbox"
+      (onUpdateInput)="updateInput($event)"
+      (onUpdateCheckBox)="updateCheckBox($event)"
+      (onDeleteCheckBox)="deleteCheckbox($event)"
+    ></app-checkbox>
+    <div
+      [ngClass]="{'active-create':!isCreate}"
+      class="task-create-wrapper"
     >
-      Apply
+      <div class="task-create">
+        <span class="create">
+          <input
+            formControlName="addCheckBox"
+            class="create-input"
+            type="text"
+          />
+          <div class="create-wrapper">
+            <div class="create-button">
+              <button
+                (click)="updateCreateState($event)"
+                (click)="createCheckBox()"
+                mat-raised-button
+                color="primary"
+                [disabled]="formTask.controls['addCheckBox'].errors"
+              >
+                Save
+              </button>
+            </div>
+            <mat-icon
+              (click)="updateCreateState($event)"
+              class="delete-task"
+              >close</mat-icon
+            >
+          </div>
+        </span>
+      </div>
+    </div>
+    <button
+      class="add-element"
+      (click)="updateCreateState($event)"
+      [ngClass]="{'active-create':isCreate}"
+      mat-raised-button
+      color="primary"
+    >
+      Add element
     </button>
-  </div>
-  <mat-icon (click)="deleteTask()">delete</mat-icon>
+  </section>
+  <mat-icon
+    class="close-modal"
+    (click)="closeModal(); updateTask(); updateChecklist()"
+    >close</mat-icon>
 </div>

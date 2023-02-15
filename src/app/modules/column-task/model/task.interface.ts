@@ -4,6 +4,11 @@ export interface ITask {
   nameTask: string;
   descriptionTask: string;
   idTask: string;
+  checkLists: {
+    idCheckBox: string;
+    nameCheckBox: string;
+    isChoose: boolean;
+  }[]
 }
 
 export interface ITaskMove {
@@ -14,6 +19,11 @@ export interface ITaskMove {
 export interface ITaskCreate {
   nameTask: string;
   descriptionTask: string;
+  checkLists: {
+    idCheckBox: string;
+    nameCheckBox: string;
+    isChoose: boolean;
+  }[]
 }
 
 export interface IMovedTask {

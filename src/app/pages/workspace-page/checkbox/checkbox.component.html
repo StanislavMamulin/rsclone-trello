@@ -1,0 +1,31 @@
+<div class="checkbox-wrapper">
+  <div class="checkbox">
+    <mat-checkbox
+    color="primary"
+      (input)="updateCheckBox()"
+      [(ngModel)]="checkboxValue"
+    >
+    </mat-checkbox>
+    <span [class.isDone]="checkbox.isChoose" class="no-edit"
+      (click)="updateIsChoose($event)"
+      [ngClass]="{'active':isChoose}"
+      >{{ checkbox.nameCheckBox }}</span
+    >
+    <span [ngClass]="{'active':!isChoose}" class="edit" >
+        <input class="edit-input"
+        [(ngModel)]="inputValue"
+        type="text"
+      />
+      <div class="edit__wrapper">
+        <div class="edit__button">
+          <button
+          (click)="updateIsChoose($event);
+          updateName()" mat-raised-button color="primary">Save</button>
+          <mat-icon class="close" (click)="updateIsChoose($event)">close</mat-icon>
+        </div>
+        <mat-icon (click)="deleteCheckbox(checkbox.idCheckBox)" *ngIf="isChoose" class="delete-task">delete</mat-icon>
+      </div>
+    </span>
+
+  </div>
+</div>
