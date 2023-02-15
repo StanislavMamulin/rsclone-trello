@@ -1,4 +1,15 @@
-import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, AfterViewInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChildren,
+  QueryList,
+  ElementRef,
+  AfterViewInit,
+  EventEmitter,
+  Output,
+  OnDestroy,
+} from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ColumnTaskService } from '../../column-task.service';
 import { IColumn } from '../../model/column.interface';
@@ -40,7 +51,11 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private columnTaskService: ColumnTaskService, public dialog: MatDialog, private boardsStateService: BoardsStateService) {}
+  constructor(
+    private columnTaskService: ColumnTaskService,
+    public dialog: MatDialog,
+    private boardsStateService: BoardsStateService,
+  ) {}
 
   ngOnInit() {
     this.tasks = this.column.tasks;
@@ -53,7 +68,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(subs => subs.unsubscribe());
+    this.subscriptions.forEach((subs) => subs.unsubscribe());
   }
 
   drop(event: CdkDragDrop<IMovedTask>) {
@@ -107,7 +122,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openModal(event: Event, task: ITask): void {
     const elTarget = event.target as HTMLTemplateElement;
-    if(!elTarget?.classList.contains('delete-button')){
+    if (!elTarget?.classList.contains('delete-button')) {
       const dialogRef = this.dialog.open(ModalTaskComponent, {
         data: { task: task, column: this.column },
         disableClose: true,
@@ -136,9 +151,11 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   hideEditColumnTitle(editedColumn: IColumn) {
     this.isShowEditColumnTitle = false;
-    this.columnTaskService.updateColumn(editedColumn.idColumn, {
-      nameColumn: editedColumn.nameColumn,
-    }).subscribe();
+    this.columnTaskService
+      .updateColumn(editedColumn.idColumn, {
+        nameColumn: editedColumn.nameColumn,
+      })
+      .subscribe();
   }
 
   deleteColumn(column: IColumn) {
@@ -149,15 +166,17 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   moveTaskToNewColumn(newColumn: IColumn): void {
     const copyTasks = [...this.column.tasks];
     copyTasks.reverse().forEach((task: ITask) =>
-      this.columnTaskService.moveTask(task.idTask, {
-        toColumnId: newColumn.idColumn,
-        newPosition: newColumn.tasks.length,
-      }).subscribe(() => {
-        const length = this.column.tasks.length;
-        for (let i = 0; i < length; i += 1) {
-          newColumn.tasks.push(this.column.tasks.shift() as ITask);
-        }
-      }),
+      this.columnTaskService
+        .moveTask(task.idTask, {
+          toColumnId: newColumn.idColumn,
+          newPosition: newColumn.tasks.length,
+        })
+        .subscribe(() => {
+          const length = this.column.tasks.length;
+          for (let i = 0; i < length; i += 1) {
+            newColumn.tasks.push(this.column.tasks.shift() as ITask);
+          }
+        }),
     );
   }
 
@@ -167,7 +186,9 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setDirectionColumns() {
-    this.directionColumns = this.columnsInBoard.filter((columnItem: IColumn) => columnItem.idColumn !== this.column.idColumn);
+    this.directionColumns = this.columnsInBoard.filter(
+      (columnItem: IColumn) => columnItem.idColumn !== this.column.idColumn,
+    );
   }
 
   showColumnInfo(): void {
@@ -178,24 +199,27 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     dialogRef.afterClosed().subscribe();
   }
 
-
-  deleteTask(idTask: string){
-    this.columnTaskService.deleteTask(idTask)
-    .subscribe(()=>{
-      this.tasks.forEach((task,i)=>{
-        if(task.idTask === idTask){
-          this.tasks.splice(i,1);
+  deleteTask(idTask: string) {
+    this.columnTaskService.deleteTask(idTask).subscribe(() => {
+      this.tasks.forEach((task, i) => {
+        if (task.idTask === idTask) {
+          this.tasks.splice(i, 1);
         }
-      })
-    })
+      });
+    });
+  }
 
   addBoardSubscribers() {
-    this.subscriptions.push(this.boardsStateService.boards$.subscribe((boards: IBoard[]) => {
-      this.allBoards = boards;
-    }));
-    this.subscriptions.push(this.boardsStateService.currentBoard$.subscribe((board) => {     
-      this.currentBoard = board;
-    }));   
+    this.subscriptions.push(
+      this.boardsStateService.boards$.subscribe((boards: IBoard[]) => {
+        this.allBoards = boards;
+      }),
+    );
+    this.subscriptions.push(
+      this.boardsStateService.currentBoard$.subscribe((board) => {
+        this.currentBoard = board;
+      }),
+    );
   }
 
   setDirectionBoards() {
@@ -204,9 +228,11 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   moveColumnToOtherBoard(destBoard: IBoard) {
     this.deletedTask.emit(this.column);
-    this.columnTaskService.moveColumn(this.column.idColumn, {
-      toBoardId: destBoard.idBoard,
-      newPosition: 0,
-    }).subscribe();
+    this.columnTaskService
+      .moveColumn(this.column.idColumn, {
+        toBoardId: destBoard.idBoard,
+        newPosition: 0,
+      })
+      .subscribe();
   }
 }

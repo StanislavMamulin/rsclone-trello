@@ -9,10 +9,14 @@
       src="../../../../assets/images/user-icon.svg"
       alt="user"
     />
-    <span class="title">Log in</span>
+    <span
+      class="title"
+      *transloco="let t"
+      >{{ t('logIn.logIn') }}</span
+    >
 
     <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
+      <mat-label *transloco="let t">{{ t('signUp.email') }}</mat-label>
       <input
         type="email"
         matInput
@@ -22,13 +26,17 @@
       <mat-error
         *ngIf="form.get('emailFormControl')?.invalid && form.get('emailFormControl')?.touched"
       >
-        <span *ngIf="form.get('emailFormControl')?.errors?.required">Enter email</span>
-        <span *ngIf="form.get('emailFormControl')?.errors?.email">Input correct email</span>
+        <span *ngIf="form.get('emailFormControl')?.errors?.required"
+          ><span *transloco="let t">{{ t('signUp.emailError') }}</span></span
+        >
+        <span *ngIf="form.get('emailFormControl')?.errors?.email"
+          ><span *transloco="let t">{{ t('signUp.correctEmailError') }}</span></span
+        >
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Enter your password</mat-label>
+      <mat-label *transloco="let t">{{ t('signUp.password') }}</mat-label>
       <input
         formControlName="enterPassword"
         matInput
@@ -44,20 +52,23 @@
         <mat-icon>{{ isHidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
       <mat-error *ngIf="form.get('enterPassword')?.invalid && form.get('enterPassword')?.touched">
-        <span *ngIf="form.get('enterPassword')?.errors?.required">Enter password</span>
+        <span *ngIf="form.get('enterPassword')?.errors?.required"
+          ><span *transloco="let t">{{ t('signUp.passwordExistError') }}</span></span
+        >
         <span *ngIf="form.get('enterPassword')?.errors?.pattern">
-          One caps letter, > 8 , one number, one of !@#$%^&*
+          <span *transloco="let t">{{ t('signUp.passwordError') }}</span>
         </span>
       </mat-error>
     </mat-form-field>
     <button
       [disabled]="form.invalid || submitted"
       mat-raised-button
+      *transloco="let t"
     >
-      Log in
+      {{ t('logIn.logIn') }}
     </button>
     <mat-error *ngIf="invalidCredentials">
-      <span>Invalid login or password</span>
+      <span *transloco="let t">{{ t('logIn.invalid') }}</span>
     </mat-error>
   </mat-card>
 </form>

@@ -5,24 +5,35 @@
   <section class="title-wrapper">
     <h2 class="title">
       <mat-icon>today</mat-icon>
-      <input class="name-task"
+      <input
+        class="name-task"
         formControlName="nameTask"
         type="text"
       />
     </h2>
-    <p>
-      in column <span>{{ data.column.nameColumn }}</span>
+    <p *transloco="let t">
+      {{ t('taskModal.column') }} <span>{{ data.column.nameColumn }}</span>
     </p>
   </section>
   <section class="description-wrapper">
-    <h3 class="description"><mat-icon>subject</mat-icon>Description</h3>
+    <h3
+      class="description"
+      *transloco="let t"
+    >
+      <mat-icon>subject</mat-icon>{{ t('taskModal.description') }}
+    </h3>
     <textarea
       class="textarea description-task"
       formControlName="descriptionTask"
     ></textarea>
   </section>
   <section class="checklist-wrapper">
-    <h4><img width="21px" src="../../../../assets/images/checked.svg">Check-list:</h4>
+    <h4 *transloco="let t">
+      <img
+        width="21px"
+        src="../../../../assets/images/checked.svg"
+      />{{ t('taskModal.checklist') }}
+    </h4>
     <div class="wrapper-progressbar">
       <div class="calc">{{ calculated }}%</div>
       <mat-progress-bar
@@ -39,7 +50,7 @@
       (onDeleteCheckBox)="deleteCheckbox($event)"
     ></app-checkbox>
     <div
-      [ngClass]="{'active-create':!isCreate}"
+      [ngClass]="{ 'active-create': !isCreate }"
       class="task-create-wrapper"
     >
       <div class="task-create">
@@ -52,14 +63,16 @@
           />
           <div class="create-wrapper">
             <div class="create-button">
-              <button class="btn-add-checkbox"
+              <button
+                class="btn-add-checkbox"
                 (click)="updateCreateState($event)"
                 (click)="createCheckBox()"
                 mat-raised-button
                 color="primary"
                 [disabled]="formTask.controls['addCheckBox'].errors"
+                *transloco="let t"
               >
-                Save
+                {{ t('taskModal.save') }}
               </button>
             </div>
             <mat-icon
@@ -74,15 +87,17 @@
     <button
       class="add-element"
       (click)="updateCreateState($event)"
-      [ngClass]="{'active-create':isCreate}"
+      [ngClass]="{ 'active-create': isCreate }"
       mat-raised-button
       color="primary"
+      *transloco="let t"
     >
-      Add element
+      {{ t('taskModal.addElement') }}
     </button>
   </section>
   <mat-icon
     class="close-modal"
     (click)="closeModal(); updateTask(); updateChecklist()"
-    >close</mat-icon>
+    >close</mat-icon
+  >
 </div>
