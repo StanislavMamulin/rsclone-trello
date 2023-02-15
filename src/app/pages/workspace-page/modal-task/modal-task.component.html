@@ -36,14 +36,10 @@
       [checkbox]="checkbox"
       (onUpdateInput)="updateInput($event)"
       (onUpdateCheckBox)="updateCheckBox($event)"
-      (onDeleteCheckBox)="delteCheckbox($event)"
+      (onDeleteCheckBox)="deleteCheckbox($event)"
     ></app-checkbox>
-    <!-- <input
-      formControlName="addCheckBox"
-      type="text"
-    /> -->
     <div
-      *ngIf="isCreate"
+      [ngClass]="{'active-create':!isCreate}"
       class="task-create-wrapper"
     >
       <div class="task-create">
@@ -56,46 +52,36 @@
           <div class="create-wrapper">
             <div class="create-button">
               <button
-                (click)="updateCreateState()"
+                (click)="updateCreateState($event)"
                 (click)="createCheckBox()"
                 mat-raised-button
                 color="primary"
+                [disabled]="formTask.controls['addCheckBox'].errors"
               >
                 Save
               </button>
             </div>
             <mat-icon
-              (click)="updateCreateState()"
+              (click)="updateCreateState($event)"
               class="delete-task"
-              >delete</mat-icon
+              >close</mat-icon
             >
           </div>
         </span>
       </div>
     </div>
     <button
-      (click)="updateCreateState()"
-      *ngIf="!isCreate"
+      class="add-element"
+      (click)="updateCreateState($event)"
+      [ngClass]="{'active-create':isCreate}"
       mat-raised-button
       color="primary"
     >
       Add element
     </button>
   </section>
-  <!-- <div class="close-buttons">
-    <button
-      class="apply"
-      (click)="updateTask(); updateChecklist()"
-      [disabled]="formTask.invalid"
-      [mat-dialog-close]="data"
-    >
-      Apply
-    </button>
-  </div> -->
-  <!-- <mat-icon (click)="deleteTask()">delete</mat-icon> -->
   <mat-icon
     class="close-modal"
     (click)="closeModal(); updateTask(); updateChecklist()"
-    >close</mat-icon
-  >
+    >close</mat-icon>
 </div>

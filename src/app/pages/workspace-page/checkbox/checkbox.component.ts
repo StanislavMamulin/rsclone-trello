@@ -19,6 +19,8 @@ export class CheckboxComponent implements OnInit {
   isChoose = false;
   checkboxValue: boolean = false;
   inputValue: string;
+  defaultValue: string;
+  inputElement: HTMLInputElement;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { task: ITask; column: IColumn },
@@ -30,8 +32,23 @@ export class CheckboxComponent implements OnInit {
     this.inputValue = this.checkbox.nameCheckBox;
   }
 
-  updateIsChoose() {
+  updateIsChoose(event:any) {
     this.isChoose = !this.isChoose;
+    const editInput = event.target.nextSibling?.querySelector('.edit-input');
+    if(editInput){
+      setTimeout(()=>{
+        editInput.focus();
+        editInput.setSelectionRange(0,editInput.value?.length);
+      },0)
+    }
+
+    if(event.target?.classList.contains('no-edit')){
+      this.defaultValue = event.target.innerHTML;
+      this.inputElement = editInput;
+    }
+    if(event.target?.classList.contains('close')){
+      this.inputElement.value = this.defaultValue;
+    }
   }
 
   updateName() {

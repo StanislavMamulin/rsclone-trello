@@ -32,7 +32,7 @@ export class ModalTaskComponent implements OnInit {
         Validators.required,
         Validators.minLength(5),
       ]),
-      descriptionTask: new FormControl(this.data.task.descriptionTask, [
+      descriptionTask: new FormControl(`description of ${this.data.task.nameTask}`, [
         Validators.required,
         Validators.minLength(10),
       ]),
@@ -49,8 +49,18 @@ export class ModalTaskComponent implements OnInit {
     });
   }
 
-  updateCreateState() {
+  updateCreateState(event:any) {
     this.isCreate = !this.isCreate;
+
+    if(event?.target.classList.contains('delete-task')){
+      this.formTask.controls["addCheckBox"].setValue(null);
+    }
+
+    const inputCreate = document.querySelector('.create-input') as HTMLInputElement;
+    console.log(inputCreate);
+    setTimeout(()=>{
+      inputCreate?.focus();
+    },0);
   }
 
   updateCalculated() {
@@ -96,6 +106,7 @@ export class ModalTaskComponent implements OnInit {
     }).subscribe((res) => {
       this.checklist.push(res);
       this.updateCalculated();
+      this.formTask.controls["addCheckBox"].setValue(null);
     });
   }
 
@@ -114,27 +125,17 @@ export class ModalTaskComponent implements OnInit {
     });
   }
 
-  deleteTask() {
-    this.ColumnTaskService.deleteTask(this.data.task.idTask).subscribe(() => {
-      this.closeModal();
-      let index: number;
-      this.data.column.tasks.find((task, i) => {
-        if (task.idTask === this.data.task.idTask) {
-          index = i;
-          this.data.column.tasks.splice(index, 1);
-        }
-      });
-    });
-  }
-
-  delteCheckbox(idCheckBox: string) {
+  deleteCheckbox(idCheckBox: string) {
     this.ChecklistService.delteCheckbox(idCheckBox).subscribe(() => {
       let index: number;
       this.checklist.forEach((item, i) => {
         if (item.idCheckBox === idCheckBox) {
           index = i;
           this.checklist.splice(index, 1);
-          this.updateCalculated();
+          if(this.checklist.length){
+            this.updateCalculated();
+          }else {this.calculated = 0}
+
         }
       });
     });
