@@ -5,7 +5,7 @@
   <section class="title-wrapper">
     <h2 class="title">
       <mat-icon>today</mat-icon>
-      <input
+      <input class="name-task"
         formControlName="nameTask"
         type="text"
       />
@@ -17,7 +17,7 @@
   <section class="description-wrapper">
     <h3 class="description"><mat-icon>subject</mat-icon>Description</h3>
     <textarea
-      class="textarea"
+      class="textarea description-task"
       formControlName="descriptionTask"
     ></textarea>
   </section>
@@ -45,13 +45,14 @@
       <div class="task-create">
         <span class="create">
           <input
+            (keydown.enter)="enterPressedInputAdd($event)"
             formControlName="addCheckBox"
             class="create-input"
             type="text"
           />
           <div class="create-wrapper">
             <div class="create-button">
-              <button
+              <button class="btn-add-checkbox"
                 (click)="updateCreateState($event)"
                 (click)="createCheckBox()"
                 mat-raised-button

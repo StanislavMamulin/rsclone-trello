@@ -38,10 +38,11 @@
   >
     <app-task
       *ngFor="let task of tasks"
-      (click)="openModal(task)"
+      (click)="openModal($event, task)"
       class="task-list__item"
       [taskInfo]="task"
       cdkDrag
+      (onDeleteTask)="deleteTask($event)"
     ></app-task>
   </div>
 

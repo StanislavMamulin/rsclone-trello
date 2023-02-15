@@ -59,6 +59,16 @@ export class CheckboxComponent implements OnInit {
     this.onUpdateInput.emit(this.checkbox);
   }
 
+  enterPressedInputUpdate(event: Event){
+    event.preventDefault();
+    const input = event.target as HTMLInputElement;
+    if(input?.value.length){
+      this.updateName();
+      this.updateCheckBox();
+    }
+  }
+
+
   updateCheckBox() {
     this.checkbox = {
       ...this.checkbox,

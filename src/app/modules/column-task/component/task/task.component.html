@@ -3,10 +3,11 @@
       {{ taskInfo.nameTask }}
     </div>
     <div class="task-list__edit">
-      <mat-icon>edit</mat-icon>
-      <mat-icon>delete</mat-icon>
+      <mat-icon (click)="deleteTask(taskInfo.idTask)" class="delete-button">delete</mat-icon>
     </div>
-    <div [ngClass]="{'all-checked': isDone}" class="task-list__checked">
+    <div [ngClass]="{'all-checked': isDone}"
+    *ngIf="!(checked===allChecked && checked===0)"
+    class="task-list__checked">
       <span *ngIf="isDone"><img  src="../../../../../assets/images/all-checked.svg" alt="checked">
          {{checked}}/{{allChecked}}
       </span>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ITask } from '../../model/task.interface';
 
 
@@ -9,14 +9,21 @@ import { ITask } from '../../model/task.interface';
 })
 export class TaskComponent implements OnInit{
   @Input() taskInfo: ITask;
+  @Output() onDeleteTask = new EventEmitter<string>();
   checked:number;
   allChecked: number = 0;
   isDone: boolean = false;
 
   ngOnInit(){
-    this.checked = this.taskInfo.checkLists.filter(item=>item.isChoose).length;
-    this.allChecked = this.taskInfo.checkLists.length;
-    this.isDone = this.checked === this.allChecked && this.checked !=0;
+    setInterval(()=>{
+      this.checked = this.taskInfo.checkLists.filter(item => item.isChoose).length;
+      this.allChecked = this.taskInfo.checkLists.length;
+      this.isDone = this.checked === this.allChecked && this.checked != 0;
+    },500);
+  }
+
+  deleteTask(idTask:string){
+    this.onDeleteTask.emit(idTask);
   }
 
 }
