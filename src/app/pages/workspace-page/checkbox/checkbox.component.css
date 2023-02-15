@@ -1,0 +1,10 @@
+input {
+  border: none;
+  background: whitesmoke;
+  width: 100%;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}

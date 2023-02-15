@@ -6,6 +6,7 @@ import { ColumnTaskService } from 'src/app/modules/column-task/column-task.servi
 import { ColumnComponent } from 'src/app/modules/column-task/component/column/column.component';
 import { IColumn } from 'src/app/modules/column-task/model/column.interface';
 import { ITask } from 'src/app/modules/column-task/model/task.interface';
+import { ICheckBox,  } from '../model/checkbox.interface';
 
 @Component({
   selector: 'app-modal-task',
@@ -14,51 +15,102 @@ import { ITask } from 'src/app/modules/column-task/model/task.interface';
 })
 export class ModalTaskComponent implements OnInit {
   formTask: any;
-  isChoose: boolean = true;
+  checklist: ICheckBox[] = [];
+  calculated: number;
+  isCreate: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { task: ITask; column: IColumn },
     public dialogRef: MatDialogRef<ColumnComponent>,
     private ColumnTaskService: ColumnTaskService,
-    private ChecklistService: ChecklistService
+    private ChecklistService: ChecklistService,
   ) {}
 
   ngOnInit() {
+
     this.formTask = new FormGroup({
       nameTask: new FormControl(this.data.task.nameTask, [
         Validators.required,
         Validators.minLength(5),
       ]),
-      descriptionTask: new FormControl(this.data.task.descriptionTask, [
+      descriptionTask: new FormControl(`description of ${this.data.task.nameTask}`, [
         Validators.required,
         Validators.minLength(10),
       ]),
+      addCheckBox: new FormControl(null, [Validators.required, Validators.minLength(3)]),
     });
 
-    console.log(this.data.column.tasks);
+    this.ChecklistService.getCheckList(this.data.task.idTask).subscribe((res) => {
+      this.checklist = res;
+      if (this.checklist.length) {
+        this.updateCalculated();
+      } else {
+        this.calculated = 0;
+      }
+    });
+  }
 
-    // this.ChecklistService.getCheckList(this.data.task.idTask)
-    // .subscribe(res=>console.log(res));
+  updateCreateState(event:any) {
+    this.isCreate = !this.isCreate;
 
-    // this.ChecklistService.getCheckBox('9468b8cd-771d-443e-96c4-8dbf90afc26c')
-    // .subscribe(res=>console.log(res));
+    if(event?.target.classList.contains('delete-task')){
+      this.formTask.controls["addCheckBox"].setValue(null);
+    }
 
-    // this.ChecklistService.createCheckbox(this.data.task.idTask,{
-    //   nameCheckBox: 'asdasdasdasda'
-    // }).subscribe(res=>{
-    //   console.log(res);
-    // })
+    const inputCreate = document.querySelector('.create-input') as HTMLInputElement;
+    console.log(inputCreate);
+    setTimeout(()=>{
+      inputCreate?.focus();
+    },0);
+  }
 
-    // this.ChecklistService.delteCheckbox("d90c0e4a-afe5-4557-ad0d-b70b3134e903")
-    //   .subscribe();
+  updateCalculated() {
+    this.calculated = Math.round(
+      (this.checklist.filter((item) => item.isChoose).length / this.checklist.length) * 100,
+    );
+  }
 
-    // this.ChecklistService.updateCheckBox("23474998-d132-42a8-8cdb-56a559f631df",{
-    //   idCheckBox: "23474998-d132-42a8-8cdb-56a559f631df",
-    //   nameCheckBox: "updating checkbox..."
-    // }).subscribe(res=>{
-    //   console.log(res);
-    // })
+  updateCheckBox(checkbox: ICheckBox) {
+    let index: any;
+    this.checklist.forEach((item, i) => {
+      if (item.idCheckBox === checkbox.idCheckBox) index = i;
+    });
+    let arr = [...this.checklist];
+    arr[index] = checkbox;
+    this.checklist = arr;
+    this.updateCalculated();
+  }
+  updateChecklist() {
+    this.ChecklistService.updateChecklist(this.data.task.idTask, this.checklist)
+    .subscribe((res) =>{
+      this.data.task.checkLists = res;
+    });
+  }
 
+  updateInput(checkbox: ICheckBox) {
+    const { nameCheckBox, idCheckBox } = checkbox;
+    this.ChecklistService.updateCheckBox(idCheckBox, {
+      ...checkbox,
+      nameCheckBox,
+    }).subscribe((res) => {
+      this.checklist.forEach((item) => {
+        if (item.idCheckBox === res.idCheckBox) {
+          item = res;
+        }
+      });
+    });
+  }
+
+  createCheckBox() {
+    this.ChecklistService.createCheckbox(this.data.task.idTask, {
+      nameCheckBox: this.formTask.get('addCheckBox').value,
+      isChoose: false,
+    }).subscribe((res) => {
+      this.checklist.push(res);
+      this.data.task.checkLists = this.checklist;
+      this.updateCalculated();
+      this.formTask.controls["addCheckBox"].setValue(null);
+    });
   }
 
   closeModal() {
@@ -76,22 +128,19 @@ export class ModalTaskComponent implements OnInit {
     });
   }
 
-  deleteTask() {
-    this.ColumnTaskService.deleteTask(this.data.task.idTask).subscribe(() => {
-      this.closeModal();
+  deleteCheckbox(idCheckBox: string) {
+    this.ChecklistService.deleteCheckbox(idCheckBox).subscribe(() => {
       let index: number;
-      this.data.column.tasks.find((task, i) => {
-        if (task.idTask === this.data.task.idTask) {
+      this.checklist.forEach((item, i) => {
+        if (item.idCheckBox === idCheckBox) {
           index = i;
-          console.log(task.idTask);
-          console.log(this.data.task.idTask);
-          this.data.column.tasks.splice(index, 1);
+          this.checklist.splice(index, 1);
+          if(this.checklist.length){
+            this.updateCalculated();
+          }else {this.calculated = 0}
         }
       });
     });
-  }
-
-  updateIsChoose() {
-    this.isChoose = !this.isChoose;
+    this.data.task.checkLists = this.checklist;
   }
 }
