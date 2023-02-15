@@ -58,6 +58,7 @@ $hover-color: #d1d3dc;
   margin-bottom: 10px;
   overflow-y: auto;
   height: 100%;
+  min-height: 30px;
 }
 
 .task-list__item {
@@ -142,4 +143,10 @@ hr {
   width: 100%;
   color: rgba(0, 0, 0, 0.12);
   margin-bottom: 8px;
+}
+
+.no-items {
+  color: gray;
+  text-align: center;
+  margin: 8px;
 }
