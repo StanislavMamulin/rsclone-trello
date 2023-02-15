@@ -11,6 +11,8 @@
     cdkDrag
     [getConnectedList]="columnsIdsFunc"
     class="workspace__column"
+    [columnsInBoard]="columns"
+    (deletedTask)="deleteColumn($event)"
   ></app-column>
   <button
     class="workspace__add-column-btn"
