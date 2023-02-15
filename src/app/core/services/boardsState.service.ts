@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { IBoard } from 'src/app/modules/board/model/Board.model';
 
 @Injectable({
@@ -8,24 +8,16 @@ import { IBoard } from 'src/app/modules/board/model/Board.model';
 export class BoardsStateService {
   private initialBoards: IBoard[] = [];
 
-  private _boards = new BehaviorSubject<IBoard[]>(this.initialBoards);
+  private boards = new BehaviorSubject<IBoard[]>(this.initialBoards);
 
   private currentBoard = new BehaviorSubject<IBoard>(this.initialBoards[0]);
 
-  private _boards$ = this._boards.asObservable();
+  boards$ = this.boards.asObservable();
   
-  private currentBoard$ = this.currentBoard.asObservable();
-
-  getBoards(): Observable<IBoard[]> {
-    return this._boards$;
-  }
+  currentBoard$ = this.currentBoard.asObservable();
 
   setBoards(newBoards: IBoard[]) {
-    return this._boards.next(newBoards);
-  }
-
-  getCurrentBoard(): Observable<IBoard> {
-    return this.currentBoard$;
+    this.boards.next(newBoards);
   }
 
   setCurrentBoard(board: IBoard) {
