@@ -1,5 +1,13 @@
-<div class="task-list__item-title">
-  <p class="task-list__item-title-text">
-    {{ taskInfo.nameTask }}
-  </p>
+<div class="task-list">
+    <div class="task-list__title">
+      {{ taskInfo.nameTask }}
+    </div>
+    <div class="task-list__edit">
+      <mat-icon>edit</mat-icon>
+      <mat-icon>delete</mat-icon>
+    </div>
+    <div [ngClass]="{'all-checked': isDone}" class="task-list__checked">
+      <span *ngIf="isDone"><img  src="../../../../../assets/images/all-checked.svg" alt="checked"> {{checked}}/{{allChecked}}</span>
+      <span *ngIf="!isDone"><img  src="../../../../../assets/images/checked.svg" alt="checked"> {{checked}}/{{allChecked}}</span>
+    </div>
 </div>
