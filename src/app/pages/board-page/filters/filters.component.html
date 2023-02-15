@@ -7,7 +7,7 @@
       name="option1"
       type="checkbox"
     />
-    <label for="option1">Favorites</label>
+    <label for="option1" *transloco="let t">{{t('boardPage.favorites')}}</label>
   </div>
 
   <div class="inputGroup">
@@ -18,11 +18,11 @@
       name="option2"
       type="checkbox"
     />
-    <label for="option2">Last created</label>
+    <label for="option2" *transloco="let t">{{t('boardPage.last')}}</label>
   </div>
 
   <mat-form-field class="select">
-    <mat-label>Sorting by</mat-label>
+    <mat-label *transloco="let t">{{t('boardPage.sorting')}}</mat-label>
     <mat-select [(value)]="selectValue">
       <mat-option
         (click)="toSelectValue(selectValue)"

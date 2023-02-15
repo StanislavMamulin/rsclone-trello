@@ -27,11 +27,13 @@ export class FiltersComponent implements OnInit {
 
   selectValue = '';
 
+  language: string = localStorage.getItem('language') as string || 'en';
+
   sorts: ISort[] = [
-    { value: 'asc', viewValue: 'Date ASC' },
-    { value: 'desc', viewValue: 'Date DESC' },
-    { value: 'by', viewValue: 'Name by alphabet' },
-    { value: 'across', viewValue: 'Name across alphabet' },
+    { value: 'asc', viewValue: this.language === 'ru' ? 'Дата ASC' : 'Date ASC'},
+    { value: 'desc', viewValue:this.language === 'ru' ? 'Дата DESC' : 'Date DESC' },
+    { value: 'by', viewValue: this.language === 'ru' ? 'Имена по алфавиту' : 'Name by alphabet' },
+    { value: 'across', viewValue:  this.language === 'ru' ? 'Имена против алфавита' : 'Name across alphabet' },
   ];
 
   ngOnInit() {}

@@ -30,7 +30,7 @@
             fill="white"
           ></path>
         </svg>
-        <span>boards</span>
+        <span *transloco="let t">{{t('header.boards')}}</span>
       </button>
     </div>
     <div
@@ -83,18 +83,31 @@
         </mat-form-field>
       </div>
     </div>
-    <div
-      class="authorization"
-      *ngIf="!auth.isAuthenticated()"
-    >
-      <button (click)="openRegistrationPage()">sign up</button>
-      <button (click)="openLoginPage()">log in</button>
-    </div>
-    <div
-      class="authorization"
-      *ngIf="auth.isAuthenticated()"
-    >
-      <button (click)="openDialog('500ms', '500ms')">log out</button>
+    <div class="right-button">
+      <div
+        class="authorization"
+        *ngIf="!auth.isAuthenticated()"
+      >
+        <button *transloco="let t" (click)="openRegistrationPage()">{{t('header.singUp')}}</button>
+        <button *transloco="let t" (click)="openLoginPage()">{{t('header.logIn')}}</button>
+      </div>
+      <div
+        class="authorization"
+        *ngIf="auth.isAuthenticated()"
+      >
+      <button *transloco="let t" (click)="openDialog('500ms', '500ms')">{{t('header.logOut')}}</button>
+      </div>
+      <div class="langauge-wrapper">
+        <mat-form-field class="langauge-wrapper__switch" >
+          <img class="img-def" width="30px" src={{selectedFlag}} alt="flag">
+          <mat-select [(ngModel)]="selectedLanguage" name="lang">
+            <mat-option  class="mat-option" (click)="switchLang()" *ngFor="let lang of languages" [value]="lang.value">
+              <img style="margin-left: -9px;" width="36px" src={{lang.img}} alt="flag">
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
   </div>
+
 </header>

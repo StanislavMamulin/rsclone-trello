@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MainPageRoutingModule } from './main-page-routing.module';
 import { MainComponent } from './main/main.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [MainComponent],
@@ -11,6 +12,7 @@ import { CoreModule } from 'src/app/core/core.module';
     CommonModule,
     MainPageRoutingModule,
     CoreModule,
+    SharedModule
   ],
 })
 export class MainPageModule {}

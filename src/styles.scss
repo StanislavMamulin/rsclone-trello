@@ -123,6 +123,22 @@ html {
   min-height: 32px;
 }
 
+.mat-mdc-text-field-wrapper.mdc-text-field.ng-tns-c102-0.mdc-text-field--filled.mdc-text-field--no-label {
+  background-color: rgba(245, 245, 245, 0);
+  .mdc-line-ripple::before {
+    border-bottom-width: 0px;
+  }
+}
+
+.mat-mdc-option.mat-mdc-option-active,
+.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.ng-trigger.ng-trigger-transformPanel.ng-tns-c111-1.mat-mdc-select-panel.mdc-menu-surface.mdc-menu-surface--open.mat-primary.ng-star-inserted {
+  background: rgb(237, 237, 237);
+}
+
 html,
 body {
   height: 100%;
@@ -130,7 +146,4 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-app-checkbox {
 }

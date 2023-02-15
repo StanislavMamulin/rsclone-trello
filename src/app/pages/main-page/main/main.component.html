@@ -1,10 +1,8 @@
 <main>
   <div class="container">
-    <h1>Getting started with Trello</h1>
-    <div class="description">
-      Welcome to Trello! Simple, flexible, and powerful. All it takes are boards, lists, and cards
-      to get a clear view of who’s doing what and what needs to get done. Trello brings all your
-      tasks, teammates, and tools together
+    <h1 *transloco="let t">{{t('pageInfo.title')}}</h1>
+    <div *transloco="let t" class="description">
+      {{t('pageInfo.subtitle')}}
     </div>
     <section>
       <div
@@ -12,24 +10,21 @@
         class="cards-wrapper"
       >
         <div class="card selected">
-          <h3>Boards</h3>
-          <p>
-            Trello boards keep tasks organized and work moving forward. In a glance, see everything
-            from “things to do” to “aww yeah, we did it!
+          <h3 *transloco="let t">{{t('pageInfo.cardBoardTitle')}}</h3>
+          <p *transloco="let t">
+            {{t('pageInfo.cardBoardSubtitle')}}
           </p>
         </div>
         <div class="card">
-          <h3>Lists</h3>
-          <p>
-            The different stages of a task. Start as simple as To Do, Doing or Done—or build a
-            workflow custom fit to your team’s needs. There’s no wrong way to Trello.
+          <h3 *transloco="let t">{{t('pageInfo.cardListTitle')}}</h3>
+          <p *transloco="let t">
+            {{t('pageInfo.cardListSubtitle')}}
           </p>
         </div>
         <div class="card">
-          <h3>Cards</h3>
-          <p>
-            Cards represent tasks and ideas and hold all the information to get the job done. As you
-            make progress, move cards across lists to show their status.
+          <h3 *transloco="let t">{{t('pageInfo.cardTitle')}}</h3>
+          <p *transloco="let t">
+            {{t('pageInfo.cardSubtitle')}}
           </p>
         </div>
       </div>

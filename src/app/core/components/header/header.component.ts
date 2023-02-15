@@ -5,6 +5,12 @@ import { BoardService } from 'src/app/modules/board/board-service.service';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalLogOutComponent } from '../modal-log-out/modal-log-out.component';
+import { TranslocoService } from '@ngneat/transloco';
+
+interface ILanguage {
+  value: string;
+  img: string;
+}
 
 @Component({
   selector: 'app-header',
@@ -13,17 +19,31 @@ import { ModalLogOutComponent } from '../modal-log-out/modal-log-out.component';
 })
 export class HeaderComponent implements OnInit {
   boards: IBoard[] = [];
-
+  selectedLanguage: string;
+  selectedFlag: string = localStorage.getItem('flag') || '../../../../assets/images/en.svg';
   isAuth = false;
 
   searchStr = '';
+
+  languages: ILanguage[] = [
+    {value: 'en', img: '../../../../assets/images/en.svg'},
+    {value: 'ru', img: '../../../../assets/images/ru.svg'},
+  ];
 
   constructor(
     private router: Router,
     private boardService: BoardService,
     public auth: AuthService,
     public dialog: MatDialog,
+    private translocoService: TranslocoService
   ) {}
+
+  switchLang(){
+    this.selectedFlag = `../../../../assets/images/${this.selectedLanguage}.svg`
+    this.translocoService.setActiveLang(this.selectedLanguage);
+    localStorage.setItem('language',this.selectedLanguage);
+    localStorage.setItem('flag',this.selectedFlag);
+  }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(ModalLogOutComponent, {

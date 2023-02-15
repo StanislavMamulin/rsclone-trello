@@ -18,6 +18,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TranslocoRootModule } from '../transloco-root.module';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -43,6 +45,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatProgressBarModule,
     MatSnackBarModule,
     MatDialogModule,
+    TranslocoRootModule,
     MatMenuModule,
   ],
   exports: [
@@ -64,6 +67,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatProgressBarModule,
     MatSnackBarModule,
     MatDialogModule,
+    TranslocoRootModule
     AutofocusDirective,
     MatMenuModule,
   ],

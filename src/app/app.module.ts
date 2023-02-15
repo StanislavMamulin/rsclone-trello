@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './core/services/auth.interceptor';
+import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { AuthInterceptor } from './core/services/auth.interceptor';
     AppRoutingModule,
     CoreModule,
     BrowserAnimationsModule,
+    TranslocoRootModule,
   ],
   providers: [
     {
