@@ -47,7 +47,7 @@ export class BoardComponent implements OnInit {
   }
 
   openBoard(event: any) {
-    if (event.currentTarget.classList.contains('board__offer-open')) {     
+    if (event.currentTarget.classList.contains('board__offer-open')) {
       this.boardsStateService.setCurrentBoard(this.board);
       this.router.navigate(['/board', this.board.idBoard]);
     }

@@ -32,6 +32,12 @@ export class CheckboxComponent implements OnInit {
     this.inputValue = this.checkbox.nameCheckBox;
   }
 
+  updateIsChooseBlur(event: FocusEvent){
+    if(!(event.relatedTarget instanceof HTMLInputElement)){
+      this.isChoose = false;
+    }
+  }
+
   updateIsChoose(event:any) {
     this.isChoose = !this.isChoose;
     const editInput = event.target.nextSibling?.querySelector('.edit-input');

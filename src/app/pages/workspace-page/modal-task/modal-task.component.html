@@ -49,12 +49,13 @@
             formControlName="addCheckBox"
             class="create-input"
             type="text"
+            (blur)="updateIsChooseBlur($event)"
           />
           <div class="create-wrapper">
             <div class="create-button">
               <button class="btn-add-checkbox"
-                (click)="updateCreateState($event)"
-                (click)="createCheckBox()"
+                (mousedown)="updateCreateState($event)"
+                (mousedown)="createCheckBox()"
                 mat-raised-button
                 color="primary"
                 [disabled]="formTask.controls['addCheckBox'].errors"
@@ -63,7 +64,7 @@
               </button>
             </div>
             <mat-icon
-              (click)="updateCreateState($event)"
+              (mousedown)="updateCreateState($event)"
               class="delete-task"
               >close</mat-icon
             >
@@ -73,7 +74,7 @@
     </div>
     <button
       class="add-element"
-      (click)="updateCreateState($event)"
+      (mousedown)="updateCreateState($event)"
       [ngClass]="{'active-create':isCreate}"
       mat-raised-button
       color="primary"
@@ -83,6 +84,6 @@
   </section>
   <mat-icon
     class="close-modal"
-    (click)="closeModal(); updateTask(); updateChecklist()"
+    (mousedown)="closeModal(); updateTask(); updateChecklist()"
     >close</mat-icon>
 </div>

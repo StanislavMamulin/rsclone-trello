@@ -1,4 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { TaskStateService } from 'src/app/core/services/task-state.service';
+import { ICheckBox } from 'src/app/pages/workspace-page/model/checkbox.interface';
 import { ITask } from '../../model/task.interface';
 
 
@@ -14,12 +16,17 @@ export class TaskComponent implements OnInit{
   allChecked: number = 0;
   isDone: boolean = false;
 
+  constructor(
+    private taskStateService: TaskStateService
+  ){}
+
   ngOnInit(){
-    setInterval(()=>{
+
+    this.taskStateService.checklist$.subscribe((checklist: ICheckBox[])=>{
       this.checked = this.taskInfo.checkLists.filter(item => item.isChoose).length;
       this.allChecked = this.taskInfo.checkLists.length;
       this.isDone = this.checked === this.allChecked && this.checked != 0;
-    },500);
+    })
   }
 
   deleteTask(idTask:string){

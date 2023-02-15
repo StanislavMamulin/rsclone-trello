@@ -188,14 +188,15 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       })
     })
+  }
 
   addBoardSubscribers() {
     this.subscriptions.push(this.boardsStateService.boards$.subscribe((boards: IBoard[]) => {
       this.allBoards = boards;
     }));
-    this.subscriptions.push(this.boardsStateService.currentBoard$.subscribe((board) => {     
+    this.subscriptions.push(this.boardsStateService.currentBoard$.subscribe((board) => {
       this.currentBoard = board;
-    }));   
+    }));
   }
 
   setDirectionBoards() {
