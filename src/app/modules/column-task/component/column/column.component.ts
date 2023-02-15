@@ -192,7 +192,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     this.deletedTask.emit(this.column);
     this.columnTaskService.moveColumn(this.column.idColumn, {
       toBoardId: destBoard.idBoard,
-      newPosition: destBoard.columns.length,
+      newPosition: 0,
     }).subscribe();
   }
 }

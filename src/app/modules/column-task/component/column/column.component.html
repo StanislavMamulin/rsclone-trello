@@ -103,6 +103,12 @@
       <span class="menu-item__title">{{ columnItem.nameColumn }}</span>
     </button>
   </ng-container>
+  <p
+    class="no-items"
+    *ngIf="directionColumns.length === 0"
+  >
+    No columns to move
+  </p>
 </mat-menu>
 
 <mat-menu #boardsList>
@@ -114,4 +120,10 @@
       <span class="menu-item__title">{{ boardItem.nameBoard }}</span>
     </button>
   </ng-container>
+  <p
+    class="no-items"
+    *ngIf="directionColumns.length === 0"
+  >
+    No boards to move
+  </p>
 </mat-menu>
