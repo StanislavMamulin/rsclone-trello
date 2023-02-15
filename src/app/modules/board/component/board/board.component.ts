@@ -1,5 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 import { IColumn } from 'src/app/modules/column-task/model/column.interface';
 import { BoardService } from '../../board-service.service';
 import { IBoard } from '../../model/Board.model';
@@ -26,7 +27,11 @@ export class BoardComponent implements OnInit {
 
   isDelete = false;
 
-  constructor(private boardService: BoardService, private router: Router) {}
+  constructor(
+    private boardService: BoardService,
+    private router: Router,
+    private boardsStateService: BoardsStateService,
+  ) {}
 
   ngOnInit() {
     this.isOpenDescription = false;
@@ -42,8 +47,10 @@ export class BoardComponent implements OnInit {
   }
 
   openBoard(event: any) {
-    if (event.currentTarget.classList.contains('board__offer-open'))
+    if (event.currentTarget.classList.contains('board__offer-open')) {     
+      this.boardsStateService.setCurrentBoard(this.board);
       this.router.navigate(['/board', this.board.idBoard]);
+    }
   }
 
   updateBoard(id: string) {

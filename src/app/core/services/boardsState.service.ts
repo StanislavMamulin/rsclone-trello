@@ -10,7 +10,11 @@ export class BoardsStateService {
 
   private _boards = new BehaviorSubject<IBoard[]>(this.initialBoards);
 
+  private currentBoard = new BehaviorSubject<IBoard>(this.initialBoards[0]);
+
   private _boards$ = this._boards.asObservable();
+  
+  private currentBoard$ = this.currentBoard.asObservable();
 
   getBoards(): Observable<IBoard[]> {
     return this._boards$;
@@ -18,5 +22,13 @@ export class BoardsStateService {
 
   setBoards(newBoards: IBoard[]) {
     return this._boards.next(newBoards);
+  }
+
+  getCurrentBoard(): Observable<IBoard> {
+    return this.currentBoard$;
+  }
+
+  setCurrentBoard(board: IBoard) {
+    this.currentBoard.next(board);
   }
 }

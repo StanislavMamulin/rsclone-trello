@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, AfterViewInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ColumnTaskService } from '../../column-task.service';
 import { IColumn } from '../../model/column.interface';
@@ -8,16 +8,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalTaskComponent } from 'src/app/pages/workspace-page/modal-task/modal-task.component';
 import { ColumnDescriptionComponent } from './column-description/column-description.component';
 import { BoardsStateService } from 'src/app/core/services/boardsState.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
 })
-export class ColumnComponent implements OnInit, AfterViewInit {
+export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() column: IColumn;
-
-  @Input() currentBoard: IBoard;
 
   @Input() columnsInBoard: IColumn[];
 
@@ -29,6 +28,8 @@ export class ColumnComponent implements OnInit, AfterViewInit {
 
   tasks: ITask[];
 
+  currentBoard: IBoard;
+
   allBoards: IBoard[];
 
   directionColumns: IColumn[];
@@ -37,18 +38,22 @@ export class ColumnComponent implements OnInit, AfterViewInit {
 
   isShowEditColumnTitle = false;
 
-  constructor(private columnTaskService: ColumnTaskService, public dialog: MatDialog, private boardsService: BoardsStateService) {}
+  subscriptions: Subscription[] = [];
+
+  constructor(private columnTaskService: ColumnTaskService, public dialog: MatDialog, private boardsStateService: BoardsStateService) {}
 
   ngOnInit() {
     this.tasks = this.column.tasks;
     this.setDirectionColumns();
-    this.boardsService.getBoards().subscribe((boards: IBoard[]) => {
-      this.allBoards = boards;
-    });
+    this.addBoardSubscribers();
   }
 
   ngAfterViewInit(): void {
     this.titleInput.changes.subscribe(() => this.focusTitleInput());
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subs => subs.unsubscribe());
   }
 
   drop(event: CdkDragDrop<IMovedTask>) {
@@ -138,10 +143,6 @@ export class ColumnComponent implements OnInit, AfterViewInit {
     this.deletedTask.emit(column);
   }
 
-  moveColumnWithinBoard() {
-
-  }
-
   moveTaskToNewColumn(newColumn: IColumn): void {
     const copyTasks = [...this.column.tasks];
     copyTasks.reverse().forEach((task: ITask) =>
@@ -159,6 +160,7 @@ export class ColumnComponent implements OnInit, AfterViewInit {
 
   showedColumnMenu() {
     this.setDirectionColumns();
+    this.setDirectionBoards();
   }
 
   setDirectionColumns() {
@@ -171,5 +173,26 @@ export class ColumnComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe();
+  }
+
+  addBoardSubscribers() {
+    this.subscriptions.push(this.boardsStateService.getBoards().subscribe((boards: IBoard[]) => {
+      this.allBoards = boards;
+    }));
+    this.subscriptions.push(this.boardsStateService.getCurrentBoard().subscribe((board) => {     
+      this.currentBoard = board;
+    }));   
+  }
+
+  setDirectionBoards() {
+    this.allBoards = this.allBoards.filter((board) => board.idBoard !== this.currentBoard.idBoard);
+  }
+
+  moveColumnToOtherBoard(destBoard: IBoard) {
+    this.deletedTask.emit(this.column);
+    this.columnTaskService.moveColumn(this.column.idColumn, {
+      toBoardId: destBoard.idBoard,
+      newPosition: destBoard.columns.length,
+    }).subscribe();
   }
 }
