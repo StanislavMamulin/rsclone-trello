@@ -103,6 +103,27 @@
       <span class="menu-item__title">{{ columnItem.nameColumn }}</span>
     </button>
   </ng-container>
+  <p
+    class="no-items"
+    *ngIf="directionColumns.length === 0"
+  >
+    No columns to move
+  </p>
 </mat-menu>
 
-<mat-menu #boardsList> </mat-menu>
+<mat-menu #boardsList>
+  <ng-container *ngFor="let boardItem of allBoards">
+    <button
+      mat-menu-item
+      (click)="moveColumnToOtherBoard(boardItem)"
+    >
+      <span class="menu-item__title">{{ boardItem.nameBoard }}</span>
+    </button>
+  </ng-container>
+  <p
+    class="no-items"
+    *ngIf="directionColumns.length === 0"
+  >
+    No boards to move
+  </p>
+</mat-menu>

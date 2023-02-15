@@ -6,6 +6,7 @@ import {
   IBoardUpdateResponse,
 } from 'src/app/modules/board/model/Board.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 
 @Component({
   selector: 'app-board-page',
@@ -39,7 +40,7 @@ export class BoardPageComponent implements OnInit {
 
   isEnter = false;
 
-  constructor(private boardService: BoardService) {}
+  constructor(private boardService: BoardService, private boardStateService: BoardsStateService) {}
 
   ngOnInit(): void {
     this.createFormModal = new FormGroup({
@@ -53,6 +54,7 @@ export class BoardPageComponent implements OnInit {
       .subscribe(res=>{
         this.boards = res;
         this.isLoading = false;
+        this.boardStateService.setBoards(res);
       });
   }
 
@@ -104,11 +106,13 @@ export class BoardPageComponent implements OnInit {
       .subscribe((res: IBoardCreateResponse) => {
         this.boards.push(res);
         this.defaultModal();
+        this.boardStateService.setBoards(this.boards);
       });
   }
 
   deleteBoard(id: string) {
     this.boards = this.boards.filter((board) => board.idBoard !== id);
+    this.boardStateService.setBoards(this.boards);
   }
 
   openUpdateModal(id: string) {
@@ -138,6 +142,7 @@ export class BoardPageComponent implements OnInit {
           this.boards[indexUpdatedBoard].descriptionBoard = res.descriptionBoard;
           this.boards[indexUpdatedBoard].dateBoard = res.dateBoard;
         }
+        this.boardStateService.setBoards(this.boards);
         this.defaultModal();
       });
   }
