@@ -14,21 +14,39 @@ export class AddControlsComponent {
 
   newElementTitle: string;
 
-  addNewTaskHandler() {
+  addNewTaskHandler(event: Event) {
+    event.preventDefault();
     this.addTask();
   }
 
-  enterPressed() {
+  enterPressed(event: Event) {
+    event.preventDefault();
     this.addTask();
   }
 
   private addTask() {
-    this.addButtonPressed.emit(this.newElementTitle);
-    this.newElementTitle = '';
+    if (this.newElementTitle) {
+      this.addButtonPressed.emit(this.newElementTitle.trim());
+      this.newElementTitle = '';
+    }
   }
 
   cancelTaskCreation() {
     this.newElementTitle = '';
     this.cancelButtonPressed.emit();
+  }
+
+  blurHandler(event: FocusEvent) {
+    if (event.relatedTarget) {
+      event.preventDefault();
+      if (event.target instanceof HTMLTextAreaElement) {
+        event.target.focus();
+      }
+    } else {
+      if (this.newElementTitle) {
+        this.addTask();
+      }
+      this.cancelButtonPressed.emit();
+    }
   }
 }
