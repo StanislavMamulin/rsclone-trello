@@ -30,14 +30,11 @@ export class ModalTaskComponent implements OnInit {
 
   ngOnInit() {
     this.formTask = new FormGroup({
-      nameTask: new FormControl(this.data.task.nameTask, [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
+      nameTask: new FormControl(this.data.task.nameTask, [Validators.required]),
       descriptionTask: new FormControl(this.data.task.descriptionTask ||
         `description of ${this.data.task.nameTask}`, [
         Validators.required,
-        Validators.minLength(10),
+        Validators.minLength(5),
       ]),
       addCheckBox: new FormControl(null, [Validators.required]),
     });

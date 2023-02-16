@@ -66,7 +66,7 @@ export class BoardPageComponent implements OnInit {
 
     document.onkeyup = (e: KeyboardEvent) => {
 
-      if (e.ctrlKey && e.code === "ArrowRight") {
+      if (e.code === "ArrowRight") {
         e.preventDefault();
         const boards = document.querySelectorAll('app-board');
         if (this.indexBoard < boards.length - 1 && e.code === 'ArrowRight') {
@@ -84,7 +84,7 @@ export class BoardPageComponent implements OnInit {
           }
         })
       }
-      if (e.ctrlKey && e.code === "ArrowLeft") {
+      if (e.code === "ArrowLeft") {
         e.preventDefault();
         const boards = document.querySelectorAll('app-board');
 

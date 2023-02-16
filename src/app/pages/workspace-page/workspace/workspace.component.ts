@@ -62,7 +62,7 @@ export class WorkspaceComponent implements OnInit {
         }
       }
 
-      if (e.ctrlKey && e.code === "ArrowRight" && this.isWorkHotKeys) {
+      if (e.code === "ArrowRight" && this.isWorkHotKeys) {
         e.preventDefault();
         if (this.indexColumn < columns.length - 1 && e.code === 'ArrowRight') {
           ++this.indexColumn;
@@ -80,20 +80,24 @@ export class WorkspaceComponent implements OnInit {
 
         columns.forEach((item, i) => {
           if (i === this.indexColumn) {
-            item.classList.add("active");
             const tasks = item.querySelectorAll('app-task');
-            if(this.indexTask > tasks.length-1){
-              this.indexTask = tasks.length-1;
-            }
-            tasks.forEach((item,i)=>{
-              if(i === this.indexTask){
-                item.classList.add('active');
+            if(tasks.length === 0){
+              ++this.indexColumn;
+            }else{
+              item.classList.add("active");
+              if(this.indexTask > tasks.length-1){
+                this.indexTask = tasks.length-1;
               }
-            })
+              tasks.forEach((item,i)=>{
+                if(i === this.indexTask){
+                  item.classList.add('active');
+                }
+              })
+            }
           }
         })
       }
-      if (e.ctrlKey && e.code === "ArrowLeft" && this.isWorkHotKeys) {
+      if (e.code === "ArrowLeft" && this.isWorkHotKeys) {
         e.preventDefault();
         if (this.indexColumn > 0 && e.code === 'ArrowLeft') {
           --this.indexColumn;
@@ -109,22 +113,28 @@ export class WorkspaceComponent implements OnInit {
           }
         })
 
-        columns.forEach((item, i) => {
+        for(let i = 0; i<columns.length; i++){
           if (i === this.indexColumn) {
-            item.classList.add("active");
-            const tasks = item.querySelectorAll('app-task');
-            if(this.indexTask > tasks.length-1){
-              this.indexTask = tasks.length-1;
-            }
-            tasks.forEach((item,i)=>{
-              if(i === this.indexTask){
-                item.classList.add('active');
+            const tasks = columns[i].querySelectorAll('app-task');
+            if(tasks.length === 0){
+              --this.indexColumn;
+              i=0;
+            } else{
+              columns[i].classList.add("active");
+              if(this.indexTask > tasks.length-1){
+                this.indexTask = tasks.length-1;
               }
-            })
+              tasks.forEach((item,i)=>{
+                if(i === this.indexTask){
+                  item.classList.add('active');
+                }
+              })
+            }
           }
-        })
+        }
       }
-      if (e.ctrlKey && e.code === "ArrowDown" && this.isWorkHotKeys) {
+      console.log(this.indexColumn);
+      if (e.code === "ArrowDown" && this.isWorkHotKeys) {
         e.preventDefault();
         let activeColumn = columns[0];
         columns.forEach(item=>{
@@ -149,7 +159,7 @@ export class WorkspaceComponent implements OnInit {
           }
         })
       }
-      if (e.ctrlKey && e.code === "ArrowUp" && this.isWorkHotKeys) {
+      if (e.code === "ArrowUp" && this.isWorkHotKeys) {
         e.preventDefault();
         let activeColumn = columns[0];
         columns.forEach(item=>{
