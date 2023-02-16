@@ -8,10 +8,14 @@
       src="../../../../assets/images/user-icon.svg"
       alt="user"
     />
-    <span class="title">Sign Up</span>
+    <span
+      class="title"
+      *transloco="let t"
+      >{{ t('signUp.signUp') }}</span
+    >
 
     <mat-form-field class="registration__firstname">
-      <mat-label>First name</mat-label>
+      <mat-label *transloco="let t">{{ t('signUp.firstName') }}</mat-label>
       <input
         matInput
         formControlName="firstNameControl"
@@ -19,28 +23,33 @@
       <mat-error
         *ngIf="form.get('firstNameControl').invalid && form.get('firstNameControl').touched"
       >
-        <span *ngIf="form.get('firstNameControl').errors.required">Enter first name</span>
+        <span *ngIf="form.get('firstNameControl').errors.required"
+          ><span *transloco="let t">{{ t('signUp.firstNameError') }}</span></span
+        >
         <span *ngIf="form.get('firstNameControl').errors.pattern">
-          Only numbers, letters, characters (3 - 15)
+          <span *transloco="let t">{{ t('signUp.nameValidError') }}</span>
         </span>
       </mat-error>
     </mat-form-field>
     <mat-form-field class="registration__lastname">
-      <mat-label>Last name</mat-label>
+      <mat-label *transloco="let t">{{ t('signUp.lastName') }}</mat-label>
       <input
         matInput
         formControlName="lastNameControl"
       />
       <mat-error *ngIf="form.get('lastNameControl').invalid && form.get('lastNameControl').touched">
-        <span *ngIf="form.get('lastNameControl').errors.required">Enter first name</span>
+        <span *ngIf="form.get('lastNameControl').errors.required"
+          ><span *transloco="let t">{{ t('signUp.lastNameError') }}</span></span
+        >
         <span *ngIf="form.get('lastNameControl').errors.pattern">
-          Only numbers, letters, characters (3 - 15)
+          <span *transloco="let t">{{ t('signUp.nameValidError') }}</span
+          >`
         </span>
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Gender</mat-label>
+      <mat-label *transloco="let t">{{ t('signUp.gender') }}</mat-label>
       <mat-select formControlName="sexControl">
         <mat-option
           *ngFor="let gender of genders"
@@ -50,12 +59,14 @@
         </mat-option>
       </mat-select>
       <mat-error *ngIf="form.get('sexControl').invalid && form.get('sexControl').touched">
-        <span *ngIf="form.get('sexControl').errors.required">Choose a gender</span>
+        <span *ngIf="form.get('sexControl').errors.required"
+          ><span *transloco="let t">{{ t('signUp.genderError') }}</span></span
+        >
       </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
+      <mat-label *transloco="let t">{{ t('signUp.email') }}</mat-label>
       <input
         type="email"
         matInput
@@ -65,16 +76,22 @@
       <mat-error
         *ngIf="form.get('emailFormControl').invalid && form.get('emailFormControl').touched"
       >
-        <span *ngIf="form.get('emailFormControl').errors.required">Enter email</span>
-        <span *ngIf="form.get('emailFormControl').errors.email">Input correct email</span>
+        <span *ngIf="form.get('emailFormControl').errors.required"
+          ><span *transloco="let t">{{ t('signUp.emailError') }}</span></span
+        >
+        <span *ngIf="form.get('emailFormControl').errors.email"
+          ><span *transloco="let t">{{ t('signUp.correctEmailError') }}</span></span
+        >
         <span *ngIf="form.get('emailFormControl').errors.restricredEmail">
-          Email {{ form.get('emailFormControl').value }} already exists
+          <span *transloco="let t">{{ t('signUp.email') }}</span>
+          {{ form.get('emailFormControl').value }}
+          <span *transloco="let t">{{ t('signUp.existError') }}</span>
         </span>
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Enter your password</mat-label>
+      <mat-label *transloco="let t">{{ t('signUp.password') }}</mat-label>
       <input
         (input)="updateSubmitted()"
         formControlName="enterPassword"
@@ -91,15 +108,17 @@
         <mat-icon>{{ isHidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
       <mat-error *ngIf="form.get('enterPassword').invalid && form.get('enterPassword').touched">
-        <span *ngIf="form.get('enterPassword').errors.required">Enter password</span>
+        <span *ngIf="form.get('enterPassword').errors.required"
+          ><span *transloco="let t">{{ t('signUp.passwordExistError') }}</span></span
+        >
         <span *ngIf="form.get('enterPassword').errors.pattern">
-          One caps letter, > 8 , one number, one of !@#$%^&*
+          <span *transloco="let t">{{ t('signUp.passwordError') }}</span>
         </span>
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Repeat your password</mat-label>
+      <mat-label *transloco="let t">{{ t('signUp.repeatPassword') }}</mat-label>
       <input
         (input)="updateSubmitted()"
         formControlName="repeatPassword"
@@ -116,9 +135,11 @@
         <mat-icon>{{ isHidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
       <mat-error *ngIf="form.get('repeatPassword').invalid && form.get('repeatPassword').touched">
-        <span *ngIf="form.get('repeatPassword').errors.required">Enter password</span>
+        <span *ngIf="form.get('repeatPassword').errors.required"
+          ><span *transloco="let t">{{ t('signUp.passwordExistError') }}</span></span
+        >
         <span *ngIf="form.get('repeatPassword').errors.pattern">
-          One caps letter, > 8 , one number, one of !@#$%^&*
+          <span *transloco="let t">{{ t('signUp.passwordError') }}</span>
         </span>
       </mat-error>
     </mat-form-field>
@@ -127,13 +148,14 @@
       [disabled]="form.invalid || isSubmitted"
       mat-raised-button
       color="primary"
+      *transloco="let t"
     >
-      Sign Up
+      {{ t('signUp.signUp') }}
     </button>
     <mat-error
       class="isSubmitted"
       *ngIf="isSubmitted"
-      >Passwords mismatch</mat-error
+      ><span *transloco="let t">{{ t('signUp.passwordMismatch') }}</span></mat-error
     >
   </mat-card>
 </form>

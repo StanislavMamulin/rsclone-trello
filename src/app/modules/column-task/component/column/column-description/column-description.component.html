@@ -1,5 +1,10 @@
 <div class="modal-container">
-  <h1 mat-dialog-title>Column info</h1>
+  <h1
+    mat-dialog-title
+    *transloco="let t"
+  >
+    {{ t('workSpace.columnInfo') }}
+  </h1>
   <div
     mat-dialog-content
     class="column-description__container"
@@ -16,11 +21,18 @@
       mat-raised-button
       (click)="onNoClick()"
       cdkFocusInitial
+      *transloco="let t"
     >
-      Close
+      {{ t('workSpace.close') }}
     </button>
-    <button (click)="saveDescription()" class="modal-button" mat-raised-button mat-dialog-close color="primary">
-      Save
+    <button
+      mat-dialog-close
+      mat-raised-button
+      (click)="saveDescription()"
+      color="primary"
+      *transloco="let t"
+    >
+      {{ t('workSpace.save') }}
     </button>
   </div>
 </div>

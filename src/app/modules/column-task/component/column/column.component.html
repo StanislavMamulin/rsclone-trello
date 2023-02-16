@@ -51,7 +51,7 @@
     class="column__add-task"
     (click)="showAddTask()"
   >
-    + Add task
+    <span *transloco="let t">{{ t('workSpace.addTask') }}</span>
   </button>
 
   <ng-template #addTask>
@@ -69,14 +69,22 @@
     (click)="showColumnInfo()"
   >
     <mat-icon class="menu-item__icon" color="primary">info</mat-icon>
-    <span class="menu-item__title">Show column description</span>
+    <span
+      class="menu-item__title"
+      *transloco="let t"
+      >{{ t('workSpace.columnDescription') }}</span
+    >
   </button>
   <button
     mat-menu-item
     (click)="deleteColumn(column)"
   >
     <mat-icon class="menu-item__icon" color="warn">delete_forever</mat-icon>
-    <span class="menu-item__title">Delete column</span>
+    <span
+      class="menu-item__title"
+      *transloco="let t"
+      >{{ t('workSpace.columnDelete') }}</span
+    >
   </button>
   <hr />
   <button
@@ -84,14 +92,22 @@
     [matMenuTriggerFor]="columnsList"
   >
     <mat-icon class="menu-item__icon" color="primary">playlist_play</mat-icon>
-    <span class="menu-item__title">Move all tasks to other column...</span>
+    <span
+      class="menu-item__title"
+      *transloco="let t"
+      >{{ t('workSpace.moveToColumn') }}</span
+    >
   </button>
   <button
     mat-menu-item
     [matMenuTriggerFor]="boardsList"
   >
     <mat-icon class="menu-item__icon" color="primary">dashboard</mat-icon>
-    <span class="menu-item__title">Move column to other board</span>
+    <span
+      class="menu-item__title"
+      *transloco="let t"
+      >{{ t('workSpace.moveToBoard') }}</span
+    >
   </button>
 </mat-menu>
 
@@ -108,7 +124,7 @@
     class="no-items"
     *ngIf="directionColumns.length === 0"
   >
-    No columns to move
+    <span *transloco="let t">{{ t('workSpace.noColumnsToMove') }}</span>
   </p>
 </mat-menu>
 
@@ -125,6 +141,6 @@
     class="no-items"
     *ngIf="directionColumns.length === 0"
   >
-    No boards to move
+    <span *transloco="let t">{{ t('workSpace.noBoardsToMove') }}</span>
   </p>
 </mat-menu>

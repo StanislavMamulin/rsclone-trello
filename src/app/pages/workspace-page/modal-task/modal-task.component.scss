@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 500px;
+  max-width: 500px;
   max-height: 600px;
   overflow-y: auto;
   border-radius: 4px;
@@ -31,6 +31,7 @@
   .title {
     position: relative;
     margin-bottom: 0;
+    display: flex;
     mat-icon {
       position: absolute;
       left: -32px;
@@ -42,11 +43,32 @@
       border: none;
       padding-left: 5px;
       font-size: 24px;
+      display: inline-block;
+      @media (max-width: 510px) {
+        display: none;
+      }
       &:focus {
         outline: 2px solid #3f51b5;
       }
-      &:hover{
+      &:hover {
         background: whitesmoke;
+      }
+    }
+    textarea {
+      font-size: 20px;
+      margin-top: 10px;
+      flex-grow: 1;
+      border: none;
+      resize: none;
+      display: none;
+      &:focus {
+        outline: 2px solid #3f51b5;
+      }
+      &:hover {
+        background: whitesmoke;
+      }
+      @media (max-width: 510px) {
+        display: inline-flex;
       }
     }
   }
@@ -76,6 +98,9 @@
     border: none;
     resize: vertical;
     max-height: 300px;
+    @media (max-width: 510px) {
+      font-size: 15px;
+    }
     &:focus {
       outline: 2px solid #3f51b5;
     }
@@ -126,7 +151,7 @@ mat-progress-bar {
 }
 
 .task-create-wrapper {
-  &.active-create{
+  &.active-create {
     display: none;
   }
   display: flex;
@@ -146,7 +171,6 @@ mat-progress-bar {
     }
   }
 
-
   .task-create {
     display: flex;
     align-items: baseline;
@@ -162,6 +186,9 @@ mat-progress-bar {
         padding-left: 5px;
         padding-top: 5px;
         font-size: 17px;
+        @media (max-width: 510px) {
+          font-size: 15px;
+        }
         &:focus {
           outline: 1px solid #3f51b5 !important;
         }
@@ -185,10 +212,8 @@ mat-progress-bar {
   }
 }
 
-.add-element{
-  &.active-create{
+.add-element {
+  &.active-create {
     display: none;
   }
 }
-
-
