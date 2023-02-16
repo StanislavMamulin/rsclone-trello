@@ -2,8 +2,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 500px;
-  height: 500px;
+  max-width: 500px;
+  max-height: 600px;
   overflow-y: auto;
   border-radius: 4px;
   padding: 1rem;
@@ -31,22 +31,59 @@
 .title-wrapper .title {
   position: relative;
   margin-bottom: 0;
+  display: flex;
 }
 
 .title-wrapper .title mat-icon {
   position: absolute;
   left: -32px;
-  top: 3px;
+  top: 10px;
 }
 
 .title-wrapper .title input {
+  margin-top: 10px;
+  width: 100%;
   border: none;
   padding-left: 5px;
   font-size: 24px;
+  display: inline-block;
+}
+
+@media (max-width: 510px) {
+  .title-wrapper .title input {
+    display: none;
+  }
 }
 
 .title-wrapper .title input:focus {
-  outline: 1px solid #3f51b5;
+  outline: 2px solid #3f51b5;
+}
+
+.title-wrapper .title input:hover {
+  background: whitesmoke;
+}
+
+.title-wrapper .title textarea {
+  font-size: 20px;
+  margin-top: 10px;
+  flex-grow: 1;
+  border: none;
+  resize: none;
+  display: none;
+}
+
+.title-wrapper .title textarea:focus {
+  outline: 2px solid #3f51b5;
+}
+
+.title-wrapper .title textarea:hover {
+  background: whitesmoke;
+}
+
+@media (max-width: 510px) {
+  .title-wrapper .title textarea {
+    display: inline-flex;
+  }
 }
 
 .title-wrapper p span {
@@ -74,8 +111,14 @@
   max-height: 300px;
 }
 
+@media (max-width: 510px) {
+  .description-wrapper textarea {
+    font-size: 15px;
+  }
+}
+
 .description-wrapper textarea:focus {
-  outline: 1px solid #3f51b5;
+  outline: 2px solid #3f51b5;
 }
 
 .description-wrapper textarea:hover {
@@ -95,7 +138,7 @@
   position: relative;
 }
 
-.checklist-wrapper h4 mat-icon {
+.checklist-wrapper h4 img {
   position: absolute;
   left: -32px;
 }
@@ -135,6 +178,10 @@ mat-progress-bar {
   cursor: pointer;
 }
 
+.task-create-wrapper.active-create {
+  display: none;
+}
+
 .task-create-wrapper:hover {
   background: whitesmoke;
 }
@@ -169,6 +216,12 @@ mat-progress-bar {
   font-size: 17px;
 }
 
+@media (max-width: 510px) {
+  .task-create-wrapper .task-create .create input {
+    font-size: 15px;
+  }
+}
+
 .task-create-wrapper .task-create .create input:focus {
   outline: 1px solid #3f51b5 !important;
 }
@@ -188,4 +241,8 @@ mat-progress-bar {
 
 .task-create-wrapper .task-create .create-button button {
   margin: 0;
+}
+
+.add-element.active-create {
+  display: none;
 }
