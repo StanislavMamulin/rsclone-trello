@@ -37,12 +37,17 @@ export class AddControlsComponent {
   }
 
   blurHandler(event: FocusEvent) {
-    if (event.relatedTarget) {
+    const target = event.relatedTarget as HTMLElement;
+
+    if (target
+      && !(target instanceof HTMLButtonElement)
+    ) {      
       event.preventDefault();
       if (event.target instanceof HTMLTextAreaElement) {
         event.target.focus();
       }
     } else {
+      // hide control
       if (this.newElementTitle) {
         this.addTask();
       }
