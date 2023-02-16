@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BASE_URL } from 'src/app/core/constants';
-import { IUser, LoginParams, RegistrationParams } from 'src/app/shared/models/user.model';
+import { IUser, LoginParams, RegistrationParams, UserEditParams } from 'src/app/shared/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +12,8 @@ export class UserService {
 
   private loginUrl = `${BASE_URL}/api/login`;
 
+  private userUrl = `${BASE_URL}/api/user`;
+
   constructor(private httpClient: HttpClient) { }
 
   public userRegistartion(userParams: RegistrationParams): Observable<IUser> {
@@ -20,5 +22,9 @@ export class UserService {
 
   public login(loginParams: LoginParams): Observable<IUser> {
     return this.httpClient.post<IUser>(this.loginUrl, loginParams);
+  }
+
+  public updateUser(newUserInfo: UserEditParams): Observable<void> {
+    return this.httpClient.put<void>(this.userUrl, newUserInfo);
   }
 }
