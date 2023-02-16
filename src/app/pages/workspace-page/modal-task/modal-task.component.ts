@@ -51,7 +51,7 @@ export class ModalTaskComponent implements OnInit {
       }
     });
 
-    document.onkeyup = (e:KeyboardEvent) =>{
+    document.onkeydown = (e:KeyboardEvent) =>{
       if(e.code === "Escape"){
         this.closeModal();
         this.updateTask();

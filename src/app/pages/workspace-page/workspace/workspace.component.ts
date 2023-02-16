@@ -44,12 +44,23 @@ export class WorkspaceComponent implements OnInit {
       this.columns = res;
       this.currentBoardId = id;
       this.setColumnsIds();
+      this.hideAddColumn
     });
 
     document.onkeyup = (e: KeyboardEvent) => {
-      e.preventDefault();
       const columns = document.querySelectorAll('app-column');
       const tasks = document.querySelectorAll('app-task');
+
+      console.log(this.isWorkHotKeys);
+
+      if(e.key === "+"){
+        e.preventDefault();
+        if(!this.showAddControl){
+          this.showAddColumn();
+        }else{
+          this.hideAddColumn();
+        }
+      }
 
       if (e.ctrlKey && e.code === "ArrowRight" && this.isWorkHotKeys) {
         e.preventDefault();
