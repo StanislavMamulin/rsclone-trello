@@ -1,5 +1,5 @@
 header {
-  background: #026aa7;
+  background: #3f51b5;
   width: 100%;
 
   .container {
@@ -202,7 +202,13 @@ button {
     gap: 15px;
 
     &__icon{
+      background: #3f51b5;
+      border: none;
       transform: scale(1.5);
+      cursor: auto;
+      &:hover{
+        border: none;
+      }
     }
   }
 }
