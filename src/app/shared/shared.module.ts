@@ -19,9 +19,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslocoRootModule } from '../transloco-root.module';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { MatMenuModule } from '@angular/material/menu';
+import { CloseComponent } from './components/close/close.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu';
     SortByParamsPipe,
     SearchPipePipe,
     AutofocusDirective,
+    CloseComponent,
   ],
   imports: [
     CommonModule,

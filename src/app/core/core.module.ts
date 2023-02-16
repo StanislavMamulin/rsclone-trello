@@ -7,12 +7,14 @@ import { BoardService } from '../modules/board/board-service.service';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ModalLogOutComponent } from './components/modal-log-out/modal-log-out.component';
+import { ModalHotkeysComponent } from './components/modal-hotkeys/modal-hotkeys.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
     ModalLogOutComponent,
+    ModalHotkeysComponent,
   ],
   imports: [
     CommonModule,

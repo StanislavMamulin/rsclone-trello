@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalLogOutComponent } from '../modal-log-out/modal-log-out.component';
 import { TranslocoService } from '@ngneat/transloco';
+import { ModalHotkeysComponent } from '../modal-hotkeys/modal-hotkeys.component';
 
 interface ILanguage {
   value: string;
@@ -47,7 +48,15 @@ export class HeaderComponent implements OnInit {
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(ModalLogOutComponent, {
-      width: '250px',
+      width: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  openDialogHotFix(enterAnimationDuration:string, exitAnimationDuration: string) {
+    this.dialog.open(ModalHotkeysComponent, {
+      width: '400px',
       enterAnimationDuration,
       exitAnimationDuration,
     });

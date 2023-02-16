@@ -68,14 +68,14 @@
     mat-menu-item
     (click)="showColumnInfo()"
   >
-    <mat-icon class="menu-item__icon">info</mat-icon>
+    <mat-icon class="menu-item__icon" color="primary">info</mat-icon>
     <span class="menu-item__title">Show column description</span>
   </button>
   <button
     mat-menu-item
     (click)="deleteColumn(column)"
   >
-    <mat-icon class="menu-item__icon">delete_forever</mat-icon>
+    <mat-icon class="menu-item__icon" color="warn">delete_forever</mat-icon>
     <span class="menu-item__title">Delete column</span>
   </button>
   <hr />
@@ -83,14 +83,14 @@
     mat-menu-item
     [matMenuTriggerFor]="columnsList"
   >
-    <mat-icon class="menu-item__icon">playlist_play</mat-icon>
+    <mat-icon class="menu-item__icon" color="primary">playlist_play</mat-icon>
     <span class="menu-item__title">Move all tasks to other column...</span>
   </button>
   <button
     mat-menu-item
     [matMenuTriggerFor]="boardsList"
   >
-    <mat-icon class="menu-item__icon">dashboard</mat-icon>
+    <mat-icon class="menu-item__icon" color="primary">dashboard</mat-icon>
     <span class="menu-item__title">Move column to other board</span>
   </button>
 </mat-menu>

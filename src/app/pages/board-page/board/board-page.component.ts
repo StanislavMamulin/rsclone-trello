@@ -15,7 +15,7 @@ import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 })
 export class BoardPageComponent implements OnInit {
   boards: IBoard[] = [];
-  
+
   isOpenModal = false;
 
   isCreateModal = false;
@@ -111,8 +111,11 @@ export class BoardPageComponent implements OnInit {
   }
 
   deleteBoard(id: string) {
-    this.boards = this.boards.filter((board) => board.idBoard !== id);
-    this.boardStateService.setBoards(this.boards);
+    this.boardService.deleteBoard(id)
+    .subscribe(()=>{
+      this.boards = this.boards.filter((board) => board.idBoard !== id);
+      this.boardStateService.setBoards(this.boards);
+    });
   }
 
   openUpdateModal(id: string) {
