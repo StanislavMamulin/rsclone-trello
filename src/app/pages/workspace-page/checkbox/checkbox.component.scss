@@ -17,9 +17,8 @@
 
   .delete-task {
     cursor: pointer;
-    color: #3f51b5;
-    transition: 0.3s;
-    &:hover {
+    transition: .3s;
+    &:hover{
       transform: rotate(15deg);
     }
   }

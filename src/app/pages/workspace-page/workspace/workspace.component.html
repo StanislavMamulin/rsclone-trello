@@ -20,7 +20,7 @@
     (click)="showAddColumn()"
     *ngIf="!showAddControl; else addColumnControl"
   >
-    <span *transloco="let t">{{ t('workSpace.newColumn') }}</span>
+   <span *transloco="let t">{{ t('workSpace.newColumn') }}</span>
   </button>
 
   <ng-template #addColumnControl>

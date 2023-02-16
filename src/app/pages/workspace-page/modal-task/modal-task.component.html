@@ -4,7 +4,7 @@
 >
   <section class="title-wrapper">
     <h2 class="title">
-      <mat-icon>today</mat-icon>
+      <mat-icon color="primary">today</mat-icon>
       <input
         class="name-task"
         formControlName="nameTask"
@@ -25,7 +25,7 @@
       class="description"
       *transloco="let t"
     >
-      <mat-icon>subject</mat-icon>{{ t('taskModal.description') }}
+      <mat-icon color="primary">subject</mat-icon>{{ t('taskModal.description') }}
     </h3>
     <textarea
       class="textarea description-task"
@@ -65,13 +65,13 @@
             formControlName="addCheckBox"
             class="create-input"
             type="text"
+            (blur)="updateIsChooseBlur($event)"
           />
           <div class="create-wrapper">
             <div class="create-button">
-              <button
-                class="btn-add-checkbox"
-                (click)="updateCreateState($event)"
-                (click)="createCheckBox()"
+              <button class="btn-add-checkbox"
+                (mousedown)="updateCreateState($event)"
+                (mousedown)="createCheckBox()"
                 mat-raised-button
                 color="primary"
                 [disabled]="formTask.controls['addCheckBox'].errors"
@@ -81,7 +81,7 @@
               </button>
             </div>
             <mat-icon
-              (click)="updateCreateState($event)"
+              (mousedown)="updateCreateState($event)"
               class="delete-task"
               >close</mat-icon
             >
@@ -91,8 +91,9 @@
     </div>
     <button
       class="add-element"
-      (click)="updateCreateState($event)"
-      [ngClass]="{ 'active-create': isCreate }"
+      (mousedown)="updateCreateState($event)"
+      [ngClass]="{'active-create':isCreate}"
+
       mat-raised-button
       color="primary"
       *transloco="let t"
@@ -102,7 +103,6 @@
   </section>
   <mat-icon
     class="close-modal"
-    (click)="closeModal(); updateTask(); updateChecklist()"
-    >close</mat-icon
-  >
+    (mousedown)="closeModal(); updateTask(); updateChecklist()"
+    >close</mat-icon>
 </div>

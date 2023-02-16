@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalLogOutComponent } from '../modal-log-out/modal-log-out.component';
 import { TranslocoService } from '@ngneat/transloco';
+import { ModalHotkeysComponent } from '../modal-hotkeys/modal-hotkeys.component';
 
 interface ILanguage {
   value: string;
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit {
   selectedLanguage: string;
   selectedFlag: string = localStorage.getItem('flag') || '../../../../assets/images/en.svg';
   isAuth = false;
+  indexBoard = -1;
 
   searchStr = '';
 
@@ -38,6 +40,11 @@ export class HeaderComponent implements OnInit {
     private translocoService: TranslocoService
   ) {}
 
+  ngOnInit(): void {
+    this.isAuth = this.auth.isAuthenticated();
+
+  }
+
   switchLang(){
     this.selectedFlag = `../../../../assets/images/${this.selectedLanguage}.svg`
     this.translocoService.setActiveLang(this.selectedLanguage);
@@ -47,7 +54,15 @@ export class HeaderComponent implements OnInit {
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(ModalLogOutComponent, {
-      width: '250px',
+      width: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  openDialogHotFix(enterAnimationDuration:string, exitAnimationDuration: string) {
+    this.dialog.open(ModalHotkeysComponent, {
+      width: '400px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -67,10 +82,6 @@ export class HeaderComponent implements OnInit {
 
   openLoginPage() {
     this.router.navigate(['/login']);
-  }
-
-  ngOnInit(): void {
-    this.isAuth = this.auth.isAuthenticated();
   }
 
   updateBoards() {

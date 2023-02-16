@@ -1,0 +1,35 @@
+.modal{
+  background: whitesmoke;
+}
+
+.modal-info{
+  padding-top: 10px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  gap: 20px;
+  margin-left: -20px;
+}
+
+.keys-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-keys{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 10px 20px 10px 20px;
+  font-size: 17px;
+  color: black;
+}
+
+.modal-button{
+  margin-top: 15px;
+}

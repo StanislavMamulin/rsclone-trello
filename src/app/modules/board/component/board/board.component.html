@@ -19,13 +19,13 @@
       >
         <img
           src="../../../../../assets/images/delete.svg"
-          alt="description"
+          alt="delete"
         />
       </button>
       <div (click)="showDescription($event)">
         <img
           src="../../../../../assets/images/description.svg"
-          alt="edit"
+          alt="description"
         />
       </div>
     </div>
@@ -52,7 +52,7 @@
   >
     <span *transloco="let t">{{t('board.open')}}</span>
   </div>
-  <div
+  <!-- <div
     *ngIf="isDelete"
     class="board__spinner"
   >
@@ -60,7 +60,7 @@
       src="../../../../../assets/images/spinner.svg"
       alt="spinner"
     />
-  </div>
+  </div> -->
   <div
     *ngIf="isOpenDescription"
     class="description"
@@ -83,6 +83,8 @@
       (click)="closeDescription()"
       class="description__button"
       *transloco="let t"
+      mat-raised-button
+      color="primary"
     >
       {{t('board.close')}}
     </button>

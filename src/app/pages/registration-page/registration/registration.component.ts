@@ -44,16 +44,16 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
 
     this.form = new FormGroup({
-      firstNameControl: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
-      lastNameControl: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9]\w{3,15}$/)]),
+      firstNameControl: new FormControl(null, [Validators.required, Validators.pattern(/^\w{3,15}$/)]),
+      lastNameControl: new FormControl(null, [Validators.required, Validators.pattern(/^\w{3,15}$/)]),
       sexControl: new FormControl(null, Validators.required),
       emailFormControl: new FormControl(null, [
         Validators.required,
         Validators.email,
         this.restricredEmail,
       ]),
-      enterPassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
-      repeatPassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/)]),
+      enterPassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{9,}$/)]),
+      repeatPassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{9,}$/)]),
     });
     this.updateSubmitted();
   }

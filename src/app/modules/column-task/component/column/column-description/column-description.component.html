@@ -18,7 +18,7 @@
   </div>
   <div mat-dialog-actions>
     <button
-      mat-button
+      mat-raised-button
       (click)="onNoClick()"
       cdkFocusInitial
       *transloco="let t"
@@ -26,15 +26,18 @@
       {{ t('workSpace.close') }}
     </button>
     <button
-      mat-button
+      mat-dialog-close
+      mat-raised-button
       (click)="saveDescription()"
-      cdkFocusInitial
+      color="primary"
       *transloco="let t"
     >
       {{ t('workSpace.save') }}
     </button>
   </div>
 </div>
+
+
 
 <ng-template #editColumnDescription>
   <textarea

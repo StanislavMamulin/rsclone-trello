@@ -15,14 +15,14 @@
     mat-button
     mat-dialog-close
     *transloco="let t"
+     cdkFocusInitial
   >
     {{ t('logOut.no') }}
   </button>
   <button
     (click)="logOut()"
-    mat-button
+    mat-raised-button 
     mat-dialog-close
-    cdkFocusInitial
     *transloco="let t"
   >
     {{ t('logOut.ok') }}

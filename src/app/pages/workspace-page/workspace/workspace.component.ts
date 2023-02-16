@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ColumnTaskService } from 'src/app/modules/column-task/column-task.service';
 import { IColumn } from 'src/app/modules/column-task/model/column.interface';
+import { ITask } from 'src/app/modules/column-task/model/task.interface';
+import { ModalTaskComponent } from '../modal-task/modal-task.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-workspace',
@@ -18,11 +21,16 @@ export class WorkspaceComponent implements OnInit {
 
   columnsIds: string[];
 
+  isWorkHotKeys = true;
+  indexColumn = -1;
+  indexTask = 0;
+
   @ViewChild('workspaceElement') workspaceElement: ElementRef;
 
   constructor(
     private columnTaskService: ColumnTaskService,
     private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +44,192 @@ export class WorkspaceComponent implements OnInit {
       this.columns = res;
       this.currentBoardId = id;
       this.setColumnsIds();
+      this.hideAddColumn
+    });
+
+    document.onkeyup = (e: KeyboardEvent) => {
+      const columns = document.querySelectorAll('app-column');
+      const tasks = document.querySelectorAll('app-task');
+
+      console.log(this.isWorkHotKeys);
+
+      if(e.key === "+"){
+        e.preventDefault();
+        if(!this.showAddControl){
+          this.showAddColumn();
+        }else{
+          this.hideAddColumn();
+        }
+      }
+
+      if (e.code === "ArrowRight" && this.isWorkHotKeys) {
+        e.preventDefault();
+        if (this.indexColumn < columns.length - 1 && e.code === 'ArrowRight') {
+          ++this.indexColumn;
+        }
+        columns.forEach(item => {
+          if (item.classList.contains('active')) {
+            item.classList.remove("active")
+          }
+        })
+        tasks.forEach(item=>{
+          if(item.classList.contains('active')){
+            item.classList.remove('active');
+          }
+        })
+
+        columns.forEach((item, i) => {
+          if (i === this.indexColumn) {
+            const tasks = item.querySelectorAll('app-task');
+            if(tasks.length === 0){
+              ++this.indexColumn;
+            }else{
+              item.classList.add("active");
+              if(this.indexTask > tasks.length-1){
+                this.indexTask = tasks.length-1;
+              }
+              tasks.forEach((item,i)=>{
+                if(i === this.indexTask){
+                  item.classList.add('active');
+                }
+              })
+            }
+          }
+        })
+      }
+      if (e.code === "ArrowLeft" && this.isWorkHotKeys) {
+        e.preventDefault();
+        if (this.indexColumn > 0 && e.code === 'ArrowLeft') {
+          --this.indexColumn;
+        }
+        columns.forEach((item, i) => {
+          if (item.classList.contains('active')) {
+            item.classList.remove("active")
+          }
+        })
+        tasks.forEach(item=>{
+          if(item.classList.contains('active')){
+            item.classList.remove('active');
+          }
+        })
+
+        for(let i = 0; i<columns.length; i++){
+          if (i === this.indexColumn) {
+            const tasks = columns[i].querySelectorAll('app-task');
+            if(tasks.length === 0){
+              --this.indexColumn;
+              i=0;
+            } else{
+              columns[i].classList.add("active");
+              if(this.indexTask > tasks.length-1){
+                this.indexTask = tasks.length-1;
+              }
+              tasks.forEach((item,i)=>{
+                if(i === this.indexTask){
+                  item.classList.add('active');
+                }
+              })
+            }
+          }
+        }
+      }
+      console.log(this.indexColumn);
+      if (e.code === "ArrowDown" && this.isWorkHotKeys) {
+        e.preventDefault();
+        let activeColumn = columns[0];
+        columns.forEach(item=>{
+          if(item.classList.contains('active')){
+            activeColumn = item;
+          }
+        })
+        const tasks = activeColumn.querySelectorAll('app-task');
+
+        if (this.indexTask < tasks.length - 1 && e.code === 'ArrowDown') {
+          this.indexTask++;
+        }
+
+        tasks.forEach(item=>{
+          if(item.classList.contains('active')){
+            item.classList.remove('active');
+          }
+        })
+        tasks.forEach((item,i)=>{
+          if(i === this.indexTask){
+            item.classList.add('active');
+          }
+        })
+      }
+      if (e.code === "ArrowUp" && this.isWorkHotKeys) {
+        e.preventDefault();
+        let activeColumn = columns[0];
+        columns.forEach(item=>{
+          if(item.classList.contains('active')){
+            activeColumn = item;
+          }
+        })
+        const tasks = activeColumn.querySelectorAll('app-task');
+
+        if (this.indexTask > 0 && e.code === 'ArrowUp') {
+          this.indexTask--;
+        }
+
+        tasks.forEach(item=>{
+          if(item.classList.contains('active')){
+            item.classList.remove('active');
+          }
+        })
+        tasks.forEach((item,i)=>{
+          if(i === this.indexTask){
+            item.classList.add('active');
+          }
+        })
+      }
+
+      if (e.code === 'Enter') {
+        if (this.columns[this.indexColumn]) {
+          const tasksInColumn = this.columns[this.indexColumn].tasks;
+          this.isWorkHotKeys = false;
+          this.openModal(tasksInColumn[this.indexTask],this.columns[this.indexColumn]);
+          this.indexColumn = -1;
+          this.indexTask = 0;
+          columns.forEach(item => {
+            if (item.classList.contains('active')) {
+              item.classList.remove("active")
+            }
+          })
+          tasks.forEach(item => {
+            if (item.classList.contains('active')) {
+              item.classList.remove("active")
+            }
+          })
+        }
+      }
+
+      if (e.code === 'Escape') {
+        this.indexColumn = -1;
+        this.indexTask = 0;
+        columns.forEach(item => {
+          if (item.classList.contains('active')) {
+            item.classList.remove("active")
+          }
+        })
+        tasks.forEach(item => {
+          if (item.classList.contains('active')) {
+            item.classList.remove("active")
+          }
+        })
+      }
+
+    }
+  }
+
+  openModal(task: ITask, column: IColumn): void {
+    const dialogRef = this.dialog.open(ModalTaskComponent, {
+      data: { task, column },
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe(()=>{
+      this.isWorkHotKeys = true;
     });
   }
 

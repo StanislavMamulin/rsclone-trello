@@ -49,7 +49,7 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  width: 100%;
   margin: auto;
 }
 
@@ -93,6 +93,12 @@ app-header {
   width: 100%;
   position: fixed;
   top: 0;
+}
+app-board{
+  height: fit-content;
+  &.active{
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  }
 }
 
 router-outlet {
@@ -140,6 +146,19 @@ html {
 
 .ng-trigger.ng-trigger-transformPanel.ng-tns-c111-1.mat-mdc-select-panel.mdc-menu-surface.mdc-menu-surface--open.mat-primary.ng-star-inserted {
   background: rgb(237, 237, 237);
+}
+
+.mat-mdc-menu-panel{
+  width: 300px;
+}
+
+.cdk-overlay-connected-position-bounding-box {
+  margin-top: 12px;
+  width: 300px;
+}
+
+.mat-mdc-menu-panel.mdc-menu-surface.mdc-menu-surface--open.mat-mdc-elevation-specific{
+  max-width: 300px  !important;
 }
 
 html,

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChecklistService } from 'src/app/core/services/checklist.service';
+import { TaskStateService } from 'src/app/core/services/task-state.service';
 import { ColumnTaskService } from 'src/app/modules/column-task/column-task.service';
 import { ColumnComponent } from 'src/app/modules/column-task/component/column/column.component';
 import { IColumn } from 'src/app/modules/column-task/model/column.interface';
@@ -24,17 +25,16 @@ export class ModalTaskComponent implements OnInit {
     public dialogRef: MatDialogRef<ColumnComponent>,
     private ColumnTaskService: ColumnTaskService,
     private ChecklistService: ChecklistService,
+    private taskStateService: TaskStateService
   ) {}
 
   ngOnInit() {
     this.formTask = new FormGroup({
-      nameTask: new FormControl(this.data.task.nameTask, [
+      nameTask: new FormControl(this.data.task.nameTask, [Validators.required]),
+      descriptionTask: new FormControl(this.data.task.descriptionTask ||
+        `description of ${this.data.task.nameTask}`, [
         Validators.required,
-        Validators.minLength(3),
-      ]),
-      descriptionTask: new FormControl(`description of ${this.data.task.nameTask}`, [
-        Validators.required,
-        Validators.minLength(10),
+        Validators.minLength(5),
       ]),
       addCheckBox: new FormControl(null, [Validators.required]),
     });
@@ -47,6 +47,20 @@ export class ModalTaskComponent implements OnInit {
         this.calculated = 0;
       }
     });
+
+    document.onkeydown = (e:KeyboardEvent) =>{
+      if(e.code === "Escape"){
+        this.closeModal();
+        this.updateTask();
+        this.updateChecklist();
+      }
+    }
+  }
+
+  updateIsChooseBlur(event: FocusEvent){
+    if(!(event.relatedTarget instanceof HTMLInputElement)){
+      this.isCreate = false;
+    }
   }
 
   updateCreateState(event:any) {
@@ -82,6 +96,7 @@ export class ModalTaskComponent implements OnInit {
     this.ChecklistService.updateChecklist(this.data.task.idTask, this.checklist)
     .subscribe((res) =>{
       this.data.task.checkLists = res;
+      this.taskStateService.setChecklist(this.checklist);
     });
   }
   updateInput(checkbox: ICheckBox) {
@@ -114,6 +129,7 @@ export class ModalTaskComponent implements OnInit {
       this.data.task.checkLists = this.checklist;
       this.updateCalculated();
       this.formTask.controls["addCheckBox"].setValue(null);
+      this.taskStateService.setChecklist(this.checklist);
     });
   }
 
@@ -161,7 +177,8 @@ export class ModalTaskComponent implements OnInit {
           }else {this.calculated = 0}
         }
       });
+      this.data.task.checkLists = this.checklist;
+      this.taskStateService.setChecklist(this.checklist);
     });
-    this.data.task.checkLists = this.checklist;
   }
 }
