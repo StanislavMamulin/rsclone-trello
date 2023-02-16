@@ -34,7 +34,8 @@ export class ModalTaskComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
       ]),
-      descriptionTask: new FormControl(`description of ${this.data.task.nameTask}`, [
+      descriptionTask: new FormControl(this.data.task.descriptionTask ||
+        `description of ${this.data.task.nameTask}`, [
         Validators.required,
         Validators.minLength(10),
       ]),

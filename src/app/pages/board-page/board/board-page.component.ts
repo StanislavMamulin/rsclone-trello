@@ -66,10 +66,10 @@ export class BoardPageComponent implements OnInit {
 
     document.onkeyup = (e: KeyboardEvent) => {
 
-      if (e.altKey && e.code === "Period") {
+      if (e.ctrlKey && e.code === "ArrowRight") {
         e.preventDefault();
         const boards = document.querySelectorAll('app-board');
-        if (this.indexBoard < boards.length - 1 && e.code === 'Period') {
+        if (this.indexBoard < boards.length - 1 && e.code === 'ArrowRight') {
           ++this.indexBoard;
         }
         boards.forEach((item, i) => {
@@ -84,11 +84,11 @@ export class BoardPageComponent implements OnInit {
           }
         })
       }
-      if (e.altKey && e.code === "Comma") {
+      if (e.ctrlKey && e.code === "ArrowLeft") {
         e.preventDefault();
         const boards = document.querySelectorAll('app-board');
 
-        if (this.indexBoard > 0 && e.code === 'Comma') {
+        if (this.indexBoard > 0 && e.code === 'ArrowLeft') {
           --this.indexBoard;
         }
         boards.forEach((item, i) => {
@@ -112,7 +112,7 @@ export class BoardPageComponent implements OnInit {
 
       if (e.code === 'Escape') {
         const boards = document.querySelectorAll('app-board');
-
+        this.indexBoard = -1;
         boards.forEach(item => {
           if (item.classList.contains('active')) {
             item.classList.remove("active")
