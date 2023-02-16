@@ -26,17 +26,20 @@ export class BoardComponent implements OnInit {
 
   isDelete = false;
 
-  constructor(
-    private router: Router,
-    private boardsStateService: BoardsStateService,
-  ) {}
+  constructor(private router: Router, private boardsStateService: BoardsStateService) {}
 
   ngOnInit() {
     this.isOpenDescription = false;
   }
 
-  deleteBoard(id:string) {
+  deleteBoard(id: string) {
     this.onDelete.emit(id);
+  }
+
+  audioBoard(): void {
+    const audio = new Audio();
+    audio.src = '../../../../assets/audio/audio-board.mp3';
+    audio.play();
   }
 
   openBoard(event: any) {

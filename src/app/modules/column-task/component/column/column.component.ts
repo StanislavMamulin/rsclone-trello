@@ -71,6 +71,12 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions.forEach((subs) => subs.unsubscribe());
   }
 
+  audioTask(): void {
+    const audio = new Audio();
+    audio.src = '../../../../assets/audio/audio-task.mp3';
+    audio.play();
+  }
+
   drop(event: CdkDragDrop<IMovedTask>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
@@ -200,14 +206,13 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteTask(idTask: string) {
-    this.columnTaskService.deleteTask(idTask)
-      .subscribe(()=>{
-        this.tasks.forEach((task, i)=>{
-          if (task.idTask === idTask) {
-            this.tasks.splice(i, 1);
-          }
-        });
+    this.columnTaskService.deleteTask(idTask).subscribe(() => {
+      this.tasks.forEach((task, i) => {
+        if (task.idTask === idTask) {
+          this.tasks.splice(i, 1);
+        }
       });
+    });
   }
 
   addBoardSubscribers() {
