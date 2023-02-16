@@ -7,6 +7,7 @@ import {
 } from 'src/app/modules/board/model/Board.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BoardsStateService } from 'src/app/core/services/boardsState.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board-page',
@@ -40,7 +41,13 @@ export class BoardPageComponent implements OnInit {
 
   isEnter = false;
 
-  constructor(private boardService: BoardService, private boardStateService: BoardsStateService) {}
+  indexBoard = -1;
+
+  constructor(
+    private boardService: BoardService,
+    private boardStateService: BoardsStateService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.createFormModal = new FormGroup({
@@ -51,11 +58,69 @@ export class BoardPageComponent implements OnInit {
 
     this.isLoading = true;
     this.boardService.getBoards()
-      .subscribe(res=>{
+      .subscribe(res => {
         this.boards = res;
         this.isLoading = false;
         this.boardStateService.setBoards(res);
       });
+
+    document.onkeyup = (e: KeyboardEvent) => {
+
+      if (e.altKey && e.code === "Period") {
+        e.preventDefault();
+        const boards = document.querySelectorAll('app-board');
+        if (this.indexBoard < boards.length - 1 && e.code === 'Period') {
+          ++this.indexBoard;
+        }
+        boards.forEach((item, i) => {
+          if (item.classList.contains('active')) {
+            item.classList.remove("active")
+          }
+        })
+
+        boards.forEach((item, i) => {
+          if (i === this.indexBoard) {
+            item.classList.add("active")
+          }
+        })
+      }
+      if (e.altKey && e.code === "Comma") {
+        e.preventDefault();
+        const boards = document.querySelectorAll('app-board');
+
+        if (this.indexBoard > 0 && e.code === 'Comma') {
+          --this.indexBoard;
+        }
+        boards.forEach((item, i) => {
+          if (item.classList.contains('active')) {
+            item.classList.remove("active")
+          }
+        })
+
+        boards.forEach((item, i) => {
+          if (i === this.indexBoard) {
+            item.classList.add("active")
+          }
+        })
+      }
+
+      if (e.code === 'Enter') {
+        if (this.boards[this.indexBoard]) {
+          this.router.navigate([`/board/${this.boards[this.indexBoard].idBoard}`])
+        }
+      }
+
+      if (e.code === 'Escape') {
+        const boards = document.querySelectorAll('app-board');
+
+        boards.forEach(item => {
+          if (item.classList.contains('active')) {
+            item.classList.remove("active")
+          }
+        })
+      }
+
+    }
   }
 
   updateShowDate = (showDate: boolean) => {
@@ -66,7 +131,7 @@ export class BoardPageComponent implements OnInit {
     this.showFavorite = showFavorite;
   };
 
-  updateSelectValue = (selectValue: string) => {this.selectValue = selectValue;};
+  updateSelectValue = (selectValue: string) => { this.selectValue = selectValue; };
 
   toUpperFirstLetter = (str: string) => str[0].toUpperCase() + str.toLowerCase().substring(1);
 
@@ -112,10 +177,10 @@ export class BoardPageComponent implements OnInit {
 
   deleteBoard(id: string) {
     this.boardService.deleteBoard(id)
-    .subscribe(()=>{
-      this.boards = this.boards.filter((board) => board.idBoard !== id);
-      this.boardStateService.setBoards(this.boards);
-    });
+      .subscribe(() => {
+        this.boards = this.boards.filter((board) => board.idBoard !== id);
+        this.boardStateService.setBoards(this.boards);
+      });
   }
 
   openUpdateModal(id: string) {

@@ -94,6 +94,12 @@ app-header {
   position: fixed;
   top: 0;
 }
+app-board{
+  height: fit-content;
+  &.active{
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  }
+}
 
 router-outlet {
   padding-top: 45px;

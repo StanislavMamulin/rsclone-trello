@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
   selectedLanguage: string;
   selectedFlag: string = localStorage.getItem('flag') || '../../../../assets/images/en.svg';
   isAuth = false;
+  indexBoard = -1;
 
   searchStr = '';
 
@@ -38,6 +39,11 @@ export class HeaderComponent implements OnInit {
     public dialog: MatDialog,
     private translocoService: TranslocoService
   ) {}
+
+  ngOnInit(): void {
+    this.isAuth = this.auth.isAuthenticated();
+
+  }
 
   switchLang(){
     this.selectedFlag = `../../../../assets/images/${this.selectedLanguage}.svg`
@@ -76,10 +82,6 @@ export class HeaderComponent implements OnInit {
 
   openLoginPage() {
     this.router.navigate(['/login']);
-  }
-
-  ngOnInit(): void {
-    this.isAuth = this.auth.isAuthenticated();
   }
 
   updateBoards() {
