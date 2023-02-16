@@ -200,13 +200,14 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteTask(idTask: string) {
-    this.columnTaskService.deleteTask(idTask).subscribe(() => {
-      this.tasks.forEach((task, i) => {
-        if (task.idTask === idTask) {
-          this.tasks.splice(i, 1);
-        }
+    this.columnTaskService.deleteTask(idTask)
+      .subscribe(()=>{
+        this.tasks.forEach((task, i)=>{
+          if (task.idTask === idTask) {
+            this.tasks.splice(i, 1);
+          }
+        });
       });
-    });
   }
 
   addBoardSubscribers() {

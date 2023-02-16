@@ -7,6 +7,7 @@ export interface IUser {
   token?: string;
   accessLevel: AccessLevel;
   gender: string;
+  registrationDate: Date;
 }
 
 export type IUserParams = Omit<IUser, 'id' | 'token'>;
@@ -23,6 +24,8 @@ type ExpiresIn = {
 export type UserResponse = Pick<IUser, 'email' | 'id' | 'token'> & ExpiresIn;
 
 export type LoginParams = Pick<IUser, 'email' | 'password'>;
+
+export type UserEditParams = Partial<Pick<IUser, 'firstName' | 'lastName' | 'password' | 'gender'>>;
 
 export enum AccessLevel {
   'Admin',
