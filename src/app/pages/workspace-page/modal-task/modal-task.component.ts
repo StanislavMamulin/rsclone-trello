@@ -50,6 +50,14 @@ export class ModalTaskComponent implements OnInit {
         this.calculated = 0;
       }
     });
+
+    document.onkeyup = (e:KeyboardEvent) =>{
+      if(e.code === "Escape"){
+        this.closeModal();
+        this.updateTask();
+        this.updateChecklist();
+      }
+    }
   }
 
   updateIsChooseBlur(event: FocusEvent){

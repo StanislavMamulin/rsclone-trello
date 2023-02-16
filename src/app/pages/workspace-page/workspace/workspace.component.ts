@@ -21,6 +21,7 @@ export class WorkspaceComponent implements OnInit {
 
   columnsIds: string[];
 
+  isWorkHotKeys = true;
   indexColumn = -1;
   indexTask = 0;
 
@@ -50,10 +51,8 @@ export class WorkspaceComponent implements OnInit {
       const columns = document.querySelectorAll('app-column');
       const tasks = document.querySelectorAll('app-task');
 
-      if (e.ctrlKey && e.code === "ArrowRight") {
+      if (e.ctrlKey && e.code === "ArrowRight" && this.isWorkHotKeys) {
         e.preventDefault();
-        console.log(this.indexColumn);
-        console.log(columns);
         if (this.indexColumn < columns.length - 1 && e.code === 'ArrowRight') {
           ++this.indexColumn;
         }
@@ -83,9 +82,8 @@ export class WorkspaceComponent implements OnInit {
           }
         })
       }
-      if (e.ctrlKey && e.code === "ArrowLeft") {
+      if (e.ctrlKey && e.code === "ArrowLeft" && this.isWorkHotKeys) {
         e.preventDefault();
-        console.log(this.indexColumn);
         if (this.indexColumn > 0 && e.code === 'ArrowLeft') {
           --this.indexColumn;
         }
@@ -115,7 +113,7 @@ export class WorkspaceComponent implements OnInit {
           }
         })
       }
-      if (e.ctrlKey && e.code === "ArrowDown") {
+      if (e.ctrlKey && e.code === "ArrowDown" && this.isWorkHotKeys) {
         e.preventDefault();
         let activeColumn = columns[0];
         columns.forEach(item=>{
@@ -140,7 +138,7 @@ export class WorkspaceComponent implements OnInit {
           }
         })
       }
-      if (e.ctrlKey && e.code === "ArrowUp") {
+      if (e.ctrlKey && e.code === "ArrowUp" && this.isWorkHotKeys) {
         e.preventDefault();
         let activeColumn = columns[0];
         columns.forEach(item=>{
@@ -169,6 +167,7 @@ export class WorkspaceComponent implements OnInit {
       if (e.code === 'Enter') {
         if (this.columns[this.indexColumn]) {
           const tasksInColumn = this.columns[this.indexColumn].tasks;
+          this.isWorkHotKeys = false;
           this.openModal(tasksInColumn[this.indexTask],this.columns[this.indexColumn]);
           this.indexColumn = -1;
           this.indexTask = 0;
@@ -207,6 +206,9 @@ export class WorkspaceComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalTaskComponent, {
       data: { task, column },
       disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe(()=>{
+      this.isWorkHotKeys = true;
     });
   }
 
