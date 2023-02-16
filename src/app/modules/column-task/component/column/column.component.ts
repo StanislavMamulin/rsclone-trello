@@ -107,7 +107,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openModal(event: Event, task: ITask): void {
     const elTarget = event.target as HTMLTemplateElement;
-    if(!elTarget?.classList.contains('delete-button')){
+    if (!elTarget?.classList.contains('delete-button')) {
       const dialogRef = this.dialog.open(ModalTaskComponent, {
         data: { task: task, column: this.column },
         disableClose: true,
@@ -179,15 +179,16 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-  deleteTask(idTask: string){
+  deleteTask(idTask: string) {
     this.columnTaskService.deleteTask(idTask)
-    .subscribe(()=>{
-      this.tasks.forEach((task,i)=>{
-        if(task.idTask === idTask){
-          this.tasks.splice(i,1);
-        }
-      })
-    })
+      .subscribe(()=>{
+        this.tasks.forEach((task, i)=>{
+          if (task.idTask === idTask) {
+            this.tasks.splice(i, 1);
+          }
+        });
+      });
+  }
 
   addBoardSubscribers() {
     this.subscriptions.push(this.boardsStateService.boards$.subscribe((boards: IBoard[]) => {
