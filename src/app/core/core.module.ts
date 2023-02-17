@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ModalLogOutComponent } from './components/modal-log-out/modal-log-out.component';
 import { ModalHotkeysComponent } from './components/modal-hotkeys/modal-hotkeys.component';
+import { EditProfileModalComponent } from './components/edit-profile-modal/edit-profile-modal.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ModalHotkeysComponent } from './components/modal-hotkeys/modal-hotkeys.
     FooterComponent,
     ModalLogOutComponent,
     ModalHotkeysComponent,
+    EditProfileModalComponent,
   ],
   imports: [
     CommonModule,
