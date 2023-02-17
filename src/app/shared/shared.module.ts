@@ -22,6 +22,7 @@ import { TranslocoRootModule } from '../transloco-root.module';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { MatMenuModule } from '@angular/material/menu';
 import { CloseComponent } from './components/close/close.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { CloseComponent } from './components/close/close.component';
     MatDialogModule,
     TranslocoRootModule,
     MatMenuModule,
+    MatStepperModule
   ],
   exports: [
     FormsModule,
@@ -71,6 +73,7 @@ import { CloseComponent } from './components/close/close.component';
     TranslocoRootModule,
     AutofocusDirective,
     MatMenuModule,
+    MatStepperModule
   ],
 })
 export class SharedModule {}

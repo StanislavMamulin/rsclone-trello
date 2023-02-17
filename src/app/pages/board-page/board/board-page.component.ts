@@ -120,6 +120,11 @@ export class BoardPageComponent implements OnInit {
         })
       }
 
+      if(e.key === "+"){
+        this.isCreateModal = !this.isCreateModal;
+        this.isOpenModal = !this.isOpenModal;
+      }
+
     }
   }
 
@@ -184,6 +189,9 @@ export class BoardPageComponent implements OnInit {
   }
 
   openUpdateModal(id: string) {
+    const [board] = this.boards.filter(item=>item.idBoard === id);
+    this.createFormModal.controls.name.setValue(board.nameBoard);
+    this.createFormModal.controls.description.setValue(board.descriptionBoard);
     this.isUpdateModal = !this.isUpdateModal;
     this.isOpenModal = !this.isOpenModal;
     this.updateBoardId = id;

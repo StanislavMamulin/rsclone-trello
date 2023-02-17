@@ -1,0 +1,68 @@
+<h2 mat-dialog-title>Edit profile</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your first name</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>First name</mat-label>
+          <input matInput placeholder="first name" formControlName="firstName" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Fill out your last name</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastName" placeholder="last name"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Fill out your gender</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+          <mat-option
+            *ngFor="let gender of genders"
+            [value]="gender.value"
+          >
+            {{ gender.viewValue }}<mat-icon>{{ gender.value }}</mat-icon>
+          </mat-option>
+        </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    mat-raised-button
+    mat-dialog-close
+    color="primary"
+    (click)="editProfile()"
+    [disabled]="firstFormGroup.invalid || secondFormGroup.invalid || thirdFormGroup.invalid"
+  >Edit</button>
+</mat-dialog-actions>

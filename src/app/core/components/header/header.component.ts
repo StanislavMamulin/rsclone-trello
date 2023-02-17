@@ -7,10 +7,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalLogOutComponent } from '../modal-log-out/modal-log-out.component';
 import { TranslocoService } from '@ngneat/transloco';
 import { ModalHotkeysComponent } from '../modal-hotkeys/modal-hotkeys.component';
+import { EditProfileModalComponent } from '../edit-profile-modal/edit-profile-modal.component';
 
 interface ILanguage {
-  value: string;
   img: string;
+  icon: string
 }
 
 @Component({
@@ -20,16 +21,15 @@ interface ILanguage {
 })
 export class HeaderComponent implements OnInit {
   boards: IBoard[] = [];
-  selectedLanguage: string;
+  selectedLanguage: string = localStorage.getItem('language') || 'en';
   selectedFlag: string = localStorage.getItem('flag') || '../../../../assets/images/en.svg';
   isAuth = false;
   indexBoard = -1;
-
   searchStr = '';
 
   languages: ILanguage[] = [
-    {value: 'en', img: '../../../../assets/images/en.svg'},
-    {value: 'ru', img: '../../../../assets/images/ru.svg'},
+    {img: '../../../../assets/images/en.svg', icon: 'done'},
+    {img: '../../../../assets/images/ru.svg', icon: ''},
   ];
 
   constructor(
@@ -42,14 +42,35 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuth = this.auth.isAuthenticated();
-
+    this.setIconForLang();
   }
 
-  switchLang(){
-    this.selectedFlag = `../../../../assets/images/${this.selectedLanguage}.svg`
+  openDialogEditProfile(){
+    const dialogRef = this.dialog.open(EditProfileModalComponent);
+    dialogRef.afterClosed().subscribe(()=>{
+      console.log('edit profile modal closed..');
+    })
+  }
+
+  changeLanguage(e: MouseEvent){
+    const btn = e.currentTarget as HTMLButtonElement;
+    const img = btn.querySelector('img') as HTMLImageElement;
+    this.selectedLanguage = img?.src.slice(img?.src.length-6, -4);
+    this.selectedFlag =  `../../../../assets/images/${this.selectedLanguage}.svg`;
     this.translocoService.setActiveLang(this.selectedLanguage);
+    this.setIconForLang();
     localStorage.setItem('language',this.selectedLanguage);
     localStorage.setItem('flag',this.selectedFlag);
+  }
+
+  setIconForLang(){
+    if(this.selectedLanguage === 'en'){
+      this.languages[0].icon = "done"
+      this.languages[1].icon='';
+    }else{
+      this.languages[0].icon='';
+      this.languages[1].icon='done';
+    }
   }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
@@ -67,6 +88,8 @@ export class HeaderComponent implements OnInit {
       exitAnimationDuration,
     });
   }
+
+
 
   openBoards(): void {
     this.router.navigate(['/board']);
@@ -98,5 +121,13 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['main']).then(() => {
       this.router.navigate(['/board', board.idBoard]);
     });
+  }
+  reduceSearchInput(){
+    const rightSide = document.querySelector('.right-side') as HTMLTemplateElement;
+    rightSide.className = 'right-side';
+  }
+  increaseSerchInput(){
+    const rightSide = document.querySelector('.right-side') as HTMLTemplateElement;
+    rightSide.className = 'right-side active';
   }
 }

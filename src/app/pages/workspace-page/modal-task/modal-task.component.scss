@@ -217,3 +217,8 @@ mat-progress-bar {
     display: none;
   }
 }
+
+.mat-mdc-raised-button.mat-primary, .mat-mdc-unelevated-button.mat-primary {
+  --mat-mdc-button-persistent-ripple-color: none;
+  --mat-mdc-button-ripple-color: rgba(255, 255, 255, 0);
+}

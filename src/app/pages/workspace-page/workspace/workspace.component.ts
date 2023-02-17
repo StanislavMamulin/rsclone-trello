@@ -51,8 +51,6 @@ export class WorkspaceComponent implements OnInit {
       const columns = document.querySelectorAll('app-column');
       const tasks = document.querySelectorAll('app-task');
 
-      console.log(this.isWorkHotKeys);
-
       if(e.key === "+"){
         e.preventDefault();
         if(!this.showAddControl){
@@ -133,7 +131,6 @@ export class WorkspaceComponent implements OnInit {
           }
         }
       }
-      console.log(this.indexColumn);
       if (e.code === "ArrowDown" && this.isWorkHotKeys) {
         e.preventDefault();
         let activeColumn = columns[0];
@@ -269,7 +266,6 @@ export class WorkspaceComponent implements OnInit {
     this.setColumnsIds();
 
     const droppedColumn: IColumn = event.container.data[event.currentIndex];
-    console.log(droppedColumn.idColumn, event.currentIndex, this.currentBoardId);
     this.columnTaskService
       .moveColumn(droppedColumn.idColumn, {
         newPosition: event.currentIndex,
