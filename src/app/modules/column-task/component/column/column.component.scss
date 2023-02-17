@@ -17,7 +17,7 @@ $hover-color: #d1d3dc;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 10px;
 }
 
@@ -27,13 +27,15 @@ $hover-color: #d1d3dc;
   word-wrap: break-word;
   width: 100%;
   overflow: auto;
+  flex: 1;
 }
 
 .column__title_edit {
-  font: 500 20px Roboto, sans-serif;
-  letter-spacing: .0178571429em;
-  padding-left: 2px;
+  font: 500 20px/32px Roboto, sans-serif;
+  letter-spacing: .0125em;
+  padding-left: 3px;
   flex: 1;
+  box-sizing: content-box;
 }
 
 .column__menu {
