@@ -96,20 +96,23 @@
 <mat-menu  class="mat-menu-wrapper" #beforeMenu="matMenu" xPosition="before">
   <div class="profile">
     <div class="profile__title">Account</div>
+    <small class="profile__date">{{user.registrationDate | date}}</small>
     <div class="profile__user">
       <div class="profile__user__icon person-wrapper">
-        <mat-icon class="person" >person</mat-icon>
+        <img class="person" src={{person}} alt="person">
       </div>
       <div class="profile__user__items">
-        <div class="profile__user__name">Evgeniy Grushevskiy</div>
-        <small class="profile__user__email">grushevskiy.yevgeniy@mail.ru</small>
+        <div class="profile__user__name">{{user.firstName}} {{user.lastName}}</div>
+        <small class="profile__user__email">
+          <a target="_blank" href="https://mail.ru/">{{user.email}}</a>
+        </small>
       </div>
     </div>
   </div>
   <hr id="line">
   <div class="trello">
     <div class="trello__title">Trello</div>
-    <button mat-menu-item (click)="openDialogEditProfile()">Edit profile</button>
+    <button mat-menu-item (click)="openDialogEditProfile(user)">Edit profile</button>
     <button mat-menu-item (click)="openDialogHotFix('500ms','500ms')">HotKeys</button>
   </div>
   <hr>
