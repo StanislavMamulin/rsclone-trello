@@ -2,6 +2,7 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 import { IColumn } from 'src/app/modules/column-task/model/column.interface';
+import { AudioServiceService } from 'src/app/shared/audio-service.service';
 import { IBoard } from '../../model/Board.model';
 
 @Component({
@@ -29,17 +30,19 @@ export class BoardComponent implements OnInit {
   constructor(
     private router: Router,
     private boardsStateService: BoardsStateService,
+    private audioService: AudioServiceService,
   ) {}
 
   ngOnInit() {
     this.isOpenDescription = false;
   }
 
-  deleteBoard(id:string) {
+  deleteBoard(id: string) {
     this.onDelete.emit(id);
   }
 
   openBoard(event: any) {
+    this.audioService.playAudio('../../../../assets/sounds/audio-board.mp3');
     if (event.currentTarget.classList.contains('board__offer-open')) {
       this.boardsStateService.setCurrentBoard(this.board);
       this.router.navigate(['/board', this.board.idBoard]);
