@@ -96,12 +96,13 @@ header {
   }
 }
 
-.person-wrapper{
+.person-wrapper {
   width: 30px;
   height: 30px;
   background: rgb(75, 73, 73);
-  border:3px solid rgb(75, 73, 73);;
-  border-radius:50%;
+  border: 3px solid rgb(75, 73, 73);
+  ;
+  border-radius: 50%;
   margin-right: 5px;
   margin-left: 10px;
   display: flex;
@@ -109,10 +110,12 @@ header {
   align-items: center;
   cursor: pointer;
   transition: .5s;
-  &:hover{
-    border:3px solid rgb(43, 41, 41);
+
+  &:hover {
+    border: 3px solid rgb(43, 41, 41);
   }
-  .person{
+
+  .person {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -127,7 +130,7 @@ button {
 
 .search-container {
   position: relative;
-  width: 40%;
+  width: 100%;
   top: 11px;
 
   mat-form-field {
@@ -152,30 +155,6 @@ button {
   }
 }
 
-.langauge-wrapper {
-  position: relative;
-  height: 100%;
-  width: 50px;
-
-  &__switch {
-    position: absolute;
-    width: 50px;
-    top: -3px;
-
-    .img-def {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      margin-top: 2px;
-    }
-
-    .ng-tns-c111-1 {
-      display: none;
-    }
-  }
-}
-
 .mdc-text-field {
   border-radius: 0;
 }
@@ -184,15 +163,15 @@ button {
   display: flex;
 }
 
-.profile{
-  &__title{
+.profile {
+  &__title {
     font-weight: 500;
     margin-top: 15px;
     margin-left: 15px;
     color: rgb(133, 124, 124);
   }
 
-  &__user{
+  &__user {
     margin-top: 10px;
     margin-bottom: 10px;
     padding-left: 15px;
@@ -201,14 +180,18 @@ button {
     align-items: center;
     gap: 15px;
 
-    &__icon{
+    &__icon {
       background: #3f51b5;
       border: none;
       transform: scale(1.5);
       cursor: auto;
-      &:hover{
+
+      &:hover {
         border: none;
       }
+    }
+    &__email{
+      margin-right: 15px;
     }
   }
 }
@@ -220,5 +203,36 @@ button {
     margin-left: 15px;
     font-weight: 500;
     color: rgb(133, 124, 124);
+  }
+}
+
+
+.mat-mdc-menu-item.mat-mdc-focus-indicator.mdc-list-item.language-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-mdc-menu-panel.mdc-menu-surface.mdc-menu-surface--open.mat-mdc-elevation-specific.language-wrapper {
+  width: 90px;
+}
+
+.current-flag{
+  margin-top: 6px;
+}
+
+.right-side{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  width: fit-content;
+  &.active{
+    width: 60%;
+  }
+}
+
+@media (max-width: 700px){
+  .right-side{
+    width: fit-content;
   }
 }

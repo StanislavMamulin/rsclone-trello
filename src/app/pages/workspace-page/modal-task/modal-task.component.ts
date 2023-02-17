@@ -58,7 +58,14 @@ export class ModalTaskComponent implements OnInit {
   }
 
   updateIsChooseBlur(event: FocusEvent){
+    console.log('sfsdfsd');
     if(!(event.relatedTarget instanceof HTMLInputElement)){
+      this.isCreate = false;
+    }
+
+    const checkbox =  event.relatedTarget as HTMLInputElement;
+
+    if(checkbox.type === "checkbox"){
       this.isCreate = false;
     }
   }

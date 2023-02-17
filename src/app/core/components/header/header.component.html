@@ -15,6 +15,8 @@
       </button>
     </div>
 
+    <div class="right-side">
+          <!-- search -->
     <div class="search-container" *ngIf="auth.isAuthenticated()">
       <div class="search">
         <span role="img" aria-label="search" class="css-1wits42" style="
@@ -27,11 +29,17 @@
           </svg>
         </span>
         <mat-form-field class="example-full-width" appearance="fill">
-          <input style="padding-left: 20px" (click)="updateBoards()" type="text" [(ngModel)]="searchStr" matInput
+          <input style="padding-left: 20px"
+          (click)="updateBoards()"
+          (blur)="reduceSearchInput()"
+          (focus)="increaseSerchInput()"
+          type="text"
+          [(ngModel)]="searchStr" matInput
             [matAutocomplete]="auto" />
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option
               (click)="openBoard(board)"
+
               *ngFor="let board of boards | searchPipe : searchStr"
               [value]="board.nameBoard"
             >
@@ -47,37 +55,41 @@
       </div>
     </div>
 
+    <!-- registration -->
     <div class="right-button">
-      <div 
+      <div
         class="authorization"
         *ngIf="!auth.isAuthenticated()"
       >
         <button
-          *transloco="let t" 
+          *transloco="let t"
           (click)="openRegistrationPage()"
           >
           {{t('header.singUp')}}
          </button>
-        <button 
+        <button
           *transloco="let t"
           (click)="openLoginPage()"
           >{{t('header.logIn')}}
          </button>
       </div>
-      <div class="langauge-wrapper">
-        <mat-form-field class="langauge-wrapper__switch">
-          <img class="img-def" width="30px" src={{selectedFlag}} alt="flag">
-          <mat-select [(ngModel)]="selectedLanguage" name="lang">
-            <mat-option class="mat-option" (click)="switchLang()" *ngFor="let lang of languages" [value]="lang.value">
-              <img style="margin-left: -9px;" width="36px" src={{lang.img}} alt="flag">
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div [matMenuTriggerFor]="beforeMenu" class="person-wrapper" *ngIf="auth.isAuthenticated()">
-        <mat-icon class="person">person</mat-icon>
-      </div>
     </div >
+    <!-- flags -->
+    <button class="current-flag"  mat-button [matMenuTriggerFor]="menu">
+      <img width="36px" src={{selectedFlag}} alt="">
+    </button>
+    <mat-menu style="width: 120px;" class="language-wrapper" #menu="matMenu">
+      <div class="language-button" (click)="changeLanguage($event)" *ngFor="let lang of languages" mat-menu-item>
+        <img width="36px" src={{lang.img}}  alt="en"><mat-icon color="primary">{{lang.icon}}</mat-icon>
+      </div>
+    </mat-menu>
+    <!-- auth -->
+    <div [matMenuTriggerFor]="beforeMenu" class="person-wrapper" *ngIf="auth.isAuthenticated()">
+      <mat-icon class="person">person</mat-icon>
+    </div>
+
+    </div>
+
   </div>
 </header>
 
