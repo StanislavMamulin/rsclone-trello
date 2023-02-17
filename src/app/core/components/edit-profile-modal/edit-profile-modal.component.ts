@@ -58,6 +58,7 @@ export class EditProfileModalComponent implements OnInit {
         lastName,
         gender
       }
+      this.dialogRef.close();
     })
   }
 }

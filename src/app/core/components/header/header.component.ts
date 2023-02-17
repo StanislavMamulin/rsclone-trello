@@ -71,7 +71,9 @@ export class HeaderComponent implements OnInit {
       data: {user}
     });
     dialogRef.afterClosed().subscribe((result) => {
+
       if (result) {
+
         this.user = result.user;
       }
     });

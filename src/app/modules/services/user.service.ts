@@ -24,8 +24,8 @@ export class UserService {
     return this.httpClient.post<IUser>(this.loginUrl, loginParams);
   }
 
-  public updateUser(newUserInfo: UserEditParams): Observable<void> {
-    return this.httpClient.put<void>(this.userUrl, newUserInfo);
+  public updateUser(newUserInfo: UserEditParams): Observable<UserProfile> {
+    return this.httpClient.put<UserProfile>(this.userUrl, newUserInfo);
   }
 
   public getCurrentUserProfile(): Observable<UserProfile> {

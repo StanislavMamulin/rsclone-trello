@@ -7,7 +7,7 @@ import { ColumnTaskService } from 'src/app/modules/column-task/column-task.servi
 import { ColumnComponent } from 'src/app/modules/column-task/component/column/column.component';
 import { IColumn } from 'src/app/modules/column-task/model/column.interface';
 import { ITask } from 'src/app/modules/column-task/model/task.interface';
-import { ICheckBox,  } from '../model/checkbox.interface';
+import { ICheckBox } from '../model/checkbox.interface';
 
 @Component({
   selector: 'app-modal-task',
