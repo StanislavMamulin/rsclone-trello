@@ -89,7 +89,8 @@
     "noBoardsToMove": "No boards to move",
     "columnInfo": "Column info",
     "close": "Close",
-    "save": "Save"
+    "save": "Save",
+    "noTasksToMove": "No tasks to move"
   },
   "snack": {
     "exist": "Email already exists"

@@ -68,7 +68,11 @@
     mat-menu-item
     (click)="showColumnInfo()"
   >
-    <mat-icon class="menu-item__icon" color="primary">info</mat-icon>
+    <mat-icon
+      class="menu-item__icon"
+      color="primary"
+      >info</mat-icon
+    >
     <span
       class="menu-item__title"
       *transloco="let t"
@@ -79,7 +83,11 @@
     mat-menu-item
     (click)="deleteColumn(column)"
   >
-    <mat-icon class="menu-item__icon" color="warn">delete_forever</mat-icon>
+    <mat-icon
+      class="menu-item__icon"
+      color="warn"
+      >delete_forever</mat-icon
+    >
     <span
       class="menu-item__title"
       *transloco="let t"
@@ -91,7 +99,11 @@
     mat-menu-item
     [matMenuTriggerFor]="columnsList"
   >
-    <mat-icon class="menu-item__icon" color="primary">playlist_play</mat-icon>
+    <mat-icon
+      class="menu-item__icon"
+      color="primary"
+      >playlist_play</mat-icon
+    >
     <span
       class="menu-item__title"
       *transloco="let t"
@@ -102,7 +114,11 @@
     mat-menu-item
     [matMenuTriggerFor]="boardsList"
   >
-    <mat-icon class="menu-item__icon" color="primary">dashboard</mat-icon>
+    <mat-icon
+      class="menu-item__icon"
+      color="primary"
+      >dashboard</mat-icon
+    >
     <span
       class="menu-item__title"
       *transloco="let t"
@@ -121,7 +137,9 @@
       <span class="menu-item__title">{{ columnItem.nameColumn }}</span>
     </button>
     <ng-template #notasks>
-      <p class="no-items">No tasks to move</p>
+      <p class="no-items">
+        <span *transloco="let t">{{ t('workSpace.noTasksToMove') }}</span>
+      </p>
     </ng-template>
   </ng-container>
   <p
