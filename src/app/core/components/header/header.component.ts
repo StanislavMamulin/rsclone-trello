@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalLogOutComponent } from '../modal-log-out/modal-log-out.component';
 import { TranslocoService } from '@ngneat/transloco';
 import { ModalHotkeysComponent } from '../modal-hotkeys/modal-hotkeys.component';
+import { EditProfileModalComponent } from '../edit-profile-modal/edit-profile-modal.component';
 
 interface ILanguage {
   img: string;
@@ -42,6 +43,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.isAuth = this.auth.isAuthenticated();
     this.setIconForLang();
+  }
+
+  openDialogEditProfile(){
+    const dialogRef = this.dialog.open(EditProfileModalComponent);
+    dialogRef.afterClosed().subscribe(()=>{
+      console.log('edit profile modal closed..');
+    })
   }
 
   changeLanguage(e: MouseEvent){
@@ -80,6 +88,8 @@ export class HeaderComponent implements OnInit {
       exitAnimationDuration,
     });
   }
+
+
 
   openBoards(): void {
     this.router.navigate(['/board']);
