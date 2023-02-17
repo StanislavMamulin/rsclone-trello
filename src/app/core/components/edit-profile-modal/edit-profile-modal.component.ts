@@ -51,7 +51,13 @@ export class EditProfileModalComponent implements OnInit {
       gender:this.thirdFormGroup.get('gender').value,
     })
     .subscribe(res=>{
-      console.log(res);// ничего не выводит
+      const {firstName,lastName, gender} = res;
+      this.data.user= {
+        ...this.data.user,
+        firstName,
+        lastName,
+        gender
+      }
     })
   }
 }
