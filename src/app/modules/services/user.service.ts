@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BASE_URL } from 'src/app/core/constants';
-import { IUser, LoginParams, RegistrationParams, UserEditParams } from 'src/app/shared/models/user.model';
+import { IUser, LoginParams, RegistrationParams, UserEditParams, UserProfile } from 'src/app/shared/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +26,9 @@ export class UserService {
 
   public updateUser(newUserInfo: UserEditParams): Observable<void> {
     return this.httpClient.put<void>(this.userUrl, newUserInfo);
+  }
+
+  public getCurrentUserProfile(): Observable<UserProfile> {
+    return this.httpClient.get<UserProfile>(this.userUrl);
   }
 }
