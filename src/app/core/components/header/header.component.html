@@ -93,7 +93,7 @@
   </div>
 </header>
 
-<mat-menu  class="mat-menu-wrapper" #beforeMenu="matMenu" xPosition="before">
+<mat-menu class="mat-menu-wrapper" #beforeMenu="matMenu" xPosition="before">
   <div class="profile">
     <div class="profile__wrapper">
       <div class="profile__wrapper__title">Account</div>
@@ -101,6 +101,7 @@
         <mat-slide-toggle
         color="primary"
         [(ngModel)]="audioChecked"
+        (change)="updateToggleSlider()"
         >
            Sound
         </mat-slide-toggle>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBoard } from 'src/app/modules/board/model/Board.model';
 import { BoardService } from 'src/app/modules/board/board-service.service';
@@ -10,6 +10,8 @@ import { ModalHotkeysComponent } from '../modal-hotkeys/modal-hotkeys.component'
 import { EditProfileModalComponent } from '../edit-profile-modal/edit-profile-modal.component';
 import { AccessLevel, UserProfile } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/modules/services/user.service';
+import { AppStateService } from '../../services/app-state.service';
+import { MatMenuTrigger, MenuCloseReason } from '@angular/material/menu';
 
 interface ILanguage {
   img: string;
@@ -53,18 +55,31 @@ export class HeaderComponent implements OnInit {
     public auth: AuthService,
     public userService: UserService,
     public dialog: MatDialog,
-    private translocoService: TranslocoService
-  ) {}
+    private translocoService: TranslocoService,
+    private appStateService: AppStateService
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.isAuth = this.auth.isAuthenticated();
     this.setIconForLang();
 
+    this.appStateService.currentUser$.subscribe(user=>{
+      this.user = user;
+      this.person = '../../../../assets/images/' + user.gender +  '.svg';
+      console.log('../../../../assets/images/' + user.gender +  '.svg');
+    })
+
     this.userService.getCurrentUserProfile()
       .subscribe(res=>{
         this.user = {...res};
-        this.person = `../../../../assets/images/${this.user.gender}.svg`;
+        this.appStateService.setCurrentUser(res);
       })
+  }
+
+  updateToggleSlider(){
+    this.appStateService.setIsSoundEnable(this.audioChecked);
   }
 
   openDialogEditProfile(user:UserProfile){
@@ -72,7 +87,7 @@ export class HeaderComponent implements OnInit {
       data: {user}
     });
     dialogRef.afterClosed().subscribe((result) => {
-
+      console.log(result);
       if (result) {
 
         this.user = result.user;

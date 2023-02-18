@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppStateService } from 'src/app/core/services/app-state.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LoginParams } from 'src/app/shared/models/user.model';
 
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
+    private appStateService: AppStateService
   ) {}
 
   ngOnInit(): void {
@@ -41,11 +43,13 @@ export class LoginComponent implements OnInit {
     };
 
     this.auth.login(loginData).subscribe({
-      next: () => {
+      next: (res) => {
+        const {id, firstName, lastName, gender, email, registrationDate, accessLevel} = res;
         this.form.reset();
         this.router.navigate(['/board']);
         this.submitted = false;
         this.invalidCredentials = false;
+        this.appStateService.setCurrentUser({id, firstName, lastName, gender, email, registrationDate, accessLevel});
       },
       error: () => {
         this.submitted = false;

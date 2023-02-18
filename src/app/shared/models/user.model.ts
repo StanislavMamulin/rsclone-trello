@@ -13,7 +13,7 @@ export interface IUser {
 export type IUserParams = Omit<IUser, 'id' | 'token'>;
 
 export type RegistrationParams = Pick<
-IUser, 
+IUser,
 'firstName' | 'lastName' | 'email' | 'password' | 'gender'
 >;
 
@@ -21,7 +21,7 @@ type ExpiresIn = {
   expiresIn: string;
 };
 
-export type UserResponse = Pick<IUser, 'email' | 'id' | 'token'> & ExpiresIn;
+export type UserResponse = IUser & ExpiresIn;
 
 export type LoginParams = Pick<IUser, 'email' | 'password'>;
 
