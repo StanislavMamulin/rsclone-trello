@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from 'src/app/modules/services/user.service';
 import { UserProfile } from 'src/app/shared/models/user.model';
+import { AppStateService } from '../../services/app-state.service';
 import { HeaderComponent } from '../header/header.component';
 
 interface IGender {
@@ -29,7 +30,8 @@ export class EditProfileModalComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { user:UserProfile },
     private dialogRef: MatDialogRef<HeaderComponent>,
-    private userService: UserService
+    private userService: UserService,
+    private appStateService: AppStateService
   ){}
 
   ngOnInit(){
@@ -52,13 +54,13 @@ export class EditProfileModalComponent implements OnInit {
     })
     .subscribe(res=>{
       const {firstName,lastName, gender} = res;
-      this.data.user= {
+      this.dialogRef.close();
+      this.appStateService.setCurrentUser({
         ...this.data.user,
         firstName,
         lastName,
         gender
-      }
-      this.dialogRef.close();
+      })
     })
   }
 }

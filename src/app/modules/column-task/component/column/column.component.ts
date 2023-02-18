@@ -137,15 +137,16 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         data: { task: task, column: this.column },
         disableClose: true,
       });
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.tasks.forEach((taskItem) => {
-            if (taskItem.idTask == result.task.idTask) {
-              taskItem = result.task;
-            }
-          });
-        }
-      });
+      // dialogRef.afterClosed().subscribe((result) => {
+      //   console.log(result);
+      //   if (result) {
+      //     this.tasks.forEach((taskItem) => {
+      //       if (taskItem.idTask == result.task.idTask) {
+      //         taskItem = result.task;
+      //       }
+      //     });
+      //   }
+      // });
     }
   }
 

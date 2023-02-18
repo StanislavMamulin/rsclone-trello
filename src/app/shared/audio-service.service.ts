@@ -1,14 +1,27 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AppStateService } from '../core/services/app-state.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AudioServiceService {
-  constructor() {}
+  isSoundEnable:boolean = true;
+  subscription: Subscription;
+
+  constructor(
+    private appStateService: AppStateService
+  ) {
+    this.appStateService.isSoundEnable$.subscribe((enableSound)=>{
+      this.isSoundEnable = enableSound;
+    })
+  }
 
   playAudio(audioLink: string) {
-    const audio = new Audio();
-    audio.src = audioLink;
-    audio.play();
+    if(this.isSoundEnable){
+      const audio = new Audio();
+      audio.src = audioLink;
+      audio.play();
+    }
   }
 }
