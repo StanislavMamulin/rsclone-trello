@@ -78,7 +78,7 @@
     <button class="current-flag"  mat-button [matMenuTriggerFor]="menu">
       <img width="36px" src={{selectedFlag}} alt="">
     </button>
-    <mat-menu style="width: 120px;" class="language-wrapper" #menu="matMenu">
+    <mat-menu style="width: 120px;" class="language-wrapper" #menu="matMenu" xPosition="before">
       <div class="language-button" (click)="changeLanguage($event)" *ngFor="let lang of languages" mat-menu-item>
         <img width="36px" src={{lang.img}}  alt="en"><mat-icon color="primary">{{lang.icon}}</mat-icon>
       </div>
@@ -95,7 +95,17 @@
 
 <mat-menu  class="mat-menu-wrapper" #beforeMenu="matMenu" xPosition="before">
   <div class="profile">
-    <div class="profile__title">Account</div>
+    <div class="profile__wrapper">
+      <div class="profile__wrapper__title">Account</div>
+      <div class="profile__wrapper__audio">
+        <mat-slide-toggle
+        color="primary"
+        [(ngModel)]="audioChecked"
+        >
+           Sound
+        </mat-slide-toggle>
+      </div>
+    </div>
     <small class="profile__date">{{user.registrationDate | date}}</small>
     <div class="profile__user">
       <div class="profile__user__icon person-wrapper">

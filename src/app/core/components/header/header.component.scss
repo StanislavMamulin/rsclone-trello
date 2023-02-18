@@ -164,23 +164,34 @@ button {
 }
 
 .profile {
+  box-sizing: border-box;
   padding-right: 10px;
-  &__title {
-    font-weight: 500;
+  padding-left: 15px;
+  width: 280px;
+  &__wrapper{
+    display: flex;
     margin-top: 15px;
-    margin-left: 15px;
-    color: rgb(133, 124, 124);
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    &__title {
+      font-weight: 500;
+      color: rgb(133, 124, 124);
+    }
+
+    &__audio{
+
+    }
   }
 
+
   &__date{
-    margin-left: 15px;
     font-size: 12px;
   }
 
   &__user {
     margin-top: 10px;
     margin-bottom: 10px;
-    padding-left: 15px;
     display: flex;
     justify-content: left;
     align-items: center;
