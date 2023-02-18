@@ -8,6 +8,7 @@ import { ModalTaskComponent } from '../modal-task/modal-task.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { AppStateService } from 'src/app/core/services/app-state.service';
+import { AudioServiceService } from 'src/app/shared/audio-service.service';
 
 @Component({
   selector: 'app-workspace',
@@ -40,6 +41,7 @@ export class WorkspaceComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public dialog: MatDialog,
     private appStateService: AppStateService,
+    private audioService: AudioServiceService,
   ) {}
 
   ngOnInit(): void {
@@ -80,12 +82,13 @@ export class WorkspaceComponent implements OnInit {
         if (this.indexColumn < columns.length - 1 && e.code === 'ArrowRight') {
           ++this.indexColumn;
         }
-        columns.forEach(item => {
+        columns.forEach((item) => {
           if (item.classList.contains('active')) {
             item.classList.remove('active');
           }
         });
-        tasks.forEach(item => {
+
+        tasks.forEach((item) => {
           if (item.classList.contains('active')) {
             item.classList.remove('active');
           }
@@ -120,7 +123,8 @@ export class WorkspaceComponent implements OnInit {
             item.classList.remove('active');
           }
         });
-        tasks.forEach(item => {
+
+        tasks.forEach((item) => {
           if (item.classList.contains('active')) {
             item.classList.remove('active');
           }
@@ -149,11 +153,13 @@ export class WorkspaceComponent implements OnInit {
       if (e.code === 'ArrowDown' && this.isWorkHotKeys) {
         e.preventDefault();
         let activeColumn = columns[0];
-        columns.forEach(item => {
+
+        columns.forEach((item) => {
           if (item.classList.contains('active')) {
             activeColumn = item;
           }
         });
+
         const tasksInColumn = activeColumn.querySelectorAll('app-task');
 
         if (this.indexTask < tasksInColumn.length - 1 && e.code === 'ArrowDown') {
@@ -174,11 +180,12 @@ export class WorkspaceComponent implements OnInit {
       if (e.code === 'ArrowUp' && this.isWorkHotKeys) {
         e.preventDefault();
         let activeColumn = columns[0];
-        columns.forEach(item => {
+        columns.forEach((item) => {
           if (item.classList.contains('active')) {
             activeColumn = item;
           }
         });
+
         const tasksInColumn = activeColumn.querySelectorAll('app-task');
 
         if (this.indexTask > 0 && e.code === 'ArrowUp') {
@@ -186,10 +193,12 @@ export class WorkspaceComponent implements OnInit {
         }
 
         tasksInColumn.forEach(item => {
+
           if (item.classList.contains('active')) {
             item.classList.remove('active');
           }
         });
+
         tasksInColumn.forEach((item, i) => {
           if (i === this.indexTask) {
             item.classList.add('active');
@@ -204,12 +213,13 @@ export class WorkspaceComponent implements OnInit {
           this.openModal(tasksInColumn[this.indexTask], this.columns[this.indexColumn]);
           this.indexColumn = -1;
           this.indexTask = 0;
-          columns.forEach(item => {
+          columns.forEach((item) => {
             if (item.classList.contains('active')) {
               item.classList.remove('active');
             }
           });
-          tasks.forEach(item => {
+
+          tasks.forEach((item) => {
             if (item.classList.contains('active')) {
               item.classList.remove('active');
             }
@@ -220,18 +230,18 @@ export class WorkspaceComponent implements OnInit {
       if (e.code === 'Escape') {
         this.indexColumn = -1;
         this.indexTask = 0;
-        columns.forEach(item => {
+        columns.forEach((item) => {
           if (item.classList.contains('active')) {
             item.classList.remove('active');
           }
         });
-        tasks.forEach(item => {
+
+        tasks.forEach((item) => {
           if (item.classList.contains('active')) {
             item.classList.remove('active');
           }
         });
       }
-
     };
   }
 
@@ -240,7 +250,7 @@ export class WorkspaceComponent implements OnInit {
       data: { task, column },
       disableClose: true,
     });
-    dialogRef.afterClosed().subscribe(()=>{
+    dialogRef.afterClosed().subscribe(() => {
       this.isWorkHotKeys = true;
     });
   }
@@ -260,7 +270,8 @@ export class WorkspaceComponent implements OnInit {
 
   showAddColumn() {
     this.showAddControl = true;
-    this.workspaceElement.nativeElement.scrollLeft = this.workspaceElement.nativeElement.scrollWidth;
+    this.workspaceElement.nativeElement.scrollLeft =
+      this.workspaceElement.nativeElement.scrollWidth;
   }
 
   hideAddColumn() {
@@ -268,6 +279,7 @@ export class WorkspaceComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<IColumn[]>) {
+    this.audioService.playAudio('../../../assets/sounds/audio-column.mp3');
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

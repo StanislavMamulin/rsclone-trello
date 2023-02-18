@@ -7,7 +7,8 @@ import { ColumnTaskService } from 'src/app/modules/column-task/column-task.servi
 import { ColumnComponent } from 'src/app/modules/column-task/component/column/column.component';
 import { IColumn } from 'src/app/modules/column-task/model/column.interface';
 import { ITask } from 'src/app/modules/column-task/model/task.interface';
-import { ICheckBox,  } from '../model/checkbox.interface';
+import { AudioServiceService } from 'src/app/shared/audio-service.service';
+import { ICheckBox } from '../model/checkbox.interface';
 
 @Component({
   selector: 'app-modal-task',
@@ -25,17 +26,17 @@ export class ModalTaskComponent implements OnInit {
     public dialogRef: MatDialogRef<ColumnComponent>,
     private ColumnTaskService: ColumnTaskService,
     private ChecklistService: ChecklistService,
-    private taskStateService: TaskStateService
+    private taskStateService: TaskStateService,
+    private audioService: AudioServiceService,
   ) {}
 
   ngOnInit() {
     this.formTask = new FormGroup({
       nameTask: new FormControl(this.data.task.nameTask, [Validators.required]),
-      descriptionTask: new FormControl(this.data.task.descriptionTask ||
-        `description of ${this.data.task.nameTask}`, [
-        Validators.required,
-        Validators.minLength(5),
-      ]),
+      descriptionTask: new FormControl(
+        this.data.task.descriptionTask || `description of ${this.data.task.nameTask}`,
+        [Validators.required, Validators.minLength(5)],
+      ),
       addCheckBox: new FormControl(null, [Validators.required]),
     });
 
@@ -48,39 +49,38 @@ export class ModalTaskComponent implements OnInit {
       }
     });
 
-    document.onkeydown = (e:KeyboardEvent) =>{
-      if(e.code === "Escape"){
+    document.onkeydown = (e: KeyboardEvent) => {
+      if (e.code === 'Escape') {
         this.closeModal();
         this.updateTask();
         this.updateChecklist();
       }
-    }
+    };
   }
 
-  updateIsChooseBlur(event: FocusEvent){
-    console.log('sfsdfsd');
-    if(!(event.relatedTarget instanceof HTMLInputElement)){
+  updateIsChooseBlur(event: FocusEvent) {
+    if (!(event.relatedTarget instanceof HTMLInputElement)) {
       this.isCreate = false;
     }
 
-    const checkbox =  event.relatedTarget as HTMLInputElement;
+    const checkbox = event.relatedTarget as HTMLInputElement;
 
-    if(checkbox.type === "checkbox"){
+    if (checkbox.type === 'checkbox') {
       this.isCreate = false;
     }
   }
 
-  updateCreateState(event:any) {
+  updateCreateState(event: any) {
     this.isCreate = !this.isCreate;
 
-    if(event?.target.classList.contains('delete-task')){
-      this.formTask.controls["addCheckBox"].setValue(null);
+    if (event?.target.classList.contains('delete-task')) {
+      this.formTask.controls['addCheckBox'].setValue(null);
     }
 
     const inputCreate = document.querySelector('.create-input') as HTMLInputElement;
-    setTimeout(()=>{
+    setTimeout(() => {
       inputCreate?.focus();
-    },0);
+    }, 0);
   }
 
   updateCalculated() {
@@ -100,11 +100,12 @@ export class ModalTaskComponent implements OnInit {
     this.updateCalculated();
   }
   updateChecklist() {
-    this.ChecklistService.updateChecklist(this.data.task.idTask, this.checklist)
-    .subscribe((res) =>{
-      this.data.task.checkLists = res;
-      this.taskStateService.setChecklist(this.checklist);
-    });
+    this.ChecklistService.updateChecklist(this.data.task.idTask, this.checklist).subscribe(
+      (res) => {
+        this.data.task.checkLists = res;
+        this.taskStateService.setChecklist(this.checklist);
+      },
+    );
   }
   updateInput(checkbox: ICheckBox) {
     const { nameCheckBox, idCheckBox } = checkbox;
@@ -120,9 +121,9 @@ export class ModalTaskComponent implements OnInit {
     });
   }
 
-  enterPressedInputAdd(event: Event){
+  enterPressedInputAdd(event: Event) {
     event.preventDefault();
-    if(!this.formTask.controls['addCheckBox'].errors){
+    if (!this.formTask.controls['addCheckBox'].errors) {
       this.createCheckBox();
     }
   }
@@ -135,32 +136,34 @@ export class ModalTaskComponent implements OnInit {
       this.checklist.push(res);
       this.data.task.checkLists = this.checklist;
       this.updateCalculated();
-      this.formTask.controls["addCheckBox"].setValue(null);
+      this.formTask.controls['addCheckBox'].setValue(null);
       this.taskStateService.setChecklist(this.checklist);
     });
   }
 
   closeModal() {
-    if(!this.formTask.controls['nameTask'].errors &&
-    !this.formTask.controls['descriptionTask'].errors){
+    if (
+      !this.formTask.controls['nameTask'].errors &&
+      !this.formTask.controls['descriptionTask'].errors
+    ) {
       this.dialogRef.close();
-    }else{
+    } else {
       const nameInput = document.querySelector('.name-task') as HTMLInputElement;
       const descriptionInput = document.querySelector('.description-task') as HTMLTextAreaElement;
-      if(this.formTask.controls['nameTask'].errors){
+      if (this.formTask.controls['nameTask'].errors) {
         nameInput?.focus();
-      }else{
+      } else {
         descriptionInput?.focus();
         console.log(descriptionInput);
       }
-
-
     }
   }
 
   updateTask() {
-    if(!this.formTask.controls['nameTask'].errors &&
-    !this.formTask.controls['descriptionTask'].errors){
+    if (
+      !this.formTask.controls['nameTask'].errors &&
+      !this.formTask.controls['descriptionTask'].errors
+    ) {
       this.ColumnTaskService.updateTask(this.data.task.idTask, {
         nameTask: this.formTask.get('nameTask').value,
         descriptionTask: this.formTask.get('descriptionTask').value,
@@ -169,6 +172,8 @@ export class ModalTaskComponent implements OnInit {
         this.data.task.nameTask = nameTask;
         this.data.task.descriptionTask = descriptionTask;
       });
+    } else {
+      this.audioService.playAudio('../../../assets/sounds/audio-error.mp3');
     }
   }
 
@@ -179,9 +184,11 @@ export class ModalTaskComponent implements OnInit {
         if (item.idCheckBox === idCheckBox) {
           index = i;
           this.checklist.splice(index, 1);
-          if(this.checklist.length){
+          if (this.checklist.length) {
             this.updateCalculated();
-          }else {this.calculated = 0}
+          } else {
+            this.calculated = 0;
+          }
         }
       });
       this.data.task.checkLists = this.checklist;
