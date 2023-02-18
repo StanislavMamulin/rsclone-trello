@@ -20,6 +20,7 @@ import { ModalTaskComponent } from 'src/app/pages/workspace-page/modal-task/moda
 import { ColumnDescriptionComponent } from './column-description/column-description.component';
 import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 import { Subscription } from 'rxjs';
+import { AudioServiceService } from 'src/app/shared/audio-service.service';
 
 @Component({
   selector: 'app-column',
@@ -55,6 +56,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     private columnTaskService: ColumnTaskService,
     public dialog: MatDialog,
     private boardsStateService: BoardsStateService,
+    private audioService: AudioServiceService,
   ) {}
 
   ngOnInit() {
@@ -72,6 +74,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   drop(event: CdkDragDrop<IMovedTask>) {
+    this.audioService.playAudio('../../../../assets/sounds/audio-task.mp3');
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
     } else {
@@ -200,14 +203,13 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteTask(idTask: string) {
-    this.columnTaskService.deleteTask(idTask)
-      .subscribe(()=>{
-        this.tasks.forEach((task, i)=>{
-          if (task.idTask === idTask) {
-            this.tasks.splice(i, 1);
-          }
-        });
+    this.columnTaskService.deleteTask(idTask).subscribe(() => {
+      this.tasks.forEach((task, i) => {
+        if (task.idTask === idTask) {
+          this.tasks.splice(i, 1);
+        }
       });
+    });
   }
 
   addBoardSubscribers() {

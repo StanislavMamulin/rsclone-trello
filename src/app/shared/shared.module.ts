@@ -22,7 +22,8 @@ import { TranslocoRootModule } from '../transloco-root.module';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { MatMenuModule } from '@angular/material/menu';
 import { CloseComponent } from './components/close/close.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
+import { AudioServiceService } from './audio-service.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatDialogModule,
     TranslocoRootModule,
     MatMenuModule,
-    MatStepperModule
+    MatStepperModule,
   ],
   exports: [
     FormsModule,
@@ -73,7 +74,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     TranslocoRootModule,
     AutofocusDirective,
     MatMenuModule,
-    MatStepperModule
+    MatStepperModule,
   ],
+  providers: [AudioServiceService],
 })
 export class SharedModule {}
