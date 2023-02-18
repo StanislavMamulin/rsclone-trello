@@ -59,7 +59,6 @@ export class ModalTaskComponent implements OnInit {
   }
 
   updateIsChooseBlur(event: FocusEvent) {
-    console.log('sfsdfsd');
     if (!(event.relatedTarget instanceof HTMLInputElement)) {
       this.isCreate = false;
     }

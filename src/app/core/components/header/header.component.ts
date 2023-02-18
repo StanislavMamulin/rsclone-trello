@@ -8,11 +8,15 @@ import { ModalLogOutComponent } from '../modal-log-out/modal-log-out.component';
 import { TranslocoService } from '@ngneat/transloco';
 import { ModalHotkeysComponent } from '../modal-hotkeys/modal-hotkeys.component';
 import { EditProfileModalComponent } from '../edit-profile-modal/edit-profile-modal.component';
+import { AccessLevel, UserProfile } from 'src/app/shared/models/user.model';
+import { UserService } from 'src/app/modules/services/user.service';
 
 interface ILanguage {
   img: string;
   icon: string
 }
+
+
 
 @Component({
   selector: 'app-header',
@@ -21,11 +25,21 @@ interface ILanguage {
 })
 export class HeaderComponent implements OnInit {
   boards: IBoard[] = [];
+  user: UserProfile = {
+    id:'1111111111',
+    firstName: 'user name',
+    lastName: '',
+    email: 'user email',
+    gender: 'user gender',
+    registrationDate: new Date(),
+    accessLevel: AccessLevel.Anonymous
+  };
   selectedLanguage: string = localStorage.getItem('language') || 'en';
   selectedFlag: string = localStorage.getItem('flag') || '../../../../assets/images/en.svg';
   isAuth = false;
   indexBoard = -1;
   searchStr = '';
+  person = "../../../../assets/images/man.svg";
 
   languages: ILanguage[] = [
     {img: '../../../../assets/images/en.svg', icon: 'done'},
@@ -36,6 +50,7 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private boardService: BoardService,
     public auth: AuthService,
+    public userService: UserService,
     public dialog: MatDialog,
     private translocoService: TranslocoService
   ) {}
@@ -43,13 +58,25 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.isAuth = this.auth.isAuthenticated();
     this.setIconForLang();
+
+    this.userService.getCurrentUserProfile()
+      .subscribe(res=>{
+        this.user = res;
+        this.person = `../../../../assets/images/${this.user.gender}.svg`;
+      })
   }
 
-  openDialogEditProfile(){
-    const dialogRef = this.dialog.open(EditProfileModalComponent);
-    dialogRef.afterClosed().subscribe(()=>{
-      console.log('edit profile modal closed..');
-    })
+  openDialogEditProfile(user:UserProfile){
+    const dialogRef = this.dialog.open(EditProfileModalComponent,{
+      data: {user}
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+
+      if (result) {
+
+        this.user = result.user;
+      }
+    });
   }
 
   changeLanguage(e: MouseEvent){
