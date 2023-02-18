@@ -164,11 +164,17 @@ button {
 }
 
 .profile {
+  padding-right: 10px;
   &__title {
     font-weight: 500;
     margin-top: 15px;
     margin-left: 15px;
     color: rgb(133, 124, 124);
+  }
+
+  &__date{
+    margin-left: 15px;
+    font-size: 12px;
   }
 
   &__user {
@@ -191,8 +197,16 @@ button {
       }
     }
     &__email{
-      margin-right: 15px;
+      a {
+        text-decoration: none;
+        color: #3f51b5;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
+
   }
 }
 
