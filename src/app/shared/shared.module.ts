@@ -23,6 +23,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import { MatMenuModule } from '@angular/material/menu';
 import { CloseComponent } from './components/close/close.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatDialogModule,
     TranslocoRootModule,
     MatMenuModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSlideToggleModule,
   ],
   exports: [
     FormsModule,
@@ -73,7 +75,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     TranslocoRootModule,
     AutofocusDirective,
     MatMenuModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSlideToggleModule,
   ],
 })
 export class SharedModule {}

@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit {
     registrationDate: new Date(),
     accessLevel: AccessLevel.Anonymous
   };
+  audioChecked: boolean = true;
   selectedLanguage: string = localStorage.getItem('language') || 'en';
   selectedFlag: string = localStorage.getItem('flag') || '../../../../assets/images/en.svg';
   isAuth = false;
@@ -61,7 +62,7 @@ export class HeaderComponent implements OnInit {
 
     this.userService.getCurrentUserProfile()
       .subscribe(res=>{
-        this.user = res;
+        this.user = {...res};
         this.person = `../../../../assets/images/${this.user.gender}.svg`;
       })
   }
