@@ -51,11 +51,12 @@ $hover-color: #d1d3dc;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+  margin-left: 4px;
 
-.column__menu:hover {
-  background-color: $hover-color;
-  border-radius: 5px;
+  &:hover {
+    background-color: $hover-color;
+    border-radius: 5px;
+  }
 }
 
 .task-list {

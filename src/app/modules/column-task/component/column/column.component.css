@@ -47,6 +47,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 4px;
 }
 
 .column__menu:hover {
