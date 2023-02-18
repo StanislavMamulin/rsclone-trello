@@ -22,8 +22,9 @@ import { TranslocoRootModule } from '../transloco-root.module';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { MatMenuModule } from '@angular/material/menu';
 import { CloseComponent } from './components/close/close.component';
-import {MatStepperModule} from '@angular/material/stepper';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
+import { AudioServiceService } from './audio-service.service';
 
 @NgModule({
   declarations: [
@@ -78,5 +79,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatStepperModule,
     MatSlideToggleModule,
   ],
+  providers: [AudioServiceService],
 })
 export class SharedModule {}

@@ -17,8 +17,10 @@ $hover-color: #d1d3dc;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 10px;
+  overflow: auto;
+  flex-shrink: 0;
 }
 
 .column__title {
@@ -27,13 +29,20 @@ $hover-color: #d1d3dc;
   word-wrap: break-word;
   width: 100%;
   overflow: auto;
+  flex: 1;
+  max-height: 11em;
+
+  &:hover {
+    background-color: whitesmoke;
+  }
 }
 
 .column__title_edit {
-  font: 500 20px Roboto, sans-serif;
-  letter-spacing: .0178571429em;
-  padding-left: 2px;
+  font: 500 20px/32px Roboto, sans-serif;
+  letter-spacing: .0125em;
+  padding-left: 3px;
   flex: 1;
+  box-sizing: content-box;
 }
 
 .column__menu {
@@ -42,11 +51,12 @@ $hover-color: #d1d3dc;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+  margin-left: 4px;
 
-.column__menu:hover {
-  background-color: $hover-color;
-  border-radius: 5px;
+  &:hover {
+    background-color: $hover-color;
+    border-radius: 5px;
+  }
 }
 
 .task-list {
@@ -62,9 +72,7 @@ $hover-color: #d1d3dc;
 }
 
 .task-list__item {
-  padding-left: 5px;
-  padding-top: 5px;
-  height: 80px;
+  padding: 8px;
   border-bottom: solid 1px #ccc;
   border-radius: 3px;
   color: rgba(0, 0, 0, 0.87);
