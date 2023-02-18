@@ -19,6 +19,8 @@ $hover-color: #d1d3dc;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 10px;
+  overflow: auto;
+  flex-shrink: 0;
 }
 
 .column__title {
@@ -28,6 +30,7 @@ $hover-color: #d1d3dc;
   width: 100%;
   overflow: auto;
   flex: 1;
+  max-height: 11em;
 }
 
 .column__title_edit {
@@ -64,9 +67,8 @@ $hover-color: #d1d3dc;
 }
 
 .task-list__item {
-  padding-left: 5px;
-  padding-top: 5px;
-  height: 80px;
+  padding-left: 8px;
+  padding-top: 8px;
   border-bottom: solid 1px #ccc;
   border-radius: 3px;
   color: rgba(0, 0, 0, 0.87);
