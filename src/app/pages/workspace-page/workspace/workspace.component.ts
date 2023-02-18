@@ -6,6 +6,8 @@ import { IColumn } from 'src/app/modules/column-task/model/column.interface';
 import { ITask } from 'src/app/modules/column-task/model/task.interface';
 import { ModalTaskComponent } from '../modal-task/modal-task.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
+import { AppStateService } from 'src/app/core/services/app-state.service';
 
 @Component({
   selector: 'app-workspace',
@@ -22,8 +24,14 @@ export class WorkspaceComponent implements OnInit {
   columnsIds: string[];
 
   isWorkHotKeys = true;
+
   indexColumn = -1;
+
   indexTask = 0;
+
+  isEditActive = false;
+  
+  subscription: Subscription;
 
   @ViewChild('workspaceElement') workspaceElement: ElementRef;
 
@@ -31,6 +39,7 @@ export class WorkspaceComponent implements OnInit {
     private columnTaskService: ColumnTaskService,
     private activatedRoute: ActivatedRoute,
     public dialog: MatDialog,
+    private appStateService: AppStateService,
   ) {}
 
   ngOnInit(): void {
@@ -44,161 +53,167 @@ export class WorkspaceComponent implements OnInit {
       this.columns = res;
       this.currentBoardId = id;
       this.setColumnsIds();
-      this.hideAddColumn
+      this.hideAddColumn();
     });
 
+    this.subscription = this.appStateService.isItemEdit$.subscribe(editState => this.isEditActive = editState);
+
+    this.addHotkey();
+  }
+
+  private addHotkey() {
     document.onkeyup = (e: KeyboardEvent) => {
       const columns = document.querySelectorAll('app-column');
       const tasks = document.querySelectorAll('app-task');
 
-      if(e.key === "+"){
+      if (e.key === '+') {
         e.preventDefault();
-        if(!this.showAddControl){
+        if (!this.showAddControl) {
           this.showAddColumn();
-        }else{
+        } else {
           this.hideAddColumn();
         }
       }
 
-      if (e.code === "ArrowRight" && this.isWorkHotKeys) {
+      if (e.code === 'ArrowRight' && this.isWorkHotKeys) {
         e.preventDefault();
         if (this.indexColumn < columns.length - 1 && e.code === 'ArrowRight') {
           ++this.indexColumn;
         }
         columns.forEach(item => {
           if (item.classList.contains('active')) {
-            item.classList.remove("active")
-          }
-        })
-        tasks.forEach(item=>{
-          if(item.classList.contains('active')){
             item.classList.remove('active');
           }
-        })
+        });
+        tasks.forEach(item => {
+          if (item.classList.contains('active')) {
+            item.classList.remove('active');
+          }
+        });
 
         columns.forEach((item, i) => {
           if (i === this.indexColumn) {
-            const tasks = item.querySelectorAll('app-task');
-            if(tasks.length === 0){
+            const tasksInColumn = item.querySelectorAll('app-task');
+            if (tasksInColumn.length === 0) {
               ++this.indexColumn;
-            }else{
-              item.classList.add("active");
-              if(this.indexTask > tasks.length-1){
-                this.indexTask = tasks.length-1;
+            } else {
+              item.classList.add('active');
+              if (this.indexTask > tasksInColumn.length - 1) {
+                this.indexTask = tasksInColumn.length - 1;
               }
-              tasks.forEach((item,i)=>{
-                if(i === this.indexTask){
-                  item.classList.add('active');
+              tasksInColumn.forEach((taskItem, taskIndex) => {
+                if (taskIndex === this.indexTask) {
+                  taskItem.classList.add('active');
                 }
-              })
+              });
             }
           }
-        })
+        });
       }
-      if (e.code === "ArrowLeft" && this.isWorkHotKeys) {
+      if (e.code === 'ArrowLeft' && this.isWorkHotKeys) {
         e.preventDefault();
         if (this.indexColumn > 0 && e.code === 'ArrowLeft') {
           --this.indexColumn;
         }
-        columns.forEach((item, i) => {
+        columns.forEach((item) => {
           if (item.classList.contains('active')) {
-            item.classList.remove("active")
-          }
-        })
-        tasks.forEach(item=>{
-          if(item.classList.contains('active')){
             item.classList.remove('active');
           }
-        })
+        });
+        tasks.forEach(item => {
+          if (item.classList.contains('active')) {
+            item.classList.remove('active');
+          }
+        });
 
-        for(let i = 0; i<columns.length; i++){
+        for (let i = 0; i < columns.length; i++) {
           if (i === this.indexColumn) {
-            const tasks = columns[i].querySelectorAll('app-task');
-            if(tasks.length === 0){
+            const tasksInColumn = columns[i].querySelectorAll('app-task');
+            if (tasksInColumn.length === 0) {
               --this.indexColumn;
-              i=0;
-            } else{
-              columns[i].classList.add("active");
-              if(this.indexTask > tasks.length-1){
-                this.indexTask = tasks.length-1;
+              i = 0;
+            } else {
+              columns[i].classList.add('active');
+              if (this.indexTask > tasksInColumn.length - 1) {
+                this.indexTask = tasksInColumn.length - 1;
               }
-              tasks.forEach((item,i)=>{
-                if(i === this.indexTask){
-                  item.classList.add('active');
+              tasksInColumn.forEach((taskItem, taskIndex) => {
+                if (taskIndex === this.indexTask) {
+                  taskItem.classList.add('active');
                 }
-              })
+              });
             }
           }
         }
       }
-      if (e.code === "ArrowDown" && this.isWorkHotKeys) {
+      if (e.code === 'ArrowDown' && this.isWorkHotKeys) {
         e.preventDefault();
         let activeColumn = columns[0];
-        columns.forEach(item=>{
-          if(item.classList.contains('active')){
+        columns.forEach(item => {
+          if (item.classList.contains('active')) {
             activeColumn = item;
           }
-        })
-        const tasks = activeColumn.querySelectorAll('app-task');
+        });
+        const tasksInColumn = activeColumn.querySelectorAll('app-task');
 
-        if (this.indexTask < tasks.length - 1 && e.code === 'ArrowDown') {
+        if (this.indexTask < tasksInColumn.length - 1 && e.code === 'ArrowDown') {
           this.indexTask++;
         }
 
-        tasks.forEach(item=>{
-          if(item.classList.contains('active')){
+        tasksInColumn.forEach(item => {
+          if (item.classList.contains('active')) {
             item.classList.remove('active');
           }
-        })
-        tasks.forEach((item,i)=>{
-          if(i === this.indexTask){
+        });
+        tasksInColumn.forEach((item, i) => {
+          if (i === this.indexTask) {
             item.classList.add('active');
           }
-        })
+        });
       }
-      if (e.code === "ArrowUp" && this.isWorkHotKeys) {
+      if (e.code === 'ArrowUp' && this.isWorkHotKeys) {
         e.preventDefault();
         let activeColumn = columns[0];
-        columns.forEach(item=>{
-          if(item.classList.contains('active')){
+        columns.forEach(item => {
+          if (item.classList.contains('active')) {
             activeColumn = item;
           }
-        })
-        const tasks = activeColumn.querySelectorAll('app-task');
+        });
+        const tasksInColumn = activeColumn.querySelectorAll('app-task');
 
         if (this.indexTask > 0 && e.code === 'ArrowUp') {
           this.indexTask--;
         }
 
-        tasks.forEach(item=>{
-          if(item.classList.contains('active')){
+        tasksInColumn.forEach(item => {
+          if (item.classList.contains('active')) {
             item.classList.remove('active');
           }
-        })
-        tasks.forEach((item,i)=>{
-          if(i === this.indexTask){
+        });
+        tasksInColumn.forEach((item, i) => {
+          if (i === this.indexTask) {
             item.classList.add('active');
           }
-        })
+        });
       }
 
       if (e.code === 'Enter') {
         if (this.columns[this.indexColumn]) {
           const tasksInColumn = this.columns[this.indexColumn].tasks;
           this.isWorkHotKeys = false;
-          this.openModal(tasksInColumn[this.indexTask],this.columns[this.indexColumn]);
+          this.openModal(tasksInColumn[this.indexTask], this.columns[this.indexColumn]);
           this.indexColumn = -1;
           this.indexTask = 0;
           columns.forEach(item => {
             if (item.classList.contains('active')) {
-              item.classList.remove("active")
+              item.classList.remove('active');
             }
-          })
+          });
           tasks.forEach(item => {
             if (item.classList.contains('active')) {
-              item.classList.remove("active")
+              item.classList.remove('active');
             }
-          })
+          });
         }
       }
 
@@ -207,17 +222,17 @@ export class WorkspaceComponent implements OnInit {
         this.indexTask = 0;
         columns.forEach(item => {
           if (item.classList.contains('active')) {
-            item.classList.remove("active")
+            item.classList.remove('active');
           }
-        })
+        });
         tasks.forEach(item => {
           if (item.classList.contains('active')) {
-            item.classList.remove("active")
+            item.classList.remove('active');
           }
-        })
+        });
       }
 
-    }
+    };
   }
 
   openModal(task: ITask, column: IColumn): void {

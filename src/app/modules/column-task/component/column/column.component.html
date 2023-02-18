@@ -36,6 +36,7 @@
     cdkDropList
     (cdkDropListDropped)="drop($event)"
     [cdkDropListConnectedTo]="getConnectedToList(column.idColumn)"
+    [cdkDropListDisabled]="isEditActive"
   >
     <app-task
       *ngFor="let task of tasks"
