@@ -29,6 +29,10 @@
   max-height: 11em;
 }
 
+.column__title:hover {
+  background-color: whitesmoke;
+}
+
 .column__title_edit {
   font: 500 20px/32px Roboto, sans-serif;
   letter-spacing: .0125em;

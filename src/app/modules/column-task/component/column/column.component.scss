@@ -31,6 +31,10 @@ $hover-color: #d1d3dc;
   overflow: auto;
   flex: 1;
   max-height: 11em;
+
+  &:hover {
+    background-color: whitesmoke;
+  }
 }
 
 .column__title_edit {
