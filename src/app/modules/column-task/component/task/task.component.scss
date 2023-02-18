@@ -4,7 +4,7 @@
   height: 100%;
   display: flex;
   justify-content: space-between;
-
+  flex-direction: column;
 
   &:hover{
     .task-list__edit{
@@ -12,13 +12,15 @@
     }
   }
 
-
   &__edit{
-    position: relative;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: white;
     transition: .3s;
     opacity: 0;
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,7 +32,6 @@
       width: fit-content;
       height: fit-content;
       border-radius: 100%;
-      padding: 5px;
 
       &:hover{
         transform: rotate(15deg);
@@ -39,9 +40,7 @@
   }
 
   &__checked{
-    position: absolute;
-    left: 10px;
-    bottom: 5px;
+    margin-top: 8px;
     width: fit-content;
     height: fit-content;
     border-radius: 5px;

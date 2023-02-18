@@ -20,6 +20,7 @@ import { ModalTaskComponent } from 'src/app/pages/workspace-page/modal-task/moda
 import { ColumnDescriptionComponent } from './column-description/column-description.component';
 import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 import { Subscription } from 'rxjs';
+import { AppStateService } from 'src/app/core/services/app-state.service';
 import { AudioServiceService } from 'src/app/shared/audio-service.service';
 
 @Component({
@@ -52,10 +53,13 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
+  isEditActive = false;
+
   constructor(
     private columnTaskService: ColumnTaskService,
     public dialog: MatDialog,
     private boardsStateService: BoardsStateService,
+    private appStateService: AppStateService,
     private audioService: AudioServiceService,
   ) {}
 
@@ -99,13 +103,16 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   showAddTask() {
     this.showAddTaskControl = true;
+    this.appStateService.setIsItemEdit(true);
   }
 
   cancelTaskCreation() {
+    this.appStateService.setIsItemEdit(false);
     this.showAddTaskControl = false;
   }
 
   addNewTaskHandler(title: string) {
+    this.appStateService.setIsItemEdit(false);
     this.columnTaskService
       .createTaskByColumnId(this.column.idColumn, {
         nameTask: title,
@@ -150,10 +157,12 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   showEditColumnTitle() {
     this.isShowEditColumnTitle = true;
+    this.appStateService.setIsItemEdit(true);
   }
 
   hideEditColumnTitle(editedColumn: IColumn) {
     this.isShowEditColumnTitle = false;
+    this.appStateService.setIsItemEdit(false);
     this.columnTaskService
       .updateColumn(editedColumn.idColumn, {
         nameColumn: editedColumn.nameColumn,
@@ -223,6 +232,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         this.currentBoard = board;
       }),
     );
+    this.subscriptions.push(this.appStateService.isItemEdit$.subscribe(editState => this.isEditActive = editState));
   }
 
   setDirectionBoards() {
