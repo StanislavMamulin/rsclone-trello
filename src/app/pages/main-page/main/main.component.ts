@@ -27,6 +27,6 @@ export class MainComponent {
 
   private changeCardImage(): void {
     const cardImage = document.querySelector('figure img') as HTMLImageElement;
-    cardImage.src = `../../../../assets/images/main-image-${this.cardNumber}.png`;
+    cardImage.src = `../../../../assets/images/main-${this.cardNumber}.png`;
   }
 }
