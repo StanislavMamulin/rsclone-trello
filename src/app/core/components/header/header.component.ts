@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBoard } from 'src/app/modules/board/model/Board.model';
 import { BoardService } from 'src/app/modules/board/board-service.service';
@@ -11,7 +11,6 @@ import { EditProfileModalComponent } from '../edit-profile-modal/edit-profile-mo
 import { AccessLevel, UserProfile } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/modules/services/user.service';
 import { AppStateService } from '../../services/app-state.service';
-import { MatMenuTrigger, MenuCloseReason } from '@angular/material/menu';
 
 interface ILanguage {
   img: string;
@@ -26,7 +25,10 @@ interface ILanguage {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild('searchInput') private searchInput: ElementRef<HTMLInputElement>;
+
   boards: IBoard[] = [];
+
   user: UserProfile = {
     id:'1111111111',
     firstName: 'user name',
@@ -34,20 +36,24 @@ export class HeaderComponent implements OnInit {
     email: 'user email',
     gender: 'user gender',
     registrationDate: new Date(),
-    accessLevel: AccessLevel.Anonymous
+    accessLevel: AccessLevel.Anonymous,
   };
-  audioChecked: boolean = true;
-  selectedLanguage: string = localStorage.getItem('language') || 'en';
-  selectedFlag: string = localStorage.getItem('flag') || '../../../../assets/images/en.svg';
-  isAuth = false;
-  indexBoard = -1;
-  searchStr = '';
-  person = "../../../../assets/images/man.svg";
 
-  languages: ILanguage[] = [
-    {img: '../../../../assets/images/en.svg', icon: 'done'},
-    {img: '../../../../assets/images/ru.svg', icon: ''},
-  ];
+  audioChecked = true;
+
+  selectedLanguage: string = localStorage.getItem('language') || 'en';
+
+  selectedFlag: string = localStorage.getItem('flag') || '../../../../assets/images/en.svg';
+
+  isAuth = false;
+
+  indexBoard = -1;
+
+  searchStr = '';
+
+  person = '../../../../assets/images/man.svg';
+
+  languages: ILanguage[] = [{ img: '../../../../assets/images/en.svg', icon: 'done' }, { img: '../../../../assets/images/ru.svg', icon: '' }];
 
   constructor(
     private router: Router,
@@ -56,10 +62,8 @@ export class HeaderComponent implements OnInit {
     public userService: UserService,
     public dialog: MatDialog,
     private translocoService: TranslocoService,
-    private appStateService: AppStateService
-  ) {
-
-  }
+    private appStateService: AppStateService,
+  ) { }
 
   ngOnInit(): void {
     this.isAuth = this.auth.isAuthenticated();
@@ -69,22 +73,32 @@ export class HeaderComponent implements OnInit {
       this.user = user;
       this.person = '../../../../assets/images/' + user.gender +  '.svg';
       console.log('../../../../assets/images/' + user.gender +  '.svg');
-    })
+    });
 
     this.userService.getCurrentUserProfile()
       .subscribe(res=>{
-        this.user = {...res};
+        this.user = { ...res };
         this.appStateService.setCurrentUser(res);
-      })
+      });
   }
 
-  updateToggleSlider(){
+  @HostListener('window:keyup', ['$event'])
+  hotkeyHandler(event: KeyboardEvent) {
+    if (event.key === '/') {
+      this.appStateService.setIsItemEdit(true);
+      this.searchInput.nativeElement.focus();
+      this.updateBoards();
+    }
+  }
+
+  updateToggleSlider() {
     this.appStateService.setIsSoundEnable(this.audioChecked);
   }
 
-  openDialogEditProfile(user:UserProfile){
-    const dialogRef = this.dialog.open(EditProfileModalComponent,{
-      data: {user}
+  openDialogEditProfile(user:UserProfile) {
+    this.appStateService.setIsItemEdit(true);
+    const dialogRef = this.dialog.open(EditProfileModalComponent, {
+      data: { user },
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
@@ -95,24 +109,24 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  changeLanguage(e: MouseEvent){
+  changeLanguage(e: MouseEvent) {
     const btn = e.currentTarget as HTMLButtonElement;
     const img = btn.querySelector('img') as HTMLImageElement;
-    this.selectedLanguage = img?.src.slice(img?.src.length-6, -4);
+    this.selectedLanguage = img?.src.slice(img?.src.length - 6, -4);
     this.selectedFlag =  `../../../../assets/images/${this.selectedLanguage}.svg`;
     this.translocoService.setActiveLang(this.selectedLanguage);
     this.setIconForLang();
-    localStorage.setItem('language',this.selectedLanguage);
-    localStorage.setItem('flag',this.selectedFlag);
+    localStorage.setItem('language', this.selectedLanguage);
+    localStorage.setItem('flag', this.selectedFlag);
   }
 
-  setIconForLang(){
-    if(this.selectedLanguage === 'en'){
-      this.languages[0].icon = "done"
-      this.languages[1].icon='';
-    }else{
-      this.languages[0].icon='';
-      this.languages[1].icon='done';
+  setIconForLang() {
+    if (this.selectedLanguage === 'en') {
+      this.languages[0].icon = 'done';
+      this.languages[1].icon = '';
+    } else {
+      this.languages[0].icon = '';
+      this.languages[1].icon = 'done';
     }
   }
 
@@ -161,15 +175,20 @@ export class HeaderComponent implements OnInit {
   }
 
   openBoard(board: IBoard): void {
+    this.appStateService.setIsItemEdit(false);
     this.router.navigate(['main']).then(() => {
       this.router.navigate(['/board', board.idBoard]);
     });
   }
-  reduceSearchInput(){
+
+  reduceSearchInput() {
+    this.appStateService.setIsItemEdit(false);
     const rightSide = document.querySelector('.right-side') as HTMLTemplateElement;
     rightSide.className = 'right-side';
   }
-  increaseSerchInput(){
+
+  increaseSerchInput() {
+    this.appStateService.setIsItemEdit(true);
     const rightSide = document.querySelector('.right-side') as HTMLTemplateElement;
     rightSide.className = 'right-side active';
   }
