@@ -24,8 +24,6 @@ export class WorkspaceComponent implements OnInit {
 
   columnsIds: string[];
 
-  isWorkHotKeys = true;
-
   indexColumn = -1;
 
   indexTask = 0;
@@ -66,14 +64,14 @@ export class WorkspaceComponent implements OnInit {
     const columns = document.querySelectorAll('app-column');
     const tasks = document.querySelectorAll('app-task');
 
-    if (e.key === '+' && this.isWorkHotKeys) {
+    if (e.key === '+' && !this.isEditActive) {
       e.preventDefault();
       if (!this.showAddControl) {
         this.showAddColumn();
       }
     }
 
-    if (e.code === 'ArrowRight' && this.isWorkHotKeys) {
+    if (e.code === 'ArrowRight' && !this.isEditActive) {
       e.preventDefault();
       if (this.indexColumn < columns.length - 1 && e.code === 'ArrowRight') {
         ++this.indexColumn;
@@ -109,7 +107,7 @@ export class WorkspaceComponent implements OnInit {
         }
       });
     }
-    if (e.code === 'ArrowLeft' && this.isWorkHotKeys) {
+    if (e.code === 'ArrowLeft' && !this.isEditActive) {
       e.preventDefault();
       if (this.indexColumn > 0 && e.code === 'ArrowLeft') {
         --this.indexColumn;
@@ -146,7 +144,7 @@ export class WorkspaceComponent implements OnInit {
         }
       }
     }
-    if (e.code === 'ArrowDown' && this.isWorkHotKeys) {
+    if (e.code === 'ArrowDown' && !this.isEditActive) {
       e.preventDefault();
       let activeColumn = columns[0];
 
@@ -173,7 +171,7 @@ export class WorkspaceComponent implements OnInit {
         }
       });
     }
-    if (e.code === 'ArrowUp' && this.isWorkHotKeys) {
+    if (e.code === 'ArrowUp' && !this.isEditActive) {
       e.preventDefault();
       let activeColumn = columns[0];
       columns.forEach((item) => {
@@ -205,7 +203,7 @@ export class WorkspaceComponent implements OnInit {
     if (e.code === 'Enter') {
       if (this.columns[this.indexColumn]) {
         const tasksInColumn = this.columns[this.indexColumn].tasks;
-        this.isWorkHotKeys = false;
+        this.appStateService.setIsItemEdit(true);
         this.openModal(tasksInColumn[this.indexTask], this.columns[this.indexColumn]);
         this.indexColumn = -1;
         this.indexTask = 0;
@@ -246,7 +244,7 @@ export class WorkspaceComponent implements OnInit {
       disableClose: true,
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.isWorkHotKeys = true;
+      this.appStateService.setIsItemEdit(false);
     });
   }
 
