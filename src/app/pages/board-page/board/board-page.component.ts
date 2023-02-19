@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { BoardService } from 'src/app/modules/board/board-service.service';
 import {
   IBoard,
@@ -8,13 +8,15 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 import { Router } from '@angular/router';
+import { AppStateService } from 'src/app/core/services/app-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-board-page',
   templateUrl: './board-page.component.html',
   styleUrls: ['./board-page.component.scss'],
 })
-export class BoardPageComponent implements OnInit {
+export class BoardPageComponent implements OnInit, OnDestroy {
   boards: IBoard[] = [];
 
   isOpenModal = false;
@@ -43,10 +45,15 @@ export class BoardPageComponent implements OnInit {
 
   indexBoard = -1;
 
+  isItemEdit = false;
+
+  subscription: Subscription;
+
   constructor(
     private boardService: BoardService,
     private boardStateService: BoardsStateService,
     private router: Router,
+    private appStateService: AppStateService,
   ) { }
 
   ngOnInit(): void {
@@ -63,17 +70,25 @@ export class BoardPageComponent implements OnInit {
         this.isLoading = false;
         this.boardStateService.setBoards(res);
       });
+
+    this.subscription = this.appStateService.isItemEdit$.subscribe((itemEdit) => this.isItemEdit = itemEdit);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   @HostListener('window:keyup', ['$event'])
   hotkeyHandler(e: KeyboardEvent) {
+    if (this.isItemEdit) return;
+
     if (e.code === 'ArrowRight') {
       e.preventDefault();
       const boards = document.querySelectorAll('app-board');
       if (this.indexBoard < boards.length - 1 && e.code === 'ArrowRight') {
         ++this.indexBoard;
       }
-      boards.forEach((item, i) => {
+      boards.forEach((item) => {
         if (item.classList.contains('active')) {
           item.classList.remove('active');
         }
@@ -92,7 +107,7 @@ export class BoardPageComponent implements OnInit {
       if (this.indexBoard > 0 && e.code === 'ArrowLeft') {
         --this.indexBoard;
       }
-      boards.forEach((item, i) => {
+      boards.forEach((item) => {
         if (item.classList.contains('active')) {
           item.classList.remove('active');
         }
@@ -145,6 +160,8 @@ export class BoardPageComponent implements OnInit {
     }
     this.isOpenModal = !this.isOpenModal;
     document.body.style.overflow = 'hidden';
+
+    this.appStateService.setIsItemEdit(true);
   }
 
   closeModal(event: any) {
@@ -162,6 +179,8 @@ export class BoardPageComponent implements OnInit {
     this.isEnter = false;
     this.createFormModal.reset();
     document.body.style.overflow = 'auto';
+
+    this.appStateService.setIsItemEdit(false); 
   }
 
   createBoard() {
@@ -195,6 +214,7 @@ export class BoardPageComponent implements OnInit {
     this.isOpenModal = !this.isOpenModal;
     this.updateBoardId = id;
     document.body.style.overflow = 'hidden';
+    this.appStateService.setIsItemEdit(true); 
   }
 
   updateBoard() {
