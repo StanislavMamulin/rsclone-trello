@@ -66,7 +66,7 @@ export class BoardPageComponent implements OnInit {
 
     document.onkeyup = (e: KeyboardEvent) => {
 
-      if (e.code === "ArrowRight") {
+      if (e.code === 'ArrowRight') {
         e.preventDefault();
         const boards = document.querySelectorAll('app-board');
         if (this.indexBoard < boards.length - 1 && e.code === 'ArrowRight') {
@@ -74,17 +74,17 @@ export class BoardPageComponent implements OnInit {
         }
         boards.forEach((item, i) => {
           if (item.classList.contains('active')) {
-            item.classList.remove("active")
+            item.classList.remove('active');
           }
-        })
+        });
 
         boards.forEach((item, i) => {
           if (i === this.indexBoard) {
-            item.classList.add("active")
+            item.classList.add('active');
           }
-        })
+        });
       }
-      if (e.code === "ArrowLeft") {
+      if (e.code === 'ArrowLeft') {
         e.preventDefault();
         const boards = document.querySelectorAll('app-board');
 
@@ -93,20 +93,20 @@ export class BoardPageComponent implements OnInit {
         }
         boards.forEach((item, i) => {
           if (item.classList.contains('active')) {
-            item.classList.remove("active")
+            item.classList.remove('active');
           }
-        })
+        });
 
         boards.forEach((item, i) => {
           if (i === this.indexBoard) {
-            item.classList.add("active")
+            item.classList.add('active');
           }
-        })
+        });
       }
 
       if (e.code === 'Enter') {
         if (this.boards[this.indexBoard]) {
-          this.router.navigate([`/board/${this.boards[this.indexBoard].idBoard}`])
+          this.router.navigate([`/board/${this.boards[this.indexBoard].idBoard}`]);
         }
       }
 
@@ -115,17 +115,17 @@ export class BoardPageComponent implements OnInit {
         this.indexBoard = -1;
         boards.forEach(item => {
           if (item.classList.contains('active')) {
-            item.classList.remove("active")
+            item.classList.remove('active');
           }
-        })
+        });
       }
 
-      if(e.key === "+"){
+      if (e.key === '+') {
         this.isCreateModal = !this.isCreateModal;
         this.isOpenModal = !this.isOpenModal;
       }
 
-    }
+    };
   }
 
   updateShowDate = (showDate: boolean) => {
