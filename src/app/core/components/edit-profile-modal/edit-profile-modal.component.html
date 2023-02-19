@@ -1,58 +1,134 @@
-<h2 mat-dialog-title>Edit profile</h2>
+<h2
+  mat-dialog-title
+  *transloco="let t"
+>
+  {{ t('edit-profile.editProfile') }}
+</h2>
 <mat-dialog-content class="mat-typography">
-  <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+  <mat-stepper
+    orientation="vertical"
+    [linear]="isLinear"
+    #stepper
+  >
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your first name</ng-template>
+        <ng-template
+          matStepLabel
+          *transloco="let t"
+          >{{ t('edit-profile.fillFirstName') }}</ng-template
+        >
         <mat-form-field appearance="fill">
-          <mat-label>First name</mat-label>
-          <input matInput placeholder="first name" formControlName="firstName" required>
+          <mat-label *transloco="let t">{{ t('edit-profile.firstName') }}</mat-label>
+          <input
+            matInput
+            placeholder="first name"
+            formControlName="firstName"
+            required
+          />
         </mat-form-field>
         <div>
-          <button mat-button matStepperNext>Next</button>
+          <button
+            mat-button
+            matStepperNext
+            *transloco="let t"
+          >
+            {{ t('edit-profile.next') }}
+          </button>
         </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your last name</ng-template>
+        <ng-template
+          matStepLabel
+          *transloco="let t"
+          >{{ t('edit-profile.fillLastName') }}</ng-template
+        >
         <mat-form-field appearance="fill">
-          <mat-label>Last name</mat-label>
-          <input matInput formControlName="lastName" placeholder="last name"
-                 required>
+          <mat-label *transloco="let t">{{ t('edit-profile.lastName') }}</mat-label>
+          <input
+            matInput
+            formControlName="lastName"
+            placeholder="last name"
+            required
+          />
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button
+            mat-button
+            matStepperPrevious
+            *transloco="let t"
+          >
+            {{ t('edit-profile.back') }}
+          </button>
+          <button
+            mat-button
+            matStepperNext
+            *transloco="let t"
+          >
+            {{ t('edit-profile.next') }}
+          </button>
         </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="thirdFormGroup">
       <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>Fill out your gender</ng-template>
+        <ng-template
+          matStepLabel
+          *transloco="let t"
+          >{{ t('edit-profile.fillGender') }}</ng-template
+        >
         <mat-form-field appearance="fill">
-          <mat-label>Gender</mat-label>
+          <mat-label *transloco="let t">{{ t('edit-profile.gender') }}</mat-label>
           <mat-select formControlName="gender">
-          <mat-option
-            *ngFor="let gender of genders"
-            [value]="gender.value"
-          >
-            {{ gender.viewValue }}<mat-icon>{{ gender.value }}</mat-icon>
-          </mat-option>
-        </mat-select>
+            <mat-option
+              *ngFor="let gender of genders"
+              [value]="gender.value"
+            >
+              {{ gender.viewValue }}<mat-icon>{{ gender.value }}</mat-icon>
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button
+            mat-button
+            matStepperPrevious
+            *transloco="let t"
+          >
+            {{ t('edit-profile.back') }}
+          </button>
+          <button
+            mat-button
+            matStepperNext
+            *transloco="let t"
+          >
+            {{ t('edit-profile.next') }}
+          </button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
+      <ng-template
+        matStepLabel
+        *transloco="let t"
+        >{{ t('edit-profile.done') }}</ng-template
+      >
+      <p *transloco="let t">{{ t('edit-profile.nowDone') }}</p>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button
+          mat-button
+          matStepperPrevious
+          *transloco="let t"
+        >
+          {{ t('edit-profile.back') }}
+        </button>
+        <button
+          mat-button
+          (click)="stepper.reset()"
+          *transloco="let t"
+        >
+          {{ t('edit-profile.reset') }}
+        </button>
       </div>
     </mat-step>
   </mat-stepper>
@@ -63,5 +139,8 @@
     color="primary"
     (click)="editProfile()"
     [disabled]="firstFormGroup.invalid || secondFormGroup.invalid || thirdFormGroup.invalid"
-  >Edit</button>
+    *transloco="let t"
+  >
+    {{ t('edit-profile.edit') }}
+  </button>
 </mat-dialog-actions>

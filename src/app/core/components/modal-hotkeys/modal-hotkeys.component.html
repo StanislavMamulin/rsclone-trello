@@ -1,34 +1,61 @@
 <div class="modal">
-  <div mat-dialog-title class="modal-info">
-    <mat-icon color="primary">info</mat-icon><span>HotKeys</span>
+  <div
+    mat-dialog-title
+    class="modal-info"
+  >
+    <mat-icon color="primary">info</mat-icon
+    ><span *transloco="let t">{{ t('modal-hotkeys.hotKeys') }}</span>
   </div>
-  <div mat-dialog-content class="keys-wrapper">
-
-    <mat-card class="modal-keys">
-      Нажатие «/» перенесёт курсор в поле поиска в заголовке.
+  <div
+    mat-dialog-content
+    class="keys-wrapper"
+  >
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.search') }}
     </mat-card>
-    <mat-card class="modal-keys">
-      Нажатие «esc» закроет диалоговое окно.
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.escape') }}
     </mat-card>
-    <mat-card class="modal-keys">
-      Перейти в меню выбора досок "B"
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.boardMenu') }}
     </mat-card>
-    <mat-card class="modal-keys">
-      Переключение досок "&larr;" или "&rarr;",
-      Когда фокус есть на доске, "enter" открыть доску.
-      Снять выделение "Escape".
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.switchBoard') }} "&larr;" {{ t('modal-hotkeys.or') }} "&rarr;",
+      {{ t('modal-hotkeys.boardFocus') }}
     </mat-card>
-    <mat-card class="modal-keys">
-      Переключение задач "&larr;", "&rarr;", "&uarr;", "&darr;";
-      Когда фокус есть на задачу, "enter" открыть задачу.
-      Снять выделение "Escape".
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.switchTask') }} "&larr;", "&rarr;", "&uarr;", "&darr;";
+      {{ t('modal-hotkeys.taskFocus') }}
     </mat-card>
-    <mat-card class="modal-keys">
-      Чтобы открыть/закрыть меню для создания доски или колонки "LeftShift" «+».
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.openCloseMenu') }}
     </mat-card>
-    <button class="modal-button" mat-raised-button mat-dialog-close color="primary">
-      Ok
+    <button
+      class="modal-button"
+      mat-raised-button
+      mat-dialog-close
+      color="primary"
+      *transloco="let t"
+    >
+      {{ t('signUp.OK') }}
     </button>
   </div>
-
 </div>
