@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { BoardService } from 'src/app/modules/board/board-service.service';
 import {
   IBoard,
@@ -63,69 +63,68 @@ export class BoardPageComponent implements OnInit {
         this.isLoading = false;
         this.boardStateService.setBoards(res);
       });
+  }
 
-    document.onkeyup = (e: KeyboardEvent) => {
-
-      if (e.code === 'ArrowRight') {
-        e.preventDefault();
-        const boards = document.querySelectorAll('app-board');
-        if (this.indexBoard < boards.length - 1 && e.code === 'ArrowRight') {
-          ++this.indexBoard;
+  @HostListener('window:keyup', ['$event'])
+  hotkeyHandler(e: KeyboardEvent) {
+    if (e.code === 'ArrowRight') {
+      e.preventDefault();
+      const boards = document.querySelectorAll('app-board');
+      if (this.indexBoard < boards.length - 1 && e.code === 'ArrowRight') {
+        ++this.indexBoard;
+      }
+      boards.forEach((item, i) => {
+        if (item.classList.contains('active')) {
+          item.classList.remove('active');
         }
-        boards.forEach((item, i) => {
-          if (item.classList.contains('active')) {
-            item.classList.remove('active');
-          }
-        });
+      });
 
-        boards.forEach((item, i) => {
-          if (i === this.indexBoard) {
-            item.classList.add('active');
-          }
-        });
-      }
-      if (e.code === 'ArrowLeft') {
-        e.preventDefault();
-        const boards = document.querySelectorAll('app-board');
-
-        if (this.indexBoard > 0 && e.code === 'ArrowLeft') {
-          --this.indexBoard;
+      boards.forEach((item, i) => {
+        if (i === this.indexBoard) {
+          item.classList.add('active');
         }
-        boards.forEach((item, i) => {
-          if (item.classList.contains('active')) {
-            item.classList.remove('active');
-          }
-        });
+      });
+    }
+    if (e.code === 'ArrowLeft') {
+      e.preventDefault();
+      const boards = document.querySelectorAll('app-board');
 
-        boards.forEach((item, i) => {
-          if (i === this.indexBoard) {
-            item.classList.add('active');
-          }
-        });
+      if (this.indexBoard > 0 && e.code === 'ArrowLeft') {
+        --this.indexBoard;
       }
-
-      if (e.code === 'Enter') {
-        if (this.boards[this.indexBoard]) {
-          this.router.navigate([`/board/${this.boards[this.indexBoard].idBoard}`]);
+      boards.forEach((item, i) => {
+        if (item.classList.contains('active')) {
+          item.classList.remove('active');
         }
-      }
+      });
 
-      if (e.code === 'Escape') {
-        const boards = document.querySelectorAll('app-board');
-        this.indexBoard = -1;
-        boards.forEach(item => {
-          if (item.classList.contains('active')) {
-            item.classList.remove('active');
-          }
-        });
-      }
+      boards.forEach((item, i) => {
+        if (i === this.indexBoard) {
+          item.classList.add('active');
+        }
+      });
+    }
 
-      if (e.key === '+') {
-        this.isCreateModal = !this.isCreateModal;
-        this.isOpenModal = !this.isOpenModal;
+    if (e.code === 'Enter') {
+      if (this.boards[this.indexBoard]) {
+        this.router.navigate([`/board/${this.boards[this.indexBoard].idBoard}`]);
       }
+    }
 
-    };
+    if (e.code === 'Escape') {
+      const boards = document.querySelectorAll('app-board');
+      this.indexBoard = -1;
+      boards.forEach(item => {
+        if (item.classList.contains('active')) {
+          item.classList.remove('active');
+        }
+      });
+    }
+
+    if (e.key === '+') {
+      this.isCreateModal = !this.isCreateModal;
+      this.isOpenModal = !this.isOpenModal;
+    }
   }
 
   updateShowDate = (showDate: boolean) => {
