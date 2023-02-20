@@ -3,7 +3,9 @@
     "boards": "Boards",
     "singUp": "sing up",
     "logIn": "log in",
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "account": "Account",
+    "sound": "Sound"
   },
   "pageInfo": {
     "title": "Getting started with Trello",
@@ -94,5 +96,32 @@
   },
   "snack": {
     "exist": "Email already exists"
+  },
+  "edit-profile": {
+    "editProfile": "Edit profile",
+    "fillFirstName": "Fill out your first name",
+    "firstName": "First name",
+    "next": "Next",
+    "fillLastName": "Fill out your last name",
+    "lastName": "Last name",
+    "back": "Back",
+    "fillGender": "Fill out your gender",
+    "gender": "Gender",
+    "done": "Done",
+    "nowDone": "You are now done.",
+    "reset": "Reset",
+    "edit": "Edit"
+  },
+  "modal-hotkeys": {
+    "hotKeys": "HotKeys",
+    "search": "Pressure «/» will move the cursor to the search field in the header.",
+    "escape": "Pressure «esc» will close the dialog.",
+    "boardMenu": "Go to board selection menu 'B'",
+    "switchBoard": "Switch boards",
+    "or": "or",
+    "boardFocus": "When the focus is on the board, 'enter' to open board. Remove selection 'Escape'.",
+    "switchTask": "Switch tasks",
+    "taskFocus": "When the focus is on the task, 'enter' to open task. Remove selection 'Escape'.",
+    "openCloseMenu": "To open/close the menu for creating a board or column 'LeftShift' «+»."
   }
 }

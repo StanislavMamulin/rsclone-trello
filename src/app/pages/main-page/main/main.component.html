@@ -1,8 +1,11 @@
 <main>
   <div class="container">
-    <h1 *transloco="let t">{{t('pageInfo.title')}}</h1>
-    <div *transloco="let t" class="description">
-      {{t('pageInfo.subtitle')}}
+    <h1 *transloco="let t">{{ t('pageInfo.title') }}</h1>
+    <div
+      *transloco="let t"
+      class="description"
+    >
+      {{ t('pageInfo.subtitle') }}
     </div>
     <section>
       <div
@@ -10,28 +13,28 @@
         class="cards-wrapper"
       >
         <div class="card selected">
-          <h3 *transloco="let t">{{t('pageInfo.cardBoardTitle')}}</h3>
+          <h3 *transloco="let t">{{ t('pageInfo.cardBoardTitle') }}</h3>
           <p *transloco="let t">
-            {{t('pageInfo.cardBoardSubtitle')}}
+            {{ t('pageInfo.cardBoardSubtitle') }}
           </p>
         </div>
         <div class="card">
-          <h3 *transloco="let t">{{t('pageInfo.cardListTitle')}}</h3>
+          <h3 *transloco="let t">{{ t('pageInfo.cardListTitle') }}</h3>
           <p *transloco="let t">
-            {{t('pageInfo.cardListSubtitle')}}
+            {{ t('pageInfo.cardListSubtitle') }}
           </p>
         </div>
         <div class="card">
-          <h3 *transloco="let t">{{t('pageInfo.cardTitle')}}</h3>
+          <h3 *transloco="let t">{{ t('pageInfo.cardTitle') }}</h3>
           <p *transloco="let t">
-            {{t('pageInfo.cardSubtitle')}}
+            {{ t('pageInfo.cardSubtitle') }}
           </p>
         </div>
       </div>
       <div class="cards-image">
         <figure>
           <img
-            src="../../../../assets/images/main-image-1.png"
+            src="../../../../assets/images/main-1.png"
             width="100%"
             alt=""
           />

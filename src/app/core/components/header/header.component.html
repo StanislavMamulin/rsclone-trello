@@ -167,14 +167,20 @@
 >
   <div class="profile">
     <div class="profile__wrapper">
-      <div class="profile__wrapper__title">Account</div>
+      <div
+        class="profile__wrapper__title"
+        *transloco="let t"
+      >
+        {{ t('header.account') }}
+      </div>
       <div class="profile__wrapper__audio">
         <mat-slide-toggle
           color="primary"
           [(ngModel)]="audioChecked"
           (change)="updateToggleSlider()"
+          *transloco="let t"
         >
-          Sound
+          {{ t('header.sound') }}
         </mat-slide-toggle>
       </div>
     </div>
@@ -205,14 +211,16 @@
     <button
       mat-menu-item
       (click)="openDialogEditProfile(user)"
+      *transloco="let t"
     >
-      Edit profile
+      {{ t('edit-profile.editProfile') }}
     </button>
     <button
       mat-menu-item
       (click)="openDialogHotFix('500ms', '500ms')"
+      *transloco="let t"
     >
-      HotKeys
+      {{ t('modal-hotkeys.hotKeys') }}
     </button>
   </div>
   <hr />
