@@ -8,6 +8,8 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 import { Router } from '@angular/router';
+import { CloseComponent } from 'src/app/shared/components/close/close.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-board-page',
@@ -46,6 +48,7 @@ export class BoardPageComponent implements OnInit {
   constructor(
     private boardService: BoardService,
     private boardStateService: BoardsStateService,
+    public dialog: MatDialog,
     private router: Router,
   ) { }
 
@@ -186,6 +189,15 @@ export class BoardPageComponent implements OnInit {
         this.boards = this.boards.filter((board) => board.idBoard !== id);
         this.boardStateService.setBoards(this.boards);
       });
+  }
+
+  openDialogDeleteBoard(id:string){
+    const dialogRef = this.dialog.open(CloseComponent,);
+
+    dialogRef.afterClosed().subscribe((res)=>{
+      if(res === "yes")
+      this.deleteBoard(id);
+    })
   }
 
   openUpdateModal(id: string) {

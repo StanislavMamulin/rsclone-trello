@@ -11,7 +11,6 @@ import { EditProfileModalComponent } from '../edit-profile-modal/edit-profile-mo
 import { AccessLevel, UserProfile } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/modules/services/user.service';
 import { AppStateService } from '../../services/app-state.service';
-import { MatMenuTrigger, MenuCloseReason } from '@angular/material/menu';
 
 interface ILanguage {
   img: string;

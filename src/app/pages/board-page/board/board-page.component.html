@@ -24,7 +24,7 @@
             | resent : showDate
             | SortByParams : selectValue
         "
-        (onDelete)="deleteBoard($event)"
+        (onDelete)="openDialogDeleteBoard($event)"
         [board]="board"
         (onUpdate)="openUpdateModal($event)"
         (onUpdateStar)="updateStar($event)"
