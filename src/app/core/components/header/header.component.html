@@ -75,10 +75,12 @@
               [(ngModel)]="searchStr"
               matInput
               [matAutocomplete]="auto"
+              #searchInput
             />
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option
                 (click)="openBoard(board)"
+                (onSelectionChange)="openBoard(board)"
                 *ngFor="let board of boards | searchPipe : searchStr"
                 [value]="board.nameBoard"
               >
