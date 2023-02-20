@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBoard } from 'src/app/modules/board/model/Board.model';
 import { BoardService } from 'src/app/modules/board/board-service.service';
@@ -11,6 +11,7 @@ import { EditProfileModalComponent } from '../edit-profile-modal/edit-profile-mo
 import { AccessLevel, UserProfile } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/modules/services/user.service';
 import { AppStateService } from '../../services/app-state.service';
+import { Subscription } from 'rxjs';
 
 interface ILanguage {
   img: string;
@@ -24,7 +25,7 @@ interface ILanguage {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput') private searchInput: ElementRef<HTMLInputElement>;
 
   boards: IBoard[] = [];
@@ -55,6 +56,10 @@ export class HeaderComponent implements OnInit {
 
   languages: ILanguage[] = [{ img: '../../../../assets/images/en.svg', icon: 'done' }, { img: '../../../../assets/images/ru.svg', icon: '' }];
 
+  isEditActive = false;
+
+  subscriptions: Subscription[] = [];
+
   constructor(
     private router: Router,
     private boardService: BoardService,
@@ -69,11 +74,7 @@ export class HeaderComponent implements OnInit {
     this.isAuth = this.auth.isAuthenticated();
     this.setIconForLang();
 
-    this.appStateService.currentUser$.subscribe(user=>{
-      this.user = user;
-      this.person = '../../../../assets/images/' + user.gender +  '.svg';
-      console.log('../../../../assets/images/' + user.gender +  '.svg');
-    });
+    this.addSubscriptions();
 
     this.userService.getCurrentUserProfile()
       .subscribe(res=>{
@@ -82,13 +83,34 @@ export class HeaderComponent implements OnInit {
       });
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
   @HostListener('window:keyup', ['$event'])
   hotkeyHandler(event: KeyboardEvent) {
+    if (this.isEditActive) return;
+  
     if (event.key === '/') {
       this.appStateService.setIsItemEdit(true);
       this.searchInput.nativeElement.focus();
       this.updateBoards();
     }
+
+    if (event.key === 'B') {
+      this.openBoards();
+    }
+  }
+
+  private addSubscriptions() {
+    this.appStateService.currentUser$.subscribe(user => {
+      this.user = user;
+      this.person = '../../../../assets/images/' + user.gender + '.svg';
+    });
+
+    this.subscriptions.push(this.appStateService.isItemEdit$.subscribe((editActive: boolean) => {
+      this.isEditActive = editActive;
+    }));
   }
 
   updateToggleSlider() {
