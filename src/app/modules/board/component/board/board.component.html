@@ -65,10 +65,10 @@
   <mat-menu #description="matMenu"
     class="description-board"
   >
-    <small class="description__date">{{ board.dateBoard | date : 'medium' }}</small>
-    <div class="description__name">{{ board.nameBoard }}</div>
-    <div class="description__description">{{ board.descriptionBoard }}</div>
-    <div class="description__info">
+    <small class="description-board__date">{{ board.dateBoard | date : 'medium' }}</small>
+    <div class="description-board__name">{{ board.nameBoard }}</div>
+    <div class="description-board__description">{{ board.descriptionBoard }}</div>
+    <div class="description-board__info">
       <span
         ><b *transloco="let t">{{ t('board.columns') }}:</b> {{ board.columns.length }}</span
       >,
@@ -77,14 +77,14 @@
       >
     </div>
     <img
-      class="description__star"
+      class="description-board__star"
       *ngIf="board.isChosen"
       src="../../../../../assets/images/star-black.svg"
       alt="fill"
     />
     <button
       (click)="closeDescription()"
-      class="description__button"
+      class="description-board__button"
       *transloco="let t"
       mat-raised-button
       color="primary"
