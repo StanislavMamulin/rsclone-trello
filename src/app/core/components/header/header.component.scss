@@ -179,9 +179,6 @@ button {
       color: rgb(133, 124, 124);
     }
 
-    &__audio{
-
-    }
   }
 
 
@@ -229,6 +226,15 @@ button {
     font-weight: 500;
     color: rgb(133, 124, 124);
   }
+}
+
+::ng-deep .language-wrapper{
+  position: absolute;
+  top: 8px;
+}
+::ng-deep .mat-menu-wrapper{
+  position: absolute;
+  top: 12px;
 }
 
 

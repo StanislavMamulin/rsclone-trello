@@ -8,7 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [BoardComponent],
   imports: [CommonModule, RouterModule, SharedModule],
-  exports: [BoardComponent],
+  exports: [BoardComponent, SharedModule],
   providers: [BoardService],
 })
 export class BoardModule {}

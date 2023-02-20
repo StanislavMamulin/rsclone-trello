@@ -29,7 +29,7 @@ export class WorkspaceComponent implements OnInit {
   indexTask = 0;
 
   isEditActive = false;
-  
+
   subscription: Subscription;
 
   @ViewChild('workspaceElement') workspaceElement: ElementRef;
@@ -104,8 +104,12 @@ export class WorkspaceComponent implements OnInit {
               }
             });
           }
-        }
-      });
+        }});
+
+        const activeTask = document.querySelector('app-task.active') as HTMLTemplateElement;
+        this.scrollToActiveTask(activeTask);
+      //   }
+      // });
     }
     if (e.code === 'ArrowLeft' && !this.isEditActive) {
       e.preventDefault();
@@ -142,6 +146,8 @@ export class WorkspaceComponent implements OnInit {
             });
           }
         }
+        const activeTask = document.querySelector('app-task.active') as HTMLTemplateElement;
+        this.scrollToActiveTask(activeTask);
       }
     }
     if (e.code === 'ArrowDown' && !this.isEditActive) {
@@ -236,6 +242,14 @@ export class WorkspaceComponent implements OnInit {
         }
       });
     }
+  }
+
+
+  scrollToActiveTask(activeTask: HTMLTemplateElement){
+    activeTask?.scrollIntoView({
+      inline: "center",
+      behavior: "smooth"
+    })
   }
 
   openModal(task: ITask, column: IColumn): void {

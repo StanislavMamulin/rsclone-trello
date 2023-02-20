@@ -1,17 +1,18 @@
-<h1 mat-dialog-title>Log out</h1>
-<div mat-dialog-content>Would you like to log out?</div>
+<h1 mat-dialog-title>Delete</h1>
+<div mat-dialog-content>Would you like to delete it?</div>
 <div mat-dialog-actions>
   <button
     mat-button
-    mat-dialog-close
+    mat-raised-button
+    cdkFocusInitial
+    (click)="closeNo()"
   >
     No
   </button>
   <button
-    (click)="close()"
-    mat-button
-    mat-dialog-close
-    cdkFocusInitial
+    (click)="closeYes()"
+    mat-raised-button
+    color="primary"
   >
     Ok
   </button>

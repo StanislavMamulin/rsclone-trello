@@ -74,7 +74,18 @@
     flex-direction: column;
     padding: 20px 50px 40px 50px;
     border-radius: 3px;
-    width: 400px;
+    width: 500px;
+
+    @media (max-width: 530px){
+      width: 400px;
+    }
+    @media (max-width: 425px){
+      width: 350px;
+    }
+    @media (max-width: 375px){
+      padding: 20px 30px 40px 30px;
+      width: 300px;
+    }
 
     &__spinner{
       width: 100px;

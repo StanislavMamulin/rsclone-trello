@@ -22,6 +22,7 @@ import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 import { Subscription } from 'rxjs';
 import { AppStateService } from 'src/app/core/services/app-state.service';
 import { AudioServiceService } from 'src/app/shared/audio-service.service';
+import { CloseComponent } from 'src/app/shared/components/close/close.component';
 
 @Component({
   selector: 'app-column',
@@ -176,6 +177,15 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     this.deletedTask.emit(column);
   }
 
+  openDialogDeleteColumn(column:IColumn){
+    const dialogRef = this.dialog.open(CloseComponent);
+
+    dialogRef.afterClosed().subscribe((res)=>{
+      if(res === "yes")
+      this.deleteColumn(column);
+    })
+  }
+
   moveTaskToNewColumn(newColumn: IColumn): void {
     const copyTasks = [...this.column.tasks];
     copyTasks.reverse().forEach((task: ITask) =>
@@ -220,6 +230,15 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     });
+  }
+
+  openDialogDeleteTask(id:string){
+    const dialogRef= this.dialog.open(CloseComponent);
+    dialogRef.afterClosed().subscribe(res=>{
+      if(res === 'yes'){
+        this.deleteTask(id);
+      }
+    })
   }
 
   addBoardSubscribers() {

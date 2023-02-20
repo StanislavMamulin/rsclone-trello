@@ -11,7 +11,16 @@ export class CloseComponent {
     public dialogRef: MatDialogRef<CloseComponent>,
   ) {}
 
-  close() {
+
+  closeNo(){
+    this.closeDialog('no');
+  }
+  closeYes(){
+    this.closeDialog('yes');
+  }
+
+  closeDialog(button: 'no' | 'yes') {
+    this.dialogRef.close(button);
   }
 }
 

@@ -8,8 +8,11 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 import { Router } from '@angular/router';
+import { CloseComponent } from 'src/app/shared/components/close/close.component';
+import { MatDialog } from '@angular/material/dialog';
 import { AppStateService } from 'src/app/core/services/app-state.service';
 import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-board-page',
@@ -52,6 +55,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   constructor(
     private boardService: BoardService,
     private boardStateService: BoardsStateService,
+    public dialog: MatDialog,
     private router: Router,
     private appStateService: AppStateService,
   ) { }
@@ -120,6 +124,21 @@ export class BoardPageComponent implements OnInit, OnDestroy {
       });
     }
 
+
+      if (e.code === 'Escape') {
+        const boards = document.querySelectorAll('app-board');
+        this.indexBoard = -1;
+        boards.forEach(item => {
+          if (item.classList.contains('active')) {
+            item.classList.remove("active")
+          }
+        })
+
+          if( this.isUpdateModal || this.isCreateModal){
+            this.defaultModal();
+          }
+      }
+
     if (e.code === 'Enter') {
       if (this.boards[this.indexBoard]) {
         this.router.navigate([`/board/${this.boards[this.indexBoard].idBoard}`]);
@@ -139,6 +158,13 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     if (e.key === '+') {
       this.isCreateModal = !this.isCreateModal;
       this.isOpenModal = !this.isOpenModal;
+    }
+  }
+
+  enteredForm(event: KeyboardEvent){
+    if(event.code  === "Enter" && !this.createFormModal.invalid){
+      if(this.isCreateModal) this.createBoard();
+      if(this.isUpdateModal) this.updateBoard();
     }
   }
 
@@ -180,7 +206,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.createFormModal.reset();
     document.body.style.overflow = 'auto';
 
-    this.appStateService.setIsItemEdit(false); 
+    this.appStateService.setIsItemEdit(false);
   }
 
   createBoard() {
@@ -206,6 +232,15 @@ export class BoardPageComponent implements OnInit, OnDestroy {
       });
   }
 
+  openDialogDeleteBoard(id:string){
+    const dialogRef = this.dialog.open(CloseComponent,);
+
+    dialogRef.afterClosed().subscribe((res)=>{
+      if(res === "yes")
+      this.deleteBoard(id);
+    })
+  }
+
   openUpdateModal(id: string) {
     const [board] = this.boards.filter(item=>item.idBoard === id);
     this.createFormModal.controls.name.setValue(board.nameBoard);
@@ -214,7 +249,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.isOpenModal = !this.isOpenModal;
     this.updateBoardId = id;
     document.body.style.overflow = 'hidden';
-    this.appStateService.setIsItemEdit(true); 
+    this.appStateService.setIsItemEdit(true);
   }
 
   updateBoard() {

@@ -44,7 +44,7 @@
       class="task-list__item"
       [taskInfo]="task"
       cdkDrag
-      (onDeleteTask)="deleteTask($event)"
+      (onDeleteTask)="openDialogDeleteTask($event)"
     ></app-task>
   </div>
 
@@ -83,7 +83,7 @@
   </button>
   <button
     mat-menu-item
-    (click)="deleteColumn(column)"
+    (click)="openDialogDeleteColumn(column)"
   >
     <mat-icon
       class="menu-item__icon"
