@@ -51,7 +51,7 @@
     *ngIf="isOfferOpenBoard"
     class="board__offer-open"
   >
-    <span *transloco="let t">{{t('board.open')}}</span>
+    <span *transloco="let t">{{ t('board.open') }}</span>
   </div>
   <!-- <div
     *ngIf="isDelete"
@@ -69,9 +69,12 @@
     <div class="description__name">{{ board.nameBoard }}</div>
     <div class="description__description">{{ board.descriptionBoard }}</div>
     <div class="description__info">
-      <span><b *transloco="let t">{{t("board.columns")}}:</b> {{ board.columns.length }}</span
+      <span
+        ><b *transloco="let t">{{ t('board.columns') }}:</b> {{ board.columns.length }}</span
       >,
-      <span><b *transloco="let t">{{t("board.tasks")}}:</b> {{ amountTasks(board.columns) }}</span>
+      <span
+        ><b *transloco="let t">{{ t('board.tasks') }}:</b> {{ amountTasks(board.columns) }}</span
+      >
     </div>
     <img
       class="description__star"
@@ -86,7 +89,7 @@
       mat-raised-button
       color="primary"
     >
-      {{t('board.close')}}
+      {{ t('board.close') }}
     </button>
   </mat-menu>
 </div>

@@ -1,5 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppStateService } from 'src/app/core/services/app-state.service';
 import { BoardsStateService } from 'src/app/core/services/boardsState.service';
 import { IColumn } from 'src/app/modules/column-task/model/column.interface';
 import { AudioServiceService } from 'src/app/shared/audio-service.service';
@@ -31,6 +32,7 @@ export class BoardComponent implements OnInit {
     private router: Router,
     private boardsStateService: BoardsStateService,
     private audioService: AudioServiceService,
+    private appStateService: AppStateService,
   ) {}
 
   ngOnInit() {
@@ -81,13 +83,15 @@ export class BoardComponent implements OnInit {
     }, 0);
   }
 
-  showDescription(event: any) {
+  showDescription() {
     this.isOpenDescription = !this.isOpenDescription;
+    this.appStateService.setIsItemEdit(true);
   }
 
   closeDescription = () => {
     this.isOpenDescription = false;
     this.isOfferOpenBoard = false;
+    this.appStateService.setIsItemEdit(false);
   };
 
   updateFavorite(board: IBoard) {
