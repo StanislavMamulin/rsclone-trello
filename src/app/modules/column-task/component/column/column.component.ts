@@ -177,6 +177,15 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     this.deletedTask.emit(column);
   }
 
+  openDialogDeleteColumn(column:IColumn){
+    const dialogRef = this.dialog.open(CloseComponent);
+
+    dialogRef.afterClosed().subscribe((res)=>{
+      if(res === "yes")
+      this.deleteColumn(column);
+    })
+  }
+
   moveTaskToNewColumn(newColumn: IColumn): void {
     const copyTasks = [...this.column.tasks];
     copyTasks.reverse().forEach((task: ITask) =>
