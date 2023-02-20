@@ -22,7 +22,8 @@
           alt="delete"
         />
       </button>
-      <div (click)="showDescription($event)">
+      <div [matMenuTriggerFor]="description"
+      >
         <img
           src="../../../../../assets/images/description.svg"
           alt="description"
@@ -61,8 +62,7 @@
       alt="spinner"
     />
   </div> -->
-  <div
-    *ngIf="isOpenDescription"
+  <mat-menu #description="matMenu"
     class="description"
   >
     <small class="description__date">{{ board.dateBoard | date : 'medium' }}</small>
@@ -88,5 +88,5 @@
     >
       {{t('board.close')}}
     </button>
-  </div>
+  </mat-menu>
 </div>
