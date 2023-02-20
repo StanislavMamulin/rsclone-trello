@@ -36,13 +36,13 @@ export class EditProfileModalComponent implements OnInit {
 
   ngOnInit(){
     this.firstFormGroup = new FormGroup({
-      firstName : new FormControl(this.data.user.firstName,[Validators.required]) ,
+      firstName : new FormControl(this.data.user.firstName,[Validators.required, Validators.pattern(/^\w{3,15}$/)]),
     });
     this.secondFormGroup = new FormGroup({
-      lastName : new FormControl(this.data.user.lastName,[Validators.required]) ,
+      lastName : new FormControl(this.data.user.lastName,[Validators.required, Validators.pattern(/^\w{3,15}$/)]),
     });
     this.thirdFormGroup = new FormGroup({
-      gender : new FormControl(this.data.user.gender,[Validators.required]) ,
+      gender : new FormControl(this.data.user.gender,[Validators.required]),
     });
   }
 

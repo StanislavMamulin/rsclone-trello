@@ -59,9 +59,8 @@
         </mat-option>
       </mat-select>
       <mat-error *ngIf="form.get('sexControl').invalid && form.get('sexControl').touched">
-        <span *ngIf="form.get('sexControl').errors.required"
-          ><span *transloco="let t">{{ t('signUp.genderError') }}</span></span
-        >
+        <span *ngIf="form.get('sexControl').errors.required"><span
+            *transloco="let t">{{ t('signUp.genderError') }}</span></span>
       </mat-error>
     </mat-form-field>
 
