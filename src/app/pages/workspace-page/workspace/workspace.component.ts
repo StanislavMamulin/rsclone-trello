@@ -104,12 +104,12 @@ export class WorkspaceComponent implements OnInit {
               }
             });
           }
-        });
+        }});
 
         const activeTask = document.querySelector('app-task.active') as HTMLTemplateElement;
         this.scrollToActiveTask(activeTask);
-        }
-      });
+      //   }
+      // });
     }
     if (e.code === 'ArrowLeft' && !this.isEditActive) {
       e.preventDefault();

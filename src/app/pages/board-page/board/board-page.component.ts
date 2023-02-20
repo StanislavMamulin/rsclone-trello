@@ -137,6 +137,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
           if( this.isUpdateModal || this.isCreateModal){
             this.defaultModal();
           }
+      }
 
     if (e.code === 'Enter') {
       if (this.boards[this.indexBoard]) {
@@ -205,7 +206,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.createFormModal.reset();
     document.body.style.overflow = 'auto';
 
-    this.appStateService.setIsItemEdit(false); 
+    this.appStateService.setIsItemEdit(false);
   }
 
   createBoard() {
@@ -248,7 +249,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.isOpenModal = !this.isOpenModal;
     this.updateBoardId = id;
     document.body.style.overflow = 'hidden';
-    this.appStateService.setIsItemEdit(true); 
+    this.appStateService.setIsItemEdit(true);
   }
 
   updateBoard() {
