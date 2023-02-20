@@ -121,6 +121,11 @@ export class BoardPageComponent implements OnInit {
             item.classList.remove("active")
           }
         })
+
+          if( this.isUpdateModal || this.isCreateModal){
+            this.defaultModal();
+          }
+
       }
 
       if(e.key === "+"){
@@ -128,6 +133,13 @@ export class BoardPageComponent implements OnInit {
         this.isOpenModal = !this.isOpenModal;
       }
 
+    }
+  }
+
+  enteredForm(event: KeyboardEvent){
+    if(event.code  === "Enter" && !this.createFormModal.invalid){
+      if(this.isCreateModal) this.createBoard();
+      if(this.isUpdateModal) this.updateBoard();
     }
   }
 
