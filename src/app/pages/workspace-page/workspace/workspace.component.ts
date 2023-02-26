@@ -32,6 +32,8 @@ export class WorkspaceComponent implements OnInit {
 
   subscription: Subscription;
 
+  isLoading = true;
+
   @ViewChild('workspaceElement') workspaceElement: ElementRef;
 
   constructor(
@@ -54,6 +56,7 @@ export class WorkspaceComponent implements OnInit {
       this.currentBoardId = id;
       this.setColumnsIds();
       this.hideAddColumn();
+      this.isLoading = false;
     });
 
     this.subscription = this.appStateService.isItemEdit$.subscribe(editState => this.isEditActive = editState);

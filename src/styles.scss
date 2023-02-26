@@ -53,6 +53,23 @@ body {
   margin: auto;
 }
 
+// .cdk-overlay-container{
+//   overflow: auto;
+//   pointer-events: auto;
+//   height: 100%;
+//   background:rgba(0, 0, 0, 0.4);
+// }
+
+// .cdk-overlay-backdrop.cdk-overlay-backdrop-showing{
+//   background: transparent;
+// }
+
+.mdc-dialog__container{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+
 html,
 body,
 app-root {

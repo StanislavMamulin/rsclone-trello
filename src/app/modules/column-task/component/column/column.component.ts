@@ -23,6 +23,7 @@ import { Subscription } from 'rxjs';
 import { AppStateService } from 'src/app/core/services/app-state.service';
 import { AudioServiceService } from 'src/app/shared/audio-service.service';
 import { CloseComponent } from 'src/app/shared/components/close/close.component';
+import { ScrollStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-column',
@@ -56,13 +57,18 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isEditActive = false;
 
+  scrollStrategy: ScrollStrategy;
+
   constructor(
     private columnTaskService: ColumnTaskService,
     public dialog: MatDialog,
     private boardsStateService: BoardsStateService,
     private appStateService: AppStateService,
     private audioService: AudioServiceService,
-  ) {}
+    private readonly sso: ScrollStrategyOptions
+  ) {
+    this.scrollStrategy = this.sso.noop();
+  }
 
   ngOnInit() {
     this.tasks = this.column.tasks;
@@ -137,17 +143,19 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
       const dialogRef = this.dialog.open(ModalTaskComponent, {
         data: { task: task, column: this.column },
         disableClose: true,
+        id:'modal-id',
+        scrollStrategy: this.scrollStrategy,
       });
-      // dialogRef.afterClosed().subscribe((result) => {
-      //   console.log(result);
-      //   if (result) {
-      //     this.tasks.forEach((taskItem) => {
-      //       if (taskItem.idTask == result.task.idTask) {
-      //         taskItem = result.task;
-      //       }
-      //     });
-      //   }
-      // });
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log(result);
+        if (result) {
+          this.tasks.forEach((taskItem) => {
+            if (taskItem.idTask == result.task.idTask) {
+              taskItem = result.task;
+            }
+          });
+        }
+      });
     }
   }
 

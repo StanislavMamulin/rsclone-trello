@@ -18,7 +18,7 @@ import { ICheckBox } from '../model/checkbox.interface';
 export class ModalTaskComponent implements OnInit {
   formTask: any;
   checklist: ICheckBox[] = [];
-  calculated: number;
+  calculated: number = 0;
   isCreate: boolean = false;
 
   constructor(

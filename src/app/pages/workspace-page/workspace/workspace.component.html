@@ -7,6 +7,7 @@
   #workspaceElement
   [cdkDropListDisabled]="isEditActive"
 >
+
   <app-column
     *ngFor="let column of columns"
     [column]="column"
@@ -23,7 +24,6 @@
   >
     <span *transloco="let t">{{ t('workSpace.newColumn') }}</span>
   </button>
-
   <ng-template #addColumnControl>
     <app-add-controls
       addButtonText="Add a new column"
@@ -33,3 +33,8 @@
     </app-add-controls>
   </ng-template>
 </div>
+
+<mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+
+
+
