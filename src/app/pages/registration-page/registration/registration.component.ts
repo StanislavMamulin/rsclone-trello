@@ -33,15 +33,12 @@ export class RegistrationComponent implements OnInit {
 
   form: FormGroup;
 
-  language =  localStorage.getItem('language') || 'en'
+  language =  localStorage.getItem('language') || 'en';
 
-  genders: IGender[] = [
-    { value: 'man', viewValue: this.language === 'ru'? 'Мужчина' : 'Man' },
-    { value: 'woman', viewValue: this.language === 'ru'? 'Женщина': 'Woman' }
-  ];
+  genders: IGender[] = [{ value: 'man', viewValue: this.language === 'ru' ? 'Мужчина' : 'Man' }, { value: 'woman', viewValue: this.language === 'ru' ? 'Женщина' : 'Woman' }];
 
   constructor(
-    private UserService: UserService,
+    private userService: UserService,
     private router: Router,
     private snackBar: MatSnackBar,
   ) {}
@@ -63,12 +60,9 @@ export class RegistrationComponent implements OnInit {
     this.updateSubmitted();
   }
 
-  changeLanguage(){
+  changeLanguage() {
     const lang = localStorage.getItem('language');
-    this.genders = [
-      { value: 'man', viewValue: lang === 'ru'? 'Мужчина' : 'Man' },
-      { value: 'woman', viewValue: lang === 'ru'? 'Женщина': 'Woman' }
-    ];
+    this.genders = [{ value: 'man', viewValue: lang === 'ru' ? 'Мужчина' : 'Man' }, { value: 'woman', viewValue: lang === 'ru' ? 'Женщина' : 'Woman' }];
   }
 
   restricredEmail = (control: FormControl):{ [key:string]:boolean } | null => {
@@ -104,7 +98,7 @@ export class RegistrationComponent implements OnInit {
     this.isLoading = true;
     this.isSendForm = true;
     document.body.style.overflow = 'hidden';
-    this.UserService.userRegistartion({
+    this.userService.userRegistartion({
       firstName: this.form.get('firstNameControl')?.value,
       lastName: this.form.get('lastNameControl')?.value,
       gender: this.form.get('sexControl')?.value,
