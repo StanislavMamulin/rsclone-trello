@@ -1,0 +1,161 @@
+.board {
+  position: relative;
+  width: 290px;
+  height: 200px;
+  background: #3f51b5;;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+
+  &__spinner{
+    position: absolute;
+    z-index: 3;
+    width: 36px;
+    left: 0;
+    bottom: 0
+  }
+
+  .button-empty{
+    background: transparent;
+    border-style: none;
+  }
+
+  &__wrapper{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    &__title {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-left: 10px;
+      margin-top: 10px;
+      height: fit-content;
+    }
+
+    &__edit {
+      margin-top: 10px;
+      margin-right: 10px;
+      height: fit-content;
+      width: fit-content;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      img {
+        position: relative;
+        z-index: 1;
+        transition: 0.25s;
+        cursor: pointer;
+        width: 20px;
+
+        &:hover {
+          transform: scale(1.05);
+          transform: rotate(15deg);
+        }
+      }
+    }
+  }
+
+  &__chosen {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    right: 10px;
+    bottom: 5px;
+    img {
+      width: 20px;
+    }
+  }
+
+  &__offer-open {
+    cursor: pointer;
+    transition: 0.5s;
+    position: absolute;
+    background:rgba(107, 103, 103, 0.4);
+    color: rgb(167, 158, 158);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 635px) {
+  .board {
+    width: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .board {
+    .description {
+      width: 320px;
+    }
+  }
+}
+@media (max-width: 430px) {
+  .board {
+    .description {
+      width: 270px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+
+::ng-deep .description-board {
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 5px;
+  padding: 20px;
+  max-width: 400px;
+  min-width: 400px;
+
+  &__star {
+    width: 25px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  &__date {
+    color: gray;
+    font-weight: 500;
+  }
+
+  &__name{
+    margin-top: 5px;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  &__description {
+    margin-top: 15px;
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  &__info {
+    margin-top: 10px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: gray;
+    b {
+      color: black;
+    }
+  }
+
+  &__button {
+    margin-top: 20px;
+    width: 100px;
+    height: 28px;
+    border-radius: 5px;
+    border-style: none;
+  }
+}

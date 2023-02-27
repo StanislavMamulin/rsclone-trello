@@ -1,0 +1,90 @@
+.checkbox-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
+  &:hover {
+    background: whitesmoke;
+    .delete-task {
+      opacity: 1;
+    }
+  }
+
+  .delete-task {
+    opacity: 0;
+  }
+
+  .delete-task {
+    cursor: pointer;
+    transition: .3s;
+    &:hover{
+      transform: rotate(15deg);
+    }
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    gap: 10px;
+
+    .no-edit {
+      font-size: 17px;
+      width: 100%;
+      padding-top: 6px;
+      padding-bottom: 11px;
+      @media (max-width: 510px) {
+        font-size: 15px;
+      }
+      &.isDone {
+        text-decoration: line-through;
+      }
+      &.active {
+        display: none;
+      }
+    }
+
+    .edit {
+      width: 100%;
+      &.active {
+        display: none;
+      }
+      input {
+        border: 1px solid #3f51b5;
+        background: rgb(245, 245, 245);
+        width: 100%;
+        padding-bottom: 50px;
+        padding-left: 5px;
+        padding-top: 5px;
+        font-size: 17px;
+        @media (max-width: 510px) {
+          font-size: 15px;
+        }
+        &:focus {
+          outline: 1px solid #3f51b5 !important;
+        }
+      }
+      &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      &__button {
+        margin-top: 5px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        .close {
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  }
+}

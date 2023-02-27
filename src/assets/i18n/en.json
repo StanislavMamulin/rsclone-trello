@@ -1,0 +1,127 @@
+{
+  "header": {
+    "boards": "Boards",
+    "singUp": "sing up",
+    "logIn": "log in",
+    "logOut": "Log out",
+    "account": "Account",
+    "sound": "Sound"
+  },
+  "pageInfo": {
+    "title": "Getting started with Trello",
+    "subtitle": "Welcome to Trello! Simple, flexible, and powerful. All it takes are boards, lists, and cards to get a clear view of who’s doing what and what needs to get done. Trello brings all your tasks, teammates, and tools together",
+    "cardBoardTitle": "Boards",
+    "cardBoardSubtitle": "Trello boards keep tasks organized and work moving forward. In a glance, see everything from “things to do” to “aww yeah, we did it!",
+    "cardListTitle": "Lists",
+    "cardListSubtitle": "The different stages of a task. Start as simple as To Do, Doing or Done—or build a workflow custom fit to your team’s needs. There’s no wrong way to Trello.",
+    "cardTitle": "Cards",
+    "cardSubtitle": "Cards represent tasks and ideas and hold all the information to get the job done. As you make progress, move cards across lists to show their status."
+  },
+  "boardPage": {
+    "createBoard": "Create Board",
+    "updateBoard": "Update Board",
+    "create": "Create",
+    "update": "Update",
+    "name": "Name",
+    "description": "Description",
+    "favorites": "Favoritess",
+    "last": "Last created",
+    "sorting": "Sorting by",
+    "requiredName": "Enter name",
+    "minNameS": "Name must be at least",
+    "minNameE": "characters. Now it",
+    "requiredDescr": "Enter name",
+    "minDescrS": "Name must be at least",
+    "minDescrE": "characters. Now it"
+  },
+  "board": {
+    "open": "Open Board",
+    "close": "close",
+    "columns": "Columns",
+    "tasks": "Tasks"
+  },
+  "signUp": {
+    "signUp": "Sign Up",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "firstNameError": "Enter first name",
+    "lastNameError": "Enter last name",
+    "nameValidError": "Only numbers, letters, characters (3 - 15)",
+    "gender": "Gender",
+    "genderError": "Choose a gender",
+    "email": "Email",
+    "emailError": "Enter email",
+    "correctEmailError": "Input correct email",
+    "existError": "already exists",
+    "password": "Enter your password",
+    "passwordMismatch": "Passwords mismatch",
+    "passwordExistError": "Enter password",
+    "repeatPassword": "Repeat your password",
+    "passwordError": "One caps letter, > 8 , one number, one of !@#$%^&*",
+    "waiting": "Please wait",
+    "success": "You successfully registered",
+    "OK": "Ok"
+  },
+  "logIn": {
+    "logIn": "Log in",
+    "invalid": "Invalid login or password"
+  },
+  "logOut": {
+    "logOut": "Log out",
+    "confirm": "Would you like to log out?",
+    "no": "No",
+    "ok": "Ok"
+  },
+  "taskModal": {
+    "column": "in column",
+    "description": "Description",
+    "checklist": "Check-list:",
+    "save": "Save",
+    "addElement": "Add element"
+  },
+  "workSpace": {
+    "workspaceOfTrello": "Workspace of trello",
+    "newColumn": "Add a new column...",
+    "addTask": "+ Add task",
+    "columnDescription": "Show column description",
+    "columnDelete": "Delete column",
+    "moveToColumn": "Move all tasks to other column...",
+    "moveToBoard": "Move column to other board",
+    "noColumnsToMove": "No columns to move",
+    "noBoardsToMove": "No boards to move",
+    "columnInfo": "Column info",
+    "close": "Close",
+    "save": "Save",
+    "noTasksToMove": "No tasks to move"
+  },
+  "snack": {
+    "exist": "Email already exists"
+  },
+  "edit-profile": {
+    "editProfile": "Edit profile",
+    "fillFirstName": "Fill out your first name",
+    "firstName": "First name",
+    "next": "Next",
+    "fillLastName": "Fill out your last name",
+    "lastName": "Last name",
+    "back": "Back",
+    "fillGender": "Fill out your gender",
+    "gender": "Gender",
+    "done": "Done",
+    "nowDone": "You are now done.",
+    "reset": "Reset",
+    "edit": "Edit"
+  },
+  "modal-hotkeys": {
+    "hotKeys": "HotKeys",
+    "search": "Pressure «/» will move the cursor to the search field in the header.",
+    "escape": "Pressure «esc» will close the dialog.",
+    "boardMenu": "Go to board selection menu 'B'",
+    "switchBoard": "Switch boards",
+    "or": "or",
+    "boardFocus": "When the focus is on the board, 'enter' to open board. Remove selection 'Escape'.",
+    "switchTask": "Switch tasks",
+    "taskFocus": "When the focus is on the task, 'enter' to open task. Remove selection 'Escape'.",
+    "openCloseMenu": "To open/close the menu for creating a board or column 'LeftShift' «+»."
+  }
+}

@@ -1,0 +1,42 @@
+<div
+  cdkDropList
+  (cdkDropListDropped)="drop($event)"
+  class="workspace__container"
+  [cdkDropListData]="columns"
+  cdkDropListOrientation="horizontal"
+  #workspaceElement
+  [cdkDropListDisabled]="isEditActive"
+>
+  <app-column
+    *ngFor="let column of columns"
+    [column]="column"
+    cdkDrag
+    [getConnectedList]="columnsIdsFunc"
+    class="workspace__column"
+    [columnsInBoard]="columns"
+    (deletedTask)="deleteColumn($event)"
+  ></app-column>
+  <div *ngIf="isCreateColumn" class="spinner-wrapper">
+    <img src="../../../../assets/images/spinner.svg" alt="">
+  </div>
+  <button
+    class="workspace__add-column-btn"
+    (click)="showAddColumn()"
+    *ngIf="!showAddControl; else addColumnControl"
+  >
+    <span *transloco="let t">{{ t('workSpace.newColumn') }}</span>
+  </button>
+  <ng-template #addColumnControl>
+    <app-add-controls
+      [addButtonText]="addButtonText"
+      (addButtonPressed)="addNewColumn($event)"
+      (cancelButtonPressed)="hideAddColumn()"
+    >
+    </app-add-controls>
+  </ng-template>
+</div>
+
+<mat-spinner
+  class="spinner"
+  *ngIf="isLoading"
+></mat-spinner>

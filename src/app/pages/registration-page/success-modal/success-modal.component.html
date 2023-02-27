@@ -1,0 +1,29 @@
+<mat-card class="modal-success">
+  <mat-card-header class="modal-success__header">
+    <mat-card-title *ngIf="isLoading"
+      ><span *transloco="let t">{{ t('signUp.waiting') }}</span></mat-card-title
+    >
+    <mat-card-title *ngIf="!isLoading">
+      <span *transloco="let t">{{ t('signUp.success') }}</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content> </mat-card-content>
+  <mat-card-actions>
+    <button
+      [disabled]="isLoading"
+      (click)="closeModal()"
+      class="modal-success__button"
+      mat-raised-button
+      color="primary"
+      *transloco="let t"
+    >
+      {{ t('signUp.OK') }}
+    </button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar
+      *ngIf="isLoading"
+      mode="indeterminate"
+    ></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

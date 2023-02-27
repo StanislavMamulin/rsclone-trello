@@ -1,0 +1,61 @@
+<div class="modal">
+  <div
+    mat-dialog-title
+    class="modal-info"
+  >
+    <mat-icon color="primary">info</mat-icon
+    ><span *transloco="let t">{{ t('modal-hotkeys.hotKeys') }}</span>
+  </div>
+  <div
+    mat-dialog-content
+    class="keys-wrapper"
+  >
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.search') }}
+    </mat-card>
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.escape') }}
+    </mat-card>
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.boardMenu') }}
+    </mat-card>
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.switchBoard') }} "&larr;" {{ t('modal-hotkeys.or') }} "&rarr;",
+      {{ t('modal-hotkeys.boardFocus') }}
+    </mat-card>
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.switchTask') }} "&larr;", "&rarr;", "&uarr;", "&darr;";
+      {{ t('modal-hotkeys.taskFocus') }}
+    </mat-card>
+    <mat-card
+      class="modal-keys"
+      *transloco="let t"
+    >
+      {{ t('modal-hotkeys.openCloseMenu') }}
+    </mat-card>
+    <button
+      class="modal-button"
+      mat-raised-button
+      mat-dialog-close
+      color="primary"
+      *transloco="let t"
+    >
+      {{ t('signUp.OK') }}
+    </button>
+  </div>
+</div>
