@@ -6,6 +6,7 @@
     [(ngModel)]="newElementTitle"
     (keydown.enter)="enterPressed($event)"
     (blur)="blurHandler($event)"
+    [readonly]="isSubmitting"
     appAutofocus
   ></textarea>
   <div class="add-element__controls">
@@ -14,6 +15,7 @@
       (click)="addNewTaskHandler($event)"
       mat-raised-button
       color="primary"
+      [disabled]="isSubmitting"
     >
       {{ addButtonText }}
     </button>

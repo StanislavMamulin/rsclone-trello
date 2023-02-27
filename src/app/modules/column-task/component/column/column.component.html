@@ -64,6 +64,10 @@
     ></app-add-controls>
   </ng-template>
 </div>
+<mat-progress-bar
+  *ngIf="isSubmitting"
+  mode="indeterminate"
+></mat-progress-bar>
 
 <mat-menu #columnMenu>
   <button

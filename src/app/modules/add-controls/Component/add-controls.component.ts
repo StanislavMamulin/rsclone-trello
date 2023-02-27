@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AppStateService } from 'src/app/core/services/app-state.service';
 
 @Component({
   selector: 'app-add-controls',
   templateUrl: './add-controls.component.html',
   styleUrls: ['./add-controls.component.scss'],
 })
-export class AddControlsComponent {
+export class AddControlsComponent implements OnInit, OnDestroy {
   @Input() addButtonText: string;
 
   @Output() addButtonPressed = new EventEmitter<string>();
@@ -13,6 +15,24 @@ export class AddControlsComponent {
   @Output() cancelButtonPressed = new EventEmitter();
 
   newElementTitle: string;
+
+  isSubmitting = false;
+
+  subscription = new Subscription();
+
+  prevTitle = '';
+
+  constructor(private appStateService: AppStateService) {}
+
+  ngOnInit(): void {
+    this.subscription = this.appStateService.isSubmitting$.subscribe(
+      (submittingState) => this.isSubmitting = submittingState,
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   addNewTaskHandler(event: Event) {
     event.preventDefault();
@@ -25,7 +45,8 @@ export class AddControlsComponent {
   }
 
   private addTask() {
-    if (this.newElementTitle) {
+    this.prevTitle = this.newElementTitle;
+    if (this.newElementTitle && !this.isSubmitting) {
       this.addButtonPressed.emit(this.newElementTitle.trim());
       this.newElementTitle = '';
     }
