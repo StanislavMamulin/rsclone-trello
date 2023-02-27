@@ -9,6 +9,7 @@ import {
   EventEmitter,
   Output,
   OnDestroy,
+  ViewChild,
 } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ColumnTaskService } from '../../column-task.service';
@@ -41,6 +42,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChildren('titleInput') private titleInput: QueryList<ElementRef>;
 
+
   tasks: ITask[];
 
   currentBoard: IBoard;
@@ -66,6 +68,8 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   newColumnTitle: string;
 
   isSubmitting = false;
+
+  @ViewChild('taskListEl') taskListEl: ElementRef;
 
   constructor(
     private columnTaskService: ColumnTaskService,
@@ -142,6 +146,10 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((newTask: ITask) => {
         this.tasks.push(newTask);
         this.setSubmitting(false);
+
+        setTimeout(() => {
+          this.taskListEl.nativeElement.scrollTop = this.taskListEl.nativeElement.scrollHeight;
+        }, 0);
       });
   }
 
