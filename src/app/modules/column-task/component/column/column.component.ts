@@ -59,9 +59,11 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   scrollStrategy: ScrollStrategy;
 
-  language:string = localStorage.getItem('language') || "en";
+  language:string = localStorage.getItem('language') || 'en';
 
   addButtonText: string;
+
+  newColumnTitle: string;
 
   constructor(
     private columnTaskService: ColumnTaskService,
@@ -69,7 +71,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     private boardsStateService: BoardsStateService,
     private appStateService: AppStateService,
     private audioService: AudioServiceService,
-    private readonly sso: ScrollStrategyOptions
+    private readonly sso: ScrollStrategyOptions,
   ) {
     this.scrollStrategy = this.sso.noop();
   }
@@ -113,8 +115,8 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showAddTask() {
-    const lang = localStorage.getItem("language");
-    lang === "ru"? this.addButtonText = 'Добавить задачу': this.addButtonText = "Add task"
+    const lang = localStorage.getItem('language');
+    lang === 'ru' ? this.addButtonText = 'Добавить задачу' : this.addButtonText = 'Add task';
 
     this.showAddTaskControl = true;
     this.appStateService.setIsItemEdit(true);
@@ -173,20 +175,23 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showEditColumnTitle() {
+    this.newColumnTitle = this.column.nameColumn;
     this.isShowEditColumnTitle = true;
     this.appStateService.setIsItemEdit(true);
   }
 
-  hideEditColumnTitle(editedColumn: IColumn) {
-    if (editedColumn.nameColumn.length < 1) return;
-  
+  hideEditColumnTitle(editedColumn: IColumn) {   
     this.isShowEditColumnTitle = false;
-    this.appStateService.setIsItemEdit(false);
-    this.columnTaskService
-      .updateColumn(editedColumn.idColumn, {
-        nameColumn: editedColumn.nameColumn,
-      })
-      .subscribe();
+    this.appStateService.setIsItemEdit(false);  
+
+    if (this.newColumnTitle.length >= 1) {
+      this.column.nameColumn = this.newColumnTitle;
+      this.columnTaskService
+        .updateColumn(editedColumn.idColumn, {
+          nameColumn: this.newColumnTitle,
+        })
+        .subscribe();
+    }
   }
 
   deleteColumn(column: IColumn) {
@@ -194,9 +199,9 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     this.deletedTask.emit(column);
   }
 
-  openDialogDeleteColumn(column:IColumn){
-    const dialogRef = this.dialog.open(CloseComponent,{
-      data: {name: 'column', objName: column.nameColumn}
+  openDialogDeleteColumn(column: IColumn) {
+    const dialogRef = this.dialog.open(CloseComponent, {
+      data: { name: 'column', objName: column.nameColumn },
     });
 
     dialogRef.afterClosed().subscribe((res)=>{
@@ -251,10 +256,10 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  openDialogDeleteTask(id:string){
+  openDialogDeleteTask(id:string) {
     const task = this.tasks.find(item=>item.idTask === id);
-    const dialogRef= this.dialog.open(CloseComponent,{
-      data: {name: 'task', objName: task?.nameTask}
+    const dialogRef = this.dialog.open(CloseComponent, {
+      data: { name: 'task', objName: task?.nameTask },
     });
 
     dialogRef.afterClosed().subscribe(res=>{
