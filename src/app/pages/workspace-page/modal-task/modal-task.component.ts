@@ -55,7 +55,6 @@ export class ModalTaskComponent implements OnInit {
 
     document.onkeydown = (e: KeyboardEvent) => {
       if (e.code === 'Escape') {
-        this.closeModal();
         this.updateTask();
         this.updateChecklist();
       }
@@ -112,6 +111,7 @@ export class ModalTaskComponent implements OnInit {
     );
   }
   updateInput(checkbox: ICheckBox) {
+    this.isCreating = true;
     const { nameCheckBox, idCheckBox } = checkbox;
     this.ChecklistService.updateCheckBox(idCheckBox, {
       ...checkbox,
@@ -121,13 +121,14 @@ export class ModalTaskComponent implements OnInit {
         if (item.idCheckBox === res.idCheckBox) {
           item = res;
         }
+        this.isCreating = false;
       });
     });
   }
 
   enterPressedInputAdd(event: Event) {
     event.preventDefault();
-    if (!this.formTask.controls['addCheckBox'].errors) {
+    if (!this.formTask.controls['addCheckBox'].errors && !this.isCreating) {
       this.createCheckBox();
     }
   }
@@ -175,6 +176,7 @@ export class ModalTaskComponent implements OnInit {
       !this.formTask.controls['nameTask'].errors &&
       !this.formTask.controls['descriptionTask'].errors
     ) {
+      this.isCreating = true;
       this.ColumnTaskService.updateTask(this.data.task.idTask, {
         nameTask: this.formTask.get('nameTask')?.value,
         descriptionTask: this.formTask.get('descriptionTask')?.value,
@@ -182,6 +184,8 @@ export class ModalTaskComponent implements OnInit {
         const { nameTask, descriptionTask } = res;
         this.data.task.nameTask = nameTask;
         this.data.task.descriptionTask = descriptionTask;
+        this.closeModal();
+        this.isCreating = false;
       });
     } else {
       this.audioService.playAudio('../../../assets/sounds/audio-error.mp3');
@@ -189,6 +193,7 @@ export class ModalTaskComponent implements OnInit {
   }
 
   deleteCheckbox(idCheckBox: string) {
+    this.isCreating = true;
     this.ChecklistService.deleteCheckbox(idCheckBox).subscribe(() => {
       let index: number;
       this.checklist.forEach((item, i) => {
@@ -204,6 +209,7 @@ export class ModalTaskComponent implements OnInit {
       });
       this.data.task.checkLists = this.checklist;
       this.taskStateService.setChecklist(this.checklist);
+      this.isCreating = false;
     });
   }
 }

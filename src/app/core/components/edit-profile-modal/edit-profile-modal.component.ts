@@ -21,6 +21,7 @@ export class EditProfileModalComponent implements OnInit {
   firstFormGroup:FormGroup;
   secondFormGroup:FormGroup;
   thirdFormGroup:FormGroup;
+  isLoading: boolean = false;
 
   language =  localStorage.getItem('language') || 'en'
 
@@ -58,6 +59,7 @@ export class EditProfileModalComponent implements OnInit {
   }
 
   editProfile(){
+    this.isLoading = true;
     this.userService.updateUser({
       firstName:this.firstFormGroup.get('firstName')?.value,
       lastName:this.secondFormGroup.get('lastName')?.value,
@@ -72,6 +74,7 @@ export class EditProfileModalComponent implements OnInit {
         lastName,
         gender
       })
+      this.isLoading = false;
     })
   }
 }

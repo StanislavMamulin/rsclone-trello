@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: ':id',
     component: WorkspaceComponent,
-    title: 'Trello | workspace'
+    title: 'Trello | Workspace'
   },
 ];
 
