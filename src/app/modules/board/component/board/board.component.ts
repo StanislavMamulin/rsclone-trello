@@ -40,7 +40,6 @@ export class BoardComponent implements OnInit {
   }
 
   deleteBoard(id: string) {
-    this.audioService.playAudio('../../../../assets/sounds/audio-delete.mp3');
     this.onDelete.emit(id);
   }
 

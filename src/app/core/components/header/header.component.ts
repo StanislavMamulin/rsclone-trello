@@ -92,7 +92,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @HostListener('window:keyup', ['$event'])
   hotkeyHandler(event: KeyboardEvent) {
     if (this.isEditActive) return;
-  
+
     if (event.key === '/') {
       this.appStateService.setIsItemEdit(true);
       this.searchInput.nativeElement.focus();
@@ -125,7 +125,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       data: { user },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
       if (result) {
 
         this.user = result.user;

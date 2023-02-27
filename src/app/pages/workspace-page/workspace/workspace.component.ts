@@ -267,7 +267,7 @@ export class WorkspaceComponent implements OnInit {
 
   addNewColumn(columnName: string) {
     this.hideAddColumn();
-    
+
     this.columnTaskService
       .createColumn(this.currentBoardId, {
         nameColumn: columnName,
@@ -311,7 +311,7 @@ export class WorkspaceComponent implements OnInit {
         newPosition: event.currentIndex,
         toBoardId: this.currentBoardId,
       })
-      .subscribe((res) => console.log(res));
+      .subscribe();
   }
 
   get columnsIdsFunc() {
