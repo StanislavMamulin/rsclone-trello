@@ -65,6 +65,8 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   newColumnTitle: string;
 
+  isSubmitting = false;
+
   constructor(
     private columnTaskService: ColumnTaskService,
     public dialog: MatDialog,
@@ -106,12 +108,13 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     const droppedTask: ITask = event.container.data.tasks[event.currentIndex];
     const newColumn = event.container.data.column;
 
+    this.setSubmitting(true);
     this.columnTaskService
       .moveTask(droppedTask.idTask, {
         toColumnId: newColumn.idColumn,
         newPosition: event.currentIndex,
       })
-      .subscribe();
+      .subscribe(() => {this.setSubmitting(false);});
   }
 
   showAddTask() {
@@ -128,6 +131,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   addNewTaskHandler(title: string) {
+    this.setSubmitting(true);
     this.appStateService.setIsItemEdit(false);
     this.columnTaskService
       .createTaskByColumnId(this.column.idColumn, {
@@ -137,6 +141,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
       })
       .subscribe((newTask: ITask) => {
         this.tasks.push(newTask);
+        this.setSubmitting(false);
       });
   }
 
@@ -194,7 +199,8 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteColumn(column: IColumn) {
-    this.columnTaskService.deleteColumn(column.idColumn).subscribe();
+    this.setSubmitting(true);
+    this.columnTaskService.deleteColumn(column.idColumn).subscribe(() => { this.setSubmitting(false); });
     this.deletedTask.emit(column);
   }
 
@@ -210,6 +216,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   moveTaskToNewColumn(newColumn: IColumn): void {
+    this.setSubmitting(true);
     const copyTasks = [...this.column.tasks];
     copyTasks.reverse().forEach((task: ITask) =>
       this.columnTaskService
@@ -218,6 +225,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
           newPosition: newColumn.tasks.length,
         })
         .subscribe(() => {
+          this.setSubmitting(false);
           const length = this.column.tasks.length;
           for (let i = 0; i < length; i += 1) {
             newColumn.tasks.push(this.column.tasks.shift() as ITask);
@@ -246,7 +254,9 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteTask(idTask: string) {
+    this.setSubmitting(true);
     this.columnTaskService.deleteTask(idTask).subscribe(() => {
+      this.setSubmitting(false);
       this.tasks.forEach((task, i) => {
         if (task.idTask === idTask) {
           this.tasks.splice(i, 1);
@@ -279,6 +289,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         this.currentBoard = board;
       }),
     );
+
     this.subscriptions.push(this.appStateService.isItemEdit$.subscribe(editState => this.isEditActive = editState));
   }
 
@@ -287,12 +298,18 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   moveColumnToOtherBoard(destBoard: IBoard) {
+    this.setSubmitting(true);
     this.deletedTask.emit(this.column);
     this.columnTaskService
       .moveColumn(this.column.idColumn, {
         toBoardId: destBoard.idBoard,
         newPosition: 0,
       })
-      .subscribe();
+      .subscribe(() => { this.setSubmitting(false); } );
+  }
+
+  private setSubmitting(state: boolean) {
+    this.isSubmitting = state;
+    this.appStateService.setIsSubmitting(state);
   }
 }
