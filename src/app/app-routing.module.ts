@@ -34,6 +34,11 @@ const routes: Routes = [
         loadChildren: () => import('./pages/login-page/login-page.module').then(page => page.LoginPageModule),
         title: 'Trello | Log in'
       },
+      {
+        path: '**',
+        loadChildren: () => import('./pages/error-page/error-page.module').then(page => page.ErrorPageModule),
+        title: 'Trello | Error'
+      },
     ],
   },
 ];
