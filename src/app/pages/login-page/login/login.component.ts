@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private appStateService: AppStateService
+    private appStateService: AppStateService,
   ) {}
 
   ngOnInit(): void {
@@ -44,12 +44,12 @@ export class LoginComponent implements OnInit {
 
     this.auth.login(loginData).subscribe({
       next: (res) => {
-        const {id, firstName, lastName, gender, email, registrationDate, accessLevel} = res;
-        this.form.reset();
+        const { id, firstName, lastName, gender, email, registrationDate, accessLevel } = res;
         this.router.navigate(['/board']);
         this.submitted = false;
         this.invalidCredentials = false;
-        this.appStateService.setCurrentUser({id, firstName, lastName, gender, email, registrationDate, accessLevel});
+        this.appStateService.setCurrentUser({ id, firstName, lastName, gender, email, registrationDate, accessLevel });
+        this.form.reset();
       },
       error: () => {
         this.submitted = false;
