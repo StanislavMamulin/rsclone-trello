@@ -180,8 +180,9 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
   toUpperFirstLetter = (str: string) => str[0].toUpperCase() + str.toLowerCase().substring(1);
 
-  openCreateModal(event: any) {
-    if (event.currentTarget.classList.contains('board-page__create')) {
+  openCreateModal(event: MouseEvent) {
+    const el = <HTMLElement>event.currentTarget;
+    if (el.classList.contains('board-page__create')) {
       this.isCreateModal = !this.isCreateModal;
     }
     this.isOpenModal = !this.isOpenModal;
@@ -190,8 +191,9 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.appStateService.setIsItemEdit(true);
   }
 
-  closeModal(event: any) {
-    if (event.target.classList.contains('modal')) {
+  closeModal(event: MouseEvent) {
+    const el = <HTMLElement>event.target
+    if (el.classList.contains('modal')) {
       this.defaultModal();
     }
   }
@@ -233,7 +235,10 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
 
   openDialogDeleteBoard(id:string){
-    const dialogRef = this.dialog.open(CloseComponent,);
+    const board = this.boards.find(item=>item.idBoard === id);
+    const dialogRef = this.dialog.open(CloseComponent,{
+      data: {name:'board', objName: board?.nameBoard }
+    });
 
     dialogRef.afterClosed().subscribe((res)=>{
       if(res === "yes")

@@ -20,6 +20,8 @@ export class ModalTaskComponent implements OnInit {
   checklist: ICheckBox[] = [];
   calculated: number = 0;
   isCreate: boolean = false;
+  isLoading: boolean = true;
+  isCreating: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { task: ITask; column: IColumn },
@@ -31,6 +33,7 @@ export class ModalTaskComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.formTask = new FormGroup({
       nameTask: new FormControl(this.data.task.nameTask, [Validators.required]),
       descriptionTask: new FormControl(
@@ -47,6 +50,7 @@ export class ModalTaskComponent implements OnInit {
       } else {
         this.calculated = 0;
       }
+      this.isLoading = false;
     });
 
     document.onkeydown = (e: KeyboardEvent) => {
@@ -70,10 +74,10 @@ export class ModalTaskComponent implements OnInit {
     }
   }
 
-  updateCreateState(event: any) {
+  updateCreateState(event: MouseEvent) {
     this.isCreate = !this.isCreate;
-
-    if (event?.target.classList.contains('delete-task')) {
+    const el = event.target as HTMLElement;
+    if (el.classList.contains('delete-task')) {
       this.formTask.controls['addCheckBox'].setValue(null);
     }
 
@@ -90,7 +94,7 @@ export class ModalTaskComponent implements OnInit {
   }
 
   updateCheckBox(checkbox: ICheckBox) {
-    let index: any;
+    let index: number = -1;
     this.checklist.forEach((item, i) => {
       if (item.idCheckBox === checkbox.idCheckBox) index = i;
     });
@@ -129,6 +133,8 @@ export class ModalTaskComponent implements OnInit {
   }
 
   createCheckBox() {
+    this.isCreating = true;
+    const crateInput = document.querySelector('.create-input') as HTMLInputElement;
     this.ChecklistService.createCheckbox(this.data.task.idTask, {
       nameCheckBox: this.formTask.get('addCheckBox').value,
       isChoose: false,
@@ -138,6 +144,11 @@ export class ModalTaskComponent implements OnInit {
       this.updateCalculated();
       this.formTask.controls['addCheckBox'].setValue(null);
       this.taskStateService.setChecklist(this.checklist);
+      crateInput.scrollIntoView({
+        behavior:'smooth',
+        block:'center'
+      })
+      this.isCreating = false;
     });
   }
 

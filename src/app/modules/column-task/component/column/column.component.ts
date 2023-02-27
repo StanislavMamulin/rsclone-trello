@@ -186,7 +186,9 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openDialogDeleteColumn(column:IColumn){
-    const dialogRef = this.dialog.open(CloseComponent);
+    const dialogRef = this.dialog.open(CloseComponent,{
+      data: {name: 'column', objName: column.nameColumn}
+    });
 
     dialogRef.afterClosed().subscribe((res)=>{
       if(res === "yes")
@@ -241,7 +243,10 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openDialogDeleteTask(id:string){
-    const dialogRef= this.dialog.open(CloseComponent);
+    const task = this.tasks.find(item=>item.idTask === id);
+    const dialogRef= this.dialog.open(CloseComponent,{
+      data: {name: 'task', objName: task?.nameTask}
+    });
     dialogRef.afterClosed().subscribe(res=>{
       if(res === 'yes'){
         this.deleteTask(id);
