@@ -43,9 +43,10 @@ export class BoardComponent implements OnInit {
     this.onDelete.emit(id);
   }
 
-  openBoard(event: any) {
+  openBoard(event: MouseEvent) {
     this.audioService.playAudio('../../../../assets/sounds/audio-board.mp3');
-    if (event.currentTarget.classList.contains('board__offer-open')) {
+    const board = <HTMLElement>event.currentTarget;
+    if (board?.classList.contains('board__offer-open')) {
       this.boardsStateService.setCurrentBoard(this.board);
       this.router.navigate(['/board', this.board.idBoard]);
     }
@@ -56,8 +57,8 @@ export class BoardComponent implements OnInit {
     this.isOpenDescription = false;
   }
 
-  offerOpenBoard(event: any) {
-    const elClass = event.currentTarget.className;
+  offerOpenBoard(event: MouseEvent) {
+    const elClass = (event.currentTarget as HTMLElement).className;
     if (
       elClass === 'board' ||
       elClass === 'board__wrapper' ||

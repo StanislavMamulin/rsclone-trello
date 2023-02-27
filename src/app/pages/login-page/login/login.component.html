@@ -71,6 +71,11 @@
     <mat-error *ngIf="invalidCredentials">
       <span *transloco="let t">{{ t('logIn.invalid') }}</span>
     </mat-error>
+    <mat-progress-bar
+    class="progress-spinner"
+    *ngIf="submitted"
+    mode="indeterminate">
+    </mat-progress-bar>
   </mat-card>
 </form>
 <app-footer></app-footer>

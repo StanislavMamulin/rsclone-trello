@@ -21,7 +21,7 @@
     <label for="option2" *transloco="let t">{{t('boardPage.last')}}</label>
   </div>
 
-  <mat-form-field class="select">
+  <mat-form-field (click)="changeLanguage()" class="select">
     <mat-label *transloco="let t">{{t('boardPage.sorting')}}</mat-label>
     <mat-select [(value)]="selectValue">
       <mat-option

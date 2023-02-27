@@ -54,6 +54,7 @@
       (onUpdateCheckBox)="updateCheckBox($event)"
       (onDeleteCheckBox)="deleteCheckbox($event)"
     ></app-checkbox>
+    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
     <div
       [ngClass]="{ 'active-create': !isCreate }"
       class="task-create-wrapper"
@@ -67,6 +68,11 @@
             type="text"
             (blur)="updateIsChooseBlur($event)"
           />
+          <mat-progress-bar
+          class="progress-spinner"
+          *ngIf="isCreating"
+          mode="indeterminate">
+          </mat-progress-bar>
           <div class="create-wrapper">
             <div class="create-button">
               <button class="btn-add-checkbox"

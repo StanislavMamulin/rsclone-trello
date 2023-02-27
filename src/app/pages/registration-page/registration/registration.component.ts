@@ -31,9 +31,14 @@ export class RegistrationComponent implements OnInit {
 
   durationInSeconds = 5;
 
-  form: any;
+  form: FormGroup;
 
-  genders: IGender[] = [{ value: 'man', viewValue: 'Man' }, { value: 'woman', viewValue: 'Woman' }];
+  language =  localStorage.getItem('language') || 'en'
+
+  genders: IGender[] = [
+    { value: 'man', viewValue: this.language === 'ru'? 'Мужчина' : 'Man' },
+    { value: 'woman', viewValue: this.language === 'ru'? 'Женщина': 'Woman' }
+  ];
 
   constructor(
     private UserService: UserService,
@@ -56,6 +61,14 @@ export class RegistrationComponent implements OnInit {
       repeatPassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{9,}$/)]),
     });
     this.updateSubmitted();
+  }
+
+  changeLanguage(){
+    const lang = localStorage.getItem('language');
+    this.genders = [
+      { value: 'man', viewValue: lang === 'ru'? 'Мужчина' : 'Man' },
+      { value: 'woman', viewValue: lang === 'ru'? 'Женщина': 'Woman' }
+    ];
   }
 
   restricredEmail = (control: FormControl):{ [key:string]:boolean } | null => {
@@ -92,11 +105,11 @@ export class RegistrationComponent implements OnInit {
     this.isSendForm = true;
     document.body.style.overflow = 'hidden';
     this.UserService.userRegistartion({
-      firstName: this.form.get('firstNameControl').value,
-      lastName: this.form.get('lastNameControl').value,
-      gender: this.form.get('sexControl').value,
-      email: this.form.get('emailFormControl').value,
-      password: this.form.get('enterPassword').value,
+      firstName: this.form.get('firstNameControl')?.value,
+      lastName: this.form.get('lastNameControl')?.value,
+      gender: this.form.get('sexControl')?.value,
+      email: this.form.get('emailFormControl')?.value,
+      password: this.form.get('enterPassword')?.value,
     }).subscribe((res)=>{
       this.isLoading = false;
       this.email.push(res.email);

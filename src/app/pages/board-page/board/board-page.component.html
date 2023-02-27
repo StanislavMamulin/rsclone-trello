@@ -67,15 +67,15 @@
         />
         <mat-error
         class="validation"
-        *ngIf="createFormModal.get('name').touched && createFormModal.get('name').invalid"
+        *ngIf="createFormModal.get('name')?.touched && createFormModal.get('name')?.invalid"
       >
-        <small *ngIf="createFormModal.get('name').errors.required">
+        <small *ngIf="createFormModal.get('name')?.errors?.required">
           <span *transloco="let t">{{t('boardPage.requiredName')}}</span>
         </small>
-        <small *ngIf="createFormModal.get('name').errors.minlength">
+        <small *ngIf="createFormModal.get('name')?.errors?.minlength">
           <span *transloco="let t">{{t('boardPage.minNameS')}}</span>
-          {{ createFormModal.get('name').errors.minlength.requiredLength }} <span *transloco="let t">{{t('boardPage.minNameE')}}</span>
-          {{ createFormModal.get('name').errors.minlength.actualLength }}
+          {{ createFormModal.get('name')?.errors?.minlength.requiredLength }} <span *transloco="let t">{{t('boardPage.minNameE')}}</span>
+          {{ createFormModal.get('name')?.errors?.minlength.actualLength }}
         </small>
       </mat-error>
       </mat-form-field>
@@ -92,17 +92,17 @@
         <mat-error
         class="validation"
         *ngIf="
-          createFormModal.get('description').touched && createFormModal.get('description').invalid
+          createFormModal.get('description')?.touched && createFormModal.get('description')?.invalid
         "
       >
-        <small *ngIf="createFormModal.get('description').errors.required"
+        <small *ngIf="createFormModal.get('description')?.errors?.required"
         ><span *transloco="let t">{{t('boardPage.requiredDescr')}}</span>
         </small
         >
-        <small *ngIf="createFormModal.get('description').errors.minlength">
+        <small *ngIf="createFormModal.get('description')?.errors?.minlength">
           <span *transloco="let t">{{t('boardPage.requiredName')}}</span>
-          {{ createFormModal.get('description').errors.minlength.minDescrS }}<span *transloco="let t">{{t('boardPage.minDescrE')}}</span>
-          {{ createFormModal.get('description').errors.minlength.actualLength }}
+          {{ createFormModal.get('description')?.errors?.minlength.minDescrS }}<span *transloco="let t">{{t('boardPage.minDescrE')}}</span>
+          {{ createFormModal.get('description')?.errors?.minlength.actualLength }}
         </small>
       </mat-error>
       </mat-form-field>

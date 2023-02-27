@@ -23,6 +23,7 @@ import { Subscription } from 'rxjs';
 import { AppStateService } from 'src/app/core/services/app-state.service';
 import { AudioServiceService } from 'src/app/shared/audio-service.service';
 import { CloseComponent } from 'src/app/shared/components/close/close.component';
+import { ScrollStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-column',
@@ -56,13 +57,22 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isEditActive = false;
 
+  scrollStrategy: ScrollStrategy;
+
+  language:string = localStorage.getItem('language') || "en";
+
+  addButtonText: string;
+
   constructor(
     private columnTaskService: ColumnTaskService,
     public dialog: MatDialog,
     private boardsStateService: BoardsStateService,
     private appStateService: AppStateService,
     private audioService: AudioServiceService,
-  ) {}
+    private readonly sso: ScrollStrategyOptions
+  ) {
+    this.scrollStrategy = this.sso.noop();
+  }
 
   ngOnInit() {
     this.tasks = this.column.tasks;
@@ -103,6 +113,9 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showAddTask() {
+    const lang = localStorage.getItem("language");
+    lang === "ru"? this.addButtonText = 'Добавить задачу': this.addButtonText = "Add task"
+
     this.showAddTaskControl = true;
     this.appStateService.setIsItemEdit(true);
   }
@@ -137,6 +150,8 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
       const dialogRef = this.dialog.open(ModalTaskComponent, {
         data: { task: task, column: this.column },
         disableClose: true,
+        id:'modal-id',
+        scrollStrategy: this.scrollStrategy,
       });
       dialogRef.afterClosed().subscribe((result) => {
         console.log(result);
@@ -179,8 +194,10 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     this.deletedTask.emit(column);
   }
 
-  openDialogDeleteColumn(column: IColumn) {
-    const dialogRef = this.dialog.open(CloseComponent);
+  openDialogDeleteColumn(column:IColumn){
+    const dialogRef = this.dialog.open(CloseComponent,{
+      data: {name: 'column', objName: column.nameColumn}
+    });
 
     dialogRef.afterClosed().subscribe((res)=>{
       if (res === 'yes')
@@ -234,8 +251,12 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  openDialogDeleteTask(id:string) {
-    const dialogRef = this.dialog.open(CloseComponent);
+  openDialogDeleteTask(id:string){
+    const task = this.tasks.find(item=>item.idTask === id);
+    const dialogRef= this.dialog.open(CloseComponent,{
+      data: {name: 'task', objName: task?.nameTask}
+    });
+
     dialogRef.afterClosed().subscribe(res=>{
       if (res === 'yes') {
         this.deleteTask(id);

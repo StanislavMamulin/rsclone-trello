@@ -38,9 +38,11 @@ export class CheckboxComponent implements OnInit {
     }
   }
 
-  updateIsChoose(event:any) {
+  updateIsChoose(event: MouseEvent) {
     this.isChoose = !this.isChoose;
-    const editInput = event.target.nextSibling?.querySelector('.edit-input');
+    const el = <HTMLElement>event.target;
+    const nextEL = <HTMLElement>el.nextElementSibling;
+    const editInput = <HTMLInputElement>nextEL.querySelector('.edit-input');
     if(editInput){
       setTimeout(()=>{
         editInput.focus();
@@ -48,11 +50,11 @@ export class CheckboxComponent implements OnInit {
       },0)
     }
 
-    if(event.target?.classList.contains('no-edit')){
-      this.defaultValue = event.target.innerHTML;
+    if(el?.classList.contains('no-edit')){
+      this.defaultValue = el.innerHTML;
       this.inputElement = editInput;
     }
-    if(event.target?.classList.contains('close')){
+    if(el?.classList.contains('close')){
       this.inputElement.value = this.defaultValue;
     }
   }

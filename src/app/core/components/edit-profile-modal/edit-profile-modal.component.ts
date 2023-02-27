@@ -18,13 +18,16 @@ interface IGender {
 })
 export class EditProfileModalComponent implements OnInit {
   isLinear = false;
-  firstFormGroup:any;
-  secondFormGroup:any;
-  thirdFormGroup:any;
+  firstFormGroup:FormGroup;
+  secondFormGroup:FormGroup;
+  thirdFormGroup:FormGroup;
+
+  language =  localStorage.getItem('language') || 'en'
+
 
   genders: IGender[] = [
-    { value: 'man', viewValue: 'Man' },
-    { value: 'woman', viewValue: 'Woman' }
+    { value: 'man', viewValue: this.language === 'ru'? 'Мужчина' : 'Man' },
+    { value: 'woman', viewValue: this.language === 'ru'? 'Женщина': 'Woman' }
   ];
 
   constructor(
@@ -46,11 +49,19 @@ export class EditProfileModalComponent implements OnInit {
     });
   }
 
+  changeLanguage(){
+    const lang = localStorage.getItem('language');
+    this.genders = [
+      { value: 'man', viewValue: lang === 'ru'? 'Мужчина' : 'Man' },
+      { value: 'woman', viewValue: lang === 'ru'? 'Женщина': 'Woman' }
+    ];
+  }
+
   editProfile(){
     this.userService.updateUser({
-      firstName:this.firstFormGroup.get('firstName').value,
-      lastName:this.secondFormGroup.get('lastName').value,
-      gender:this.thirdFormGroup.get('gender').value,
+      firstName:this.firstFormGroup.get('firstName')?.value,
+      lastName:this.secondFormGroup.get('lastName')?.value,
+      gender:this.thirdFormGroup.get('gender')?.value,
     })
     .subscribe(res=>{
       const {firstName,lastName, gender} = res;

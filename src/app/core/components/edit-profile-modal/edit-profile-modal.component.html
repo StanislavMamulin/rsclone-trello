@@ -25,10 +25,10 @@
             formControlName="firstName"
             required
           />
-          <mat-error *ngIf="firstFormGroup.get('firstName').invalid && firstFormGroup.get('firstName').touched">
-            <span *ngIf="firstFormGroup.get('firstName').errors.required"><span
+          <mat-error *ngIf="firstFormGroup.get('firstName')?.invalid && firstFormGroup.get('firstName')?.touched">
+            <span *ngIf="firstFormGroup.get('firstName')?.errors?.required"><span
                 *transloco="let t">{{ t('signUp.firstNameError') }}</span></span>
-            <span *ngIf="firstFormGroup.get('firstName').errors.pattern">
+            <span *ngIf="firstFormGroup.get('firstName')?.errors?.pattern">
               <span *transloco="let t">{{ t('signUp.nameValidError') }}</span>
             </span>
           </mat-error>
@@ -59,10 +59,10 @@
             placeholder="last name"
             required
           />
-          <mat-error *ngIf="secondFormGroup.get('lastName').invalid && secondFormGroup.get('lastName').touched">
-            <span *ngIf="secondFormGroup.get('lastName').errors.required"><span
+          <mat-error *ngIf="secondFormGroup.get('lastName')?.invalid && secondFormGroup.get('lastName')?.touched">
+            <span *ngIf="secondFormGroup.get('lastName')?.errors?.required"><span
                 *transloco="let t">{{ t('signUp.lastNameError') }}</span></span>
-            <span *ngIf="secondFormGroup.get('lastName').errors.pattern">
+            <span *ngIf="secondFormGroup.get('lastName')?.errors?.pattern">
               <span *transloco="let t">{{ t('signUp.nameValidError') }}</span>`
             </span>
           </mat-error>
@@ -92,7 +92,7 @@
           *transloco="let t"
           >{{ t('edit-profile.fillGender') }}</ng-template
         >
-        <mat-form-field appearance="fill">
+        <mat-form-field (click)="changeLanguage()" appearance="fill">
           <mat-label *transloco="let t">{{ t('edit-profile.gender') }}</mat-label>
           <mat-select formControlName="gender">
             <mat-option
@@ -102,8 +102,8 @@
               {{ gender.viewValue }}<mat-icon>{{ gender.value }}</mat-icon>
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="thirdFormGroup.get('gender').invalid && thirdFormGroup.get('gender').touched">
-            <span *ngIf="thirdFormGroup.get('gender').errors.required"><span
+          <mat-error *ngIf="thirdFormGroup.get('gender')?.invalid && thirdFormGroup.get('gender')?.touched">
+            <span *ngIf="thirdFormGroup.get('gender')?.errors?.required"><span
                 *transloco="let t">{{ t('signUp.genderError') }}</span></span>
           </mat-error>
         </mat-form-field>
