@@ -33,6 +33,7 @@ export class WorkspaceComponent implements OnInit {
   subscription: Subscription;
 
   isLoading = true;
+
   isCreateColumn = false;
 
   addButtonText: string;

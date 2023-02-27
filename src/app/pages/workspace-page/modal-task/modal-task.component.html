@@ -1,6 +1,7 @@
 <div
   [formGroup]="formTask"
   class="wrapper"
+  #modalTaskWrapper
 >
   <section class="title-wrapper">
     <h2 class="title">
@@ -54,7 +55,10 @@
       (onUpdateCheckBox)="updateCheckBox($event)"
       (onDeleteCheckBox)="deleteCheckbox($event)"
     ></app-checkbox>
-    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+    <mat-spinner
+      class="spinner"
+      *ngIf="isLoading"
+    ></mat-spinner>
     <div
       [ngClass]="{ 'active-create': !isCreate }"
       class="task-create-wrapper"
@@ -70,7 +74,8 @@
           />
           <div class="create-wrapper">
             <div class="create-button">
-              <button class="btn-add-checkbox"
+              <button
+                class="btn-add-checkbox"
                 (mousedown)="updateCreateState($event)"
                 (mousedown)="createCheckBox()"
                 mat-raised-button
@@ -94,7 +99,7 @@
       [disabled]="isCreating"
       class="add-element"
       (mousedown)="updateCreateState($event)"
-      [ngClass]="{'active-create':isCreate}"
+      [ngClass]="{ 'active-create': isCreate }"
       mat-raised-button
       color="primary"
       *transloco="let t"
@@ -105,10 +110,12 @@
   <mat-icon
     class="close-modal"
     (mousedown)="updateTask(); updateChecklist()"
-    >close</mat-icon>
+    >close</mat-icon
+  >
 </div>
 <mat-progress-bar
-class="progress-spinner"
-*ngIf="isCreating"
-mode="indeterminate">
+  class="progress-spinner"
+  *ngIf="isCreating"
+  mode="indeterminate"
+>
 </mat-progress-bar>

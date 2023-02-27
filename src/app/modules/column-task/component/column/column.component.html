@@ -37,6 +37,7 @@
     (cdkDropListDropped)="drop($event)"
     [cdkDropListConnectedTo]="getConnectedToList(column.idColumn)"
     [cdkDropListDisabled]="isEditActive"
+    #taskListEl
   >
     <app-task
       *ngFor="let task of tasks"
@@ -102,6 +103,7 @@
   </button>
   <hr />
   <button
+    *ngIf="column.tasks.length"
     mat-menu-item
     [matMenuTriggerFor]="columnsList"
   >
