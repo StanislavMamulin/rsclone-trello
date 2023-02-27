@@ -30,7 +30,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
   updateBoardId: string;
 
-  createFormModal: any;
+  createFormModal: FormGroup;
 
   submitted = false;
 
@@ -215,8 +215,8 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.submitted = true;
     this.boardService
       .createNewBoard(
-        this.toUpperFirstLetter(this.createFormModal.get('name').value),
-        this.toUpperFirstLetter(this.createFormModal.get('description').value),
+        this.toUpperFirstLetter(this.createFormModal.get('name')?.value),
+        this.toUpperFirstLetter(this.createFormModal.get('description')?.value),
         new Date(),
       )
       .subscribe((res: IBoardCreateResponse) => {
@@ -259,8 +259,8 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
   updateBoard() {
     this.submitted = true;
-    const nameBoard = this.toUpperFirstLetter(this.createFormModal.get('name').value);
-    const descriptionBoard = this.toUpperFirstLetter(this.createFormModal.get('description').value);
+    const nameBoard = this.toUpperFirstLetter(this.createFormModal.get('name')?.value);
+    const descriptionBoard = this.toUpperFirstLetter(this.createFormModal.get('description')?.value);
     this.boardService
       .updateBoard(this.updateBoardId, {
         nameBoard,

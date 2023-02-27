@@ -18,9 +18,9 @@ interface IGender {
 })
 export class EditProfileModalComponent implements OnInit {
   isLinear = false;
-  firstFormGroup:any;
-  secondFormGroup:any;
-  thirdFormGroup:any;
+  firstFormGroup:FormGroup;
+  secondFormGroup:FormGroup;
+  thirdFormGroup:FormGroup;
 
   genders: IGender[] = [
     { value: 'man', viewValue: 'Man' },
@@ -48,9 +48,9 @@ export class EditProfileModalComponent implements OnInit {
 
   editProfile(){
     this.userService.updateUser({
-      firstName:this.firstFormGroup.get('firstName').value,
-      lastName:this.secondFormGroup.get('lastName').value,
-      gender:this.thirdFormGroup.get('gender').value,
+      firstName:this.firstFormGroup.get('firstName')?.value,
+      lastName:this.secondFormGroup.get('lastName')?.value,
+      gender:this.thirdFormGroup.get('gender')?.value,
     })
     .subscribe(res=>{
       const {firstName,lastName, gender} = res;

@@ -16,7 +16,7 @@ import { ICheckBox } from '../model/checkbox.interface';
   styleUrls: ['./modal-task.component.scss'],
 })
 export class ModalTaskComponent implements OnInit {
-  formTask: any;
+  formTask: FormGroup;
   checklist: ICheckBox[] = [];
   calculated: number = 0;
   isCreate: boolean = false;
@@ -136,7 +136,7 @@ export class ModalTaskComponent implements OnInit {
     this.isCreating = true;
     const crateInput = document.querySelector('.create-input') as HTMLInputElement;
     this.ChecklistService.createCheckbox(this.data.task.idTask, {
-      nameCheckBox: this.formTask.get('addCheckBox').value,
+      nameCheckBox: this.formTask.get('addCheckBox')?.value,
       isChoose: false,
     }).subscribe((res) => {
       this.checklist.push(res);
@@ -176,8 +176,8 @@ export class ModalTaskComponent implements OnInit {
       !this.formTask.controls['descriptionTask'].errors
     ) {
       this.ColumnTaskService.updateTask(this.data.task.idTask, {
-        nameTask: this.formTask.get('nameTask').value,
-        descriptionTask: this.formTask.get('descriptionTask').value,
+        nameTask: this.formTask.get('nameTask')?.value,
+        descriptionTask: this.formTask.get('descriptionTask')?.value,
       }).subscribe((res) => {
         const { nameTask, descriptionTask } = res;
         this.data.task.nameTask = nameTask;

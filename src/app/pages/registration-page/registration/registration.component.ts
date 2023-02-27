@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit {
 
   durationInSeconds = 5;
 
-  form: any;
+  form: FormGroup;
 
   genders: IGender[] = [{ value: 'man', viewValue: 'Man' }, { value: 'woman', viewValue: 'Woman' }];
 
@@ -92,11 +92,11 @@ export class RegistrationComponent implements OnInit {
     this.isSendForm = true;
     document.body.style.overflow = 'hidden';
     this.UserService.userRegistartion({
-      firstName: this.form.get('firstNameControl').value,
-      lastName: this.form.get('lastNameControl').value,
-      gender: this.form.get('sexControl').value,
-      email: this.form.get('emailFormControl').value,
-      password: this.form.get('enterPassword').value,
+      firstName: this.form.get('firstNameControl')?.value,
+      lastName: this.form.get('lastNameControl')?.value,
+      gender: this.form.get('sexControl')?.value,
+      email: this.form.get('emailFormControl')?.value,
+      password: this.form.get('enterPassword')?.value,
     }).subscribe((res)=>{
       this.isLoading = false;
       this.email.push(res.email);

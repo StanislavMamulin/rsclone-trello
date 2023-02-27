@@ -21,12 +21,12 @@
         formControlName="firstNameControl"
       />
       <mat-error
-        *ngIf="form.get('firstNameControl').invalid && form.get('firstNameControl').touched"
+        *ngIf="form.get('firstNameControl')?.invalid && form.get('firstNameControl')?.touched"
       >
-        <span *ngIf="form.get('firstNameControl').errors.required"
+        <span *ngIf="form.get('firstNameControl')?.errors?.required"
           ><span *transloco="let t">{{ t('signUp.firstNameError') }}</span></span
         >
-        <span *ngIf="form.get('firstNameControl').errors.pattern">
+        <span *ngIf="form.get('firstNameControl')?.errors?.pattern">
           <span *transloco="let t">{{ t('signUp.nameValidError') }}</span>
         </span>
       </mat-error>
@@ -37,11 +37,11 @@
         matInput
         formControlName="lastNameControl"
       />
-      <mat-error *ngIf="form.get('lastNameControl').invalid && form.get('lastNameControl').touched">
-        <span *ngIf="form.get('lastNameControl').errors.required"
+      <mat-error *ngIf="form.get('lastNameControl')?.invalid && form.get('lastNameControl')?.touched">
+        <span *ngIf="form.get('lastNameControl')?.errors?.required"
           ><span *transloco="let t">{{ t('signUp.lastNameError') }}</span></span
         >
-        <span *ngIf="form.get('lastNameControl').errors.pattern">
+        <span *ngIf="form.get('lastNameControl')?.errors?.pattern">
           <span *transloco="let t">{{ t('signUp.nameValidError') }}</span
           >`
         </span>
@@ -58,8 +58,8 @@
           {{ gender.viewValue }}<mat-icon>{{ gender.value }}</mat-icon>
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('sexControl').invalid && form.get('sexControl').touched">
-        <span *ngIf="form.get('sexControl').errors.required"><span
+      <mat-error *ngIf="form.get('sexControl')?.invalid && form.get('sexControl')?.touched">
+        <span *ngIf="form.get('sexControl')?.errors?.required"><span
             *transloco="let t">{{ t('signUp.genderError') }}</span></span>
       </mat-error>
     </mat-form-field>
@@ -73,17 +73,17 @@
         placeholder="Ex. pat@example.com"
       />
       <mat-error
-        *ngIf="form.get('emailFormControl').invalid && form.get('emailFormControl').touched"
+        *ngIf="form.get('emailFormControl')?.invalid && form.get('emailFormControl')?.touched"
       >
-        <span *ngIf="form.get('emailFormControl').errors.required"
+        <span *ngIf="form.get('emailFormControl')?.errors?.required"
           ><span *transloco="let t">{{ t('signUp.emailError') }}</span></span
         >
-        <span *ngIf="form.get('emailFormControl').errors.email"
+        <span *ngIf="form.get('emailFormControl')?.errors?.email"
           ><span *transloco="let t">{{ t('signUp.correctEmailError') }}</span></span
         >
-        <span *ngIf="form.get('emailFormControl').errors.restricredEmail">
+        <span *ngIf="form.get('emailFormControl')?.errors?.restricredEmail">
           <span *transloco="let t">{{ t('signUp.email') }}</span>
-          {{ form.get('emailFormControl').value }}
+          {{ form.get('emailFormControl')?.value }}
           <span *transloco="let t">{{ t('signUp.existError') }}</span>
         </span>
       </mat-error>
@@ -106,11 +106,11 @@
       >
         <mat-icon>{{ isHidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
-      <mat-error *ngIf="form.get('enterPassword').invalid && form.get('enterPassword').touched">
-        <span *ngIf="form.get('enterPassword').errors.required"
+      <mat-error *ngIf="form.get('enterPassword')?.invalid && form.get('enterPassword')?.touched">
+        <span *ngIf="form.get('enterPassword')?.errors?.required"
           ><span *transloco="let t">{{ t('signUp.passwordExistError') }}</span></span
         >
-        <span *ngIf="form.get('enterPassword').errors.pattern">
+        <span *ngIf="form.get('enterPassword')?.errors?.pattern">
           <span *transloco="let t">{{ t('signUp.passwordError') }}</span>
         </span>
       </mat-error>
@@ -133,11 +133,11 @@
       >
         <mat-icon>{{ isHidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
-      <mat-error *ngIf="form.get('repeatPassword').invalid && form.get('repeatPassword').touched">
-        <span *ngIf="form.get('repeatPassword').errors.required"
+      <mat-error *ngIf="form.get('repeatPassword')?.invalid && form.get('repeatPassword')?.touched">
+        <span *ngIf="form.get('repeatPassword')?.errors?.required"
           ><span *transloco="let t">{{ t('signUp.passwordExistError') }}</span></span
         >
-        <span *ngIf="form.get('repeatPassword').errors.pattern">
+        <span *ngIf="form.get('repeatPassword')?.errors?.pattern">
           <span *transloco="let t">{{ t('signUp.passwordError') }}</span>
         </span>
       </mat-error>
