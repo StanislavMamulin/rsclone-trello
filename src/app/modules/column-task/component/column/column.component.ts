@@ -154,6 +154,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   openModal(event: Event, task: ITask): void {
     const elTarget = event.target as HTMLTemplateElement;
     if (!elTarget?.classList.contains('delete-button')) {
+      this.appStateService.setIsItemEdit(true);
       const dialogRef = this.dialog.open(ModalTaskComponent, {
         data: { task: task, column: this.column },
         disableClose: true,
@@ -161,6 +162,8 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         scrollStrategy: this.scrollStrategy,
       });
       dialogRef.afterClosed().subscribe((result) => {
+        this.appStateService.setIsItemEdit(false);
+        
         if (result) {
           this.tasks.forEach((taskItem) => {
             if (taskItem.idTask == result.task.idTask) {
