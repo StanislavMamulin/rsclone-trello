@@ -151,7 +151,7 @@
     </mat-step>
   </mat-stepper>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="center">
   <button
     mat-raised-button
     color="primary"
@@ -162,3 +162,8 @@
     {{ t('edit-profile.edit') }}
   </button>
 </mat-dialog-actions>
+<mat-progress-bar
+class="progress-spinner"
+*ngIf="isLoading"
+mode="indeterminate">
+</mat-progress-bar>

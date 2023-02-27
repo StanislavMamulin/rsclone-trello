@@ -68,11 +68,6 @@
             type="text"
             (blur)="updateIsChooseBlur($event)"
           />
-          <mat-progress-bar
-          class="progress-spinner"
-          *ngIf="isCreating"
-          mode="indeterminate">
-          </mat-progress-bar>
           <div class="create-wrapper">
             <div class="create-button">
               <button class="btn-add-checkbox"
@@ -96,6 +91,7 @@
       </div>
     </div>
     <button
+      [disabled]="isCreating"
       class="add-element"
       (mousedown)="updateCreateState($event)"
       [ngClass]="{'active-create':isCreate}"
@@ -108,6 +104,11 @@
   </section>
   <mat-icon
     class="close-modal"
-    (mousedown)="closeModal(); updateTask(); updateChecklist()"
+    (mousedown)="updateTask(); updateChecklist()"
     >close</mat-icon>
 </div>
+<mat-progress-bar
+class="progress-spinner"
+*ngIf="isCreating"
+mode="indeterminate">
+</mat-progress-bar>
