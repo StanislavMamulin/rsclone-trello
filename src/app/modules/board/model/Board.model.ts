@@ -1,24 +1,12 @@
+import { IColumn } from '../../column-task/model/column.interface';
+
 export interface IBoard {
   idBoard: string;
   nameBoard: string;
   dateBoard: Date;
   descriptionBoard: string;
   isChosen: boolean;
-  columns: {
-    idColumn: string;
-    nameColumn: string;
-    descriptionColumn: string;
-    tasks: {
-      idTask: string;
-      nameTask: string;
-      descriptionTask: string;
-      checkLists:{
-        idCheckBox:string;
-        nameCheckBox: string;
-        isChoose: boolean;
-    }[]
-    }[];
-  }[];
+  columns: IColumn[];
 }
 
 export interface IBoardCreateResponse {
@@ -27,7 +15,7 @@ export interface IBoardCreateResponse {
   dateBoard: Date;
   descriptionBoard: string;
   isChosen: boolean;
-  columns: [];
+  columns: IColumn[];
 }
 
 export interface IBoardUpdateResponse {

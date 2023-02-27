@@ -178,6 +178,8 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   hideEditColumnTitle(editedColumn: IColumn) {
+    if (editedColumn.nameColumn.length < 1) return;
+  
     this.isShowEditColumnTitle = false;
     this.appStateService.setIsItemEdit(false);
     this.columnTaskService
@@ -198,9 +200,9 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((res)=>{
-      if(res === "yes")
-      this.deleteColumn(column);
-    })
+      if (res === 'yes')
+        this.deleteColumn(column);
+    });
   }
 
   moveTaskToNewColumn(newColumn: IColumn): void {
@@ -254,11 +256,12 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef= this.dialog.open(CloseComponent,{
       data: {name: 'task', objName: task?.nameTask}
     });
+
     dialogRef.afterClosed().subscribe(res=>{
-      if(res === 'yes'){
+      if (res === 'yes') {
         this.deleteTask(id);
       }
-    })
+    });
   }
 
   addBoardSubscribers() {
