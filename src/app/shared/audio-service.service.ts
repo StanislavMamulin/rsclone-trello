@@ -20,9 +20,7 @@ export class AudioServiceService {
       const audio = new Audio();
       audio.src = audioLink;
       audio.ondurationchange = () => {
-        console.log(audio.duration);
-        console.log(audio.currentTime);
-        audio.duration ? audio.play() : console.log('no');
+        audio.duration ? audio.play() : 'no';
       };
     }
   }

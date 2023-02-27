@@ -165,7 +165,6 @@ export class ModalTaskComponent implements OnInit {
         nameInput?.focus();
       } else {
         descriptionInput?.focus();
-        console.log(descriptionInput);
       }
     }
   }

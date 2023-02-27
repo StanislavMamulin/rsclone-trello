@@ -109,7 +109,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         toColumnId: newColumn.idColumn,
         newPosition: event.currentIndex,
       })
-      .subscribe((res) => console.log('res', res));
+      .subscribe();
   }
 
   showAddTask() {
@@ -154,7 +154,6 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         scrollStrategy: this.scrollStrategy,
       });
       dialogRef.afterClosed().subscribe((result) => {
-        console.log(result);
         if (result) {
           this.tasks.forEach((taskItem) => {
             if (taskItem.idTask == result.task.idTask) {
@@ -179,7 +178,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   hideEditColumnTitle(editedColumn: IColumn) {
     if (editedColumn.nameColumn.length < 1) return;
-  
+
     this.isShowEditColumnTitle = false;
     this.appStateService.setIsItemEdit(false);
     this.columnTaskService
