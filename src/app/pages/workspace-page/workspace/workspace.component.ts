@@ -104,12 +104,11 @@ export class WorkspaceComponent implements OnInit {
               }
             });
           }
-        }});
+        }
+      });
 
-        const activeTask = document.querySelector('app-task.active') as HTMLTemplateElement;
-        this.scrollToActiveTask(activeTask);
-      //   }
-      // });
+      const activeTask = document.querySelector('app-task.active') as HTMLTemplateElement;
+      this.scrollToActiveTask(activeTask);
     }
     if (e.code === 'ArrowLeft' && !this.isEditActive) {
       e.preventDefault();
@@ -244,12 +243,11 @@ export class WorkspaceComponent implements OnInit {
     }
   }
 
-
-  scrollToActiveTask(activeTask: HTMLTemplateElement){
+  scrollToActiveTask(activeTask: HTMLTemplateElement) {
     activeTask?.scrollIntoView({
-      inline: "center",
-      behavior: "smooth"
-    })
+      inline: 'center',
+      behavior: 'smooth',
+    });
   }
 
   openModal(task: ITask, column: IColumn): void {
@@ -263,6 +261,8 @@ export class WorkspaceComponent implements OnInit {
   }
 
   addNewColumn(columnName: string) {
+    this.hideAddColumn();
+    
     this.columnTaskService
       .createColumn(this.currentBoardId, {
         nameColumn: columnName,
@@ -271,7 +271,6 @@ export class WorkspaceComponent implements OnInit {
       .subscribe((newColumn: IColumn) => {
         this.columns.push(newColumn);
         this.setColumnsIds();
-        this.hideAddColumn();
       });
   }
 

@@ -84,9 +84,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keyup', ['$event'])
   hotkeyHandler(e: KeyboardEvent) {
-    if (this.isItemEdit) return;
-
-    if (e.code === 'ArrowRight') {
+    if (e.code === 'ArrowRight' && !this.isItemEdit) {
       e.preventDefault();
       const boards = document.querySelectorAll('app-board');
       if (this.indexBoard < boards.length - 1 && e.code === 'ArrowRight') {
@@ -104,7 +102,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
         }
       });
     }
-    if (e.code === 'ArrowLeft') {
+    if (e.code === 'ArrowLeft' && !this.isItemEdit) {
       e.preventDefault();
       const boards = document.querySelectorAll('app-board');
 
@@ -124,27 +122,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
       });
     }
 
-
-      if (e.code === 'Escape') {
-        const boards = document.querySelectorAll('app-board');
-        this.indexBoard = -1;
-        boards.forEach(item => {
-          if (item.classList.contains('active')) {
-            item.classList.remove("active")
-          }
-        })
-
-          if( this.isUpdateModal || this.isCreateModal){
-            this.defaultModal();
-          }
-      }
-
-    if (e.code === 'Enter') {
-      if (this.boards[this.indexBoard]) {
-        this.router.navigate([`/board/${this.boards[this.indexBoard].idBoard}`]);
-      }
-    }
-
     if (e.code === 'Escape') {
       const boards = document.querySelectorAll('app-board');
       this.indexBoard = -1;
@@ -153,18 +130,28 @@ export class BoardPageComponent implements OnInit, OnDestroy {
           item.classList.remove('active');
         }
       });
+
+      if ( this.isUpdateModal || this.isCreateModal) {
+        this.defaultModal();
+      }
     }
 
-    if (e.key === '+') {
+    if (e.code === 'Enter') {
+      if (this.boards[this.indexBoard]) {
+        this.router.navigate([`/board/${this.boards[this.indexBoard].idBoard}`]);
+      }
+    }
+
+    if (e.key === '+' && !this.isItemEdit) {
       this.isCreateModal = !this.isCreateModal;
       this.isOpenModal = !this.isOpenModal;
     }
   }
 
-  enteredForm(event: KeyboardEvent){
-    if(event.code  === "Enter" && !this.createFormModal.invalid){
-      if(this.isCreateModal) this.createBoard();
-      if(this.isUpdateModal) this.updateBoard();
+  enteredForm(event: KeyboardEvent) {
+    if (event.code  === 'Enter' && !this.createFormModal.invalid) {
+      if (this.isCreateModal) this.createBoard();
+      if (this.isUpdateModal) this.updateBoard();
     }
   }
 
@@ -232,13 +219,13 @@ export class BoardPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  openDialogDeleteBoard(id:string){
-    const dialogRef = this.dialog.open(CloseComponent,);
+  openDialogDeleteBoard(id:string) {
+    const dialogRef = this.dialog.open(CloseComponent);
 
     dialogRef.afterClosed().subscribe((res)=>{
-      if(res === "yes")
-      this.deleteBoard(id);
-    })
+      if (res === 'yes')
+        this.deleteBoard(id);
+    });
   }
 
   openUpdateModal(id: string) {

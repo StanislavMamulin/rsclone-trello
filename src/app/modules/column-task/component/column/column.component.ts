@@ -138,16 +138,16 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         data: { task: task, column: this.column },
         disableClose: true,
       });
-      // dialogRef.afterClosed().subscribe((result) => {
-      //   console.log(result);
-      //   if (result) {
-      //     this.tasks.forEach((taskItem) => {
-      //       if (taskItem.idTask == result.task.idTask) {
-      //         taskItem = result.task;
-      //       }
-      //     });
-      //   }
-      // });
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log(result);
+        if (result) {
+          this.tasks.forEach((taskItem) => {
+            if (taskItem.idTask == result.task.idTask) {
+              taskItem = result.task;
+            }
+          });
+        }
+      });
     }
   }
 
@@ -163,6 +163,8 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   hideEditColumnTitle(editedColumn: IColumn) {
+    if (editedColumn.nameColumn.length < 1) return;
+  
     this.isShowEditColumnTitle = false;
     this.appStateService.setIsItemEdit(false);
     this.columnTaskService
@@ -177,13 +179,13 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     this.deletedTask.emit(column);
   }
 
-  openDialogDeleteColumn(column:IColumn){
+  openDialogDeleteColumn(column: IColumn) {
     const dialogRef = this.dialog.open(CloseComponent);
 
     dialogRef.afterClosed().subscribe((res)=>{
-      if(res === "yes")
-      this.deleteColumn(column);
-    })
+      if (res === 'yes')
+        this.deleteColumn(column);
+    });
   }
 
   moveTaskToNewColumn(newColumn: IColumn): void {
@@ -232,13 +234,13 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  openDialogDeleteTask(id:string){
-    const dialogRef= this.dialog.open(CloseComponent);
+  openDialogDeleteTask(id:string) {
+    const dialogRef = this.dialog.open(CloseComponent);
     dialogRef.afterClosed().subscribe(res=>{
-      if(res === 'yes'){
+      if (res === 'yes') {
         this.deleteTask(id);
       }
-    })
+    });
   }
 
   addBoardSubscribers() {
