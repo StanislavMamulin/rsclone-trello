@@ -1,7 +1,7 @@
 <div class="add-element__container">
   <textarea
     type="text"
-    placeholder="enter the title of the new task"
+    placeholder="{{ addButtonText }}"
     class="add-element__title"
     [(ngModel)]="newElementTitle"
     (keydown.enter)="enterPressed($event)"
