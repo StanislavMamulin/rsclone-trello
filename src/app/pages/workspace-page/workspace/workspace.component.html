@@ -16,6 +16,9 @@
     [columnsInBoard]="columns"
     (deletedTask)="deleteColumn($event)"
   ></app-column>
+  <div *ngIf="isCreateColumn" class="spinner-wrapper">
+    <img src="../../../../assets/images/spinner.svg" alt="">
+  </div>
   <button
     class="workspace__add-column-btn"
     (click)="showAddColumn()"

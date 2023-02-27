@@ -33,6 +33,7 @@ export class WorkspaceComponent implements OnInit {
   subscription: Subscription;
 
   isLoading = true;
+  isCreateColumn = false;
 
   addButtonText: string;
 
@@ -267,7 +268,7 @@ export class WorkspaceComponent implements OnInit {
 
   addNewColumn(columnName: string) {
     this.hideAddColumn();
-
+    this.isCreateColumn = true;
     this.columnTaskService
       .createColumn(this.currentBoardId, {
         nameColumn: columnName,
@@ -276,6 +277,7 @@ export class WorkspaceComponent implements OnInit {
       .subscribe((newColumn: IColumn) => {
         this.columns.push(newColumn);
         this.setColumnsIds();
+        this.isCreateColumn = false;
       });
   }
 
