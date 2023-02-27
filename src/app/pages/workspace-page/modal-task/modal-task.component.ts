@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChecklistService } from 'src/app/core/services/checklist.service';
@@ -17,17 +17,24 @@ import { ICheckBox } from '../model/checkbox.interface';
 })
 export class ModalTaskComponent implements OnInit {
   formTask: FormGroup;
+
   checklist: ICheckBox[] = [];
-  calculated: number = 0;
-  isCreate: boolean = false;
-  isLoading: boolean = true;
-  isCreating: boolean = false;
+
+  calculated = 0;
+
+  isCreate = false;
+
+  isLoading = true;
+
+  isCreating = false;
+
+  @ViewChild('modalTaskWrapper') modalTaskWrapper: ElementRef;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { task: ITask; column: IColumn },
     public dialogRef: MatDialogRef<ColumnComponent>,
-    private ColumnTaskService: ColumnTaskService,
-    private ChecklistService: ChecklistService,
+    private columnTaskService: ColumnTaskService,
+    private checklistService: ChecklistService,
     private taskStateService: TaskStateService,
     private audioService: AudioServiceService,
   ) {}
@@ -43,7 +50,7 @@ export class ModalTaskComponent implements OnInit {
       addCheckBox: new FormControl(null, [Validators.required]),
     });
 
-    this.ChecklistService.getCheckList(this.data.task.idTask).subscribe((res) => {
+    this.checklistService.getCheckList(this.data.task.idTask).subscribe((res) => {
       this.checklist = res;
       if (this.checklist.length) {
         this.updateCalculated();
@@ -77,7 +84,7 @@ export class ModalTaskComponent implements OnInit {
     this.isCreate = !this.isCreate;
     const el = event.target as HTMLElement;
     if (el.classList.contains('delete-task')) {
-      this.formTask.controls['addCheckBox'].setValue(null);
+      this.formTask.controls.addCheckBox.setValue(null);
     }
 
     const inputCreate = document.querySelector('.create-input') as HTMLInputElement;
@@ -93,27 +100,29 @@ export class ModalTaskComponent implements OnInit {
   }
 
   updateCheckBox(checkbox: ICheckBox) {
-    let index: number = -1;
+    let index = -1;
     this.checklist.forEach((item, i) => {
       if (item.idCheckBox === checkbox.idCheckBox) index = i;
     });
-    let arr = [...this.checklist];
+    const arr = [...this.checklist];
     arr[index] = checkbox;
     this.checklist = arr;
     this.updateCalculated();
   }
+
   updateChecklist() {
-    this.ChecklistService.updateChecklist(this.data.task.idTask, this.checklist).subscribe(
+    this.checklistService.updateChecklist(this.data.task.idTask, this.checklist).subscribe(
       (res) => {
         this.data.task.checkLists = res;
         this.taskStateService.setChecklist(this.checklist);
       },
     );
   }
+
   updateInput(checkbox: ICheckBox) {
     this.isCreating = true;
     const { nameCheckBox, idCheckBox } = checkbox;
-    this.ChecklistService.updateCheckBox(idCheckBox, {
+    this.checklistService.updateCheckBox(idCheckBox, {
       ...checkbox,
       nameCheckBox,
     }).subscribe((res) => {
@@ -128,41 +137,41 @@ export class ModalTaskComponent implements OnInit {
 
   enterPressedInputAdd(event: Event) {
     event.preventDefault();
-    if (!this.formTask.controls['addCheckBox'].errors && !this.isCreating) {
+    if (!this.formTask.controls.addCheckBox.errors && !this.isCreating) {
       this.createCheckBox();
     }
   }
 
   createCheckBox() {
     this.isCreating = true;
-    const crateInput = document.querySelector('.create-input') as HTMLInputElement;
-    this.ChecklistService.createCheckbox(this.data.task.idTask, {
+
+    this.checklistService.createCheckbox(this.data.task.idTask, {
       nameCheckBox: this.formTask.get('addCheckBox')?.value,
       isChoose: false,
     }).subscribe((res) => {
       this.checklist.push(res);
       this.data.task.checkLists = this.checklist;
       this.updateCalculated();
-      this.formTask.controls['addCheckBox'].setValue(null);
+      this.formTask.controls.addCheckBox.setValue(null);
       this.taskStateService.setChecklist(this.checklist);
-      crateInput.scrollIntoView({
-        behavior:'smooth',
-        block:'center'
-      })
+
+      setTimeout(() => {
+        this.modalTaskWrapper.nativeElement.scrollTop = this.modalTaskWrapper.nativeElement.scrollHeight;
+      }, 0);
       this.isCreating = false;
     });
   }
 
   closeModal() {
     if (
-      !this.formTask.controls['nameTask'].errors &&
-      !this.formTask.controls['descriptionTask'].errors
+      !this.formTask.controls.nameTask.errors &&
+      !this.formTask.controls.descriptionTask.errors
     ) {
       this.dialogRef.close();
     } else {
       const nameInput = document.querySelector('.name-task') as HTMLInputElement;
       const descriptionInput = document.querySelector('.description-task') as HTMLTextAreaElement;
-      if (this.formTask.controls['nameTask'].errors) {
+      if (this.formTask.controls.nameTask.errors) {
         nameInput?.focus();
       } else {
         descriptionInput?.focus();
@@ -172,11 +181,11 @@ export class ModalTaskComponent implements OnInit {
 
   updateTask() {
     if (
-      !this.formTask.controls['nameTask'].errors &&
-      !this.formTask.controls['descriptionTask'].errors
+      !this.formTask.controls.nameTask.errors &&
+      !this.formTask.controls.descriptionTask.errors
     ) {
       this.isCreating = true;
-      this.ColumnTaskService.updateTask(this.data.task.idTask, {
+      this.columnTaskService.updateTask(this.data.task.idTask, {
         nameTask: this.formTask.get('nameTask')?.value,
         descriptionTask: this.formTask.get('descriptionTask')?.value,
       }).subscribe((res) => {
@@ -193,7 +202,7 @@ export class ModalTaskComponent implements OnInit {
 
   deleteCheckbox(idCheckBox: string) {
     this.isCreating = true;
-    this.ChecklistService.deleteCheckbox(idCheckBox).subscribe(() => {
+    this.checklistService.deleteCheckbox(idCheckBox).subscribe(() => {
       let index: number;
       this.checklist.forEach((item, i) => {
         if (item.idCheckBox === idCheckBox) {
