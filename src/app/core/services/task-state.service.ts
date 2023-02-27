@@ -14,7 +14,6 @@ export class TaskStateService {
   checklist$ = this.checklist.asObservable();
 
   setChecklist(newChecklist: ICheckBox[]){
-    console.log(newChecklist);
     this.checklist.next(newChecklist);
   }
 

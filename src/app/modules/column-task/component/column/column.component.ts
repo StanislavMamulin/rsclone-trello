@@ -111,7 +111,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         toColumnId: newColumn.idColumn,
         newPosition: event.currentIndex,
       })
-      .subscribe((res) => console.log('res', res));
+      .subscribe();
   }
 
   showAddTask() {
@@ -156,7 +156,6 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         scrollStrategy: this.scrollStrategy,
       });
       dialogRef.afterClosed().subscribe((result) => {
-        console.log(result);
         if (result) {
           this.tasks.forEach((taskItem) => {
             if (taskItem.idTask == result.task.idTask) {
