@@ -92,7 +92,7 @@
           *transloco="let t"
           >{{ t('edit-profile.fillGender') }}</ng-template
         >
-        <mat-form-field appearance="fill">
+        <mat-form-field (click)="changeLanguage()" appearance="fill">
           <mat-label *transloco="let t">{{ t('edit-profile.gender') }}</mat-label>
           <mat-select formControlName="gender">
             <mat-option

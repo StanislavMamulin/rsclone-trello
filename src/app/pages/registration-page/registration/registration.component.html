@@ -48,7 +48,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field (click)="changeLanguage()" appearance="fill">
       <mat-label *transloco="let t">{{ t('signUp.gender') }}</mat-label>
       <mat-select formControlName="sexControl">
         <mat-option

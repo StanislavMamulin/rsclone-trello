@@ -26,7 +26,7 @@
   </button>
   <ng-template #addColumnControl>
     <app-add-controls
-      addButtonText="Add a new column"
+      [addButtonText]="addButtonText"
       (addButtonPressed)="addNewColumn($event)"
       (cancelButtonPressed)="hideAddColumn()"
     >

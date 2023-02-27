@@ -22,9 +22,12 @@ export class EditProfileModalComponent implements OnInit {
   secondFormGroup:FormGroup;
   thirdFormGroup:FormGroup;
 
+  language =  localStorage.getItem('language') || 'en'
+
+
   genders: IGender[] = [
-    { value: 'man', viewValue: 'Man' },
-    { value: 'woman', viewValue: 'Woman' }
+    { value: 'man', viewValue: this.language === 'ru'? 'Мужчина' : 'Man' },
+    { value: 'woman', viewValue: this.language === 'ru'? 'Женщина': 'Woman' }
   ];
 
   constructor(
@@ -44,6 +47,14 @@ export class EditProfileModalComponent implements OnInit {
     this.thirdFormGroup = new FormGroup({
       gender : new FormControl(this.data.user.gender,[Validators.required]),
     });
+  }
+
+  changeLanguage(){
+    const lang = localStorage.getItem('language');
+    this.genders = [
+      { value: 'man', viewValue: lang === 'ru'? 'Мужчина' : 'Man' },
+      { value: 'woman', viewValue: lang === 'ru'? 'Женщина': 'Woman' }
+    ];
   }
 
   editProfile(){

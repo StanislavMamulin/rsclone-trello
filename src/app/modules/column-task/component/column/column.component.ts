@@ -59,6 +59,10 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   scrollStrategy: ScrollStrategy;
 
+  language:string = localStorage.getItem('language') || "en";
+
+  addButtonText: string;
+
   constructor(
     private columnTaskService: ColumnTaskService,
     public dialog: MatDialog,
@@ -109,6 +113,9 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showAddTask() {
+    const lang = localStorage.getItem("language");
+    lang === "ru"? this.addButtonText = 'Добавить задачу': this.addButtonText = "Add task"
+
     this.showAddTaskControl = true;
     this.appStateService.setIsItemEdit(true);
   }

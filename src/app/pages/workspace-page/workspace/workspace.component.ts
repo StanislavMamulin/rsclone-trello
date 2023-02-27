@@ -34,6 +34,8 @@ export class WorkspaceComponent implements OnInit {
 
   isLoading = true;
 
+  addButtonText: string;
+
   @ViewChild('workspaceElement') workspaceElement: ElementRef;
 
   constructor(
@@ -279,6 +281,8 @@ export class WorkspaceComponent implements OnInit {
   }
 
   showAddColumn() {
+    const lang = localStorage.getItem("language") || 'en';
+    lang==='ru'? this.addButtonText = 'Добавить колонку': this.addButtonText = 'Add a new column'
     this.showAddControl = true;
     this.workspaceElement.nativeElement.scrollLeft =
       this.workspaceElement.nativeElement.scrollWidth;

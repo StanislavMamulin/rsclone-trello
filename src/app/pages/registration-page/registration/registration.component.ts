@@ -33,7 +33,12 @@ export class RegistrationComponent implements OnInit {
 
   form: FormGroup;
 
-  genders: IGender[] = [{ value: 'man', viewValue: 'Man' }, { value: 'woman', viewValue: 'Woman' }];
+  language =  localStorage.getItem('language') || 'en'
+
+  genders: IGender[] = [
+    { value: 'man', viewValue: this.language === 'ru'? 'Мужчина' : 'Man' },
+    { value: 'woman', viewValue: this.language === 'ru'? 'Женщина': 'Woman' }
+  ];
 
   constructor(
     private UserService: UserService,
@@ -56,6 +61,14 @@ export class RegistrationComponent implements OnInit {
       repeatPassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{9,}$/)]),
     });
     this.updateSubmitted();
+  }
+
+  changeLanguage(){
+    const lang = localStorage.getItem('language');
+    this.genders = [
+      { value: 'man', viewValue: lang === 'ru'? 'Мужчина' : 'Man' },
+      { value: 'woman', viewValue: lang === 'ru'? 'Женщина': 'Woman' }
+    ];
   }
 
   restricredEmail = (control: FormControl):{ [key:string]:boolean } | null => {

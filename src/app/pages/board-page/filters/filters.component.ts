@@ -38,6 +38,16 @@ export class FiltersComponent implements OnInit {
 
   ngOnInit() {}
 
+  changeLanguage(){
+    const lang = localStorage.getItem('language')
+    this.sorts = [
+      { value: 'asc', viewValue: lang === 'ru' ? 'Дата ASC' : 'Date ASC'},
+      { value: 'desc', viewValue:lang === 'ru' ? 'Дата DESC' : 'Date DESC' },
+      { value: 'by', viewValue: lang === 'ru' ? 'Имена по алфавиту' : 'Name by alphabet' },
+      { value: 'across', viewValue: lang === 'ru' ? 'Имена против алфавита' : 'Name across alphabet' },
+    ];
+  }
+
   toShowFavorite = (showFavorite: boolean) => {
     this.onShowFavorite.emit(showFavorite);
   };

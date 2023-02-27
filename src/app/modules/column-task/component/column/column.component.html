@@ -58,7 +58,7 @@
 
   <ng-template #addTask>
     <app-add-controls
-      addButtonText="Add task"
+      [addButtonText]="addButtonText"
       (addButtonPressed)="addNewTaskHandler($event)"
       (cancelButtonPressed)="cancelTaskCreation()"
     ></app-add-controls>
