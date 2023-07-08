@@ -1,0 +1,35 @@
+<div class="task-list">
+  <div class="task-list__info">
+    <div class="task-list__title">
+      {{ taskInfo.nameTask }}
+    </div>
+    <div
+      [ngClass]="{ 'all-checked': isDone }"
+      *ngIf="!(checked === allChecked && checked === 0)"
+      class="task-list__checked"
+    >
+      <span *ngIf="isDone"
+        ><img
+          src="../../../../../assets/images/all-checked.svg"
+          alt="checked"
+        />
+        {{ checked }}/{{ allChecked }}
+      </span>
+      <span *ngIf="!isDone"
+        ><img
+          src="../../../../../assets/images/checked.svg"
+          alt="checked"
+        />
+        {{ checked }}/{{ allChecked }}
+      </span>
+    </div>
+  </div>
+  <div class="task-list__edit">
+    <mat-icon
+      (click)="deleteTask(taskInfo.idTask)"
+      color="warn"
+      class="delete-button"
+      >delete_forever</mat-icon
+    >
+  </div>
+</div>

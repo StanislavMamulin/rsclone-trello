@@ -1,0 +1,17 @@
+<div class="snack">
+  <span
+    class="snack__label"
+    *transloco="let t"
+  >
+    {{ t('snack.exist') }}
+  </span>
+  <span class="snack__button">
+    <button
+      mat-button
+      (click)="snackBarRef.dismissWithAction()"
+      *transloco="let t"
+    >
+      {{ t('signUp.OK') }}
+    </button>
+  </span>
+</div>

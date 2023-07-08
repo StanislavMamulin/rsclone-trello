@@ -1,0 +1,136 @@
+<div class="board-page">
+  <div class="container">
+    <div class="board-page__wrapper">
+      <div
+        class="board-page__create"
+        (click)="openCreateModal($event)"
+      >
+        <span *transloco="let t">{{t('boardPage.createBoard')}}</span>
+      </div>
+      <app-filters
+        (boards)="(boards)"
+        (onShowFavorite)="updateShowFavorite($event)"
+        (onShowDate)="updateShowDate($event)"
+        (onSelectValue)="updateSelectValue($event)"
+      >
+      </app-filters>
+    </div>
+    <div class="board-page__boards">
+      <app-board
+        [submitted]="submitted"
+        *ngFor="
+          let board of boards
+            | chosen : showFavorite
+            | resent : showDate
+            | SortByParams : selectValue
+        "
+        (onDelete)="openDialogDeleteBoard($event)"
+        [board]="board"
+        (onUpdate)="openUpdateModal($event)"
+        (onUpdateStar)="updateStar($event)"
+      ></app-board>
+      <mat-spinner
+        class="spinner"
+        *ngIf="isLoading"
+      ></mat-spinner>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="isOpenModal"
+  (click)="closeModal($event)"
+  class="modal"
+>
+  <div>
+    <mat-card
+    class="form-create"
+    [formGroup]="createFormModal"
+  >
+    <h3
+      *ngIf="isCreateModal"
+      class="form-create__title"
+    >
+    <div *transloco="let t">{{t('boardPage.createBoard')}}</div>
+    </h3>
+    <h3 *ngIf="isUpdateModal" class="form-create__title">
+      <div *transloco="let t">{{t('boardPage.updateBoard')}}</div>
+    </h3>
+    <div class="form-create__name">
+      <mat-form-field>
+        <mat-label *transloco="let t">{{t('boardPage.name')}}</mat-label>
+        <input
+          autofocus="true"
+          formControlName="name"
+          matInput
+          (keydown)="enteredForm($event)"
+        />
+        <mat-error
+        class="validation"
+        *ngIf="createFormModal.get('name')?.touched && createFormModal.get('name')?.invalid"
+      >
+        <small *ngIf="createFormModal.get('name')?.errors?.required">
+          <span *transloco="let t">{{t('boardPage.requiredName')}}</span>
+        </small>
+        <small *ngIf="createFormModal.get('name')?.errors?.minlength">
+          <span *transloco="let t">{{t('boardPage.minNameS')}}</span>
+          {{ createFormModal.get('name')?.errors?.minlength.requiredLength }} <span *transloco="let t">{{t('boardPage.minNameE')}}</span>
+          {{ createFormModal.get('name')?.errors?.minlength.actualLength }}
+        </small>
+      </mat-error>
+      </mat-form-field>
+
+    </div>
+    <div class="form-create__description">
+      <mat-form-field appearance="fill">
+        <mat-label *transloco="let t">{{t('boardPage.description')}}</mat-label>
+        <textarea
+          formControlName="description"
+          matInput
+          (keydown)="enteredForm($event)"
+        ></textarea>
+        <mat-error
+        class="validation"
+        *ngIf="
+          createFormModal.get('description')?.touched && createFormModal.get('description')?.invalid
+        "
+      >
+        <small *ngIf="createFormModal.get('description')?.errors?.required"
+        ><span *transloco="let t">{{t('boardPage.requiredDescr')}}</span>
+        </small
+        >
+        <small *ngIf="createFormModal.get('description')?.errors?.minlength">
+          <span *transloco="let t">{{t('boardPage.requiredName')}}</span>
+          {{ createFormModal.get('description')?.errors?.minlength.minDescrS }}<span *transloco="let t">{{t('boardPage.minDescrE')}}</span>
+          {{ createFormModal.get('description')?.errors?.minlength.actualLength }}
+        </small>
+      </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-create__buttons">
+      <button
+        *ngIf="isCreateModal"
+        (click)="createBoard()"
+        [disabled]="createFormModal.invalid || submitted"
+        mat-raised-button
+        color="primary"
+      >
+      <div *transloco="let t">{{t('boardPage.create')}}</div>
+      </button>
+      <button
+        *ngIf="isUpdateModal"
+        (click)="updateBoard()"
+        [disabled]="createFormModal.invalid || submitted"
+        mat-raised-button
+        color="primary"
+      >
+      <div *transloco="let t">{{t('boardPage.update')}}</div>
+      </button>
+    </div>
+  </mat-card>
+  <mat-progress-bar
+    *ngIf="submitted"
+    mode="indeterminate"
+  ></mat-progress-bar>
+  </div>
+</div>

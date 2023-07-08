@@ -1,0 +1,32 @@
+.gif{
+  width: 400px;
+}
+
+
+@media (max-width: 410px) {
+  .gif {
+    width: 350px;
+  }
+}
+
+@media (max-width: 360px) {
+  .gif {
+    width: 250px;
+  }
+}
+
+
+h1 {
+  margin-top: 10px;
+  font-size: 72px;
+  color: #5363c0;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+app-footer {
+  width: 100%;
+  justify-self: end;
+  margin: auto;
+  margin-bottom: 0;
+}

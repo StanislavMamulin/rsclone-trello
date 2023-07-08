@@ -1,0 +1,29 @@
+<div class="add-element__container">
+  <textarea
+    type="text"
+    placeholder="{{ addButtonText }}"
+    class="add-element__title"
+    [(ngModel)]="newElementTitle"
+    (keydown.enter)="enterPressed($event)"
+    (blur)="blurHandler($event)"
+    [readonly]="isSubmitting"
+    appAutofocus
+  ></textarea>
+  <div class="add-element__controls">
+    <button
+      class="add-element__add-btn button"
+      (click)="addNewTaskHandler($event)"
+      mat-raised-button
+      color="primary"
+      [disabled]="isSubmitting"
+    >
+      {{ addButtonText }}
+    </button>
+    <button
+      class="add-element__cancel-btn button"
+      (click)="cancelTaskCreation()"
+    >
+      X
+    </button>
+  </div>
+</div>

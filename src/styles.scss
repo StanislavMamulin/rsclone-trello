@@ -1,0 +1,186 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$rsclone-trello-primary: mat.define-palette(mat.$indigo-palette);
+$rsclone-trello-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$rsclone-trello-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$rsclone-trello-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $rsclone-trello-primary,
+      accent: $rsclone-trello-accent,
+      warn: $rsclone-trello-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($rsclone-trello-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  background: whitesmoke;
+}
+
+.container {
+  width: 100%;
+  margin: auto;
+}
+
+// .cdk-overlay-container{
+//   overflow: auto;
+//   pointer-events: auto;
+//   height: 100%;
+//   background:rgba(0, 0, 0, 0.4);
+// }
+
+// .cdk-overlay-backdrop.cdk-overlay-backdrop-showing{
+//   background: transparent;
+// }
+
+.mdc-dialog__container{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+
+html,
+body,
+app-root {
+  height: 100%;
+}
+
+app-main,
+app-header,
+app-root {
+  display: flex;
+}
+
+app-root {
+  flex-direction: column;
+}
+
+app-main {
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 1;
+  background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat scroll padding-box
+    border-box rgb(178, 212, 255);
+}
+app-registration,
+app-board-page,
+app-login {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: whitesmoke;
+}
+app-workspace{
+  height: 100%;
+}
+
+app-header {
+  z-index: 5;
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
+app-board{
+  height: fit-content;
+  &.active{
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  }
+}
+
+app-error{
+  display: flex;
+  height: 100%;
+  background: #ffffff;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+router-outlet {
+  padding-top: 45px;
+  @media (max-width: 500px) {
+    padding-top: 60px;
+  }
+}
+
+html {
+  --scrollbarBG: lightgray;
+  --thumbBG: rgba(17, 86, 152, 0.8);
+}
+
+.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 150px;
+}
+
+.mat-mdc-form-field-infix {
+  min-height: 32px;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field.ng-tns-c82-0.mdc-text-field--filled.mdc-text-field--no-label {
+  padding-left: 33px;
+  border-radius: 4px;
+}
+
+.mat-mdc-option.mat-mdc-focus-indicator.mdc-list-item.ng-tns-c84-1 {
+  min-height: 32px;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field.ng-tns-c102-0.mdc-text-field--filled.mdc-text-field--no-label {
+  background-color: rgba(245, 245, 245, 0);
+  .mdc-line-ripple::before {
+    border-bottom-width: 0px;
+  }
+}
+
+.mat-mdc-option.mat-mdc-option-active,
+.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.ng-trigger.ng-trigger-transformPanel.ng-tns-c111-1.mat-mdc-select-panel.mdc-menu-surface.mdc-menu-surface--open.mat-primary.ng-star-inserted {
+  background: rgb(237, 237, 237);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

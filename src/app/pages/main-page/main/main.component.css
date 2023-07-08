@@ -1,0 +1,88 @@
+main .container {
+  padding: 15px 30px;
+}
+
+app-footer {
+  margin: auto;
+  margin-bottom: 0;
+  width: 100%;
+  justify-self: flex-end;
+  display: flex;
+}
+
+h1,
+.description {
+  letter-spacing: 1px;
+}
+
+.description {
+  margin: 10px 0;
+  line-height: 1.4;
+  font-size: 18px;
+}
+
+section {
+  display: flex;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  section {
+    flex-direction: column-reverse;
+  }
+}
+
+.cards-wrapper {
+  width: 60%;
+  height: fit-content;
+}
+
+@media (max-width: 900px) {
+  .cards-wrapper {
+    width: 100%;
+  }
+}
+
+.cards-wrapper .card {
+  border-radius: 0.3rem;
+  padding: 1rem 1rem 1rem 1.5rem;
+  cursor: pointer;
+}
+
+.cards-wrapper .card.selected {
+  background-color: white;
+  color: #091e42;
+  box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+  position: relative;
+}
+
+.cards-wrapper .card.selected::before {
+  content: '';
+  width: 0.5rem;
+  height: 100%;
+  background-color: #00c7e5;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 0.3rem 0 0 0.3rem;
+  top: 0;
+  left: 0;
+}
+
+.cards-wrapper .card h3 {
+  margin-bottom: 5px;
+}
+
+.cards-image {
+  flex-grow: 1;
+}
+
+.cards-image figure img {
+  border-radius: 0.5rem;
+  cursor: grab;
+}
+
+.cards-image figure img:hover {
+  transform: scale(1.005);
+  transition: 0.3s linear;
+}

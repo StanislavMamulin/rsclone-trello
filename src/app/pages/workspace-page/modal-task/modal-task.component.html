@@ -1,0 +1,121 @@
+<div
+  [formGroup]="formTask"
+  class="wrapper"
+  #modalTaskWrapper
+>
+  <section class="title-wrapper">
+    <h2 class="title">
+      <mat-icon color="primary">today</mat-icon>
+      <input
+        class="name-task"
+        formControlName="nameTask"
+        type="text"
+      />
+      <textarea
+        id="dw_resize"
+        class="name-task"
+        formControlName="nameTask"
+      ></textarea>
+    </h2>
+    <p *transloco="let t">
+      {{ t('taskModal.column') }} <span>{{ data.column.nameColumn }}</span>
+    </p>
+  </section>
+  <section class="description-wrapper">
+    <h3
+      class="description"
+      *transloco="let t"
+    >
+      <mat-icon color="primary">subject</mat-icon>{{ t('taskModal.description') }}
+    </h3>
+    <textarea
+      class="textarea description-task"
+      formControlName="descriptionTask"
+    ></textarea>
+  </section>
+  <section class="checklist-wrapper">
+    <h4 *transloco="let t">
+      <img
+        width="21px"
+        src="../../../../assets/images/checked.svg"
+      />{{ t('taskModal.checklist') }}
+    </h4>
+    <div class="wrapper-progressbar">
+      <div class="calc">{{ calculated }}%</div>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="calculated"
+        [bufferValue]="calculated"
+      ></mat-progress-bar>
+    </div>
+    <app-checkbox
+      *ngFor="let checkbox of checklist"
+      [checkbox]="checkbox"
+      (onUpdateInput)="updateInput($event)"
+      (onUpdateCheckBox)="updateCheckBox($event)"
+      (onDeleteCheckBox)="deleteCheckbox($event)"
+    ></app-checkbox>
+    <mat-spinner
+      class="spinner"
+      *ngIf="isLoading"
+    ></mat-spinner>
+    <div
+      [ngClass]="{ 'active-create': !isCreate }"
+      class="task-create-wrapper"
+    >
+      <div class="task-create">
+        <span class="create">
+          <input
+            (keydown.enter)="enterPressedInputAdd($event)"
+            formControlName="addCheckBox"
+            class="create-input"
+            type="text"
+            (blur)="updateIsChooseBlur($event)"
+          />
+          <div class="create-wrapper">
+            <div class="create-button">
+              <button
+                class="btn-add-checkbox"
+                (mousedown)="updateCreateState($event)"
+                (mousedown)="createCheckBox()"
+                mat-raised-button
+                color="primary"
+                [disabled]="formTask.controls['addCheckBox'].errors"
+                *transloco="let t"
+              >
+                {{ t('taskModal.save') }}
+              </button>
+            </div>
+            <mat-icon
+              (mousedown)="updateCreateState($event)"
+              class="delete-task"
+              >close</mat-icon
+            >
+          </div>
+        </span>
+      </div>
+    </div>
+    <button
+      [disabled]="isCreating"
+      class="add-element"
+      (mousedown)="updateCreateState($event)"
+      [ngClass]="{ 'active-create': isCreate }"
+      mat-raised-button
+      color="primary"
+      *transloco="let t"
+    >
+      {{ t('taskModal.addElement') }}
+    </button>
+  </section>
+  <mat-icon
+    class="close-modal"
+    (mousedown)="updateTask(); updateChecklist()"
+    >close</mat-icon
+  >
+</div>
+<mat-progress-bar
+  class="progress-spinner"
+  *ngIf="isCreating"
+  mode="indeterminate"
+>
+</mat-progress-bar>
